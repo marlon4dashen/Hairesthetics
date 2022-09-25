@@ -3,14 +3,17 @@
 \usepackage{tabularx}
 \usepackage{booktabs}
 
-\title{Problem Statement and Goals\\\progname}
+\title{Problem Statement and Goals\\Hairesthetics}
 
-\author{\authname}
+\author{Team 18 \\ Charlotte Cheng
+        \\ Marlon Liu
+        \\ Senni Tan
+        \\ Qiushi Xu
+        \\ Hongwei Niu
+        \\ Bill Song
+}
 
-\date{}
-
-\input{../Comments}
-\input{../Common}
+\date{Sept 22, 2022}
 
 \begin{document}
 
@@ -22,35 +25,62 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
-Date2 & Name(s) & Description of changes\\
-... & ... & ...\\
+Sep 22 & Charlotte, Marlon, Senni, Hongwei, Bill, Qiushi  & Initial Draft\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \section{Problem Statement}
 
-\wss{You should check your problem statement with the
-\href{https://github.com/smiths/capTemplate/blob/main/docs/Checklists/ProbState-Checklist.pdf}
-{problem statement checklist}.}
-\wss{You can change the section headings, as long as you include the required information.}
-
 \subsection{Problem}
+
+A good hairstyle improves anyone's self-confidence and self-worth. However, making these kinds of decisions can be difficult and sometimes require a costly hairstyle expert. The average cost of a haircut in Canada is between \$60 and \$90. In addition, people often get disappointed and unsatisfied after trying new hairstyles. Hairstyle is an important feature of a person's image and an unsuitable haircut changes how people perceive you. Moreover, you will be stuck with the hairstyle for at least a few months since hair grows relatively slowly. 
+
 
 \subsection{Inputs and Outputs}
 
-\wss{Characterize the problem in terms of ``high level'' inputs and outputs.  
-Use abstraction so that you can avoid details.}
+The project takes the inputs of the user's appearance and the user's choice of hairstyle and hair color, and then it should output the appearance of the user with the selected hairstyle and hair color.
 
 \subsection{Stakeholders}
 
+Anyone who wants to see how other hairstyles and different hair colors match their appearance virtually.
+
 \subsection{Environment}
 
-\wss{Hardware and software}
+\subsubsection{Hardware}
+A mobile phone with iOS system, camera, and internet connection.
+
+\subsubsection{Software}
+iOS system 15 and above.
 
 \section{Goals}
 
+\subsection{Ease of Use}
+In terms of operations, the application should be intuitive to use and no further instruction is required. People of all age groups should be able to learn all of the features of the application with ease.
+\subsection{Real-time Facial Feature Detection}
+The system will be collecting user's facial features and outlines - eyes, nose, lips and others through camera, then import and analyze facial data information to locate user's face accurately on the screen. Further, different hairstyles could be matched on user's face and displayed properly.
+\subsection{3D Virtual Simulation}
+Virtual hairstyles are applied on user's head through camera in real-time. The user should be able to visualize through the phone screen as the simulation proceeds. The hairstyle simulation will be available in 3D structure which means the virtual hair should move around as the user's head moves. 
+\subsection{Fast Response}
+The application should respond and provide outputs within less than 1 second after the user selects the hairstyle and hair color.
+\subsection{Safety of User Data}
+The application should secure user data. There should be no case of information leakage.
+
 \section{Stretch Goals}
+
+\subsection{Accuracy of Detection}
+The detected face features should be precise and match the user's facial features in real life.
+
+\subsection{Quality of Virtual Simulation}
+The appearance of the virtual hair should look similar to the appearance of hair in real life.
+
+\subsection{Support virtual modification}
+The advanced version should allow the user to modify the virtual hair. For example, hair cuts, hair perms, hair straightening, and hair color, etc. 
+
+\subsection{Hair style detection}
+Be able to identify the name of the hairstyle from an input image.
+
+\subsection{Provide nearby Barber Shop}
+The advanced version should allow the user to view the nearby Barbershops.
 
 \end{document}
