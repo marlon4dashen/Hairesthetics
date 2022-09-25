@@ -3,16 +3,27 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 
-\title{Development Plan\\\progname}
 
-\author{\authname}
 
-\date{}
+\title{Development Plan\\Hairesthetics}
 
-\input{../Comments}
-\input{../Common}
+\author{Team 18 \\ Charlotte Cheng
+        \\ Marlon Liu
+        \\ Senni Tan
+        \\ Qiushi Xu
+        \\ Hongwei Niu
+        \\ Bill Song
+}
+
+
+\date{Sept 22, 2022}
+
+% \input{../Comments}
+% \input{../Common}
 
 \begin{document}
+
+\maketitle
 
 \begin{table}[hp]
 \caption{Revision History} \label{TblRevisionHistory}
@@ -20,9 +31,7 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
-Date2 & Name(s) & Description of changes\\
-... & ... & ...\\
+Sept 22 & Charlotte, Marlon, Senni, Hongwei, Bill, Qiushi & Initial Draft\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -30,48 +39,94 @@ Date2 & Name(s) & Description of changes\\
 \newpage
 
 \maketitle
-
-\wss{Put your introductory blurb here.}
+This document provides the timeline of the project Hairesthetics, and aims to plan the future phases of our project by scheduling team meeting plans, team communication plans, and project deliverables, as well as the steps we must take to complete each phase of work.
 
 \section{Team Meeting Plan}
+The team will meet twice a week for three hours at a time. The first meeting happens each Monday from 7 to 10 pm. The date and time for the second meeting will vary based on members' availability, but it will always run for at least three hours.
+Meetings will take place on discord virtually on the capstone server. All team members are expected to show up and join the meeting at or before the designated meeting time. If any team member is not available, the team meeting shall be rescheduled to another time. Work should be assigned to each team member properly. Team leader Marlon Liu will chair the meeting and shall have an agenda set for all meetings in advance. All decisions will be announced in the discord channel and documents will be uploaded to the capstone GitHub repository.
 
 \section{Team Communication Plan}
+All important Capstone related information will communicate through Discord channel, discord will also be used for virtual meetings. 
+\\ If a matter is urgent, such as if a member is not at a meeting, we may choose to contact that group member via WeChat. We are choosing to use WeChat as our primary means of communication since we are all familiar with using WeChat.
+
 
 \section{Team Member Roles}
+
+\begin{table}[hp]
+\caption{Team Member Roles} \label{TblMembers}
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+\textbf{Name} & \textbf{Developer(s)} & \textbf{Description}\\
+\midrule
+Marlon Liu & AR and Backend Developer & 3D simulation and facial feature detection model \\
+\midrule
+Charlotte Cheng & iOS Developer & UI/UX, Ar Kit\\
+\midrule
+Hongwei Niu & Backend Developer & Computer Vision\\
+\midrule
+Bill Song & Backend Developer & 2D algorithms and APIs\\
+\midrule
+Senni Tan & iOS Developer & UI/UX, Ar Kit\\
+\midrule
+Qiushi Xu & Database developer & Manage and process data\\ 
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \section{Workflow Plan}
 
 \begin{itemize}
-	\item How will you be using git, including branches, pull request, etc.?
-	\item How will you be managing issues, including template issues, issue
-	classificaiton, etc.?
+    \item The GitHub repository will be where the code and documents are kept at. The main branch should have our working version of the application. And a branch named "development" should have our latest change in the next delivery cycle. Those two branches are protected and require an approved pull request to be merged into.
+    \item Every team member should branch off the development branch with the feature name when they are writing new features.
+    \item Each team member can only make changes to the project by creating a pull request and each team member should pull the latest code from the development branch before they create the pull request.
+    \item An issue should be opened for tracking the development of features using the GitHub issue template for development tracking.
+    \item An issue should be raised in case of errors using the GitHub issue template for error to ensure that useful information is provided for the developers to debug. Logs and trace back should be provided as well.
+    \item Issues should be tagged properly (cycle number, type, bugs or features, estimated resolving time, priority level)
 \end{itemize}
 
 \section{Proof of Concept Demonstration Plan}
 
-What is the main risk, or risks, for the success of your project?  What will you
-demonstrate during your proof of concept demonstration to convince yourself that
-you will be able to overcome this risk?
+\subsection{Most significant Risk}
+The most significant risk of the project will be having the application crash on the user's mobile, for example, the application suddenly stops and go back to the mobile desktop. To overcome this issue, we have to make sure the application is tested throughout and rigorously. Another major concern is that mobiles with old iOS versions may not be supported, it is important to implement exception handling for such scenarios. 
+
+\subsection{Will a part of the implementation be difficult?}
+Technologies such as AR, Computer Vision, and iOS development are relatively new to the team members since the team does not have sufficient background knowledge in these fields.
+
+\subsection{Will the facial feature detection be accurate?}
+The accuracy of the location of facial features is crucial for fitting the virtual hairstyle, since the system needs to know where those coordinates are in order to shift and rotate hairstyles in real time to match the position of the user. This might require the accuracy of the model and the face contour algorithms.
+
+\subsection{Will testing be difficult?}
+Unit testing will not be difficult because each developer will be responsible for testing their individual components. There are many useful testing frameworks for the technologies used in this project, for example, Pytest for Python and XCTest for Swift.
+
+\subsection{Is a required library difficult to install?}
+No, the required library is not difficult to install. For backend, importing a library only requires the developer to install the package and add the path to the python routine; for frontend and user interface, the Swift project has a package manager to help install libraries.
+
+\subsection{Will portability be a concern?}
+Portability will not be a concern, since it will be published on iOS Apple App Store. Users with a portable mobile device and internet connection will have access to the application.
 
 \section{Technology}
 
 \begin{itemize}
-\item Specific programming language
-\item Specific linter tool (if appropriate)
-\item Specific unit testing framework
-\item Investigation of code coverage measuring tools
-\item Specific plans for Continuous Integration (CI), or an explanation that CI
-  is not being done
-\item Specific performance measuring tools (like Valgrind), if
-  appropriate
-\item Libraries you will likely be using?
-\item Tools you will likely be using?
+\item Programming languages: Swift, Python
+\item Framework: Flask
+\item Linter tool (if appropriate): SwiftLint
+\item Unit testing framework: IOS unit test, IOS UI test, Pytest.
+\item CI/CD tool: Jenkins
+\item Code coverage measuring tool: Coverage.py, XCode coverage checking tool.
+\item Hosting: AWS
+\item Specific performance measuring tools: XCode Organizer
+\item Libraries: iOS AR Kit, OpenCV, Scikit-Learn
+\item Version control: git
+\item Documentation: Javadoc, Doxygen
+\item Tools: XCode
 \end{itemize}
 
 \section{Coding Standard}
 
+We decided to use the pep8 coding standard for our python code, Google Swift Style Guide for the Swift code. Naming convention for variables and method names is camel notation. All constant variable names should be capitalized and the values are set as type final. The code should contain a reasonable amount of comments. For example, each file should begin with the last revision date and the purpose, each method should be documented with purpose, input type and output type, etc.
+
 \section{Project Scheduling}
 
-\wss{How will the project be scheduled?}
+The team will have a meeting at least one week in advance of a deliverable deadline to discuss the details and work breakdown. We aim to finish and upload each deliverable one day before its deadline. Each team member will review the content of each deliverable before pushing to the main branch.
 
 \end{document}
