@@ -614,7 +614,6 @@ N/A
 \begin{itemize}
     \item[SPR\refstepcounter{sprreqnum}\thesprreqnum \label{R_Inputs}:] 
     The product shall be available on iPhone with iOS system 14 and after.
-    \item[] Volunteers with iPhone 
 \end{itemize}
 
 \subsubsection{Adaptablity Requirements}
@@ -685,13 +684,17 @@ N/A
 \subsubsection{Compliance Requirements}
 \begin{itemize}
     \item[CPR\refstepcounter{cprreqnum}\thecprreqnum \label{R_Inputs}:] The product must state that the application does not take responsibility for any accidents resulting from its use. 
+    \item[] Fit Criteria: Developers will do user tests on application; when the application starts, application will pop up a window to ask the user to agree on the statements, and in the statements it must state that the application does not take responsibility for any accidents resulting from its use.
 \end{itemize}
 
 \subsubsection{Standards Requirements}
 \begin{itemize}
     \item[SDR\refstepcounter{sdrreqnum}\thesdrreqnum \label{R_Inputs}:] The product must follow the fail-safe-defaults design principle in that it will always error into a safe state.
+    \item[] Fit Criteria: There should be error handling in the application to catch any possible errors. Every time before a developer pushes the changes to GitHub, the developer must test the application to ensure the application is in error-safe state.
     \item[SDR\refstepcounter{sdrreqnum}\thesdrreqnum \label{R_Inputs}:] The product must follow modular design principles to allow for easy maintenance.
+    \item[] Fit Criteria: The project will be split into different modules in later capstone documents, and every developer should follow the modular design in the document to implement the application.
     \item[SDR\refstepcounter{sdrreqnum}\thesdrreqnum \label{R_Inputs}:] The application must be developed using iOS application style guides. 
+    \item[] Every time there is a pull request on GitHub, the team should run the application in XCode to see if it violates the iOS application style guides.
 
 \end{itemize}
 
