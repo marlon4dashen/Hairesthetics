@@ -16,14 +16,16 @@
 \usepackage{caption}
 \usepackage{pdflscape}
 \usepackage{afterpage}
-
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{enumitem}
 \usepackage[round]{natbib}
 
 %\usepackage{refcheck}
 
 \hypersetup{
     bookmarks=true,         % show bookmarks bar?
-      colorlinks=true,       % false: boxed links; true: colored links
+     colorlinks=true,       % false: boxed links; true: colored links
     linkcolor=red,          % color of internal links (change box color with linkbordercolor)
     citecolor=green,        % color of links to bibliography
     filecolor=magenta,      % color of file links
@@ -66,8 +68,80 @@
 \newcounter{instnum} %Instance Number
 \newcommand{\itheinstnum}{IM\theinstnum}
 \newcommand{\iref}[1]{IM\ref{#1}}
+
 \newcounter{reqnum} %Requirement Number
 \newcommand{\rthereqnum}{P\thereqnum}
+\newcounter{frreqnum} % Facial Recognition Requirement Number
+\newcommand{\rthefrreqnum}{P\thefrreqnum}
+\newcounter{hmreqnum} % Hair Modification Requirement Number
+\newcommand{\rthehmreqnum}{P\thehmreqnum}
+\newcounter{arreqnum} %Authentication Requirement Number
+\newcommand{\rthearreqnum}{P\thearreqnum}
+
+\newcounter{hrreqnum} % Hair Salon Requirement Number
+\newcommand{\rthehrreqnum}{P\thehrreqnum}
+
+\newcounter{aprreqnum} % Appearance Requirement Number
+\newcommand{\rtheaprreqnum}{P\theaprreqnum}
+\newcounter{iarreqnum} % Interface Style Requirement Number
+\newcommand{\rtheiarreqnum}{P\theiarreqnum}
+
+\newcounter{eurreqnum} % Ease of Use Requirement Number
+\newcommand{\rtheeurreqnum}{P\theeurreqnum}
+\newcounter{lrreqnum} % Learning Requirement Number
+\newcommand{\rthelrreqnum}{P\thelrreqnum}
+\newcounter{uprreqnum} % Understandability and Politeness Requirement Number
+\newcommand{\rtheuprreqnum}{P\theuprreqnum}
+\newcounter{asrreqnum} % Accessibility Requirement Number
+\newcommand{\rtheasrreqnum}{P\theasrreqnum}
+
+\newcounter{slrreqnum} % Speed and Latency Requirement Number
+\newcommand{\rtheslrreqnum}{P\theslrreqnum}
+\newcounter{parreqnum} % Precision and Accuracy Requirement Number
+\newcommand{\rtheparreqnum}{P\theparreqnum}
+\newcounter{rarreqnum} % Reliability and Availability Requirement Number
+\newcommand{\rtherarreqnum}{P\therarreqnum}
+\newcounter{rbrreqnum} % Robustness Requirement Number
+\newcommand{\rtherbrreqnum}{P\therbrreqnum}
+\newcounter{ccrreqnum} % Capacity Requirement Number
+\newcommand{\rtheccrreqnum}{P\theccrreqnum}
+\newcounter{serreqnum} % Scalablity and Extensibility Requirement Number
+\newcommand{\rtheserreqnum}{P\theserreqnum}
+\newcounter{lgrreqnum} % Longevity Requirement Number
+\newcommand{\rthelgrreqnum}{P\thelgrreqnum}
+
+\newcounter{pdrreqnum} % Productiontization Requirement Number
+\newcommand{\rthepdrreqnum}{P\thepdrreqnum}
+\newcounter{rerreqnum} % Release Requirement Number
+\newcommand{\rthererreqnum}{P\thererreqnum}
+
+\newcounter{ucnum} % Use Case Number
+\newcommand{\rucnum}{P\ucnum}
+
+\newcounter{acrreqnum} % Access Requirement Number
+\newcommand{\rtheacrreqnum}{P\theacrreqnum}
+\newcounter{irreqnum} % Integrity Requirement Number
+\newcommand{\rtheirreqnum}{P\theirreqnum}
+\newcounter{prrreqnum} % Privacy Requirement Number
+\newcommand{\rtheprrreqnum}{P\theprrreqnum}
+\newcounter{aurreqnum} % Audit Requirement Number
+\newcommand{\rthererrreqnum}{P\thererrreqnum}
+\newcounter{rerrreqnum} % release Requirement Number
+\newcommand{\rtheaurreqnum}{P\theaurreqnum}
+\newcounter{msrreqnum} % maintenance Requirement Number
+\newcommand{\rthemsrreqnum}{P\themsrreqnum}
+\newcounter{adrreqnum} % adaptability Requirement Number
+\newcommand{\rtheadrreqnum}{P\theadrreqnum}
+\newcounter{sprreqnum} % Supportability Requirement Number
+\newcommand{\rthesprreqnum}{P\thesprreqnum}
+
+\newcounter{crreqnum} % Cultural Requirement Number
+\newcommand{\rthecrreqnum}{P\thecrreqnum}
+\newcounter{cprreqnum} % Compliance Number
+\newcommand{\rthecprreqnum}{P\thecprreqnum}
+\newcounter{sdrreqnum} % Audit Requirement Number
+\newcommand{\rthesdrreqnum}{P\thesdrreqnum}
+
 \newcommand{\rref}[1]{R\ref{#1}}
 \newcounter{nfrnum} %NFR Number
 \newcommand{\rthenfrnum}{NFR\thenfrnum}
@@ -76,6 +150,12 @@
 \newcommand{\lthelcnum}{LC\thelcnum}
 \newcommand{\lcref}[1]{LC\ref{#1}}
 
+\newlist{UC}{enumerate}{1}
+\setlist[UC]{label=UC\arabic*:}
+
+\newcounter{ulcnum} %Likely change number
+\newcommand{\ltheulcnum}{ULC\theulcnum}
+\newcommand{\ulcref}[1]{ULC\ref{#1}}
 \usepackage{fullpage}
 
 \newcommand{\deftheory}[9][Not Applicable]
@@ -126,8 +206,16 @@
 
 \begin{document}
 
-\title{Software Requirements Specification for \progname: subtitle describing software} 
-\author{\authname}
+\title{Software Requirements Specification for Hairesthetics: A 3D Hairstyle Simulation iOS App} 
+
+\author{Team 18 \\ Charlotte Cheng
+        \\ Marlon Liu
+        \\ Senni Tan
+        \\ Qiushi Xu
+        \\ Hongwei Niu
+        \\ Bill Song
+}
+
 \date{\today}
 	
 \maketitle
@@ -137,963 +225,507 @@
 \pagenumbering{roman}
 
 \tableofcontents
-
-~\newpage
+\listoftables
+\listoffigures
 
 \section*{Revision History}
 
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+Oct 1 & 1.0 & Initial Drafts\\
+Oct 4 & 1.1 & Update template based on rubric\\
 \bottomrule
 \end{tabularx}
 
 ~\newpage
 
-\section{Reference Material}
-
-This section records information for easy reference.
-
-\subsection{Table of Units}
-
-Throughout this document SI (Syst\`{e}me International d'Unit\'{e}s) is employed
-as the unit system.  In addition to the basic units, several derived units are
-used as described below.  For each unit, the symbol is given followed by a
-description of the unit and the SI name.
-~\newline
-
-\renewcommand{\arraystretch}{1.2}
-%\begin{table}[ht]
-  \noindent \begin{tabular}{l l l} 
-    \toprule		
-    \textbf{symbol} & \textbf{unit} & \textbf{SI}\\
-    \midrule 
-    \si{\metre} & length & metre\\
-    \si{\kilogram} & mass	& kilogram\\
-    \si{\second} & time & second\\
-    \si{\celsius} & temperature & centigrade\\
-    \si{\joule} & energy & joule\\
-    \si{\watt} & power & watt (W = \si{\joule\per\second})\\
-    \bottomrule
-  \end{tabular}
-  %	\caption{Provide a caption}
-%\end{table}
-
-\plt{Only include the units that your SRS actually uses.}
-
-\plt{Derived units, like newtons, pascal, etc, should show their derivation
-    (the units they are derived from) if their constituent units are in the
-    table of units (that is, if the units they are derived from are used in the
-    document).  For instance, the derivation of pascals as
-    $\si{\pascal}=\si{\newton\per\square\meter}$ is shown if newtons and m are
-    both in the table.  The derivations of newtons would not be shown if kg and
-    s are not both in the table.}
-
-\plt{The symbol for units named after people use capital letters, but the name
-  of the unit itself uses lower case.  For instance, pascals use the symbol Pa,
-  watts use the symbol W, teslas use the symbol T, newtons use the symbol N,
-  etc.  The one exception to this is degree Celsius.  Details on writing metric
-  units can be found on the 
-  \href{https://www.nist.gov/pml/weights-and-measures/writing-metric-units}
-  {NIST} web-page.}
-
-\subsection{Table of Symbols}
-
-The table that follows summarizes the symbols used in this document along with
-their units.  The choice of symbols was made to be consistent with the heat
-transfer literature and with existing documentation for solar water heating
-systems.  The symbols are listed in alphabetical order.
-
-\renewcommand{\arraystretch}{1.2}
-%\noindent \begin{tabularx}{1.0\textwidth}{l l X}
-\noindent \begin{longtable*}{l l p{12cm}} \toprule
-\textbf{symbol} & \textbf{unit} & \textbf{description}\\
-\midrule 
-$A_C$ & \si[per-mode=symbol] {\square\metre} & coil surface area
-\\
-$A_\text{in}$ & \si[per-mode=symbol] {\square\metre} & surface area over 
-which heat is transferred in
-\\ 
-\bottomrule
-\end{longtable*}
-\plt{Use your problems actual symbols.  The si package is a good idea to use for
-  units.}
-
-\subsection{Abbreviations and Acronyms}
-
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{l l} 
-  \toprule		
-  \textbf{symbol} & \textbf{description}\\
-  \midrule 
-  A & Assumption\\
-  DD & Data Definition\\
-  GD & General Definition\\
-  GS & Goal Statement\\
-  IM & Instance Model\\
-  LC & Likely Change\\
-  PS & Physical System Description\\
-  R & Requirement\\
-  SRS & Software Requirements Specification\\
-  \progname{} & \plt{put an expanded version of your program name here (as appropriate)}\\
-  T & Theoretical Model\\
-  \bottomrule
-\end{tabular}\\
-
-\plt{Add any other abbreviations or acronyms that you add}
-
-\subsection{Mathematical Notation}
-
-\plt{This section is optional, but should be included for projects that make use
-  of notation to convey mathematical information.  For instance, if typographic
-  conventions (like bold face font) are used to distinguish matrices, this
-  should be stated here.  If symbols are used to show mathematical operations,
-  these should be summarized here.  In some cases the easiest way to summarize
-  the notation is to point to a text or other source that explains the
-  notation.}
-
-\plt{This section was added to the template because some students use very
-  domain specific notation.  This notation will not be readily understandable to
-  people outside of your domain.  It should be explained.}
-
-\newpage
-
 \pagenumbering{arabic}
+  
 
-\plt{This SRS template is based on \citet{SmithAndLai2005, SmithEtAl2007}.  It
-  will get you started.  You should not modify the section headings, without
-  first discussing the change with the course instructor.  Modification means
-  you are not following the template, which loses some of the advantage of a
-  template, especially standardization.  Although the bits shown below do not
-  include type information, you may need to add this information for your
-  problem.  If you are unsure, please can ask the instructor.}
+\includegraphics{universe}
 
-\plt{Feel free to change the appearance of the report by modifying the LaTeX
-  commands.}
+\section{Project Drivers}
 
-\plt{This template document assumes that a single program is being documented.
-  If you are documenting a family of models, you should start with a commonality
-  analysis.  A separate template is provided for this.  For program
-  families you should look at \cite{Smith2006, SmithMcCutchanAndCarette2017}.
-  Single family member programs are often programs based on a single physical
-  model.  General purpose tools are usually documented as a family.  Families of
-  physical models also come up.}
+\subsection{The Purpose of the Project}
+  
+The purpose for this document is to provide the basic requirements for a software application that helps user simulate hairstyles and hair colors virtually. It should include the essential functional requirements, which specify the behavioral capability of the system, as well as the non-functional requirements in order to create a successful and robust application. \\
+\newline
+\noindent
+This document should also act like an agreement between the stakeholders and the developers that the design should be based on the critical information provided in this document. The requirements should be the guiding principles in the design phase to guarantee that all the requirements are met. 
 
-\plt{The SRS is not generally written, or read, sequentially.  The SRS is a
-  reference document.  It is generally read in an ad hoc order, as the need
-  arises.  For writing an SRS, and for reading one for the first time, the
-  suggested order of sections is:
+\subsection{Stakeholders}
+\subsubsection{User}
+\item People who have the demand to change their hair style and see how other hairstyles and different hair colors match their appearance virtually are welcome to explore in this iOS application.
+
+\subsubsection{Client}
+
+The clients for this project with be the students from the capstone course. These individuals will review and test the software before being deployed to the general public. In addition, the teach assistants and the supervisor will be actively involved throughout
+the construction of this project.
+
+\subsubsection{Other Stakeholders}
+Other stakeholder could be the hair dressers and barbers. They can provide this app for their customer to help making a hairstyle decision.
+
+\subsubsection{User Characteristics}
+The identified users of the project can be categorized into 2 distinct groups. These groups are differentiated based on their varying background, experience of the user and their intended use(s) of the system. They are classified as the novice user and administrative user. \\
+\newline
+\noindent
+It is assumed that all system users have experience operating with iOS applications. More specifically, all users are assumed to have experience working with iPhone, iOS 14, and above. They have been exposed to the camera app and most common icons by Apple.
 \begin{itemize}
-\item Goal Statement
-\item Instance Models
-\item Requirements
-\item Introduction
-\item Specific System Description
+    \item Novice User: The application requires no prior training, and it is meant for the public, so all non-administrative users are novice users. Their intention is to use the application to simulate hairstyles and hair colors virtually. Anyone who does not have optic disabilities and other physical disabilities that make them unable to use the application on a smartphone can use the application.
+    \item Administrative User: Their intention is not to use the application to simulate hairstyles, but to calibrate, configure, and maintain the application to make sure it functions properly and to its maximal capabilities. They wish to fix bugs, maintain database, and implement new features. They have a basic knowledge of computers, data management and app development.
+    
 \end{itemize}
-}
 
-\plt{Guiding principles for the SRS document:
+~\newpage
+
+\section{Project Constraints}
+\subsection{Mandated Constraints}
+\subsubsection{Solution Constraints}
+\textbf{Description}: The product shall operate using iOS 14 and above. \\
+\textbf{Rationale}: The users use iOS 14 and do not want to update system. \\
+\textbf{Fit Criterion}: The product shall be approved as iOS 14 compliant by developers. \\
+\newline
+\textbf{Description}: The product shall use the default camera system on the iphone device to obtain the input image and videos from users. \\
+\textbf{Rationale}: The users will not pay for a new graphic input device. \\
+\textbf{Fit Criterion}: All graphical inputs should come from the default camera with the device. \\
+\subsubsection{Implementation Environment of the Current System}
 \begin{itemize}
-\item Do not repeat the same information at the same abstraction level.  If
-  information is repeated, the repetition should be at a different abstraction
-  level.  For instance, there will be overlap between the scope section and the
-  assumptions, but the scope section will not go into as much detail as the
-  assumptions section.
+    \item Source code is entirely written in Python and swift.
+    \item Backend framework Flask is used to create user login system.
+    \item MongoDB is used for storing and manipulating the password database.
+    \item iOS AR kit is used for developing AR components.
+    \item OpenCV is mainly used for capturing and analysing user's facial feature
 \end{itemize}
-}
+\subsubsection{Off-The-Shelf Software}
+\begin{itemize}
+    \item Facial Contour Detection API from google ML Kit.
+\end{itemize}
+\subsubsection{Partner or Collaborative Applications}
+N/A. \\All the external libraries / API used are open-sourced and free of charge.
+\subsubsection{Anticipated Workplace Environment}
+The workplace could be anywhere with a visible screen and camera. When The workplace is outside, the device must be weather resistant, have displays that are visible in sunlight, and allow for the effect of surrounding environment on output.
+\subsubsection{Schedule Constraints}
+Project must be completed before the end of the academic year. This will limit the amount, complexity and quality of the additional features upon initial release date.
+\subsubsection{Budget Constraints}
+The cost of the project must not exceed \$750. This limitation will constrain the number of requirements that can be included in the project.
+\subsection{Naming Conventions and Terminology}
+\subsubsection{Abbreviations and Acronyms}
+\begin{enumerate}
+\item \textbf{UI} - User Interface
+\item \textbf{GUI} - Graphical User Interface
+\item \textbf{UI} - A high-level, modern programming language that is used both on the client-side and server-side.
+\item \textbf{AI} - Artificial Intelligence
+\item \textbf{API} - Application programming interface
+\item \textbf{REST} - Representational state transfer
+\item \textbf{OS} - Operating System
+\item \textbf{RGB} - Red, Green, Blue
 
-\plt{The template description comments should be disabled before submitting this
-  document for grading.}
+\end{enumerate}
 
-\plt{You can borrow any wording from the text given in the template.  It is part
-  of the template, and not considered an instance of academic integrity.  Of
-  course, you need to cite the source of the template.}
+  
+\subsection{Relevant Facts and Assumptions}
+\begin{itemize}
+    \item Users will have access to the internet through WiFi or though their data plan from their mobile phone.
+    \item Users can understand English text.
+    \item Users have healthy vision and have no difficulties in seeing colors, graphs and words on the mobile screen.
+\end{itemize}
 
-\plt{When the documentation is done, it should be possible to trace back to the
-  source of every piece of information.  Some information will come from
-  external sources, like terminology.  Other information will be derived, like
-  General Definitions.}
+\section{Functional Requirements}
+\subsection{The Scope of the Work}
+Many people wonder how a different hairstyle would look on them in real life. Most of them rely on their imagination and feelings, and some uses some applications with simple filters. Thus, the existing market lacks mobile applications that accurately simulate their look with a new hairstyle or color.
 
-\plt{An SRS document should have the following qualities: unambiguous,
-  consistent, complete, validatable, abstract and traceable.}
-
-\plt{The overall goal of the SRS is that someone that meets the Characteristics
-  of the Intended Reader (Section~\ref{sec_IntendedReader}) can learn,
-  understand and verify the captured domain knowledge.  They should not have to
-  trust the authors of the SRS on any statements.  They should be able to
-  independently verify/derive every statement made.}
-
-\section{Introduction}
-
-\plt{The introduction section is written to introduce the problem.  It starts
-  general and focuses on the problem domain. The general advice is to start with
-a paragraph or two that describes the problem, followed by a ``roadmap''
-paragraph.  A roadmap orients the reader by telling them what sub-sections to
-expect in the Introduction section.}
-
-\subsection{Purpose of Document}
-
-\plt{This section summarizes the purpose of the SRS document.  It does not focus
-  on the problem itself.  The problem is described in the ``Problem
-  Description'' section (Section~\ref{Sec_pd}).  The purpose is for the document
-  in the context of the project itself, not in the context of this course.
-  Although the ``purpose'' of the document is to get a grade, you should not
-  mention this.  Instead, ``fake it'' as if this is a real project.  The purpose
-  section will be similar between projects.  The purpose of the document is the
-  purpose of the SRS, including communication, planning for the design stage,
-  etc.}
-
-\subsection{Scope of Requirements} 
-
-\plt{Modelling the real world requires simplification.  The full complexity of
-  the actual physics, chemistry, biology is too much for existing models, and
-  for existing computational solution techniques.  Rather than say what is in
-  the scope, it is usually easier to say what is not.  You can think of it as
-  the scope is initially everything, and then it is constrained to create the
-  actual scope.  For instance, the problem can be restricted to 2 dimensions, or
-  it can ignore the effect of temperature (or pressure) on the material
-  properties, etc.}  
-
-\plt{The scope section is related to the assumptions section
-  (Section~\ref{sec_assumpt}).  However, the scope and the assumptions are not
-  at the same level of abstraction.  The scope is at a high level.  The focus is
-  on the ``big picture'' assumptions.  The assumptions section lists, and
-  describes, all of the assumptions.}
-
-\subsection{Characteristics of Intended Reader} \label{sec_IntendedReader}
-
-\plt{This section summarizes the skills and knowledge of the readers of the
-  SRS.  It does NOT have the same purpose as the ``User Characteristics''
-  section (Section~\ref{SecUserCharacteristics}).  The intended readers are the
-  people that will read, review and maintain the SRS.  They are the people that
-  will conceivably design the software that is intended to meet the
-  requirements.  The user, on the other hand, is the person that uses the
-  software that is built.  They may never read this SRS document.  Of course,
-  the same person could be a ``user'' and an ``intended reader.''}
-
-\plt{The intended reader characteristics should be written as unambiguously and
-  as specifically as possible.  Rather than say, the user should have an
-  understanding of physics, say what kind of physics and at what level.  For
-  instance, is high school physics adequate, or should the reader have had a
-  graduate course on advanced quantum mechanics?}
-
-\subsection{Organization of Document}
-
-\plt{This section provides a roadmap of the SRS document.  It will help the
-  reader orient themselves.  It will provide direction that will help them
-  select which sections they want to read, and in what order.  This section will
-  be similar between project.}
-
-\section{General System Description}
-
-This section provides general information about the system.  It identifies the
-interfaces between the system and its environment, describes the user
-characteristics and lists the system constraints.  \plt{This text can likely be
-  borrowed verbatim.}
-
-\plt{The purpose of this section is to provide general information about the
-  system so the specific requirements in the next section will be easier to
-  understand. The general system description section is designed to be
-  changeable independent of changes to the functional requirements documented in
-  the specific system description. The general system description provides a
-  context for a family of related models.  The general description can stay the
-  same, while specific details are changed between family members.}
-
-\subsection{System Context}
-
-\plt{Your system context will include a figure that shows the abstract view of
-  the software.  Often in a scientific context, the program can be viewed
-  abstractly following the design pattern of Inputs $\rightarrow$ Calculations
-  $\rightarrow$ Outputs.  The system context will therefore often follow this
-  pattern.  The user provides inputs, the system does the calculations, and then
-  provides the outputs to the user.  The figure should not show all of the
-  inputs, just an abstract view of the main categories of inputs (like material
-  properties, geometry, etc.).  Likewise, the outputs should be presented from
-  an abstract point of view.  In some cases the diagram will show other external
-  entities, besides the user.  For instance, when the software product is a
-  library, the user will be another software program, not an actual end user.
-  If there are system constraints that the software must work with external
-  libraries, these libraries can also be shown on the System Context diagram.
-  They should only be named with a specific library name if this is required by
-  the system constraint.}
-
+\subsection{The Context of the Work}
+\graphicspath{ {./context_work_diagram.jpg/} }
+\includegraphics[width=\textwidth]{context_work_diagram}
 \begin{figure}[h!]
 \begin{center}
- \includegraphics[width=0.6\textwidth]{SystemContextFigure}
-\caption{System Context}
+ \includegraphics[width=0.6\textwidth]{WorkContextFigure}
+\caption{Context of Work Diagram}
 \label{Fig_SystemContext} 
 \end{center}
 \end{figure}
 
-\plt{For each of the entities in the system context diagram its responsibilities
-  should be listed.  Whenever possible the system should check for data quality,
-  but for some cases the user will need to assume that responsibility.  The list
-  of responsibilites should be about the inputs and outputs only, and they
-  should be abstract.  Details should not be presented here.  However, the
-  information should not be so abstract as to just say ``inputs'' and
-  ``outputs''.  A summarizing phrase can be used to characterize the inputs.
-  For instance, saying ``material properties'' provides some information, but it
-  stays away from the detail of listing every required properties.}
+\subsection{The Scope of the Product}
+ \subsubsection{In Scope}
+The goal of our application can be found below:
+ \begin{itemize}
+     \item Our software should be able to identify the facial features based on the input faces
+     \item Our software should be able to provide the 3D simulation of hairstyles on user's head lively, the virtual hair should be able to move around with the user's head.
+     \item Our software should allow the users to change the hair color of their own hair as well as the virtual hair they are trying on.
+     \item Our software should be able to recommend hairstyles based on the users facial features.
+ \end{itemize}
+ 
+ \noindent
+ Based on the above goals of our application, the scope of our requirements can be summarized to the following:
+ \begin{itemize}
+     \item Identify user facial features
+     \item Simulate 3D virtual hairstyles
+     \item Change hair colors
+     \item Make hairstyle suggestions
+ \end{itemize}
+
+\subsubsection{Out of Scope}
+
+The stretch goals are currently out of the scope of our requirements document, which can be summarized to the followings:
 
 \begin{itemize}
-\item User Responsibilities:
-\begin{itemize}
-\item 
-\end{itemize}
-\item \progname{} Responsibilities:
-\begin{itemize}
-\item Detect data type mismatch, such as a string of characters instead of a
-  floating point number
-\item 
-\end{itemize}
+    \item Support virtual modification of the simulating hairstyles: This allows the users to touch and change the simulated hairstyles and the system should modify the virtual hair accordingly.
+    \item Hair style detection: This enables the software to detect the current hairstyle the users have with machine learning algorithms.
+    \item Providing nearby hair salons: This goal suggest nearby hair salons to the users ranked by their ratings and reviews.
 \end{itemize}
 
-\subsection{User Characteristics} \label{SecUserCharacteristics}
+\subsection{Work Partitioning}
+\begin{flushleft}
+\begin{table}[bp hp]
+\caption{\bf Work Partitioning}
+    \begin{tabularx}{\linewidth}{|l|X|X|}
+        \toprule {\bf Event Name} & {\bf Input/Output} & {\bf Summary}\\
+        \midrule
+        BE1: User pick new hairstyle & image/video(in), transformed image/video(out) & The system will transform desired hairstyle on user's image/video\\
+        \hline
+        BE2: User pick new hair color & image/video(in), transformed image/video(out) & The system will transform desired hair color on user's image/video\\
+        \hline
+        BE3: User save image & image/video(in) & The system will save the user's image/video\\
+        \hline
+        BE4: User download image & image/video(out) & The system will download the user's save image/video\\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+\end{flushleft}
 
-\plt{This section summarizes the knowledge/skills expected of the user.
-  Measuring usability, which is often a required non-function requirement,
-  requires knowledge of a typical user.  As mentioned above, the user is a
-  different role from the ``intended reader,'' as given in
-  Section~\ref{sec_IntendedReader}.  As in Section~\ref{sec_IntendedReader}, the
-  user characteristics should be specific an unambiguous.  For instance, ``The
-  end user of \progname{} should have an understanding of undergraduate Level 1
-  Calculus and Physics.''}
+\subsection{Individual Product Use Cases}
+\begin{UC}
+    \item Change hairstyle: The user wants to change a hairstyle
+    \item Change hair color: The user wants to change a hair color
+    \item Upload images: The user wants to upload images (after transformation) to their account
+    \item Save images: The user wants to save their images (after transformation)
+    \item Log into account: The user wants to log into their account
+\end{UC}
 
-\subsection{System Constraints}
-
-\plt{System constraints differ from other type of requirements because they
-  limit the developers' options in the system design and they identify how the
-  eventual system must fit into the world. This is the only place in the SRS
-  where design decisions can be specified.  That is, the quality requirement for
-  abstraction is relaxed here.  However, system constraints should only be
-  included if they are truly required.}
-
-\section{Specific System Description}
-
-This section first presents the problem description, which gives a high-level
-view of the problem to be solved.  This is followed by the solution characteristics
-specification, which presents the assumptions, theories, definitions and finally
-the instance models.  \plt{Add any project specific details that are relevant
-  for the section overview.}
-
-\subsection{Problem Description} \label{Sec_pd}
-
-\progname{} is intended to solve ... \plt{What problem does your program solve?
-The description here should be in the problem space, not the solution space.}
-
-\subsubsection{Terminology and  Definitions}
-
-\plt{This section is expressed in words, not with equations.  It provide the
-  meaning of the different words and phrases used in the domain of the problem.
-The terminology is used to introduce concepts from the world outside of the
-mathematical model  The terminology provides a real world connection to give the
-mathematical model meaning.}
-
-This subsection provides a list of terms that are used in the subsequent
-sections and their meaning, with the purpose of reducing ambiguity and making it
-easier to correctly understand the requirements:
-
-\begin{itemize}
-
-\item 
-
-\end{itemize}
-
-\subsubsection{Physical System Description} \label{sec_phySystDescrip}
-
-\plt{The purpose of this section is to clearly and unambiguously state the
-  physical system that is to be modelled. Effective problem solving requires a
-  logical and organized approach. The statements on the physical system to be
-  studied should cover enough information to solve the problem. The physical
-  description involves element identification, where elements are defined as
-  independent and separable items of the physical system. Some example elements
-  include acceleration due to gravity, the mass of an object, and the size and
-  shape of an object. Each element should be identified and labelled, with their
-  interesting properties specified clearly. The physical description can also
-  include interactions of the elements, such as the following: i) the
-  interactions between the elements and their physical environment; ii) the
-  interactions between elements; and, iii) the initial or boundary conditions.}
-
-The physical system of \progname{}, as shown in Figure~?,
-includes the following elements:
-
-\begin{itemize}
-
-\item[PS1:] 
-
-\item[PS2:] ...
-
-\end{itemize}
-
-\plt{A figure here makes sense for most SRS documents}
-
-% \begin{figure}[h!]
-% \begin{center}
-% %\rotatebox{-90}
-% {
-%  \includegraphics[width=0.5\textwidth]{<FigureName>}
-% }
-% \caption{\label{<Label>} <Caption>}
-% \end{center}
-% \end{figure}
-
-\subsubsection{Goal Statements}
-
-\plt{The goal statements refine the ``Problem Description''
-  (Section~\ref{Sec_pd}).  A goal is a functional objective the system under
-  consideration should achieve. Goals provide criteria for sufficient
-  completeness of a requirements specification and for requirements
-  pertinence. Goals will be refined in Section “Instanced Models”
-  (Section~\ref{sec_instance}). Large and complex goals should be decomposed
-  into smaller sub-goals.  The goals are written abstractly, with a minimal
-  amount of technical language.  They should be understandable by non-domain
-  experts.}
-
-\noindent Given the \plt{inputs}, the goal statements are:
-
-\begin{itemize}
-
-\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_meaningfulLabel}:] \plt{One
-    sentence description of the goal.  There may be more than one.  Each Goal
-    should have a meaningful label.}
-
-\end{itemize}
-
-\subsection{Solution Characteristics Specification}
-
-\plt{This section specifies the information in the solution domain of the system
-  to be developed. This section is intended to express what is required in
-  such a way that analysts and stakeholders get a clear picture, and the
-  latter will accept it. The purpose of this section is to reduce the problem
-  into one expressed in mathematical terms. Mathematical expertise is used to
-  extract the essentials from the underlying physical description of the
-  problem, and to collect and substantiate all physical data pertinent to the
-  problem.}
-
-\plt{This section presents the solution characteristics by successively refining
-  models.  It starts with the abstract/general Theoretical Models (TMs) and
-  refines them to the concrete/specific Instance Models (IMs).  If necessary
-  there are intermediate refinements to General Definitions (GDs).  All of these
-  refinements can potentially use Assumptions (A) and Data Definitions (DD).
-  TMs are refined to create new models, that are called GMs or IMs. DDs are not
-  refined; they are just used. GDs and IMs are derived, or refined, from other
-  models. DDs are not derived; they are just given. TMs are also just given, but
-  they are refined, not used.  If a potential DD includes a derivation, then
-  that means it is refining other models, which would make it a GD or an IM.}
-
-\plt{The above makes a distinction between ``refined'' and ``used.'' A model is
-  refined to another model if it is changed by the refinement. When we change a
-  general 3D equation to a 2D equation, we are making a refinement, by applying
-  the assumption that the third dimension does not matter. If we use a
-  definition, like the definition of density, we aren't refining, or changing
-  that definition, we are just using it.}
-
-\plt{The same information can be a TM in one problem and a DD in another.  It is
-  about how the information is used.  In one problem the definition of
-  acceleration can be a TM, in another it would be a DD.}
-
-\plt{There is repetition between the information given in the different chunks
-  (TM, GDs etc) with other information in the document.  For instance, the
-  meaning of the symbols, the units etc are repeated.  This is so that the
-  chunks can stand on their own when being read by a reviewer/user.  It also
-  facilitates reuse of the models in a different context.}
-
-\noindent \plt{The relationships between the parts of the document are show in
-  the following figure.  In this diagram ``may ref'' has the same role as
-  ``uses'' above.  The figure adds ``Likely Changes,'' which are able to
-  reference (use) Assumptions.}
-
-\begin{figure}[H]
-  \includegraphics[scale=0.9]{RelationsBetweenTM_GD_IM_DD_A.pdf}
+\subsection{The Context of the System}
+\graphicspath{ {./system_context_diagram.jpg/} }
+\includegraphics[width=\textwidth]{system_context_diagram}
+\begin{figure}[h!]
+\begin{center}
+ \includegraphics[width=0.6\textwidth]{SystemContextFigure}
+\caption{Context of System Diagram}
+\end{center}
 \end{figure}
 
-The instance models that govern \progname{} are presented in
-Subsection~\ref{sec_instance}.  The information to understand the meaning of the
-instance models and their derivation is also presented, so that the instance
-models can be verified.
+\subsection{Functional Requirements }
+\subsubsection{Facial Recognition System}
+    \begin{itemize}
+        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The user must input their face in image or video format
+        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must pre-process the image by transforming the input facial image to grayscale
+        \item[] Rationale: Increase the contrastness of the image to better detect the edges
+        \item[] Math Specification: newImage $:=$ process($image$) $\Rightarrow$ ($\forall p :$ Pixels in image $|$ p[$Red$]*0.21 + p[$Green$]*0.72 + p[$Blue$]*0.07)
+        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must load the grayscale facial image into a pre-trained facial detection model for face shape detection
+        \item[] Rationale: The pre-trained facial detection model needs a grayscale image as an input to provide a more accurate result
+        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must load the pre-processed image into a pre-trained hair detection model for hair extraction
+        \item[] Rationale: The pre-trained hair detection model needs a grayscale image as an input to provide a more accurate result
+        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system compute the hair edge coordinates
+        \item[] Rationale: the pre-trained models will compute a series of important coordinates related to the hair. These coordinates will be used for various transformation.
+        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must mark the corners and shape with facial landmark coordinates.
+        \item[] Rationale: Marking the boundary is important, because the transformations will only apply to the hair not the face.
+        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must store the coordinates from the hair and facial features.
+    \end{itemize}
 
-\subsubsection{Assumptions} \label{sec_assumpt}
+\subsubsection{Hair Modification System}
+    \begin{itemize}
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The user must choose a color from the provided options if hair color transformation is selected
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system must load the hair feature data for hair color transition
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system should map the hair coordinates on the image and apply the new rgb values to the region
+        \item[] Rationale: The hair coordinates are retrieved from facial recognition system, so new rgb colors can be applied to those regions
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system must load the facial coordinates for hair style transformation
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The user must choose a hair style from the provided options if hair style transformation is selected
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system should load the selected hair style dataset from the database
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] the system should adjust the coordinate to be proportional with the image scale
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system should add the new hair style coordinates above the facial coordinates.
+        \item[] Rationale: depends on the hair style, some can be placed on top of the existing hair style, or re-construct
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system should output the transformed face in image or video.
+    \end{itemize}
+\subsubsection{Hair Salon Recommendation System}
+    \begin{itemize}
+        \item[HR\refstepcounter{hrreqnum}\thehrreqnum \label{R_Inputs}:] The user must enter a address or turn on current location to use the recommendation system
+        \item[HR\refstepcounter{hrreqnum}\thehrreqnum \label{R_Inputs}:] The system must retrieve 5 nearby hair salon locations based on the input address
+        \item[HR\refstepcounter{hrreqnum}\thehrreqnum \label{R_Inputs}:] The system should label the retrieved locations on a map
+        \item[] Rationale: marking the locations on the map allows the user to see the distance to their current location visually
+        \item[HR\refstepcounter{hrreqnum}\thehrreqnum \label{R_Inputs}:] The system should rank the locations based on user review
+        \item[] Rationale: the user reviews is a good indicator for deciding which one to go to
+    \end{itemize}
+    
+\subsubsection{Authentication System}
+    \begin{itemize}
+        \item[AR\refstepcounter{arreqnum}\thearreqnum \label{R_Inputs}:] The user must enter valid username and password to access their profile in the system
+        \item[AR\refstepcounter{arreqnum}\thearreqnum \label{R_Inputs}:] The system must allow the user to upload their face image before and after hair transformation
+        \item[] Rationale: users might want to save the images for future references
+        \item[AR\refstepcounter{arreqnum}\thearreqnum \label{R_Inputs}:] The system shall upload images after successful log in
+        \item[AR\refstepcounter{arreqnum}\thearreqnum \label{R_Inputs}:] The system must allow the user to log out
+    \end{itemize}
 
-\plt{The assumptions are a refinement of the scope.  The scope is general, where
-  the assumptions are specific.  All assumptions should be listed, even those
-  that domain experts know so well that they are rarely (if ever) written down.}
-\plt{The document should not take for granted that the reader knows which
-  assumptions have been made. In the case of unusual assumptions, it is
-  recommended that the documentation either include, or point to, an explanation
-  and justification for the assumption.}
+\subsection{Finite State Machine}
+\graphicspath{ {./fsm.jpg/} }
+\includegraphics[width=\textwidth]{FSM}
+\begin{figure}[h!]
+\begin{center}
+ \includegraphics[width=0.8\textwidth]{FSMFigure}
+\caption{Finite State Machine}
+\end{center}
+\end{figure}
 
-This section simplifies the original problem and helps in developing the
-theoretical model by filling in the missing information for the physical
-system. The numbers given in the square brackets refer to the theoretical model
-[T], general definition [GD], data definition [DD], instance model [IM], or
-likely change [LC], in which the respective assumption is used.
 
+\section{Nonfunctional Requirements}
+
+\subsection{Look and Feel Requirements}
+\subsubsection{Appearance Requirements}
 \begin{itemize}
+    \item[APR\refstepcounter{aprreqnum}\theaprreqnum \label{R_Inputs}:] The fonts must be outstanding and easily recognizable through the interface.
+    \item[] Fit Criteria: Volunteers from various age ranges will be invited to verify that they can see the text with the application font size.
+    \item[APR\refstepcounter{aprreqnum}\theaprreqnum \label{R_Inputs}:] The user interface should be well-organized while simple to use. 
+    \item[] Fit Criteria: Volunteers from different age group will be invited to use the application and see if they can learn how to use by themselves. 
+\end{itemize}
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_meaningfulLabel}:]
-  \plt{Short description of each assumption.  Each assumption
-    should have a meaningful label.  Use cross-references to identify the
-    appropriate traceability to T, GD, DD etc., using commands like dref, ddref
-    etc.  Each assumption should be atomic - that is, there should not be an
-    explicit (or implicit) ``and'' in the text of an assumption.}
+\subsubsection{Style Requirements}
+\begin{itemize}
+    \item[IAR\refstepcounter{iarreqnum}\theiarreqnum \label{R_Inputs}:] The style of the interface must has a modern aesthetic.
+    \item[] Fit Criteria: The interface will be compared with the popular modern interface style found online. Professional UI Designers will be invited to take a look at the application interface to ensure the interface has a mordern aesthetic.
+    \item[IAR\refstepcounter{iarreqnum}\theiarreqnum \label{R_Inputs}:] The style of the interface must be simple and clear. 
+    \item[] Fit Criteria: Volunteers will be invited to use the application, and there should be no user reflects that the interface is complicated, unclear, and hard to use.
+\end{itemize}
+\subsection{Usability and Humanity Requirements}
+
+\subsubsection{Ease of Use Requirements}
+\begin{itemize}
+    \item[EUR\refstepcounter{eurreqnum}\theeurreqnum \label{R_Inputs}:] Interactable components on the interface should be emphasized to signify the user that the components can be interacted with.
+    \item[] Fit Criteria: Volunteers will be invited to use the application and see if they can intuitively find out all the interactable components.
+    \item[EUR\refstepcounter{eurreqnum}\theeurreqnum \label{R_Inputs}:] Interactable components on the interface should be big enough to prevent the user from misclicking.
+    \item[] Fit Criteria: Volunteers will be invited to use the application and see if they will misclick throughout using the application.
+\end{itemize}
+
+\subsubsection{Personalization and Internationalization Requirements}
+N/A
+
+\subsubsection{Learning Requirements}
+\begin{itemize}
+    \item[LR\refstepcounter{lrreqnum}\thelrreqnum \label{R_Inputs}:] The installation process must be completed within 3 steps.
+    \item[LR\refstepcounter{lrreqnum}\thelrreqnum \label{R_Inputs}:] The instructions shall be concise and easy to follow.
+    \item[] Fit Criteria: Volunteers will be invited to use the application and see if they can follow the instructions without problems.
+\end{itemize}
+
+\subsubsection{Understandability and Politeness Requirements}
+\begin{itemize}
+    \item[UPR\refstepcounter{uprreqnum}\theuprreqnum \label{R_Inputs}:] The icons should be taken from common usage icons when appropriate.
+    \item[] Fit Criteria: Volunteers will be invited to use the application and see if all the icons make sense where they were used
+\end{itemize}
+
+\subsubsection{Accessibility Requirements}
+\begin{itemize}
+    \item[ASR\refstepcounter{asrreqnum}\theasrreqnum \label{R_Inputs}:] Fonts shall be in appropriate color and size
+    \item[] Rationale: The content can be easily read by the user.
+    \item[] Fit Criteria: Volunteers will be invited to use the application and rate the readability of the content from 1-10, below 7 is a fail.
+\end{itemize}
+
+
+\subsection{Performance Requirements}
+\subsubsection{Speed and Latency Requirements}
+\begin{itemize}
+    \item[SLR\refstepcounter{slrreqnum}\theslrreqnum \label{R_Inputs}:] The response time of hairstyle suggestion must be within 1 second.
+    \item[SLR\refstepcounter{slrreqnum}\theslrreqnum \label{R_Inputs}:] The response time of users changing hairstyles must be within 1 second.
+    \item[SLR\refstepcounter{slrreqnum}\theslrreqnum \label{R_Inputs}:] The response time of users clicking any other buttons must be within 0.5 seconds.
+\end{itemize}
+
+\subsubsection{Safety-Critical Requirements}
+N/A
+
+\subsubsection{Precision and Accuracy Requirements}
+\begin{itemize}
+    \item[PAR\refstepcounter{parreqnum}\theparreqnum \label{R_Inputs}:] The position of the AR hair must fit the users' head position on the screen within 1 millimeter accuracy.
+    \item[PAR\refstepcounter{parreqnum}\theparreqnum \label{R_Inputs}:] When users move their heads, the AR hair must move along the users' heads within 2 millimeters accuracy.
+\end{itemize}
+
+\subsubsection{Reliability and Availability Requirements}
+\begin{itemize}
+    \item[RAR\refstepcounter{rarreqnum}\therarreqnum \label{R_Inputs}:] For all users, the application will be available to use without crashes over 99 percents of the time. (less than or equal to 1 crash per 100 access)
+    \item[RAR\refstepcounter{rarreqnum}\therarreqnum \label{R_Inputs}:] The application must allow the users to use continuously until the hardware device is broken or out of battery. 
+    \item[] Fit Criteria: There should be no errors during unit tests, integration test and user tests for the application.
+\end{itemize}
+
+\subsubsection{Robustness Requirements}
+\begin{itemize}
+    \item[RBR\refstepcounter{rbrreqnum}\therbrreqnum \label{R_Inputs}:] The application must have exception handling methods to provide useful feedback if improper information is input.
+    \item[] Fit Criteria: There should be a pressure test on the application and developers will try to inject irrational inputs to break the application, but no errors or exceptions should occur.
+    \item[RBR\refstepcounter{rbrreqnum}\therbrreqnum \label{R_Inputs}:] The application must have error case handling methods so that it can recover from simple errors such as stuck or no response.
+    \item[] Fit Criteria: There should be a pressure test on the application and developers will try to inject irrational inputs to break the application, but the application should not crash.
+\end{itemize}
+
+\subsubsection{Capacity Requirements}
+\begin{itemize}
+    \item[CCR\refstepcounter{ccrreqnum}\theccrreqnum \label{R_Inputs}:] The application must have a database to store every user's account information.
+    \item[] Fit Criteria: Database developer will do tests on the database such that the count of users' account information in the database equals the actual registered number of user accounts.
+    \item[CCR\refstepcounter{ccrreqnum}\theccrreqnum \label{R_Inputs}:] The product must have a database to store at least 10 different hairstyles.
+\end{itemize}
+
+\subsubsection{Scalability and Extensibility Requirements}
+\begin{itemize}
+    \item[SER\refstepcounter{serreqnum}\theserreqnum \label{R_Inputs}:] The application must allow new features to be added in the future.
+    \item[] Fit Criteria: Any possible future developing features will be kept in the section of Watch Room in this document.
+\end{itemize}
+
+\subsubsection{Longevity Requirements}
+\begin{itemize}
+    \item[LGR\refstepcounter{lgrreqnum}\thelgrreqnum \label{R_Inputs}:] The application must be supported while the libraries and frameworks being used are supported and all developers constantly maintaining.
+    \item[] Fit Criteria: Developers will regularly run tests to ensure the application is functioning.
+\end{itemize}
+
+\subsection{Operational and Environmental Requirements}
+\subsubsection{Expected Physical Environment}
+N/A
+
+\subsubsection{Requirements for Interfacing with Adjacent System}
+N/A
+
+\subsubsection{Productization Requirements}
+\begin{itemize}
+    \item[PDR\refstepcounter{pdrreqnum}\thepdrreqnum \label{R_Inputs}:] The product must be available to download via Apple App Store.
+    \item[] Fit Criteria: Volunteers and developers will search and download the application via Apple App Store and all people should download the application successfully.
+\end{itemize}
+
+\subsubsection{Release Requirements}
+\begin{itemize}
+    \item[RER\refstepcounter{rerreqnum}\thererreqnum \label{R_Inputs}:] Data from previous builds of the product should be compatible with new builds of the product.
+    \item[] Fit Criteria: Developers will regularly run tests to ensure that data can be used between different builds.
+    \item[RER\refstepcounter{rerreqnum}\thererreqnum \label{R_Inputs}:] Version updates and descriptions of changes shall be included in change logs available to the user.
+\end{itemize}
+
+\subsection{Maintainability and Support Requirements}
+\subsubsection{Maintenance Requirements}
+\begin{itemize}
+    \item[MSR\refstepcounter{msrreqnum}\themsrreqnum \label{R_Inputs}:] 
+    The product will be maintained by the developers.
+    \item[] Fit Criteria: Developers will regularly run tests and fix bugs if any occur.
+    \item[MSR\refstepcounter{msrreqnum}\themsrreqnum \label{R_Inputs}:] 
+    The product shall undergo revision to check for any potential bugs.
+    \item[] Fit Criteria: Developers will regularly run tests to check for potential bugs.
+    \item[MSR\refstepcounter{msrreqnum}\themsrreqnum \label{R_Inputs}:] 
+    The mean time to restore the App (MTTRS) following a system failure must not be greater than 60 minutes. MTTRS includes all corrective maintenance time and delay time
+\end{itemize}
+\subsubsection{Supportability Requirements}
+\begin{itemize}
+    \item[SPR\refstepcounter{sprreqnum}\thesprreqnum \label{R_Inputs}:] 
+    The product shall be available on iPhone with iOS system 14 and after.
+    \item[] Volunteers with iPhone 
+\end{itemize}
+
+\subsubsection{Adaptablity Requirements}
+\begin{itemize}
+    \item[ADR\refstepcounter{adrreqnum}\theadrreqnum \label{R_Inputs}:] 
+    The product shall be compatible with iOS system 14 and after.
+    
+\end{itemize}
+
+\subsection{Security Requirements}
+
+\subsubsection{Access Requirements}
+\begin{itemize}
+    \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:] Users will be able to access images they previously stored.
+    \item[] Fit Criteria: Developers will run tests as user role to ensure that stored data is accessible.
+    \item[ACR\refstepcounter{acrreqnum}\theacrreqnum\label{R_Inputs}:] 
+    Users will be able to access site data for job sites they are authorized for.
+    \item[] Fit Criteria: Developers will run tests in user role to ensure that data is accessible with permission.
+    \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:]
+    Admins and supervisors will be able to unlock locked resources.
+    \item[] Fit Criteria: Developers will run tests in admin role to ensure that locked resources are accessible to admins and supervisors.
+    \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:]
+    Only admins will be able to modify application information.
+    \item[] Fit Criteria: Developers will run tests in admin role to ensure that only admins can modify application information.
+\end{itemize}
+
+
+\subsubsection{Integrity Requirements}
+\begin{itemize}
+    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] The product will not modify data unnecessary.
+    \item[] Fit Criteria: Developers will run tests in a sandbox to verify that data is only modified when necessary.
+    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] The product will not modify any data unrelated to its execution.
+    \item[] Fit Criteria: Developers will run tests in a sandbox to verify that data is only modified when it is related to its execution.
+    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] Data will be automatically backed up daily.
+     \item[] Fit Criteria: Developers will verify that the cloud database is backed up daily.
+    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] Unsaved data will be stored locally on the user's device if it cannot be uploaded to the remote database and is not explicitly discarded.
+    \item[] Fit Criteria: Developers will run tests in user role to ensure that unsaved data is stored locally on the user's device if it cannot be uploaded to the remote database and is not explicitly discarded.
+\end{itemize}
+
+\subsubsection{Privacy Requirements}
+\begin{itemize}
+    \item[PRR\refstepcounter{prrreqnum}\theprrreqnum \label{R_Inputs}:] Users will not be able to access data generated by other users.
+    \item[] Fit Criteria: Developers will run tests in user role to ensure that users cannot access data generated by other users.
+    \item[PRR\refstepcounter{prrreqnum}\theprrreqnum \label{R_Inputs}:] Users will be required to register and login to the application with their emails.
+    \item[] Fit Criteria: Developers will run tests in user role to ensure that users cannot access data generated by other users.
+\end{itemize}
+
+\subsubsection{Audit Requirements}
+\begin{itemize}
+    \item[AUR\refstepcounter{aurreqnum}\theaurreqnum \label{R_Inputs}:] Requirements should be easy to read and verify against the system facilitate regular inspections.
+    \item[] Fit Criteria: SRS requirements will be verified by SE4G06A teaching assistants.
+\end{itemize}
+
+\subsubsection{Immunity Requirements}
+N/A
+
+\subsection{Cultural and Political Requirements}
+\subsubsection{Cultural Requirements}
+\begin{itemize}
+    \item[CR\refstepcounter{crreqnum}\thecrreqnum \label{R_Inputs}:] The product will not use any terms that are inappropriate or offensive towards any cultures.
+    \item[] Fit Criteria: Volunteers will be invited to use the application and see if they find any inappropriate terms.
+\end{itemize}
+
+\subsubsection{Political Requirements}
+N/A
+
+\subsection{Legal Requirements}
+\subsubsection{Compliance Requirements}
+\begin{itemize}
+    \item[CPR\refstepcounter{cprreqnum}\thecprreqnum \label{R_Inputs}:] The product must state that the application does not take responsibility for any accidents resulting from its use. 
+\end{itemize}
+
+\subsubsection{Standards Requirements}
+\begin{itemize}
+    \item[SDR\refstepcounter{sdrreqnum}\thesdrreqnum \label{R_Inputs}:] The product must follow the fail-safe-defaults design principle in that it will always error into a safe state.
+    \item[SDR\refstepcounter{sdrreqnum}\thesdrreqnum \label{R_Inputs}:] The product must follow modular design principles to allow for easy maintenance.
+    \item[SDR\refstepcounter{sdrreqnum}\thesdrreqnum \label{R_Inputs}:] The application must be developed using iOS application style guides. 
 
 \end{itemize}
 
-\subsubsection{Theoretical Models}\label{sec_theoretical}
-
-\plt{Theoretical models are sets of abstract mathematical equations or axioms
-  for solving the problem described in Section ``Physical System Description''
-  (Section~\ref{sec_phySystDescrip}). Examples of theoretical models are
-  physical laws, constitutive equations, relevant conversion factors, etc.}
-
-This section focuses on the general equations and laws that \progname{} is based
-on.  \plt{Modify the examples below for your problem, and add additional models
-  as appropriate.}
-
-~\newline
-
-\noindent
-\deftheory
-% #2 refname of theory
-{T:COE}
-% #3 label
-{Conservation of thermal energy}
-% #4 equation
-{
-  $-{\bf \nabla \cdot q} + g$ = $\rho C \frac{\partial T}{\partial t}$
-}
-% #5 description
-{
-  The above equation gives the conservation of energy for transient heat transfer in a material
-  of specific heat capacity $C$ (\si{\joule\per\kilogram\per\celsius}) and density $\rho$ 
-  (\si{\kilogram\per\cubic\metre}), where $\bf q$ is the thermal flux vector (\si{\watt\per\square\metre}),
-  $g$ is the volumetric heat generation
-  (\si{\watt\per\cubic\metre}), $T$ is the temperature
-  (\si{\celsius}),  $t$ is time (\si{\second}), and $\nabla$ is
-  the gradient operator.  For this equation to apply, other forms
-  of energy, such as mechanical energy, are assumed to be negligible in the
-  system (\aref{A_OnlyThermalEnergy}).  In general, the material properties ($\rho$ and $C$) depend on temperature.
-}
-% #6 Notes
-{
-None.
-}
-% #7 Source
-{
-  \url{http://www.efunda.com/formulae/heat_transfer/conduction/overview_cond.cfm}
-}
-% #8 Referenced by
-{
-  \dref{ROCT}
-}
-% #9 Preconditions
-{
-None
-}
-% #1 derivation - not applicable by default
-{}
-
-\plt{``Ref.\ By'' is used repeatedly with the different types of information.
-  This stands for Referenced By.  It means that the models, definitions and
-  assumptions listed reference the current model, definition or assumption.
-  This information is given for traceability.  Ref. By provides a pointer in the
-  opposite direction to what we commonly do.  You still need to have a reference
-  in the other direction pointing to the current model, definition or
-  assumption.  As an example, if T1 is referenced by G2, that means that G2 will
-  explicitly include a reference to T1.}
-
-~\newline
-
-\subsubsection{General Definitions}\label{sec_gendef}
-
-\plt{General Definitions (GDs) are a refinement of one or more TMs, and/or of
-  other GDs.  The GDs are less abstract than the TMs.  Generally the reduction
-  in abstraction is possible through invoking (using/referencing) Assumptions.
-  For instance, the TM could be Newton's Law of Cooling stated abstracting.  The
-  GD could take the general law and apply it to get a 1D equation.}
-
-This section collects the laws and equations that will be used in building the
-instance models.
-
-\plt{Some projects may not have any content for this section, but the section
-  heading should be kept.}  \plt{Modify the examples below for your problem, and
-  add additional definitions as appropriate.}
-
-~\newline
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-\hline
-\rowcolor[gray]{0.9}
-Number& GD\refstepcounter{defnum}\thedefnum \label{NL}\\
-\hline
-Label &\bf Newton's law of cooling \\
-\hline
-% Units&$MLt^{-3}T^0$\\
-% \hline
-SI Units&\si{\watt\per\square\metre}\\
-\hline
-Equation&$ q(t) = h \Delta T(t)$  \\
-\hline
-Description &
-Newton's law of cooling describes convective cooling from a surface.  The law is
-stated as: the rate of heat loss from a body is proportional to the difference
-in temperatures between the body and its surroundings.
-\\
-& $q(t)$ is the thermal flux (\si{\watt\per\square\metre}).\\
-& $h$ is the heat transfer coefficient, assumed independent of $T$ (\aref{A_hcoeff})
-	(\si{\watt\per\square\metre\per\celsius}).\\
-&$\Delta T(t)$= $T(t) - T_{\text{env}}(t)$ is the time-dependent thermal gradient
-between the environment and the object (\si{\celsius}).
-\\
-\hline
-  Source & Citation here \\
-  \hline
-  Ref.\ By & \ddref{FluxCoil}, \ddref{FluxPCM}\\
-  \hline
-\end{tabular}
-\end{minipage}\\
-
-\subsubsection*{Detailed derivation of simplified rate of change of temperature}
-
-\plt{This may be necessary when the necessary information does not fit in the
-  description field.}
-\plt{Derivations are important for justifying a given GD.  You want it to be
-  clear where the equation came from.}
-
-\subsubsection{Data Definitions}\label{sec_datadef}
-
-\plt{The Data Definitions are definitions of symbols and equations that are
-  given for the problem.  They are not derived; they are simply used by other
-  models.  For instance, if a problem depends on density, there may be a data
-  definition for the equation defining density.  The DDs are given information
-  that you can use in your other modules.}
-
-\plt{All Data Definitions should be used (referenced) by at least one other
-  model.}
-
-This section collects and defines all the data needed to build the instance
-models. The dimension of each quantity is also given.  \plt{Modify the examples
-  below for your problem, and add additional definitions as appropriate.}
-
-~\newline
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-\hline
-\rowcolor[gray]{0.9}
-Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{FluxCoil}\\
-\hline
-Label& \bf Heat flux out of coil\\
-\hline
-Symbol &$q_C$\\
-\hline
-% Units& $Mt^{-3}$\\
-% \hline
-  SI Units & \si{\watt\per\square\metre}\\
-  \hline
-  Equation&$q_C(t) = h_C (T_C - T_W(t))$, over area $A_C$\\
-  \hline
-  Description & 
-                $T_C$ is the temperature of the coil (\si{\celsius}).  $T_W$ is the temperature of the water (\si{\celsius}).  
-                The heat flux out of the coil, $q_C$ (\si{\watt\per\square\metre}), is found by
-                assuming that Newton's Law 
-                of Cooling applies (\aref{A_Newt_coil}).  This law (\dref{NL}) is used on the surface of
-                the coil, which has area $A_C$ (\si{\square\metre}) and heat 
-                transfer coefficient $h_C$
-                (\si{\watt\per\square\metre\per\celsius}).  This equation
-                assumes that the temperature of the coil is constant over time (\aref{A_tcoil}) and that it does not vary along the length
-                of the coil (\aref{A_tlcoil}).
-  \\
-  \hline
-  Sources& Citation here \\
-  \hline
-  Ref.\ By & \iref{ewat}\\
-  \hline
-\end{tabular}
-\end{minipage}\\
-
-\subsubsection{Data Types}\label{sec_datatypes}
-
-\plt{This section is optional.  In many scientific computing programs it isn't
-  necessary, since the inputs and outpus are straightforward types, like reals,
-  integers, and sequences of reals and integers.  However, for some problems it
-  is very helpful to capture the type information.}
-
-\plt{The data types are not derived; they are simply stated and used by other
-  models.}
-
-\plt{All data types must be used by at least one of the models.}
-
-\plt{For the mathematical notation for expressing types, the recommendation is
-  to use the notation of~\citet{HoffmanAndStrooper1995}.}
-
-This section collects and defines all the data types needed to document the
-models. \plt{Modify the examples below for your problem, and add additional
-  definitions as appropriate.}
-
-~\newline
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-  \hline
-  \rowcolor[gray]{0.9}
-  Type Name & Name for Type\\
-  \hline
-  Type Def & mathematical definition of the type\\
-  \hline
-  Description & description here
-  \\
-  \hline
-  Sources & Citation here, if the type is borrowed from another source\\
-  \hline
-\end{tabular}
-\end{minipage}\\
-
-\subsubsection{Instance Models} \label{sec_instance}    
-
-\plt{The motivation for this section is to reduce the problem defined in
-  ``Physical System Description'' (Section~\ref{sec_phySystDescrip}) to one
-  expressed in mathematical terms. The IMs are built by refining the TMs and/or
-  GDs.  This section should remain abstract.  The SRS should specify the
-  requirements without considering the implementation.}
-
-This section transforms the problem defined in Section~\ref{Sec_pd} into 
-one which is expressed in mathematical terms. It uses concrete symbols defined 
-in Section~\ref{sec_datadef} to replace the abstract symbols in the models 
-identified in Sections~\ref{sec_theoretical} and~\ref{sec_gendef}.
-
-The goals \plt{reference your goals} are solved by \plt{reference your instance
-  models}.  \plt{other details, with cross-references where appropriate.}
-\plt{Modify the examples below for your problem, and add additional models as
-  appropriate.}
-
-~\newline
-
-%Instance Model 1
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-  \hline
-  \rowcolor[gray]{0.9}
-  Number& IM\refstepcounter{instnum}\theinstnum \label{ewat}\\
-  \hline
-  Label& \bf Energy balance on water to find $T_W$\\
-  \hline
-  Input&$m_W$, $C_W$, $h_C$, $A_C$, $h_P$, $A_P$, $t_\text{final}$, $T_C$, 
-  $T_\text{init}$, $T_P(t)$ from \iref{epcm}\\
-  & The input is constrained so that $T_\text{init} \leq T_C$ (\aref{A_charge})\\
-  \hline
-  Output&$T_W(t)$, $0\leq t \leq t_\text{final}$, such that\\
-  &$\frac{dT_W}{dt} = \frac{1}{\tau_W}[(T_C - T_W(t)) + {\eta}(T_P(t) - T_W(t))]$,\\
-  &$T_W(0) = T_P(0) = T_\text{init}$ (\aref{A_InitTemp}) and $T_P(t)$ from \iref{epcm} \\
-  \hline
-  Description&$T_W$ is the water temperature (\si{\celsius}).\\
-  &$T_P$ is the PCM temperature (\si{\celsius}).\\
-  &$T_C$ is the coil temperature (\si{\celsius}).\\
-  &$\tau_W = \frac{m_W C_W}{h_C A_C}$ is a constant (\si{\second}).\\
-  &$\eta = \frac{h_P A_P}{h_C A_C}$ is a constant (dimensionless).\\
-  & The above equation applies as long as the water is in liquid form,
-  $0<T_W<100^o\text{C}$, where $0^o\text{C}$ and $100^o\text{C}$ are the melting
-  and boiling points of water, respectively (\aref{A_OpRange}, \aref{A_Pressure}).
-  \\
-  \hline
-  Sources& Citation here \\
-  \hline
-  Ref.\ By & \iref{epcm}\\
-  \hline
-\end{tabular}
-\end{minipage}\\
-
-%~\newline
-
-\subsubsection*{Derivation of ...}
-
-\plt{The derivation shows how the IM is derived from the TMs/GDs.  In cases
-  where the derivation cannot be described under the Description field, it will
-  be necessary to include this subsection.}
-
-\subsubsection{Input Data Constraints} \label{sec_DataConstraints}    
-
-Table~\ref{TblInputVar} shows the data constraints on the input output
-variables.  The column for physical constraints gives the physical limitations
-on the range of values that can be taken by the variable.  The column for
-software constraints restricts the range of inputs to reasonable values.  The
-software constraints will be helpful in the design stage for picking suitable
-algorithms.  The constraints are conservative, to give the user of the model the
-flexibility to experiment with unusual situations.  The column of typical values
-is intended to provide a feel for a common scenario.  The uncertainty column
-provides an estimate of the confidence with which the physical quantities can be
-measured.  This information would be part of the input if one were performing an
-uncertainty quantification exercise.
-
-The specification parameters in Table~\ref{TblInputVar} are listed in
-Table~\ref{TblSpecParams}.
-
-\begin{table}[!h]
-  \caption{Input Variables} \label{TblInputVar}
-  \renewcommand{\arraystretch}{1.2}
-\noindent \begin{longtable*}{l l l l c} 
-  \toprule
-  \textbf{Var} & \textbf{Physical Constraints} & \textbf{Software Constraints} &
-                             \textbf{Typical Value} & \textbf{Uncertainty}\\
-  \midrule 
-  $L$ & $L > 0$ & $L_{\text{min}} \leq L \leq L_{\text{max}}$ & 1.5 \si[per-mode=symbol] {\metre} & 10\%
-  \\
-  \bottomrule
-\end{longtable*}
-\end{table}
-
-\noindent 
-\begin{description}
-\item[(*)] \plt{you might need to add some notes or clarifications}
-\end{description}
-
-\begin{table}[!h]
-\caption{Specification Parameter Values} \label{TblSpecParams}
-\renewcommand{\arraystretch}{1.2}
-\noindent \begin{longtable*}{l l} 
-  \toprule
-  \textbf{Var} & \textbf{Value} \\
-  \midrule 
-  $L_\text{min}$ & 0.1 \si{\metre}\\
-  \bottomrule
-\end{longtable*}
-\end{table}
-
-\subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
-
-\noindent
-A correct solution must exhibit \plt{fill in the details}.  \plt{These
-  properties are in addition to the stated requirements.  There is no need to
-  repeat the requirements here.  These additional properties may not exist for
-  every problem.  Examples include conservation laws (like conservation of
-  energy or mass) and known constraints on outputs, which are usually summarized
-  in tabular form.  A sample table is shown in Table~\ref{TblOutputVar}}
-
-\begin{table}[!h]
-\caption{Output Variables} \label{TblOutputVar}
-\renewcommand{\arraystretch}{1.2}
-\noindent \begin{longtable*}{l l} 
-  \toprule
-  \textbf{Var} & \textbf{Physical Constraints} \\
-  \midrule 
-  $T_W$ & $T_\text{init} \leq T_W \leq T_C$ (by~\aref{A_charge})
-  \\
-  \bottomrule
-\end{longtable*}
-\end{table}
-
-\plt{This section is not for test cases or techniques for verification and
-  validation.  Those topics will be addressed in the Verification and Validation
-  plan.}
-
-\section{Requirements}
-
-\plt{The requirements refine the goal statement.  They will make heavy use of
-  references to the instance models.}
-
-This section provides the functional requirements, the business tasks that the
-software is expected to complete, and the nonfunctional requirements, the
-qualities that the software is expected to exhibit.
-
-\subsection{Functional Requirements}
-
-\noindent \begin{itemize}
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] \plt{Requirements
-    for the inputs that are supplied by the user.  This information has to be
-    explicit.}
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_OutputInputs}:] \plt{It isn't
-    always required, but often echoing the inputs as part of the output is a
-    good idea.}
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Calculate}:] \plt{Calculation
-    related requirements.}
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:]
-  \plt{Verification related requirements.}
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Output}:] \plt{Output related
-    requirements.}
-
-\end{itemize}
-
-\plt{Every IM should map to at least one requirement, but not every requirement
-  has to map to a corresponding IM.}
-
-\subsection{Nonfunctional Requirements}
-
-\plt{List your nonfunctional requirements.  You may consider using a fit
-  criterion to make them verifiable.}
-\plt{The goal is for the nonfunctional requirements to be unambiguous, abstract
-  and verifiable.  This isn't easy to show succinctly, so a good strategy may be
-to give a ``high level'' view of the requirement, but allow for the details to
-be covered in the Verification and Validation document.}
-\plt{An absolute requirement on a quality of the system is rarely needed.  For
-  instance, an accuracy of 0.0101 \% is likely fine, even if the requirement is
-  for 0.01 \% accuracy.  Therefore, the emphasis will often be more on
-  describing now well the quality is achieved, through experimentation, and
-  possibly theory, rather than meeting some bar that was defined a priori.}
-\plt{You do not need an entry for correctness in your NFRs.  The purpose of the
-  SRS is to record the requirements that need to be satisfied for correctness.
-  Any statement of correctness would just be redundant. Rather than discuss
-  correctness, you can characterize how far away from the correct (true)
-  solution you are allowed to be.  This is discussed under accuracy.}
-
-\noindent \begin{itemize}
-
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Accuracy}:]
-  \textbf{Accuracy} \plt{Characterize the accuracy by giving the context/use for
-    the software.  Maybe something like, ``The accuracy of the computed
-    solutions should meet the level needed for $<$engineering or scientific
-    application$>$.  The level of accuracy achieved by \progname{} shall be
-    described following the procedure given in Section~X of the Verification and
-    Validation Plan.''  A link to the VnV plan would be a nice extra.}
-
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability}:] \textbf{Usability}
-  \plt{Characterize the usability by giving the context/use for the software.
-    You should likely reference the user characteristics section.  The level of
-    usability achieved by the software shall be described following the
-    procedure given in Section~X of the Verification and Validation Plan.  A
-    link to the VnV plan would be a nice extra.}
-
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Maintainability}:]
-  \textbf{Maintainability} \plt{The effort required to make any of the likely
-    changes listed for \progname{} should be less than FRACTION of the original
-    development time.  FRACTION is then a symbolic constant that can be defined
-    at the end of the report.}
-
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Portability}:]
-  \textbf{Portability} \plt{This NFR is easier to write than the others.  The
-    systems that \progname{} should run on should be listed here.  When possible
-    the specific versions of the potential operating environments should be
-    given.  To make the NFR verifiable a statement could be made that the tests
-    from a given section of the VnV plan can be successfully run on all of the
-    possible operating environments.}
-
-\item Other NFRs that might be discussed include verifiability,
-  understandability and reusability.
-
-\end{itemize}
+\subsubsection{Health and Safety Requirements}
+N/A
 
 \section{Likely Changes}    
 
 \noindent \begin{itemize}
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] \plt{Give
-    the likely changes, with a reference to the related assumption (aref), as appropriate.}
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
+This project will only result in the development of a mobile iOS app. However, an android application may also be developed to work with, or in place of, the iOS application in the future.
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
+The application may be extended to offer compatibility as a web application.
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
+The application will not initially pursue functionality for users to "cut" their 3D simulated hair.
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
+The application may require more data for the facial recognition feature.
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
+The load capacity of the system is initially set low for the first edition of this application. As demand for the application increases, the load capacity must also increase to support a larger user base.
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
+The application may be required to include new features as discovered through use of the system in real-world scenarios.
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
+The format of the
+input and output data of facial recognition, hair modification, hair salon recommendation system.
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
+The interface style requirements might change since no metric has been provided for this by stakeholders. 
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
+The speed and latency requirements might change since no metric has been provided for this by stakeholders. 
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
+The precision and accuracy requirements might change since no metric has been provided for this by stakeholders. 
+
+
+
 
 \end{itemize}
 
@@ -1101,219 +733,311 @@ be covered in the Verification and Validation document.}
 
 \noindent \begin{itemize}
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] \plt{Give
-    the unlikely changes.  The design can assume that the changes listed will
-    not occur.}
+\item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_meaningfulLabel}:] 
+Since several of the features might require exposing API endpoints, an offline-only version of the application is unlikely to be necessary. 
+\item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_meaningfulLabel}:] 
+As the main demographic of this application is less computer literate, the ease of use of this application must remain a high priority consideration throughout the design of this system.
+\item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_meaningfulLabel}:] 
+The application is designed to ensure that data will only be modified when necessary. 
+\item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_meaningfulLabel}:] 
+The application is designed to ensure that only admins and supervisors will be able to unlock locked resources.
+\item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_meaningfulLabel}:] 
+The application is designed to ensure that no inappropriate or offensive language towards any culture will be used.
+\item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_meaningfulLabel}:] 
+The application is designed to ensure compliance with the Data Privacy Act of Canada. All user personal information will not be stored or used without consent. 
+\item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_meaningfulLabel}:] 
+The application is designed to ensure that users are only able to see data that they have proper authorization for.
+\item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_meaningfulLabel}:] 
+The application is designed to help users simulate hairstyles and hair colors virtually.
+\item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_meaningfulLabel}:] 
+The primary user of this project is unlikely going to change since the project purpose is determined already, only certain types of users will be interested in this kind of application.
+\item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_meaningfulLabel}:] 
+The client of this project is unlikely going to change because this project is a student capstone project and it has limited marketability.
+\item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_meaningfulLabel}:] 
+The schedule and budget constraints are not likely going to change, because this project is a student capstone project. It needs to strictly follow SE4G06 course constraints.
+
+
+
+
+
+
+
 
 \end{itemize}
-
-\section{Traceability Matrices and Graphs}
-
-The purpose of the traceability matrices is to provide easy references on what
-has to be additionally modified if a certain component is changed.  Every time a
-component is changed, the items in the column of that component that are marked
-with an ``X'' may have to be modified as well.  Table~\ref{Table:trace} shows the
-dependencies of theoretical models, general definitions, data definitions, and
-instance models with each other. Table~\ref{Table:R_trace} shows the
-dependencies of instance models, requirements, and data constraints on each
-other. Table~\ref{Table:A_trace} shows the dependencies of theoretical models,
-general definitions, data definitions, instance models, and likely changes on
-the assumptions.
-
-\plt{You will have to modify these tables for your problem.}
-
-\plt{The traceability matrix is not generally symmetric.  If GD1 uses A1, that
-  means that GD1's derivation or presentation requires invocation of A1.  A1
-  does not use GD1.  A1 is ``used by'' GD1.}
-
-\plt{The traceability matrix is challenging to maintain manually.  Please do
-  your best.  In the future tools (like Drasil) will make this much easier.}
-
-\afterpage{
-\begin{landscape}
-\begin{table}[h!]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-\hline
-	& \aref{A_OnlyThermalEnergy}& \aref{A_hcoeff}& \aref{A_mixed}& \aref{A_tpcm}& \aref{A_const_density}& \aref{A_const_C}& \aref{A_Newt_coil}& \aref{A_tcoil}& \aref{A_tlcoil}& \aref{A_Newt_pcm}& \aref{A_charge}& \aref{A_InitTemp}& \aref{A_OpRangePCM}& \aref{A_OpRange}& \aref{A_htank}& \aref{A_int_heat}& \aref{A_vpcm}& \aref{A_PCM_state}& \aref{A_Pressure} \\
-\hline
-\tref{T_COE}        & X& & & & & & & & & & & & & & & & & & \\ \hline
-\tref{T_SHE}        & & & & & & & & & & & & & & & & & & & \\ \hline
-\tref{T_LHE}        & & & & & & & & & & & & & & & & & & & \\ \hline
-\dref{NL}           & & X& & & & & & & & & & & & & & & & & \\ \hline
-\dref{ROCT}         & & & X& X& X& X& & & & & & & & & & & & & \\ \hline
-\ddref{FluxCoil}    & & & & & & & X& X& X& & & & & & & & & & \\ \hline
-\ddref{FluxPCM}     & & & X& X& & & & & & X& & & & & & & & & \\ \hline
-\ddref{D_HOF}       & & & & & & & & & & & & & & & & & & & \\ \hline
-\ddref{D_MF}        & & & & & & & & & & & & & & & & & & & \\ \hline
-\iref{ewat}         & & & & & & & & & & & X& X& & X& X& X& & & X \\ \hline
-\iref{epcm}         & & & & & & & & & & & & X& X& & & X& X& X& \\ \hline
-\iref{I_HWAT}       & & & & & & & & & & & & & & X& & & & & X \\ \hline
-\iref{I_HPCM}       & & & & & & & & & & & & & X& & & & & X & \\ \hline
-\lcref{LC_tpcm}     & & & & X& & & & & & & & & & & & & & & \\ \hline
-\lcref{LC_tcoil}    & & & & & & & & X& & & & & & & & & & & \\ \hline
-\lcref{LC_tlcoil}   & & & & & & & & & X& & & & & & & & & & \\ \hline
-\lcref{LC_charge}   & & & & & & & & & & & X& & & & & & & & \\ \hline
-\lcref{LC_InitTemp} & & & & & & & & & & & & X& & & & & & & \\ \hline
-\lcref{LC_htank}    & & & & & & & & & & & & & & & X& & & & \\
-\hline
-\end{tabular}
-\caption{Traceability Matrix Showing the Connections Between Assumptions and Other Items}
-\label{Table:A_trace}
-\end{table}
-\end{landscape}
-}
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-\hline        
-	& \tref{T_COE}& \tref{T_SHE}& \tref{T_LHE}& \dref{NL}& \dref{ROCT} & \ddref{FluxCoil}& \ddref{FluxPCM} & \ddref{D_HOF}& \ddref{D_MF}& \iref{ewat}& \iref{epcm}& \iref{I_HWAT}& \iref{I_HPCM} \\
-\hline
-\tref{T_COE}     & & & & & & & & & & & & & \\ \hline
-\tref{T_SHE}     & & & X& & & & & & & & & & \\ \hline
-\tref{T_LHE}     & & & & & & & & & & & & & \\ \hline
-\dref{NL}        & & & & & & & & & & & & & \\ \hline
-\dref{ROCT}      & X& & & & & & & & & & & & \\ \hline
-\ddref{FluxCoil} & & & & X& & & & & & & & & \\ \hline
-\ddref{FluxPCM}  & & & & X& & & & & & & & & \\ \hline
-\ddref{D_HOF}    & & & & & & & & & & & & & \\ \hline
-\ddref{D_MF}     & & & & & & & & X& & & & & \\ \hline
-\iref{ewat}      & & & & & X& X& X& & & & X& & \\ \hline
-\iref{epcm}      & & & & & X& & X& & X& X& & & X \\ \hline
-\iref{I_HWAT}    & & X& & & & & & & & & & & \\ \hline
-\iref{I_HPCM}    & & X& X& & & & X& X& X& & X& & \\
-\hline
-\end{tabular}
-\caption{Traceability Matrix Showing the Connections Between Items of Different Sections}
-\label{Table:trace}
-\end{table}
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline
-	& \iref{ewat}& \iref{epcm}& \iref{I_HWAT}& \iref{I_HPCM}& \ref{sec_DataConstraints}& \rref{R_RawInputs}& \rref{R_MassInputs} \\
-\hline
-\iref{ewat}            & & X& & & & X& X \\ \hline
-\iref{epcm}            & X& & & X& & X& X \\ \hline
-\iref{I_HWAT}          & & & & & & X& X \\ \hline
-\iref{I_HPCM}          & & X& & & & X& X \\ \hline
-\rref{R_RawInputs}     & & & & & & & \\ \hline
-\rref{R_MassInputs}    & & & & & & X& \\ \hline
-\rref{R_CheckInputs}   & & & & & X& & \\ \hline
-\rref{R_OutputInputs}  & X& X& & & & X& X \\ \hline
-\rref{R_TempWater}     & X& & & & & & \\ \hline 
-\rref{R_TempPCM}       & & X& & & & & \\ \hline
-\rref{R_EnergyWater}   & & & X& & & & \\ \hline
-\rref{R_EnergyPCM}     & & & & X& & & \\ \hline
-\rref{R_VerifyOutput}  & & & X& X& & & \\ \hline
-\rref{R_timeMeltBegin} & & X& & & & & \\ \hline
-\rref{R_timeMeltEnd}   & & X& & & & & \\ 
-\hline
-\end{tabular}
-\caption{Traceability Matrix Showing the Connections Between Requirements and Instance Models}
-\label{Table:R_trace}
-\end{table}
-
-The purpose of the traceability graphs is also to provide easy references on
-what has to be additionally modified if a certain component is changed.  The
-arrows in the graphs represent dependencies. The component at the tail of an
-arrow is depended on by the component at the head of that arrow. Therefore, if a
-component is changed, the components that it points to should also be
-changed. Figure~\ref{Fig_ATrace} shows the dependencies of theoretical models,
-general definitions, data definitions, instance models, likely changes, and
-assumptions on each other. Figure~\ref{Fig_RTrace} shows the dependencies of
-instance models, requirements, and data constraints on each other.
-
-% \begin{figure}[h!]
-% 	\begin{center}
-% 		%\rotatebox{-90}
-% 		{
-% 			\includegraphics[width=\textwidth]{ATrace.png}
-% 		}
-% 		\caption{\label{Fig_ATrace} Traceability Matrix Showing the Connections Between Items of Different Sections}
-% 	\end{center}
-% \end{figure}
-
-
-% \begin{figure}[h!]
-% 	\begin{center}
-% 		%\rotatebox{-90}
-% 		{
-% 			\includegraphics[width=0.7\textwidth]{RTrace.png}
-% 		}
-% 		\caption{\label{Fig_RTrace} Traceability Matrix Showing the Connections Between Requirements, Instance Models, and Data Constraints}
-% 	\end{center}
-% \end{figure}
-
-\section{Development Plan}
-
-\plt{This section is optional.  It is used to explain the plan for developing
-  the software.  In particular, this section gives a list of the order in which
-  the requirements will be implemented.  In the context of a course  this is
-  where you can indicate which requirements will be implemented as part of the
-  course, and which will be ``faked'' as future work.  This section can be
-  organized as a prioritized list of requirements, or it could should the
-  requirements that will be implemented for ``phase 1'', ``phase 2'', etc.}
-
-\section{Values of Auxiliary Constants}
-
-\plt{Show the values of the symbolic parameters introduced in the report.}
-
-\plt{The definition of the requirements will likely call for SYMBOLIC\_CONSTANTS.
-Their values are defined in this section for easy maintenance.}
-
-\plt{The value of FRACTION, for the Maintainability NFR would be given here.}
-
-\newpage
 
 \bibliographystyle {plainnat}
 \bibliography {../../refs/References}
 
+\section{Project Issues}
+
+\subsection{Open Issues}
+One of the issues is that the team does not have sufficient background knowledge in technologies we are going to use: AR, Computer Vision, and iOS development. Developers must learn these technologies before implementation of the application.
+
+
+\subsection{Off-the-Shelf Solutions}
+Until now, there are a few similar open source projects online for us to go through. Since they are all written in different coding styles and design structures, we will only be gathering the basic concepts from these projects. Besides, to ensure that everyone in our team will be at the same pace and participate in the actual project, everyone in our team will take some time to play around with ARkit and swift before getting our hands on the actual design.
+
+\subsection{New Problems}
+\subsubsection{Effects on current environment}
+\begin{enumerate}
+    \item The application will occupy the camera of the iOS mobile system when the application runs, and other applications in the same system can not use the camera function during this time.
+    \item The application will occupy some memory in the iOS mobile system for it to run.
+\end{enumerate}
+
+\subsubsection{Potential User Problem}
+\begin{enumerate}
+    \item Since pictures of users' faces will be saved in the system database,
+    any potential data breach will exposes user privacy. 
+    \item If the user uses the application under strong sunlight or in a dark environment, the user can potentially damage the eyes.
+    \item If the user uses the application when crossing traffics, there is a potential of traffic accident.
+\end{enumerate}
+
+\subsubsection{Limitations in the Anticipated Implementation Environment That May Inhibit the New Product}
+\begin{enumerate}
+    \item The back-end server may not be powerful enough to handle high volume of requests from users.
+    \item The size of the application may be too large to install in a normal iOS mobile.
+\end{enumerate}
+
+\subsubsection{Follow-Up Problems}
+\begin{enumerate}
+    \item Will we create a demand for our product that we are not able to service?
+    \item Will the new system cause us to run afoul of laws that do not currently apply?
+    \item Will the existing hardware on users' iOS mobile cope?
+\end{enumerate}
 \newpage
+\subsection{Tasks}
+\begin{flushleft}
+\begin{table}[bp hp]
+\caption{\bf Phase In Plan}
+    \begin{tabularx}{\linewidth}{|l|X|}
+        \toprule {\bf Task} & {\bf Timeline}\\
+        \midrule
+        Discuss \& Revise requirements  & Oct 5th\\
+        \hline
+        Submit SRS & Oct 5th\\
+        \hline
+        Initial Draft of Hazard Analysis & Oct 12th\\
+        \hline
+        Revision of Hazard Analysis & Oct 18th\\
+        \hline
+        Submit Hazard Analysis & Oct 19th\\
+        \hline
+        Initial Draft of VnV Plan & Oct 24th\\
+        \hline
+        Revision of VnV Plan & Nov 1nd\\
+        \hline
+        Submit VnV Plan & Nov 2nd\\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+\end{flushleft}
 
-\noindent \plt{The following is not part of the template, just some things to consider
-  when filing in the template.}
+\begin{flushleft}
+\begin{table}[bp hp]
+\caption{\bf Project Implementation Tasks}
+    \begin{tabularx}{\linewidth}{|l|X|}
+        \toprule {\bf Task Name} & {\bf Description}\\
+        \midrule
+        Implement basic UI & An iOS UI that can access the camera and get camera inputs and pass it to back end\\
+        \hline
+        Implement Computer Vision & A component in the back end that receives camera inputs and use computer vision technique to analyze human face and output to the front end\\
+        \hline
+        Implement AR functionality in UI & A component in the front end that takes the analyzed output from computer vision in backend and apply AR technique to add hairs on the user's face on the screen\\
+        \hline
+        Implement Database & A database to store user information\\
+        \hline
+        Implement Database interaction on UI & Add a component to fulfill read and write access to database\\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+\end{flushleft}
+\subsection{Migration to the New Product}
+N/A
 
-\noindent \plt{Grammar, flow and \LaTeX advice:
-\begin{itemize}
-\item For Mac users \texttt{*.DS\_Store} should be in \texttt{.gitignore}
-\item \LaTeX{} and formatting rules
-\begin{itemize}
-\item Variables are italic, everything else not, includes subscripts (link to
-  document)
-\begin{itemize}
-\item \href{https://physics.nist.gov/cuu/pdf/typefaces.pdf}{Conventions}
-\item Watch out for implied multiplication
-\end{itemize}
-\item Use BibTeX
-\item Use cross-referencing
-\end{itemize}
-\item Grammar and writing rules
-\begin{itemize}
-\item Acronyms expanded on first usage (not just in table of acronyms)
-\item ``In order to'' should be ``to''
-\end{itemize}
-\end{itemize}}
+\subsection{Risks}
+Some of the testing process will be difficult to automate, since the product will need actual human to judge whether the hairstyle fits smoothly on the 3D model. For this part of the testing, we will draw random samples and ask people around us to perform physical testing.
 
-\noindent \plt{Advice on using the template:
-\begin{itemize}
-\item Difference between physical and software constraints
-\item Properties of a correct solution means \emph{additional} properties, not
-  a restating of the requirements (may be ``not applicable'' for your problem).
-  If you have a table of output constraints, then these are properties of a
-  correct solution.
-\item Assumptions have to be invoked somewhere
-\item ``Referenced by'' implies that there is an explicit reference
-\item Think of traceability matrix, list of assumption invocations and list of
-  reference by fields as automatically generatable
-\item If you say the format of the output (plot, table etc), then your
-  requirement could be more abstract
-\end{itemize}
-}
+\subsection{Costs}
 
-\newpage{}
+Other than the time it takes to develop the application there might be a cost for using some licensed libraries. 
+
+\subsection{User Documentation and Training}
+\subsubsection{User Documentation Requirements}
+\begin{enumerate}
+    \item A readme file will be provided in the documentation for user to read. The file will provide a full guideline of how to install and use our application.
+    \item A technical specification will be provided for other developers who would like to make further changes to our application.
+    \item The guideline will also be available on the help page of the running application.
+\end{enumerate}
+\subsubsection{Training Requirements}
+N/A
+
+\subsection{Waiting Room}
+
+The application shall allow users to cut and make changes to their hairstyles, in order to enhance user experiences.
+
+\subsection{Ideas for Solutions}
+\begin{itemize}
+    \item Add function in computer vision to capture user hand gestures, with the specific gesture motion on a specific area of hair, the hair beneath the hand will be cut.
+\end{itemize}
+
+\section{Traceability Matrix}
+
+\begin{landscape}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+	& FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & HM1 & HM2 & HM3 & HM4 & HM5 & HM6 & HM7 & HM8 & HM9 \\
+\hline
+APR1        & & & & & & & & & & & & & & & & \\ \hline
+APR2        & & & & & & & & & & & & & & & &  \\ \hline
+IAR1        & & & & & & & & & & & & & & & & \\ \hline
+IAR2        & & & & & & & & & & & & & & & & \\ \hline
+EUR1        &X & & &X &X & &X & & & & & & & & & \\ \hline
+EUR2        & &X &X & &X & &X & & & & & & & & & \\ \hline
+LR1         & & & & & & & & & & & & & & & & \\ \hline
+LR2         & & & & & & & & & & & & & & & & \\ \hline
+UPR1        & & & & & & & & & & & & & & & & \\ \hline
+ASR1        & & & & & & & & & & & & & & & & \\ \hline
+SLR1        & X& & & & & & & & & & & X& & X& & \\ \hline
+SLR2        & & & & & & & & & & & & X& & X& X& \\ \hline
+SLR3        & & & & & & & & & & X& & X& & & X& \\ \hline
+PAR1        & & & & & & & & & & & X& & X& & & \\ \hline
+PAR2        & & & & & & & & & & & & X& & X& & \\ \hline
+RAR1        & & & & & & & & & & & & & & & & \\ \hline
+RAR2        & & & & & & & & & & & & & & & & \\ \hline
+RBR1        & & & & & & & & & & & & & & & & \\ \hline
+RBR2        & & & & & & & & & & & & & & & & \\ \hline
+CCR1        & & & & & & & & & & & & & & & & \\ \hline
+CCR2        & & & & & & & & & & & & & & & & \\ \hline
+SER1        & & & & & & & & & & & & & & & & \\ \hline
+LGR1        & & & & & & & & & & X & & & X& & & \\ \hline
+PDR1        & & & & & & & & & & & & & & & & \\ \hline
+RER1        & & & & & & & & & & & & & & & & \\ \hline
+
+\end{tabular}
+\caption{Traceability Matrix Showing the Connections Between Functional Requirements and Non-functional Requirements}
+\label{Table:A_trace}
+\end{table}
+\end{landscape}
+
+\begin{landscape}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+	& FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & HM1 & HM2 & HM3 & HM4 & HM5 & HM6 & HM7 & HM8 & HM9 \\
+\hline
+RER2        & & & & & & & & & & & & & & & & \\ \hline
+MSR1        & & & & & & & & & & & & & & & & \\ \hline
+MSR2        & & & & & & & & & & & & & & & & \\ \hline
+MSR3        & & & & & & & & & & & & & & & & \\ \hline
+ADR1        & & & & & & & & & & & & & & & & \\ \hline
+ACR1        & & & & & & & & & & & & & & & & \\ \hline
+ACR2        & & & & & & & & & & & & & & & & \\ \hline
+ACR3        & & & & & & & & & & & & & & & & \\ \hline
+ACR4        & & & & & & & & & & & & & & & & \\ \hline
+IR1         & & & & & & & & & & & & & & & & \\ \hline
+IR2         & & & & & & & & & & & & & & & & \\ \hline
+IR3         & & & & & & & & & & & & & & & & \\ \hline
+IR4         & & & & & & & & & & & & & & & & \\ \hline
+PRR1        & & & & & & & & & & & & & & & & \\ \hline
+PRR2        & & & & & & & & & & & & & & & & \\ \hline
+AUR1        & & & & & & & & & & & & & & & & \\ \hline
+CR1         & & & & & & & & & & & & & & & & \\ \hline
+CPR1        & & & & & & & & & & & & & & & & \\ \hline
+SDR1        & & & & & & & & & & & & & & & & \\ \hline
+SDR2        & & & & & & & & & & & & X & & & & \\ \hline
+SDR3        & & & & & & & & & & & & & & & & \\ \hline
+RER1        & & & & & & & & & & & & & & & & \\ \hline
+
+\end{tabular}
+\caption{Traceability Matrix Showing the Connections Between Functional Requirements and Non-functional Requirements}
+\label{Table:A_trace}
+\end{table}
+\end{landscape}
+
+\begin{landscape}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+& HR1 & HR2 & HR3 & HR4 & AR1 & AR2 & AR3 & AR4 \\
+\hline
+APR1        & & & & & & & & \\ \hline
+APR2        & & & & & & & & \\ \hline
+IAR1        & & & & & & & & \\ \hline
+IAR2        & & & & & & & & \\ \hline
+EUR1        &X &X & & & & & & \\ \hline
+EUR2        &X & &X &X & & & & \\ \hline
+LR1         & & & & & & & & \\ \hline
+LR2         & & & & & & & & \\ \hline
+UPR1        & & & & & & & & \\ \hline
+ASR1        & & & & & & & & \\ \hline
+SLR1        & & & & & & & & \\ \hline
+SLR2        & & & & & & & & \\ \hline
+SLR3        & & & & & & & & \\ \hline
+PAR1        & & & & & & & & \\ \hline
+PAR2        & & & & & & & & \\ \hline
+RAR1        & & & & & & & & \\ \hline
+RAR2        & & & & & & & & \\ \hline
+RBR1        & & & & & & & & \\ \hline
+RBR2        & & & & & & & & \\ \hline
+CCR1        & & & & & & & & \\ \hline
+CCR2        & & & & & & & & \\ \hline
+SER1        & & & & & & & & \\ \hline
+LGR1        & & & & & & & & \\ \hline
+PDR1        & & & & & & & & \\ \hline
+RER1        & & & & & & & & \\ \hline
+\end{tabular}
+\caption{Traceability Matrix Showing the Connections Between Functional Requirements and Non-functional Requirements - Continue}
+\label{Table:A_trace}
+\end{table}
+\end{landscape}
+
+\begin{landscape}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+& HR1 & HR2 & HR3 & HR4 & AR1 & AR2 & AR3 & AR4 \\
+\hline
+RER2        & & & & & & & & \\ \hline
+MSR1        & & & & & & & & \\ \hline
+MSR2        & & & & & & & & \\ \hline
+MSR3        & & & & & & & & \\ \hline
+SPR1        & & & & & & & & \\ \hline
+ADR1        & & & & & & & & \\ \hline
+ACR1        & & & & & &X & & \\ \hline
+ACR2        & & & & &X &X &X &X \\ \hline
+ACR3        & & & & &X &X & &X \\ \hline
+ACR4        & & & & &X &X & & \\ \hline
+IR1         & & & & & & & & \\ \hline
+IR2         & & & & & & & & \\ \hline
+IR3         & & & & & & & & \\ \hline
+IR4         & & & & & & & & \\ \hline
+PRR1        & & & & & & & & \\ \hline
+PRR2        & & & & & & & & \\ \hline
+AUR1        & & & & & & & & \\ \hline
+CR1         & & & & & & & & \\ \hline
+CPR1        & & & & & & & & \\ \hline
+SDR1        & & & & & & & & \\ \hline
+SDR2        & & & & & & & & \\ \hline
+SDR3        & & & & & & & & \\ \hline
+\end{tabular}
+\caption{Traceability Matrix Showing the Connections Between Functional Requirements and Non-functional Requirements - Continue}
+\label{Table:A_trace}
+\end{table}
+\end{landscape}
+
+\section*{Appendix --- References}
+
+\begin{itemize}
+    \item templates: https://gitlab.cas.mcmaster.ca/smiths/pub/-/blob/master/VolereTemplate16.doc
+    \item J. Cook, “Converting color to grayscale,” John D. Cook — Applied Mathematics Con-sulting, 29-Apr-2019. [Online]. Available: \newline https://www.johndcook.com/blog/2009/08/24/algorithms-convert-color-grayscale/.
+    \item Inc., A. (n.d.). Designing for IOS. Designing for iOS - Platforms - Human Interface Guidelines - Design - Apple Developer. \newline Retrieved October 5, 2022, from https://developer.apple.com/design/human-interface-guidelines/platforms/designing-for-ios/ 
+\end{itemize}
+
 \section*{Appendix --- Reflection}
 
 The information in this section will be used to evaluate the team members on the
@@ -1322,15 +1046,24 @@ graduate attribute of Lifelong Learning.  Please answer the following questions:
 \begin{enumerate}
   \item What knowledge and skills will the team collectively need to acquire to
   successfully complete this capstone project?  Examples of possible knowledge
-  to acquire include domain specific knowledge from the domain of your
+  to acquire include domain-specific knowledge from the domain of your
   application, or software engineering knowledge, mechatronics knowledge or
   computer science knowledge.  Skills may be related to technology, or writing,
   or presentation, or team management, etc.  You should look to identify at
-  least one item for each team member.
+  least one item for each team member.\\ \\
+  Upon completing your project, all members will learn more about writing software development documentation and prototype presentation. In this project, ARkit is a new tool for everyone. As a result, after completing this project, we all should be familiar with the technical knowledge which can help us to build more AR-related applications. 
+  
+  Although Charlotte and Senni had some prior experience with swift, this project will be their first time developing a serious iOS application, not only will they have the opportunity to implement application UI/UX, but they will also learn more about swift which will help them gain insights about iOS/mobile application development. Although Jack had some experience with database development, such as using SQL and MATLAB, this is the first time he take the challenge to deal with project-related data. For sure he will also become better at data processing after this project. Last but not least, Marlon, Hongwei and Bill will be the pioneers to adventure machine learning using OpenCV with regard to facial recognition detection. They will learn about many machine learning concepts. During the whole development, all team members will also share their knowledge about the new technology they have learnt to help each other become better engineers, and also the things they already know to help each other during the development. Besides, all members will practice the design pattern we have learned in previous years and improve our leadership, communication and cooperation skills.
   \item For each of the knowledge areas and skills identified in the previous
   question, what are at least two approaches to acquiring the knowledge or
   mastering the skill?  Of the identified approaches, which will each team
   member pursue, and why did they make this choice?
+  \begin{enumerate}
+  \item For swift programming learning. The first approach will be gathering information from a book called "Develop In Swift". And applying the knowledge they learned to our project will help them to master Swift. The second approach would be from the other team members who had some knowledge about it. In this way, Senni and Charlotte will get familiar with the basic syntax in a short time. 
+  \item For database developing, Jack will be adventuring pandas from python and following the tutorial online to learn the basic functions of it. After that, he will also learn from the actual developing process to put the knowledge into physical development.
+  \item For back end and AR developers, they will first go through a few examples on github to get the basic concept about how to use a machine learning model. And then during the actual project building, they will also learn along the development and gather all the information needed to build a successful AR platform. 
+  \item For teamwork skills mentioned above, we will first take turns to be the leader and host the weekly meetings during the development. Besides, we will also follow an agile standard during the development to enhance our teamwork and cooperation skills.
+  \end{enumerate}
 \end{enumerate}
 
 \end{document}
