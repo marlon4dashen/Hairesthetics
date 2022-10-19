@@ -1,8 +1,19 @@
 \documentclass{article}
-
+\usepackage{pdflscape}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{changepage}
+
+\newcounter{acrreqnum} % Access Requirement Number
+\newcommand{\rtheacrreqnum}{P\theacrreqnum}
+\newcounter{irreqnum} % Integrity Requirement Number
+\newcommand{\rtheirreqnum}{P\theirreqnum}
+\newcounter{prrreqnum} % Privacy Requirement Number
+\newcommand{\rtheprrreqnum}{P\theprrreqnum}
+\newcounter{aurreqnum} % Audit Requirement Number
+\newcommand{\rtheaurreqnum}{P\theaurreqnum}
 
 \hypersetup{
     colorlinks=true,       % false: boxed links; true: colored links
@@ -12,11 +23,17 @@
     urlcolor=cyan           % color of external links
 }
 
-\title{Hazard Analysis\\\progname}
+\title{Hazard Analysis\\Hairesthetics}
 
-\author{\authname}
+\author{Team 18 \\ Charlotte Cheng
+        \\ Marlon Liu
+        \\ Senni Tan
+        \\ Qiushi Xu
+        \\ Hongwei Niu
+        \\ Bill Song
+}
 
-\date{}
+\date{\today}
 
 \input{../Comments}
 \input{../Common}
@@ -36,7 +53,7 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
+Oct 11 & All & Initial Draft\\
 Date2 & Name(s) & Description of changes\\
 ... & ... & ...\\
 \bottomrule
@@ -46,40 +63,168 @@ Date2 & Name(s) & Description of changes\\
 ~\newpage
 
 \tableofcontents
+\listoftables
 
 ~\newpage
 
 \pagenumbering{arabic}
 
-\wss{You are free to modify this template.}
 
 \section{Introduction}
 
-\wss{You can include your definition of what a hazard is here.}
+This document provides the hazard analysis of the Hairesthetics application. Hairesthetics is an application that simulates 3D hairstyles. The definition of a hazard used throughout this document is based on Nancy Leveson's work. A hazard is any property or condition of Hairesthetics that has the potential to result in a loss in the system when paired with a condition in the environment. In Hairesthetics, there are hazards in safety (storing data), and security (restricting access to data). 
 
 \section{Scope and Purpose of Hazard Analysis}
+The scope of this document is to state any critical assumptions about the project, as well as to identify possible hazards within the system components, the effects and causes of failures, mitigation steps, and resulting safety and security requirements.
 
 \section{System Boundaries and Components}
+The system referred to in this document that the hazard analysis will be conducted on consists of:
+\begin{enumerate}
+    \item The iOS application installed on user devices, including both the front-end and back-end made up of the following four major components:
+    \begin{itemize}
+        \item Facial Recognition System
+        \item Hair Modification System
+        \item Hair Salon Recommendation System
+        \item Authentication System       
+    \end{itemize}
+    \item User Device, iPhone
+    \item MongoDB database where all data will be stored
+    \item Cloud database backup programs
+\end{enumerate}
+
+\noindent The system boundary in this case includes the entire application, user device, the database, and the data backup program. The user device and cloud hosting, hardware, and down-time of the database are elements that are not controlled by this project. The user device is controlled by the user and portions of the database are controlled by MongoDB. However, they are still critical elements of the system and were thus included in this hazard analysis.
 
 \section{Critical Assumptions}
+The application will be tested on Apple-provided iPhone simulators as well as developers' devices (iOS 14 and above). It is assumed that all physical devices are in good condition to be used for the project and if the application is compatible with Apple-provided iPhone simulators, then it is compatible and functions properly on actual iPhones with iOS 14 and above.\\
+\\
+\noindent The scope and specifications of the project will not change when the project takes place. However, when conducting the project, there might be cases where the scope and specifications need to be altered to cater to clients' requirements and needs of the project.\\
+\\
+\noindent The data will be automatically updated in the database, and all information in the database is synchronized.
 
-\wss{These assumptions that are made about the software or system.  You should
-minimize the number of assumptions that remove potential hazards.  For instance,
-you could assume a part will never fail, but it is generally better to include
-this potential failure mode.}
 
 \section{Failure Mode and Effect Analysis}
+\subsection{Hazards out of scope}
+The out of scope hazards falls into the following categories:
+\begin{itemize}
+    \item User's Camera
+    \item User's mobile phone hardware
+    \item ArKit library
+\end{itemize}
+User side's hardware conditions is something that the team does not have control over. Besides, the ArKit library is also out of the scope since it is a third party library. The hazards can not be handled completely through our development, however we will try our best to minimize them.
+\subsection{Failure Mode and Effect Analysis Table}
+The failure modes \& effects analysis (FMEA) was chosen as a tool to identify and analyze the hazards within the system so that requirements can be made to mitigate them.
 
 \wss{Include your FMEA table here}
 
+\begin{landscape}
+\begin{table}[h!]
+\def\arraystretch{1.7}
+\begin{tabularx}{1.2\textwidth} { |X|X|X|X|X
+  | p{0.9cm}
+  | p{0.9cm} | }
+\hline
+	\centering{Component} & \centering{Failure Mode} & \centering{Effects of Failure} & \centering{Causes of Failure} & \centering{Recommended Action} & \centering{SR} & Ref \\ \hline
+    Facial Recognition System & The facial landmarks aren't computed properly & Inaccurate simulation results & User might not input proper image / video & Ask the user for inputs again & FR5, FR6 & H1-1 \\ \cline{2-7}
+     & System Crash & Overall application crash & Model execution failure & Display error message to prevent further actions & RAR1 & H1-2 \\ \hline
+     
+     Hair Modification System & Failed to load hairstyle models & Virtual hair simulation won't appear on the screen  & Database failure & Backup data or reboot & HM6  & H2-1 \\  \cline{2-7}
+     
+     ~ & Algorithm failed to detect hair coordinates  & User's hair color fails to change as selected  &  
+     Hair coordination data failed to be retrieved. \newline 
+     Facial recognition system crash
+     & Refer to H1-1 & HM3 \newline HM4 & H2-2 \\ \hline
+     
+     Hair Salon Recommendation System & Failed to compute recommendations, Invalid user input & User gets no recommendation and lose interests & Database failure & Inform user to try again & HR2 & H3-1 \\ \cline{2-7}
+     ~ & System freeze or crash & system crash or overall application crash & Database failure, Invalid user input & Backup data or reboot & HR1, SLR1 & H3-2 \\ \hline
+     
+
+\end{tabularx}
+\caption{Failure Mode and Effect Analysis Table}
+\label{FMEA Table}
+\end{table}
+\end{landscape}
+
+
+\newpage
+
+\begin{landscape}
+\begin{table}[h!]
+\def\arraystretch{1.7}
+\begin{tabularx}{1.2\textwidth} { |X|X|X|X|X
+  | p{0.9cm}
+  | p{0.9cm} | }
+\hline
+	\centering{Component} & \centering{Failure Mode} & \centering{Effects of Failure} & \centering{Causes of Failure} & \centering{Recommended Action} & \centering{SR} & Ref \\ \hline
+     
+
+     Authentication System & User can not login to the app & User can not use the functionality of the application  & Login credentials do not match the records in the database & Inform user to try again or reset credentials & AR1 & H4-1 \\ \cline{2-7}
+     ~ & System failed to use the default camera with the device  & The application can not be used since there's no input source & 
+    User denied the access of the camera.  \newline
+    The device has no proper camera system.
+     & 
+     Prompt the user to allow camera access. \newline
+     Try another device with a valid camera.
+     & AR2 \newline AR3 & H4-2 \\ \hline     
+
+    General & App crashes unexpectedly & User loses the current progress  &
+    The device runs out of battery. \newline 
+    The application crashes due to instability.  &
+    Charge the device. \newline 
+    Reboot and restart the app. & 
+    RAR1 \newline
+    RAR2
+    &  H5-1 \\  \cline{2-7}
+    ~ & Failed to save the images locally & The user won't have the simulation result & User denied the system access to the local storage. & Prompt the user to allow access to local storage & AR2 & H5-2 \\   
+    \hline
+
+\end{tabularx}
+\caption{Failure Mode and Effect Analysis Table}
+\label{FMEA Table}
+\end{table}
+\end{landscape}
+
 \section{Safety and Security Requirements}
 
-\wss{Newly discovered requirements.  These should also be added to the SRS.  (A
-rationale design process how and why to fake it.)}
+Requirements that have been included in Revision 0 of the Software Requirements Specification document are written in \textbf{bold}. 
+
+\subsubsection{Access Requirements}
+\begin{itemize}
+    \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:] \textbf{Users will be able to access images they previously stored.}
+    \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:]
+    \textbf{Admins and supervisors will be able to unlock locked resources.}
+    \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:]
+    \textbf{Only admins will be able to modify application information.}
+    \item[ACR\refstepcounter{acrreqnum}\theacrreqnum\label{R_Inputs}:] 
+    Users will be able to access the history of the hairs they chose.
+\end{itemize}
+
+
+\subsubsection{Integrity Requirements}
+\begin{itemize}
+    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] \textbf{The product will not modify data unnecessary.}
+    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] \textbf{The product will not modify any data unrelated to its execution.}
+    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] \textbf{Data will be automatically backed up daily.}
+    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] \textbf{Unsaved data will be stored locally on the user's device if it cannot be uploaded to the remote database and is not explicitly discarded.}
+    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] All locked resources will be unlocked once the user sends the request to admins and admins approves the request.
+\end{itemize}
+
+\subsubsection{Privacy Requirements}
+\begin{itemize}
+    \item[PRR\refstepcounter{prrreqnum}\theprrreqnum \label{R_Inputs}:] \textbf{Users will not be able to access data generated by other users.}
+    \item[PRR\refstepcounter{prrreqnum}\theprrreqnum \label{R_Inputs}:] \textbf{Users will be required to register and login to the application with their emails.}
+    \item[PRR\refstepcounter{prrreqnum}\theprrreqnum \label{R_Inputs}:] Admins will not able to access data generated by other users.
+\end{itemize}
+
+\subsubsection{Audit Requirements}
+\begin{itemize}
+    \item[AUR\refstepcounter{aurreqnum}\theaurreqnum \label{R_Inputs}:] \textbf{Requirements should be easy to read and verify against the system facilitate regular inspections.}
+\end{itemize}
+
+\subsubsection{Immunity Requirements}
+N/A
 
 \section{Roadmap}
 
-\wss{Which safety requirements will be implemented as part of the capstone timeline?
-Which requirements will be implemented in the future?}
+The hazard analysis resulted in new safety and security requirements given in section above. A number of the requirements will be implemented within the capstone timeline such as ACR1, ACR3, IR1, IR2, IR4, PRR1, PRR2, PRR3, AUR1. However, some of them will not, due to project time constraints, such as ACR2, ACR4, IR3, IR5. These will be implemented in the future. Towards the end of the project, the hazard analysis will be consulted to gain an understanding of which risks have been successfully mitigated and which one sill require work.
 
 \end{document}
