@@ -3,6 +3,7 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{pdflscape}
 \hypersetup{
     colorlinks,
     citecolor=blue,
@@ -11,14 +12,27 @@
     urlcolor=blue
 }
 \usepackage[round]{natbib}
+\bibliographystyle{unsrtnat}
 
 \input{../Comments}
 \input{../Common}
 
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
 \begin{document}
 
-\title{Project Title: System Verification and Validation Plan for \progname{}} 
-\author{\authname}
+\title{Project Title: System Verification and Validation Plan for Hairesthetics} 
+\author{Team 18 \\ Charlotte Cheng
+        \\ Marlon Liu
+        \\ Senni Tan
+        \\ Qiushi Xu
+        \\ Hongwei Niu
+        \\ Bill Song
+}
 \date{\today}
 	
 \maketitle
@@ -30,8 +44,7 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+Oct 25th & 1.0 & Initial draft\\
 \bottomrule
 \end{tabularx}
 
@@ -40,10 +53,6 @@ Date 2 & 1.1 & Notes\\
 \tableofcontents
 
 \listoftables
-\wss{Remove this section if it isn't needed}
-
-\listoffigures
-\wss{Remove this section if it isn't needed}
 
 \newpage
 
@@ -55,349 +64,1087 @@ Date 2 & 1.1 & Notes\\
   \textbf{symbol} & \textbf{description}\\
   \midrule 
   T & Test\\
+  SRS & Software Requirements Specification\\
+  DP & Development Plan\\
+  HA & Hazards Analysis\\
+  MG & Module Guide\\
+  GUI & Graphical User Interface\\
+  PoC & Proof of Concept\\
+  
   \bottomrule
 \end{tabular}\\
 
-\wss{symbols, abbreviations or acronyms -- you can simply reference the SRS
-  \citep{SRS} tables, if appropriate}
 
 \newpage
 
 \pagenumbering{arabic}
 
-This document ... \wss{provide an introductory blurb and roadmap of the
-  Verification and Validation plan}
+This document will provide the testing plan for Hairesthetics, including verification and validation Plan of SRS, design, and implementation, as well as system tests ranging from functional requirements tests to unit tests. It will also act as an outline of testing methods and outline the tools that will be utilized.
 
 \section{General Information}
 
 \subsection{Summary}
 
-\wss{Say what software is being tested.  Give its name and a brief overview of
-  its general functions.}
+
+  The software application Hairesthetics will be tested. Its functionality includes facial recognition, 3D hair modification, hair salon recommendation and authentication System.
 
 \subsection{Objectives}
 
-\wss{State what is intended to be accomplished.  The objective will be around
-  the qualities that are most important for your project.  You might have
-  something like: ``build confidence in the software correctness,''
-  ``demonstrate adequate usability.'' etc.  You won't list all of the qualities,
-  just those that are most important.}
+The objective for testing this project is to build confidence in the software correctness and demonstrate
+safety of data, efficient execution, and adequate usability. 
 
 \subsection{Relevant Documentation}
 
-\wss{Reference relevant documentation.  This will definitely include your SRS
-  and your other project documents (MG, MIS, etc).  You can include these even
-  before they are written, since by the time the project is done, they will be
-  written.}
-
-\citet{SRS}
+Relevant documentation includes \textit{SRS}, \textit{HA} and \textit{MG}.
 
 \section{Plan}
 
-\wss{Introduce this section.   You can provide a roadmap of the sections to
-  come.}
+This section will provide the verification and validation plan of SRS, design, and implementation as well as tools that will be used for Verification and Automated Testing.
+  
 
 \subsection{Verification and Validation Team}
 
-\wss{You, your classmates and the course instructor.  Maybe your supervisor.
+\wss{Your teammates.  Maybe your supervisor.
   You shoud do more than list names.  You should say what each person's role is
-  for the project.  A table is a good way to summarize this information.}
+  for the project's verification.  A table is a good way to summarize this information.}
+
+\noindent
+Everyone on the team shares a role in the verification and validation process.
+\begin{itemize}
+    \item Bill Song and Marlon Liu - Responsible for backend API testing and system integration testing
+    \item Charlotte Cheng and Senni Tan - Responsible for frontend interface test
+    \item Qiushi Xu and Hongwei Niu - Responsible for AR related testing. 
+\end{itemize} 
+
+ 
 
 \subsection{SRS Verification Plan}
 
-\wss{List any approaches you intend to use for SRS verification.  This may just
-  be ad hoc feedback from reviewers, like your classmates, or you may have
-  something more rigorous/systematic in mind..}
-
-\wss{Remember you have an SRS checklist}
+ 
+\noindent
+Our SRS would be verified through getting ad hoc feedback from our classmates and TAs. Since the team that reviewed The plan and TA had knowledge on our SRS, our plan is to ask them to explore our application with improvisation and ensure that they cover every possible functionality covered in our SRS. They can use their own ways to try to explore the extent of each features provided in our application and find possible behavioral bugs. 
 
 \subsection{Design Verification Plan}
 
-\wss{Plans for design verification}
+Design will be verified by teammates, classmates and stakeholders. A checklist will be created to ensure the success of design in terms of the ability to meet the requirements and potential to satisfy stretch goals. Design is verified if the actual design output is the same as expected design output which satisfies the specifications of the product. The following checklist is composed of questions with regard to the design of the project.
+\begin{itemize}
+    \item Did you design the product right?
+    \item Did you design the right product?
+    \item Can users accomplish their goals and tasks with the application?
+    \item Is the design effective?
+    \item Does the design provide good utility?
+    \item Does the design's actual output match the expected output?
+\end{itemize}
 
-\wss{The review will include reviews by your classmates}
 
-\wss{Remember you have MG and MIS checklists}
+
+
+\subsection{Verification and Validation Plan Verification Plan}
+
+
+
+\noindent
+The verification and validation plan will be verified by a group of our classmates and TAs where they will be asked to perform a walk-through of the document to ensure that our test plan is complete and effective. Any feedback will be accepted and changes will be made to address those reviews.
 
 \subsection{Implementation Verification Plan}
 
-\wss{You should at least point to the tests listed in this document and the unit
-  testing plan.}
-
-\wss{In this section you would also give any details of any plans for static verification of
-  the implementation.  Potential techniques include code walkthroughs, code
-  inspection, static analyzers, etc.}
+  
+The functionality and performance of our code implementation will be mostly verified through our system testing. It will ensure our application performs all the specified tasks as expected. Additionally, a part of the NFRs are also validated by the system tests. Our unit test are designed to take care of each individual module by assessing their quality using stubs or drivers. And it also evaluates the details of each module by providing test case for each function.\\
+\noindent
+Our implementation would also require static verification. The method is decided to have classmates and TA perform code inspection to our source code. This can help reveal any code styling issue and potential logical errors in our implementation.
 
 \subsection{Automated Testing and Verification Tools}
 
-\wss{What tools are you using for automated testing.  Likely a unit testing
-  framework and maybe a profiling tool, like ValGrind.  Other possible tools
-  include a static analyzer, make, continuous integration tools, test coverage
-  tools, etc.  Explain your plans for summarizing code coverage metrics.
-  Linters are another important class of tools.  For the programming language
-  you select, you should look at the available linters.  There may also be tools
-  that verify that coding standards have been respected, like flake9 for
-  Python.}
+The following tools will be used for automated testing:
 
-\wss{The details of this section will likely evolve as you get closer to the
-  implementation.}
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{l|l}
+    \hline
+        \textbf{Module} & \textbf{Automated Testing and Verification Tools} \\ \hline
+        Backend API & Postman \\ \hline
+        Python code & Pytest, Pycoverage, flake8 \\ \hline
+        IOS code and ARKit & XCTest, XCUITest \\ \hline
+    \end{tabular}
+    \caption{The verification tools used in each module/section}
+\end{table}
+
+\newpage
 
 \subsection{Software Validation Plan}
 
-\wss{If there is any external data that can be used for validation, you should
-  point to it here.  If there are no plans for validation, you should state that
-  here.}
+No external data will be used for validation, therefore no plans are formulated for it.\\
+\\
+\noindent Review sessions will be conducted with the stakeholders to check that the requirements document fully capture the right requirements. For this purpose, a task-based walkthrough will serve as the validation. Users of the system were already identified in SRS along with a set of real-world tasks that they complete using the system. These tasks must mirror what users actually do in their environment but not how they do it. These tasks must be very specific and they must be complete. This information was gathered by observing the actual target users using the application in their environment, team 18 came up with a list of target users and realistic tasks. The combination of a user and their corresponding task descriptions is called a scenario and the goal is to tell a complete story.
+With a manageable list of scenarios in place from SRS, a task-based walkthrough of the system can be performed by teammates and stakeholders. A scenario will be selected and participants will
+place themselves in the mind of their target user and stay on track with what that user is trying to accomplish during the scenario. 
+
 
 \section{System Test Description}
 	
 \subsection{Tests for Functional Requirements}
 
-\wss{Subsets of the tests may be in related, so this section is divided into
-  different areas.  If there are no identifiable subsets for the tests, this
-  level of document structure can be removed.}
-
-\wss{Include a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good.}
-
-\subsubsection{Area of Testing1}
-
-\wss{It would be nice to have a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good.  If a section
-  covers tests for input constraints, you should reference the data constraints
-  table in the SRS.}
+\subsubsection{Facial Recognition System}
 		
-\paragraph{Title for Test}
-
 \begin{enumerate}
 
-\item{test-id1\\}
+\item{FRS-T1\\}
+Type: Functional, Dynamic, Automated
+					
+Initial State: Home page
+					
+Input: An image (clicked upload)
+					
+Output: Facial features coordinates
 
-Control: Manual versus Automatic
+How test will be performed: Upload a sample image to the facial recognition system, and manually check if the produced coordinates are appropriate.
 					
-Initial State: 
+\item{FRS-T2\\}
+Type: Functional, Dynamic, Manual
+                    
+Initial State: Home screen
 					
-Input: 
+Input: A photo (taken)
 					
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Output: Facial features coordinates
 					
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Control: Manual versus Automatic
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-How test will be performed: 
+How test will be performed: Take a photo with a clear and whole face included, then manually check if the produced coordinates are appropriate for the taken image. 
 
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\subsubsection{Hair Modification System}
+\begin{enumerate}
+\item{HMS-T1\\}
+Type: Functional, Dynamic, Manual
+                    
+Initial State: Home screen
+					
+Input: Click on virtual simulation section
+					
+Output: Switch to virtual simulation screen
+					
+How test will be performed: When at the home screen, click on the button that directs to virtual simulation, see if it switches to the virtual simulation screen
+\item{HMS-T2\\}
+Type: Functional, Dynamic, Manual
+                    
+Initial State: Virtual Simulation Screen
+					
+Input: Enable camera input (assume the application already has the camera access)
+					
+Output: The hair and facial feature coordinates of the user's face with updates
+					
+How test will be performed: As soon as the user is at the virtual simulator, manually check if the hair and facial coordinates are output by the system periodically with the input video.
+
+\item{HMS-T3\\}
+Type: Functional, Dynamic, Manual
+                    
+Initial State: Virtual Simulation Screen
+					
+Input: Select a hair color
+					
+Output: The system displays the changed hair color at appropriate position.
+					
+How test will be performed: The tester should try to select a hair color and see if his/her hair color changes to the selected color.
+
+\item{HMS-T4\\}
+Type: Functional, Dynamic, Manual
+                    
+Initial State: Virtual Simulation Screen
+					
+Input: Select a hairstyle
+					
+Output: The application fit the hairstyle onto user's head, at an appropriate position and scale. 
+					
+How test will be performed: The tester should try to select a hair style, and check if the system fits the hair style onto the user's head at an appropriate position and scale.
+\end{enumerate}
+\subsubsection{Hair Salon Recommendation System}
+\begin{enumerate}
+\item{HSR-T1}\\
+Type: Functional, Dynamic, Manual
+					
+Initial State: Home screen
+					
+Input: User clicked on recommendation
+					
+Output: Switch to recommendation page with a map
+					
+How test will be performed: Click on the recommendation tab and see if the screen changes to the recommendation page with a map
+				
+\item{HSR-T2}\\
+Type: Functional, Dynamic, Manual
+					
+Initial State: Recommendation page
+					
+Input: User entered a valid address
+					
+Output: The map zooms to the entered location and displays up to 5 location markers (recommended hair salon) near the entered location
+					
+How test will be performed: Enter a valid address and see if the map zooms to that location correctly and markers being displayed around the location (within 10 kilometer radius)
+
+\item{HSR-T3}\\
+Type: Functional, Dynamic, Manual
+					
+Initial State: Recommendation page
+					
+Input: User entered an invalid or unknown address
+					
+Output: The page displays an address not found message
+					
+How test will be performed: Enter an invalid address and check if the error message shows up.
+\item{HSR-T4}\\
+Type: Functional, Dynamic, Manual
+					
+Initial State: Recommendation page
+					
+Input: User clicked on 'use my current location'
+					
+Output: The map zooms to the user current location and displays up to 5 location markers (recommended hair salon) near the location (within 10 kilometer radius)
+					
+How test will be performed: Click on the 'use my current location' button and see if the map zooms to the current location correctly and markers being displayed around the current location.
+\item{HSR-T5}\\
+Type: Functional, Dynamic, Manual
+					
+Initial State: Recommendation page
+					
+Input: User clicked on 'use my current location'
+					
+Output: The map zooms to the user current location and displays up to 5 location markers (recommended hair salon) near the location (within 10 kilometer radius)
+					
+How test will be performed: Click on the 'use my current location' button and see if the map zooms to the current location correctly and markers being displayed around the current location.
+\item{HSR-T6}\\
+Type: Functional, Dynamic, Manual
+					
+Initial State: Recommendation page with markers
+					
+Input: User clicked on one of the marker
+					
+Output: The details of that hair salon will be shown. Details include address, postal code, overall ratings, and link to their web page if possible.
+					
+How test will be performed: Click on one of the marker and see if the details of the hair salon will be displayed.
+\item{HSR-T6}\\
+Type: Functional, Dynamic, Manual
+					
+Initial State: Hair salon details tab opened
+					
+Input: User clicked on the website link
+					
+Output: The app will open user's default browser and redirect to the clicked link (hair salon website)
+					
+How test will be performed: Click on the link and see if a browser is being opened redirected to the selected hair salon website
+\end{enumerate}
+\subsubsection{Authentication System}
+\begin{enumerate}
+\item{AS-T1}\\
+Type: Functional, Dynamic, Manual
+					
+Initial State: Home screen
+					
+Input: Correct email and password and click register
+					
+Output: Successful registration
+					
+How test will be performed: Create a test user using proper email format (xxx$@$xxx) and password. Click register and check if successful registration
+
+\item{AS-T2}\\
+Type: Functional, Dynamic, Manual
+					
+Initial State: Home screen
+					
+Input: Incorrect email and password and click register
+					
+Output: Failed registration with incorrect email format message
+					
+How test will be performed: Create a test user using improper email format (without $@$ sign) and password. Click register and check if the registration failed.
+
+\item{AS-T3}\\
+Type: Functional, Dynamic, Manual
+					
+Initial State: Home screen
+					
+Input: Email and password
+					
+Output: Successful login
+					
+How test will be performed: Create a test user. Enter correct credentials and check if the internal state of the system is logged in.
+					
+\item{AS-T4}\\
+Type: Functional, Dynamic, Manual
+					
+Initial State: Home screen
+					
+Input: Incorrect email and password
+					
+Output: Failed login
+					
+How test will be performed: Create a test user. Enter incorrect credentials and check if the internal state of the system is not logged in.
+
+\item{AS-T5}\\
+Type: Functional, Dynamic, Manual
+					
+Initial State: User personal page (logged in)
+					
+Input: Open gallery
+					
+Output: Display user's saved images
+					
+How test will be performed: Create a test user with sample images. Then login as the test user and see if the sample images show up in the gallery.
+\end{enumerate}
 
 ...
 
 \subsection{Tests for Nonfunctional Requirements}
 
-\wss{The nonfunctional requirements for accuracy will likely just reference the
-  appropriate functional tests from above.  The test cases should mention
-  reporting the relative error for these tests.}
-
-\wss{Tests related to usability could include conducting a usability test and
-  survey.}
-
-\subsubsection{Area of Testing1}
+\subsubsection{Look and Feel Requirements}
 		
-\paragraph{Title for Test}
+\paragraph{Appearance Requirements}
 
 \begin{enumerate}
 
-\item{test-id1\\}
+\item{AP-T1\\}
 
-Type: 
+Type: Structural, Dynamic, Manual
 					
-Initial State: 
+Initial State: Application installed onto a cell phone and running
 					
-Input/Condition: 
+Input/Condition: User inputs
 					
-Output/Result: 
+Output/Result: Interfaces of the application
 					
-How test will be performed: 
+How test will be performed: Tests will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "Is the text on the application outstanding and easily recognizable for you with this font size?"
 					
-\item{test-id2\\}
+\item{AP-T2\\}
 
-Type: Functional, Dynamic, Manual, Static etc.
+Type: Structural, Dynamic, Manual
 					
-Initial State: 
+Initial State: Application installed onto a cell phone and running
 					
-Input: 
+Input: User inputs
 					
-Output: 
+Output: Logo, icon, buttons and other functional entity units that the user can be interact with
 					
-How test will be performed: 
+How test will be performed: Tests will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "Is the elements on the interface well-organized enough for you to use the application easily?"
 
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\paragraph{Style Requirements}
 
-...
+\begin{enumerate}
+
+\item{IA-T1\\}
+
+Type: Structural, Dynamic, Manual.
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Any visual elements in the interface
+					
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale, would you say the style of the interface matches the modern aesthetic? (1-10) (poorly - very)"
+					
+\item{IA-T2\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input: User inputs
+					
+Output: The entire interface presented to the user
+					
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale, do you think the interface is simple and clear? (1 - 10) from very disagree to very agree"
+
+\end{enumerate}
+
+\subsubsection{Usability and Humanity Requirements}
+		
+\paragraph{Ease of Use Requirements}
+
+\begin{enumerate}
+
+\item{EU-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: The entire interface and any interactable elements on the interface
+					
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale, do you think the interactable components in the interface is easy to be recognized? (1 - 10) from very disagree to very agree"
+					
+\item{EU-T2\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input: User inputs
+					
+Output: The entire interface and any interactable elements on the interface
+					
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "During the use of this application, how many times did you misclicking an interactable element?"
+
+\end{enumerate}
+
+\paragraph{Learning Requirements}
+
+\begin{enumerate}
+
+\item{LR-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application is not yet installed
+					
+Input/Condition: User operations
+					
+Output/Result: The installed application
+					
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "Did you finish the installation within 3 steps: open App Store, search for "Hairesthetics", click on install?"
+					
+\item{LR-T2\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input: User inputs
+					
+Output: Instructions on the interface when user first open the application
+					
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale do you find the instruction easy to follow? (1 - 10) from very disagree to very agree"
+
+\end{enumerate}
+
+\paragraph{Understandability and Politeness Requirements}
+
+\begin{enumerate}
+
+\item{UP-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Icons on the interface
+					
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale do you find the icon is appropriate and with no offense? (1 - 10) from very disagree to very agree"
+
+\end{enumerate}
+
+\paragraph{Accessibility Requirements}
+
+\begin{enumerate}
+
+\item{AS-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Text on the interface
+					
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale do you find the text has appropriate font size and color? (1 - 10) from very disagree to very agree"
+
+\end{enumerate}
+
+\subsubsection{Performance Requirements}
+		
+\paragraph{Speed and Latency Requirements}
+
+\begin{enumerate}
+
+\item{SL-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Hairstyle suggestion is given on the screen
+					
+How test will be performed: Test will be done manually by developers running prototype. The developer will test the hairstyle suggestion functionality 100 time and measure the time from giving input to the hairstyle suggestion output. Number of times when the response time is greater than 1 second will be recorded.
+					
+\item{SL-T2\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Hairstyle changing on the screen
+					
+How test will be performed: Test will be done manually by developers running prototype. The developer will test the hairstyle changing functionality 100 time and measure the time from giving input to the hairstyle changing output. Number of times when the response time is greater than 1 second will be recorded.
+
+\textbf{\item{SL-T3\\}}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Responses to the user inputs
+					
+How test will be performed: Test will be done manually by developers running prototype. The developer will randomly clicking any interactable buttons 100 time and measure the time from clicking the button to the response output. Number of times when the response time is greater than 0.5 second will be recorded.
+
+\end{enumerate}
+
+\paragraph{Precision and Accuracy Requirements}
+
+\begin{enumerate}
+
+\item{PA-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Hairstyle on the user's head on the screen
+					
+How test will be performed: Test will be done manually by developers running prototype. The developer will test the hairstyle functionality 100 time and take screenshots, then measure the length from the hair image to the head's position. All measurements are recorded and the average error in length should be within 1 millimeter.
+					
+\item{PA-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Moving hair image on the user's head on the screen
+					
+How test will be performed: Test will be done manually by developers running prototype. The developer will test the hairstyle functionality 100 time with moving developer's head and record the screen. Each scene in the recording video will be made into screenshots, then developers measure the length from the hair image to the head's position. All measurements are recorded and the average error in length should be within 2 millimeter.
+
+\end{enumerate}
+
+\paragraph{Reliability and Availability Requirements}
+
+\begin{enumerate}
+
+\item{RA-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Response from user inputs
+					
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "How many times have you faced a crash when using the application?" The total number will be add up and divided by the number of users to get the crash percentage.
+					
+\item{RA-T2\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Response from user inputs
+					
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "How many times have you get an error message or any unexpected wrong behavior of the application when using the application?" The total number will be add up and divided by the number of users to get the crash percentage.
+
+\end{enumerate}
+
+\paragraph{Robustness Requirements}
+
+\begin{enumerate}
+
+\item{RB-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Response from user inputs
+					
+How test will be performed: Test will be done manually by developers running prototype. The developer will try to inject irrational inputs to break the application and record the number of times that the application has an systematic error message(not error message from error exception handling) or any unexpected wrong behavior.
+					
+\item{RB-T2\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Response from user inputs
+					
+How test will be performed: Test will be done manually by developers running prototype. The developer will try to inject irrational inputs to break the application and record the number of times that the application crashes.
+
+\end{enumerate}
+
+\paragraph{Capacity Requirements}
+
+\begin{enumerate}
+
+\item{CC-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Response from user inputs
+					
+How test will be performed: Test will be done manually by developers running prototype. At 10 different time points, the database developer will check if the number of user's information in database matches the actual number of users. Any mismatch will be recorded.
+					
+\item{CC-T2\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Response from user inputs
+					
+How test will be performed: Test will be done manually by developers running prototype. Developer will check at any 100 different time points, the database stores at least 10 different hairstyles. Any mismatch will be recorded.
+
+\end{enumerate}
+
+\paragraph{Scalability and Extensibility Requirements}
+
+\begin{enumerate}
+
+\item{SE-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Response from user inputs
+					
+How test will be performed: Any possible future developing features will be kept in the section of
+Watch Room in the SRS document.
+
+\end{enumerate}
+
+\paragraph{Longevity Requirements}
+
+\begin{enumerate}
+
+\item{LG-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Response from user inputs
+					
+How test will be performed: The developer will perform the tests written in this document every month to ensure the application is functioning and meeting requirements.
+
+\end{enumerate}
+
+\subsubsection{Operational and Environmental Requirements}
+		
+\paragraph{Productization Requirements}
+
+\begin{enumerate}
+
+\item{PD-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application is not yet installed
+					
+Input/Condition: User operations
+					
+Output/Result: Search result of "Hairesthetics" application is shown in App Store
+					
+How test will be performed: Test will be done manually by user searching "Hairesthetics" in App Store. ests will be enhanced by actual user feedback via a survey asking them "Can you find Hairesthetics application on App Store?"
+
+\end{enumerate}
+
+\paragraph{Release Requirements}
+
+\begin{enumerate}
+
+\item{RE-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Response from user inputs
+					
+How test will be performed: Developers will run tests in this document to ensure that data can be used between different builds.
+					
+\item{RE-T2\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: Version of Application is updated. Application is updated and running
+					
+Output/Result: Update Log windows pop up
+					
+How test will be performed: After application is updated, users will be asked in a survey "Have you seen the pop-up window for the update log?" 
+
+\end{enumerate}
+
+\subsubsection{Maintainability and Support Requirements}
+\paragraph{Maintenance Requirements}
+\begin{enumerate}
+
+\item{MS-T1 and MS-T2\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application is published and able to be downloaded from app store.
+					
+Input/Condition: Developer input
+					
+Output/Result: Test results
+					
+How test will be performed: Developers collect feed backs from user and fix any bugs reported. Once a month, the developing team will also run the existing tests.
+\item{MS-T3\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application is installed able to run.
+					
+Input/Condition: System failure occurs to the app
+					
+Output/Result: whether the system recovers within time
+					
+How test will be performed: Developers would try to crash the app and record the time for recovering 10 times. Then the team will calculate the average recovering time to see whether it is within 1 hour.
+\end{enumerate}
+\paragraph{Supportability Requirements and Adaptability Requirements}
+
+\begin{enumerate}
+
+\item{SP-T1 and AD-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Response from user inputs
+					
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "Is your iPhone with iOS 14 and later? If yes, is the application running on your phone?"
+
+\end{enumerate}
+
+\subsubsection{Security Requirements}
+		
+\paragraph{Access Requirements}
+
+\begin{enumerate}
+
+\item{AC-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Response from user inputs
+					
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "Are you able to access images previously stored on the application?"
+
+\end{enumerate}
+
+\subsubsection{Cultural and Political Requirements}
+		
+\paragraph{Cultural Requirements}
+
+\begin{enumerate}
+
+\item{CR-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Response from user inputs
+					
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "Do you think that any terms in the application is inappropriate or offensive toward your or others culture?"
+
+\end{enumerate}
+
+\subsubsection{Legal Requirements}
+		
+\paragraph{Compliance Requirements}
+
+\begin{enumerate}
+
+\item{CP-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Application installed onto a cell phone and running
+					
+Input/Condition: User inputs
+					
+Output/Result: Pop up windows for the legal statements
+					
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "Have you seen the pop up windows of the legal statements when you start the application for the first time?"
+
+\end{enumerate}
 
 \subsection{Traceability Between Test Cases and Requirements}
 
 \wss{Provide a table that shows which test cases are supporting which
   requirements.}
 
-\section{Unit Test Description}
+\section{Unit Test Plan}
+The pytest framework will be used as unit testing too for this project. In unit testing, each “unit” of our code is tested as fully as possible, as an isolated chunk of code. A “unit” stands for a function or a method in our system.
 
-\wss{Reference your MIS and explain your overall philosophy for test case
-  selection.}  
-\wss{This section should not be filled in until after the MIS has
-  been completed.}
 
 \subsection{Unit Testing Scope}
+Unit tests are narrow in scope, and allow us to cover all cases, ensuring that every single part works correctly. Unit testing typically have to test every function, method, object or component in our design. In our application, unit testing should mainly focus on testing the accuracy of the AR output on face capture through camera, which will compare the similarity of expected look with the actual look. Additionally, other compatible components need to be tested as well. In order to make single unit test pass and achieve a high coverage rate, we will use test coverage metrics to measure and monitor the testing activity\\
 
-\wss{What modules are outside of the scope.  If there are modules that are
-  developed by someone else, then you would say here if you aren't planning on
-  verifying them.  There may also be modules that are part of your software, but
-  have a lower priority for verification than others.  If this is the case,
-  explain your rationale for the ranking of module importance.}
 
-\subsection{Tests for Functional Requirements}
 
-\wss{Most of the verification will be through automated unit testing.  If
-  appropriate specific modules can be verified by a non-testing based
-  technique.  That can also be documented in this section.}
+\newline Modules outside of the scope:
+\begin{itemize}
+    \item It interact with the database
+    \item It uses interface through the network
+    \item It communicates with the file system
+    \item It cannot be ran automatically using the unit testing tool with other unit tests at the same time
+    \item It needs mandatory operations (like modify makefile, configfile, environment variables) to run it
+\end{itemize}\\
 
-\subsubsection{Module 1}
+More specifically, most of the non-functional requirements cannot be verified by unit testing. Non-functional tests are mostly categorized as a performance test and cannot be tested quantitatively.
 
-\wss{Include a blurb here to explain why the subsections below cover the module.
-  References to the MIS would be good.  You will want tests from a black box
-  perspective and from a white box perspective.  Explain to the reader how the
-  tests were selected.}
+  
 
-\begin{enumerate}
+\section{Traceability Matrix}
 
-\item{test-id1\\}
+\begin{landscape}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+	& FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & HM1 & HM2 & HM3 & HM4 & HM5 & HM6 & HM7 & HM8 & HM9 \\
+\hline
+FRS-T1        & X& X& X& X& & & & & & & & & & & & \\ \hline
+FRS-T2        & & & & & X& X& X& & & & & & & & &  \\ \hline
+HMS-T1        & & & & & & & & & & & & & & & & \\ \hline
+HMS-T2        & & & & & & & & & & X& X& X& & & & \\ \hline
+HMS-T3        & & & & & & & & X& X& & & & & & & \\ \hline
+HMS-T4        & & & & & & & & & & & & & X& X& X&X \\ \hline
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
+\end{tabular}
+\caption{Traceability Matrix Showing the Connections Between Functional Requirements and functional requirements tests}
+\label{Table:A_trace}
+\end{table}
+\end{landscape}
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+\begin{landscape}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+& HR1 & HR2 & HR3 & HR4 & AR1 & AR2 & AR3 & AR4 \\
+\hline
+HSR-T1        & & & & & & & & \\ \hline
+HSR-T2        &X &X &X & & & & & \\ \hline
+HSR-T3        &X &X &X & & & & & \\ \hline
+HSR-T4        &X &X &X & & & & & \\ \hline
+HSR-T5        & & & & & & & & \\ \hline
+HSR-T6        & & & & X& & & & \\ \hline
+HSR-T7        & & & & X& & & & \\ \hline
+AS-T1         & & & & &X & & & \\ \hline
+AS-T2        & & & & &X & & & \\ \hline
+AS-T3        & & & & &X & & & \\ \hline
+AS-T4        & & & & &X & & & \\ \hline
+AS-T5        & & & & & &X &X & \\ \hline
+\end{tabular}
+\caption{Traceability Matrix Showing the Connections Between Functional Requirements and functional requirements tests}
+\label{Table:A_trace}
+\end{table}
+\end{landscape}
 
-How test will be performed: 
-					
-\item{test-id2\\}
+\begin{landscape}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+	& APR1 & APR2 & IAR1 & IAR2 & EUR1 & EUR2 & LR1 & LR2 & UPR1 & ASR1 & SLR1 & SLR2 & SLR3\\
+\hline
+AP-T1        &X & & & & & & & & & & & & \\ \hline
+AP-T2        & &X & & & & & & & & & & & \\ \hline
+IA-T1        & & &X & & & & & & & & & & \\ \hline
+IA-T2        & & & &X & & & & & & & & & \\ \hline
+EU-T1        & & & & &X & & & & & & & & \\ \hline
+EU-T2        & & & & & &X & & & & & & & \\ \hline
+LR-T1        & & & & & & &X & & & & & & \\ \hline
+LR-T2        & & & & & & & &X & & & & & \\ \hline
+AS-T1        & & & & & & & & & &X & & & \\ \hline
+SL-T1        & & & & & & & & & & &X & & \\ \hline
+SL-T2        & & & & & & & & & & & &X & \\ \hline
+SL-T3        & & & & & & & & & & & & &X \\ \hline
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
+\end{tabular}
+\caption{Traceability Matrix Showing the Connections Between non-functional Requirements and non-functional requirements tests}
+\label{Table:A_trace}
+\end{table}
+\end{landscape}
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+\begin{landscape}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+	& PAR1 & PAR2 & RAR1 & RAR2 & RBR1 & RBR2 & CCR1 & CCR2 & SER1 & LGR1 & PDR1 & RER1 & RER2\\
+\hline
+PA-T1        &X & & & & & & & & & & & & \\ \hline
+PA-T2        & &X & & & & & & & & & & & \\ \hline
+RA-T1        & & &X & & & & & & & & & & \\ \hline
+RA-T2        & & & &X & & & & & & & & & \\ \hline
+RB-T1        & & & & &X & & & & & & & & \\ \hline
+RB-T2        & & & & & &X & & & & & & & \\ \hline
+CC-T1        & & & & & & &X & & & & & & \\ \hline
+CC-T2        & & & & & & & &X & & & & & \\ \hline
+SE-T1        & & & & & & & & &X & & & & \\ \hline
+LG-T1        & & & & & & & & & &X & & & \\ \hline
+PD-T1        & & & & & & & & & & &X & & \\ \hline
+RE-T1        & & & & & & & & & & & &X & \\ \hline
+RE-T2        & & & & & & & & & & & & &X \\ \hline
 
-How test will be performed: 
+\end{tabular}
+\caption{Traceability Matrix Showing the Connections Between non-functional Requirements and non-functional requirements tests}
+\label{Table:A_trace}
+\end{table}
+\end{landscape}
 
-\item{...\\}
-    
-\end{enumerate}
+\begin{landscape}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+	& MSR1 & MSR2 & MSR3 & SPR1 & ADR1 & ACR1 & ACR2 & ACR3 & ACR4 & CR1 & CPR1 \\
+\hline
+MS-T1        &X &X & & & & & & & & &  \\ \hline
+MS-T2        & & &X & & & & & & & &  \\ \hline
+SP-T1        & & & &X &X & & & & & &  \\ \hline
+AC-T1        & & & & & & X&X &X &X & & \\ \hline
+CR-T1        & & & & & & & & & &X &  \\ \hline
+CP-T1        & & & & & & & & & & &X \\ \hline
 
-\subsubsection{Module 2}
+\end{tabular}
+\caption{Traceability Matrix Showing the Connections Between non-functional Requirements and non-functional requirements tests}
+\label{Table:A_trace}
+\end{table}
+\end{landscape}
 
-...
-
-\subsection{Tests for Nonfunctional Requirements}
-
-\wss{If there is a module that needs to be independently assessed for
-  performance, those test cases can go here.  In some projects, planning for
-  nonfunctional tests of units will not be that relevant.}
-
-\wss{These tests may involve collecting performance data from previously
-  mentioned functional tests.}
-
-\subsubsection{Module ?}
-		
-\begin{enumerate}
-
-\item{test-id1\\}
-
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input/Condition: 
-					
-Output/Result: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
-
-\end{enumerate}
-
-\subsubsection{Module ?}
-
-...
-
-\subsection{Traceability Between Test Cases and Modules}
-
-\wss{Provide evidence that all of the modules have been considered.}
 				
 \bibliographystyle{plainnat}
 
-\bibliography{../../refs/References}
+% \bibliography{../../refs/References}
 
 \newpage
 
 \section{Appendix}
 
-This is where you can place additional information.
-
 \subsection{Symbolic Parameters}
 
 The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
 Their values are defined in this section for easy maintenance.
+\subsection{Usability Research Plan}
+For our project, the interface and user experience would be very important. In order to conduct the best user friendly application, we decides to make a user research by two methods. First of all, we are planning to prepare a usability survey and make small interviews with users interested in such apps. Buy gathering suggestions from public we can make small changes to make our product easier to use. Besides, we are also planing to ask guests to test use our application and gain useful feed backs once it is implemented. By making small changes accordingly before submitting may improve the usability experience significantly.
+\subsection{Usability Survey Questions}
+\begin{itemize}
+    \item Would you prefer to have a tutorial of our application by text or video?
+    \item Would you prefer to have all the features hidden or present when virtually presenting the hairstyle?
+    \item Would you prefer to have cartoon style interface or modern style interface? 
+\end{itemize}
 
-\subsection{Usability Survey Questions?}
-
-\wss{This is a section that would be appropriate for some projects.}
 
 \newpage{}
-\section*{Appendix --- Reflection}
+\subsection{Reflection}
 
 The information in this section will be used to evaluate the team members on the
 graduate attribute of Lifelong Learning.  Please answer the following questions:
 
 \begin{enumerate}
-  \item 
-  \item 
+  \item What knowledge and skills will the team collectively need to acquire to
+  successfully complete the verification and validation of your project?
+  Examples of possible knowledge and skills include dynamic testing knowledge,
+  static testing knowledge, specific tool usage etc.  You should look to
+  identify at least one item for each team member.
+  
+  \item For each of the knowledge areas and skills identified in the previous
+  question, what are at least two approaches to acquiring the knowledge or
+  mastering the skill?  Of the identified approaches, which will each team
+  member pursue, and why did they make this choice?
 \end{enumerate}
+\subsubsection{Senni}
+More knowledge on dynamic testing will be acquired for the team to successfully complete the verification and validation of the project. In the system test for nonfuncational requirement, most of the tests are plan to be done by the user and gathering feedback from the user survey, a more generic approach or a more generic measure tool or methods are required to give a more thorough test.\\
+\newline
+To acquire the knowledge of better testing nonfunctional requirements, there are two approaches: 1. do research on any measurement tools for dynamic testing 2. interview with experienced senior developer in the industry or project manager in the industry to learn more knowledge about testing nonfunctional requirements with dynamic testing. After discussion, we decided to take the second approach because measurement tools for dynamically testing nonfunctional requirement is very rare in the current industry, and all members had connections to senior developers or managers in the software industry, and thus it will be a good way to interview with the seniors and learn more about testing for nonfunctional requirement in dynamic testing.
+
+\subsubsection{Bill}
+I am responsible for conducting verification and validation of the functional testing in our project. On the back-end side of our application, the team chose to use a testing framework called Pytest. However, I am not familiar with this tool, I need to acquire more knowledge and information regarding to Pytest's testing structure and syntax. For example, ways of unit testing, integration testing, and code coverage analysis using Pytest. In addition, more of the testings are related to image processing and transformation, I need to learn how to conduct these test efficiently.\\
+\newline
+The first action I would take is to talk to professionals and friends who have extensive experiences in testing image processing and transformation. I want to formulate some ideas and strategies, then try to apply them using Pytest. This method would be time-efficient, since they gave me a general direction on testing based on their professional experiences. The second approach is looking at information available online, some resources provide useful information and solutions to specific domains I might encounter.
+\medskip
+
+\subsubsection{Jack}
+In this document, I am mainly responsible for provide tests method for some of the non-functional requirements and also conclude all the tests method into a tractability matrix. For non-functional requirements, the tests mostly reply on manual and user input. Our team needs to conduct physical tests to ensure that the application meets all the requirements. Besides, I have also added a matrix to trace which test can ensure which requirements.\\
+
+\newline
+There are a few knowledge I need to learn before the actual testing begin. First of all, we need to come up with a plan to conduct these tests effectively. For example, finding suitable people to test our app after it is being developed. Secondly, I will be coffee talking to other project managers and learn about their non-functional requirements testing procedures. Last but not least, I will also go through some testing reports on the open source projects on GitHub to gain more knowledge about testing methods.
+
+
+
+
+\subsubsection{Charlotte}
+For this VnV plan, I learnt that in software testing, verification and validation (V&V) is the process of checking that a software system meets specifications and requirements so that it fulfills its intended purpose. It may also be referred to as software quality control. It is normally the responsibility of software testers as part of the software development lifecycle. In simple terms, software verification is: "Assuming we should build X, does our software achieve its goals without any bugs or gaps?" On the other hand, software validation is: "Was X what we should have built? Does X meet the high-level requirements?".\\
+
+Verification and validation are not the same things, although they are often confused. Verification is asking the question: Are we building the product right?
+Validation is asking the question: Are we building the right product? "Building the product right" checks that the specifications are correctly implemented by the system while "building the right product" refers back to the user's needs. In some contexts, it is required to have written requirements for both as well as formal procedures or protocols for determining compliance. 
+\newline
+
+\subsubsection{Marlon}
+During the development of the VnV plan, I was responsible for coming up with the verification plan. One  message I learnt is the importance of getting reviews from people other than the development group, which also reflects the needs for roles like software engineer in testing in the industry. During the software development life cycle, the developers usually strictly follow the development plan and ideas when contributing to a grand software. Thus, it's hard for them to jump out of the box and realize their mistakes through their development process. Additionally, all the documents are required to be inspected as well in case any ignorance causing problems forming in the early stages. 
+
+The process also rings a bell for me to start learning testing frameworks required when creating automation for my assigned parts in the project. I will be accompany with Bill to test the backend API and algorithm. One important tool used for testing API is Postman. I will need to learn how to integrate it into part of the pytest framework. The best way to learn how to set up the testing automation properly is to consult someone with QA experiences, such as colleagues from our group during my internship. It will also help to start some research online since I already have some experiences working with both postman and pytest.
+
+\subsubsection{Hongwei}
+Based on development of this document, I learned Verification process (static testing) includes checking documents, design, code, and program, whereas Validation process (dynamic testing) includes testing and validation of the actual product. For example, Dynamic testing contains the steps of Test case design, Test environment step-up, Test case execution, Test analysis and evaluation, Bug Reporting. More specifically, in the hierarchy of Dynamic testing - Black-box testing - Functional testing, there are Unit testing, Integration testing, System testing, User acceptance testing. In unit testing, we will be using pytest to test each component in our design.\\
+\newline
+Two possible approaches to acquring related knowledge and get hands-on experience with the tool: First, do research on pytest.org and other open-source community, run and understand examples, try to integrate our design into pytest. Secondly, talk to friends and former colleagues who has related experience. After analysing pros and cons of both methods, we choose to use the second one, since there is a limitation in online resources and the teammate (Marlon) who work with me has industrial-level experience in pytest.
+\medskip
+
+\newpage
+\section*{Appendix --- References}
+
+\begin{itemize}
+    \item Team 18, Software Requirements Specification for Hairesthetics: A 3D Hairstyle Simulation iOS App, 2022. [Online]. Available: https://github.com/marlon4dashen/Hairesthetics/tree/main/docs.
+    \item Team 18, Module Guide for Hairesthetics: A 3D Hairstyle Simulation iOS App, 2022. [Online]. Available: https://github.com/marlon4dashen/Hairesthetics/tree/main/docs.
+    \item Team 18, Development Plan for Hairesthetics: A 3D Hairstyle Simulation iOS App, 2022. [Online]. Available: https://github.com/marlon4dashen/Hairesthetics/tree/main/docs.
+    \item Team 18, Hazard Analysis for Hairesthetics: A 3D Hairstyle Simulation iOS App, 2022. [Online]. Available: https://github.com/marlon4dashen/Hairesthetics/tree/main/docs.
+\end{itemize}
+
 
 \end{document}
