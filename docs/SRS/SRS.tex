@@ -125,9 +125,9 @@
 \newcounter{prrreqnum} % Privacy Requirement Number
 \newcommand{\rtheprrreqnum}{P\theprrreqnum}
 \newcounter{aurreqnum} % Audit Requirement Number
-\newcommand{\rthererrreqnum}{P\thererrreqnum}
-\newcounter{rerrreqnum} % release Requirement Number
 \newcommand{\rtheaurreqnum}{P\theaurreqnum}
+\newcounter{rerrreqnum} % release Requirement Number
+\newcommand{\rthererrreqnum}{P\thererrreqnum}
 \newcounter{msrreqnum} % maintenance Requirement Number
 \newcommand{\rthemsrreqnum}{P\themsrreqnum}
 \newcounter{adrreqnum} % adaptability Requirement Number
@@ -420,9 +420,9 @@ The stretch goals are currently out of the scope of our requirements document, w
         \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must pre-process the image by transforming the input facial image to grayscale
         \item[] Rationale: Increase the contrastness of the image to better detect the edges
         \item[] Math Specification: newImage $:=$ process($image$) $\Rightarrow$ ($\forall p :$ Pixels in image $|$ p[$Red$]*0.21 + p[$Green$]*0.72 + p[$Blue$]*0.07)
-        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must load the grayscale facial image into a pre-trained facial detection model for face shape detection
+        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must perform face shape detection on grayscale facial image
         \item[] Rationale: The pre-trained facial detection model needs a grayscale image as an input to provide a more accurate result
-        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must load the pre-processed image into a pre-trained hair detection model for hair extraction
+        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must perform hair extraction on pre-processed image.
         \item[] Rationale: The pre-trained hair detection model needs a grayscale image as an input to provide a more accurate result
         \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system compute the hair edge coordinates
         \item[] Rationale: the pre-trained models will compute a series of important coordinates related to the hair. These coordinates will be used for various transformation.
