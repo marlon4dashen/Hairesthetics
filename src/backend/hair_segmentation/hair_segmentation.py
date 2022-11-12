@@ -52,4 +52,4 @@ def test(model_path, image_path, image_size):
 
 if __name__ == "__main__":
     # png doesnt work for now
-    test('./model/model.pth', './images/test4.jpg', 512)
+    test('./model/model.pth', './images/test.jpg', 512)
