@@ -109,5 +109,5 @@ def input_videostream():
 
 
 if __name__ == '__main__':
-    img = input_image(img_path='./images/test2.jpeg')
-    # input_videostream()
+    # img = input_image(img_path='./images/test2.jpeg')
+    input_videostream()
