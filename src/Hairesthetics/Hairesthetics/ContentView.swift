@@ -19,18 +19,22 @@ struct ContentView: View {
         Box(title:"Short1", imageUrl:"hairstyle2")
     ]
     var body: some View {
-        VStack{
-            CameraView()
-            NavigationView{
-                ScrollView{
-                    HStack{
-                        ForEach(hairstyles) { hair in
-                            BoxView(selectedBox: self.$selectedBox, box: hair)
+        VStack(spacing: 0){
+//            CameraView()
+            ZStack(alignment: .bottom) {
+                VStack{
+                    Spacer()
+                    NavigationView{
+                        ScrollView (.horizontal, showsIndicators: false){
+                            HStack{
+                                ForEach(hairstyles) { hair in
+                                    BoxView(selectedBox: self.$selectedBox, box: hair)
+                                }
+                            }
                         }
-                    }
-                }
-                .padding(5)
 
+                    }.frame(height: UIScreen.main.bounds.width/2)
+                }
             }
         }
     }
