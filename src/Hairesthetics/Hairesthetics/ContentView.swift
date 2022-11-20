@@ -7,35 +7,25 @@
 
 import SwiftUI
 import AVFoundation
+class AppSettings: ObservableObject {
+    @Published var currentMode: String? = "Haircolor"
+    @Published var selectedHair: String? = nil
+    @Published var selectedColor: String? = nil
+    
+}
 
 struct ContentView: View {
-    @State var selectedBox: String? = nil
-    let hairstyles: [Box] = [
-        Box(title:"Long", imageUrl:"hairstyle0"),
-        Box(title:"Medium", imageUrl:"hairstyle1"),
-        Box(title:"Short", imageUrl:"hairstyle2"),
-        Box(title:"Long1", imageUrl:"hairstyle0"),
-        Box(title:"Medium1", imageUrl:"hairstyle1"),
-        Box(title:"Short1", imageUrl:"hairstyle2")
-    ]
+    @StateObject var settings = AppSettings()
     var body: some View {
         VStack(spacing: 0){
-//            CameraView()
-            ZStack(alignment: .bottom) {
-                VStack{
-                    Spacer()
-                    NavigationView{
-                        ScrollView (.horizontal, showsIndicators: false){
-                            HStack{
-                                ForEach(hairstyles) { hair in
-                                    BoxView(selectedBox: self.$selectedBox, box: hair)
-                                }
-                            }
-                        }
-
-                    }.frame(height: UIScreen.main.bounds.width/2)
-                }
+            // CameraView() # comment to run on simulator
+            
+            if settings.currentMode == "Hairstyle" {
+                HairstyleMenu().environmentObject(settings)
+            }else{
+                HaircolorMenu().environmentObject(settings)
             }
+            
         }
     }
 }

@@ -15,6 +15,8 @@
 		1CAD07602929763F00E67F21 /* HairestheticsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD075F2929763F00E67F21 /* HairestheticsUITests.swift */; };
 		1CAD07622929763F00E67F21 /* HairestheticsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD07612929763F00E67F21 /* HairestheticsUITestsLaunchTests.swift */; };
 		1CAD077229298F5E00E67F21 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD077129298F5E00E67F21 /* Box.swift */; };
+		1CAD07742929C16F00E67F21 /* HairstyleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD07732929C16E00E67F21 /* HairstyleMenu.swift */; };
+		1CAD07762929CF3600E67F21 /* HaircolorMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD07752929CF3600E67F21 /* HaircolorMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		1CAD075F2929763F00E67F21 /* HairestheticsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairestheticsUITests.swift; sourceTree = "<group>"; };
 		1CAD07612929763F00E67F21 /* HairestheticsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairestheticsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1CAD077129298F5E00E67F21 /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		1CAD07732929C16E00E67F21 /* HairstyleMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairstyleMenu.swift; sourceTree = "<group>"; };
+		1CAD07752929CF3600E67F21 /* HaircolorMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaircolorMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +138,8 @@
 			isa = PBXGroup;
 			children = (
 				1CAD077129298F5E00E67F21 /* Box.swift */,
+				1CAD07732929C16E00E67F21 /* HairstyleMenu.swift */,
+				1CAD07752929CF3600E67F21 /* HaircolorMenu.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -269,8 +275,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CAD077229298F5E00E67F21 /* Box.swift in Sources */,
+				1CAD07762929CF3600E67F21 /* HaircolorMenu.swift in Sources */,
 				1CAD07472929763D00E67F21 /* ContentView.swift in Sources */,
 				1CAD07452929763D00E67F21 /* HairestheticsApp.swift in Sources */,
+				1CAD07742929C16F00E67F21 /* HairstyleMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

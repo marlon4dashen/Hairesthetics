@@ -30,6 +30,7 @@ struct BoxView: View{
             Text(box.title)
                 .font(.subheadline)
                 .fontWeight(.semibold)
+                .foregroundColor(.white)
         }.onTapGesture {
             self.selectedBox = self.box.title
         }
