@@ -17,8 +17,7 @@ if __name__ == '__main__':
     map_client = googlemaps.Client(API_KEY)
 
     #print(dir(map_client))
-    loc = googlemaps.geolocate()
-    print(loc)
+    
     location = (43.8594059105088, -79.31981073115197)
     search_string = 'hair'
     distance = miles_to_meter(15)
