@@ -7,14 +7,14 @@ import cv2
 import filetype
 import numpy as np
 # import config
-import webcolors
+# import webcolors
 import onnxruntime
 
 HAIR_SEGMENTATION_MODEL = './model/best_model_simplifier.onnx'
 EXPANDING_FACTOR = 0.75
 MEAN = [0.485, 0.456, 0.406]
 STD = [0.229, 0.224, 0.225]
-ALPHA = 0.4
+ALPHA = 0.25
 
 # BGR Format
 COLORS = {
