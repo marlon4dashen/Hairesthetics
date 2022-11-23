@@ -18,8 +18,6 @@
 
 \date{Sept 22, 2022}
 
-% \input{../Comments}
-% \input{../Common}
 
 \begin{document}
 
@@ -45,33 +43,32 @@ This document provides the timeline of the project Hairesthetics, and aims to pl
 The team will meet twice a week for three hours at a time. The first meeting happens each Monday from 7 to 10 pm. The date and time for the second meeting will vary based on members' availability, but it will always run for at least three hours.
 Meetings will take place on discord virtually on the capstone server. All team members are expected to show up and join the meeting at or before the designated meeting time. If any team member is not available, the team meeting shall be rescheduled to another time. Work should be assigned to each team member properly. Team leader Marlon Liu will chair the meeting and shall have an agenda set for all meetings in advance. All decisions will be announced in the discord channel and documents will be uploaded to the capstone GitHub repository.
 
-\section{Team Communication Plan}
-All important Capstone related information will communicate through Discord channel, discord will also be used for virtual meetings. 
-\\ If a matter is urgent, such as if a member is not at a meeting, we may choose to contact that group member via WeChat. We are choosing to use WeChat as our primary means of communication since we are all familiar with using WeChat.
-
-
 \section{Team Member Roles}
 
-\begin{table}[hp]
+\begin{table}[h]
 \caption{Team Member Roles} \label{TblMembers}
-\begin{tabularx}{\textwidth}{llX}
+\begin{tabularx}{\textwidth}{lXX}
 \toprule
 \textbf{Name} & \textbf{Developer(s)} & \textbf{Description}\\
 \midrule
-Marlon Liu & AR and Backend Developer & 3D simulation and facial feature detection model \\
+Marlon Liu & Computer Vision and Backend Developer & Facial feature detection and hair segmentation \\
 \midrule
-Charlotte Cheng & iOS Developer & UI/UX, Ar Kit\\
+Charlotte Cheng & iOS and AR Developer & UI/UX and 3D simulation\\
 \midrule
-Hongwei Niu & Backend Developer & Computer Vision\\
+Hongwei Niu & Backend Developer & APIs and model training\\
 \midrule
-Bill Song & Backend Developer & 2D algorithms and APIs\\
+Bill Song & Computer Vision and Backend Developer & 2D algorithms and hair segmentation\\
 \midrule
 Senni Tan & iOS Developer & UI/UX, Ar Kit\\
 \midrule
-Qiushi Xu & Database developer & Manage and process data\\ 
+Qiushi Xu & AR developer & Hair model artist and 3D simulation\\ 
 \bottomrule
 \end{tabularx}
 \end{table}
+
+\section{Team Communication Plan}
+All important Capstone related information will communicate through Discord channel, discord will also be used for virtual meetings. 
+\\ If a matter is urgent, such as if a member is not at a meeting, we may choose to contact that group member via WeChat. We are choosing to use WeChat as our primary means of communication since we are all familiar with using WeChat.
 
 \section{Workflow Plan}
 
@@ -87,7 +84,10 @@ Qiushi Xu & Database developer & Manage and process data\\
 \section{Proof of Concept Demonstration Plan}
 
 \subsection{Most significant Risk}
-The most significant risk of the project will be having the application crash on the user's mobile, for example, the application suddenly stops and go back to the mobile desktop. To overcome this issue, we have to make sure the application is tested throughout and rigorously. Another major concern is that mobiles with old iOS versions may not be supported, it is important to implement exception handling for such scenarios. 
+\begin{enumerate}
+    \item Software Integration: our application consists technologies such as AR, computer vision, and iOS. Integrating all components into one application could be difficult to do due to potential compatibility issues between technologies.
+    \item Hair segmentation accuracy: Different hairstyle, hair length, and the environment are the biggest factors that can affect the accuracy of our model. It is challenging to find large high quality datasets and also come up with an efficient and precise algorithm.
+\end{enumerate}
 
 \subsection{Will a part of the implementation be difficult?}
 Technologies such as AR, Computer Vision, and iOS development are relatively new to the team members since the team does not have sufficient background knowledge in these fields.
