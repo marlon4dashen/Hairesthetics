@@ -17,6 +17,12 @@
 		1CAD077229298F5E00E67F21 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD077129298F5E00E67F21 /* Box.swift */; };
 		1CAD07742929C16F00E67F21 /* HairstyleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD07732929C16E00E67F21 /* HairstyleMenu.swift */; };
 		1CAD07762929CF3600E67F21 /* HaircolorMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD07752929CF3600E67F21 /* HaircolorMenu.swift */; };
+		1CB0E2E5292EE2B200584141 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CB0E2E4292EE2B200584141 /* Launch Screen.storyboard */; };
+		1CB0E2EB292EE5FB00584141 /* textRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB0E2E7292EE5FB00584141 /* textRow.swift */; };
+		1CB0E2EC292EE5FB00584141 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB0E2E8292EE5FB00584141 /* SettingsView.swift */; };
+		1CB0E2ED292EE5FB00584141 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB0E2E9292EE5FB00584141 /* Icon.swift */; };
+		1CB0E2EE292EE5FB00584141 /* buttonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB0E2EA292EE5FB00584141 /* buttonRow.swift */; };
+		1CB0E2F1292EE62100584141 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB0E2F0292EE62100584141 /* ColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +56,12 @@
 		1CAD077129298F5E00E67F21 /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		1CAD07732929C16E00E67F21 /* HairstyleMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairstyleMenu.swift; sourceTree = "<group>"; };
 		1CAD07752929CF3600E67F21 /* HaircolorMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaircolorMenu.swift; sourceTree = "<group>"; };
+		1CB0E2E4292EE2B200584141 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		1CB0E2E7292EE5FB00584141 /* textRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = textRow.swift; sourceTree = "<group>"; };
+		1CB0E2E8292EE5FB00584141 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		1CB0E2E9292EE5FB00584141 /* Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		1CB0E2EA292EE5FB00584141 /* buttonRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = buttonRow.swift; sourceTree = "<group>"; };
+		1CB0E2F0292EE62100584141 /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +112,10 @@
 		1CAD07432929763D00E67F21 /* Hairesthetics */ = {
 			isa = PBXGroup;
 			children = (
-				1CAD076E29298F0100E67F21 /* ui */,
+				1CB0E2EF292EE62100584141 /* Extension */,
+				1CB0E2E3292EE29500584141 /* Launch Screen */,
+				1CB0E2E1292EE22E00584141 /* Controller */,
+				1CAD076E29298F0100E67F21 /* Views */,
 				1CAD07442929763D00E67F21 /* HairestheticsApp.swift */,
 				1CAD07462929763D00E67F21 /* ContentView.swift */,
 				1CAD07482929763E00E67F21 /* Assets.xcassets */,
@@ -134,14 +149,57 @@
 			path = HairestheticsUITests;
 			sourceTree = "<group>";
 		};
-		1CAD076E29298F0100E67F21 /* ui */ = {
+		1CAD076E29298F0100E67F21 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1CB0E2E6292EE5FB00584141 /* Settings */,
+				1CB0E2E2292EE23B00584141 /* StyleMenu */,
 				1CAD077129298F5E00E67F21 /* Box.swift */,
 				1CAD07732929C16E00E67F21 /* HairstyleMenu.swift */,
 				1CAD07752929CF3600E67F21 /* HaircolorMenu.swift */,
 			);
-			path = ui;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1CB0E2E1292EE22E00584141 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1CB0E2E2292EE23B00584141 /* StyleMenu */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = StyleMenu;
+			sourceTree = "<group>";
+		};
+		1CB0E2E3292EE29500584141 /* Launch Screen */ = {
+			isa = PBXGroup;
+			children = (
+				1CB0E2E4292EE2B200584141 /* Launch Screen.storyboard */,
+			);
+			path = "Launch Screen";
+			sourceTree = "<group>";
+		};
+		1CB0E2E6292EE5FB00584141 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				1CB0E2E7292EE5FB00584141 /* textRow.swift */,
+				1CB0E2E8292EE5FB00584141 /* SettingsView.swift */,
+				1CB0E2E9292EE5FB00584141 /* Icon.swift */,
+				1CB0E2EA292EE5FB00584141 /* buttonRow.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		1CB0E2EF292EE62100584141 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				1CB0E2F0292EE62100584141 /* ColorExtension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,6 +306,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CB0E2E5292EE2B200584141 /* Launch Screen.storyboard in Resources */,
 				1CAD074C2929763E00E67F21 /* Preview Assets.xcassets in Resources */,
 				1CAD07492929763E00E67F21 /* Assets.xcassets in Resources */,
 			);
@@ -274,11 +333,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CB0E2EC292EE5FB00584141 /* SettingsView.swift in Sources */,
 				1CAD077229298F5E00E67F21 /* Box.swift in Sources */,
+				1CB0E2EB292EE5FB00584141 /* textRow.swift in Sources */,
 				1CAD07762929CF3600E67F21 /* HaircolorMenu.swift in Sources */,
 				1CAD07472929763D00E67F21 /* ContentView.swift in Sources */,
+				1CB0E2EE292EE5FB00584141 /* buttonRow.swift in Sources */,
 				1CAD07452929763D00E67F21 /* HairestheticsApp.swift in Sources */,
+				1CB0E2ED292EE5FB00584141 /* Icon.swift in Sources */,
 				1CAD07742929C16F00E67F21 /* HairstyleMenu.swift in Sources */,
+				1CB0E2F1292EE62100584141 /* ColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,21 +11,32 @@ class AppSettings: ObservableObject {
     @Published var currentMode: String? = "Haircolor"
     @Published var selectedHair: String? = nil
     @Published var selectedColor: String? = nil
-    
+
 }
 
 struct ContentView: View {
     @StateObject var settings = AppSettings()
     var body: some View {
-        VStack(spacing: 0){
-            // CameraView() # comment to run on simulator
-            
-            if settings.currentMode == "Hairstyle" {
-                HairstyleMenu().environmentObject(settings)
-            }else{
-                HaircolorMenu().environmentObject(settings)
+        NavigationView {
+            VStack(spacing: 0){
+                // CameraView() # comment to run on simulator
+
+                if settings.currentMode == "Hairstyle" {
+                    HairstyleMenu().environmentObject(settings)
+                }else{
+                    HaircolorMenu().environmentObject(settings)
+                }
+
             }
-            
+            .navigationBarItems(
+                    trailing:
+                        NavigationLink(
+                            destination: SettingsView(),
+                            label: {
+                                Image(systemName: "gearshape.fill")
+                                    .foregroundColor(Color(UIColor(rgb: 0x99A799)))
+                                    .font(.title2)
+                            }))
         }
     }
 }
