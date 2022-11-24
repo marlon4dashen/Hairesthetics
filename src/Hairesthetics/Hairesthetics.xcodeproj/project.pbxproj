@@ -91,12 +91,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1C085443292EF08900903C12 /* Model */ = {
+		1C085443292EF08900903C12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				1C085444292EF09900903C12 /* hair.usdz */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		1CAD07382929763D00E67F21 = {
@@ -122,7 +122,7 @@
 		1CAD07432929763D00E67F21 /* Hairesthetics */ = {
 			isa = PBXGroup;
 			children = (
-				1C085443292EF08900903C12 /* Model */,
+				1C085443292EF08900903C12 /* Models */,
 				1CB0E2EF292EE62100584141 /* Extension */,
 				1CB0E2E3292EE29500584141 /* Launch Screen */,
 				1CAD076E29298F0100E67F21 /* Views */,
@@ -504,14 +504,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Hairesthetics/Preview Content\"";
-				DEVELOPMENT_TEAM = 7C3RFH7X8Z;
+				DEVELOPMENT_TEAM = ZJ3WV524JF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME)";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(PRODUCT_NAME)";
+				INFOPLIST_KEY_CFBundleDisplayName = apps;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSCameraUsageDescription = Hairesthetics;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Hairesthetics;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -522,8 +525,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.emotionaldamage.hairesthetics.Hairesthetics;
+				PRODUCT_BUNDLE_IDENTIFIER = com.emotionaldamage.hairesthetics.Hairesthetics1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -538,11 +542,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Hairesthetics/Preview Content\"";
-				DEVELOPMENT_TEAM = 7C3RFH7X8Z;
+				DEVELOPMENT_TEAM = ZJ3WV524JF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME)";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(PRODUCT_NAME)";
+				INFOPLIST_KEY_CFBundleDisplayName = apps;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSCameraUsageDescription = Hairesthetics;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Hairesthetics;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -553,7 +559,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.emotionaldamage.hairesthetics.Hairesthetics;
+				PRODUCT_BUNDLE_IDENTIFIER = com.emotionaldamage.hairesthetics.Hairesthetics1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
