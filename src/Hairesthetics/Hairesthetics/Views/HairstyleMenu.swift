@@ -9,14 +9,7 @@ import SwiftUI
 
 struct HairstyleMenu: View {
     @EnvironmentObject var settings: AppSettings
-    let styles: [Box] = [
-        Box(title:"Long", imageUrl:"hairstyle0"),
-        Box(title:"Medium", imageUrl:"hairstyle1"),
-        Box(title:"Short", imageUrl:"hairstyle2"),
-        Box(title:"Long1", imageUrl:"hairstyle0"),
-        Box(title:"Medium1", imageUrl:"hairstyle1"),
-        Box(title:"Short1", imageUrl:"hairstyle2")
-    ]
+
     var body: some View {
         ZStack {
             VStack{
@@ -35,8 +28,9 @@ struct HairstyleMenu: View {
                         
                         ScrollView (.horizontal, showsIndicators: false){
                             HStack{
-                                ForEach(styles) { style in
-                                    BoxView(selectedBox: $settings.selectedHair, box: style)
+                                ForEach(0..<self.settings.models.count){
+                                    index in
+                                    BoxView(selectedBox: $settings.selectedModel, box: $settings.models[index], isPlacementEnabled: $settings.isPlacementEnabled)
                                 }
                             }
                         }

@@ -11,47 +11,47 @@ import RealityKit
 import ARKit
 
 class AppSettings: ObservableObject {
-    @Published var currentMode: String? = "Haircolor"
+    @Published var currentMode: String? = "Hairstyle"
     @Published var selectedHair: String? = nil
     @Published var selectedColor: String? = nil
+    @Published var isPlacementEnabled: Bool = false
+    @Published var selectedModel: String? = nil
+    @Published var modelConfirmed: String? = nil
+    @Published var models: [String?] = {
+        let filemanager = FileManager.default
+        guard let path = Bundle.main.resourcePath, let files = try?filemanager.contentsOfDirectory(atPath: path) else {
+            return []
+        }
+        var availableodels: [String] = []
+        for filename in files where filename.hasSuffix("usdz"){
+            let modelName = filename.replacingOccurrences(of: ".usdz", with: "")
+            availableodels.append(modelName)
+        }
+        return availableodels
+    }()
 
 }
 
 struct ContentView: View {
-    @State private var isPlacementEnabled = false
-    @State private var selectedModel: String?
-    @State private var modelConfirmed: String?
     @StateObject var settings = AppSettings()
-    private var models: [String] = {
-            let filemanager = FileManager.default
-            guard let path = Bundle.main.resourcePath, let files = try?filemanager.contentsOfDirectory(atPath: path) else {
-                return []
-            }
-            var availableodels: [String] = []
-            for filename in files where filename.hasSuffix("usdz"){
-                let modelName = filename.replacingOccurrences(of: ".usdz", with: "")
-                availableodels.append(modelName)
-            }
-            return availableodels
-        }()
+   
     var body: some View {
         NavigationView {
             VStack(spacing: 0){
                 // CameraView() # comment to run on simulator
-                ZStack(alignment: .bottom){
-                    ARViewContainer(modelConfirmed: $modelConfirmed)
-                    if self.isPlacementEnabled{
-                        placeButtons(isPlacementEnabled: self.$isPlacementEnabled, selectedModel: self.$selectedModel, modelConfirmed: self.$modelConfirmed)
+                ARViewContainer(modelConfirmed: $settings.modelConfirmed)
+                ZStack(alignment: .topTrailing){
+                    if settings.currentMode == "Hairstyle" {
+                        HairstyleMenu().environmentObject(settings)
                     }else{
-                        ModelPickerView(isPlacementEnabled: self.$isPlacementEnabled, selectedModel: self.$selectedModel,models: self.models)
+                        HaircolorMenu().environmentObject(settings)
                     }
-                            
+                    if self.settings.isPlacementEnabled{
+                        placeButtons().environmentObject(settings)
+                    }
+                    
                 }
-                if settings.currentMode == "Hairstyle" {
-                    HairstyleMenu().environmentObject(settings)
-                }else{
-                    HaircolorMenu().environmentObject(settings)
-                }
+                
 
             }
             .navigationBarItems(
@@ -80,8 +80,7 @@ struct ARViewContainer: UIViewRepresentable {
             config.sceneReconstruction = .mesh
         }
         arView.session.run(config)
-    
-        
+
         return arView
         
     }
@@ -91,7 +90,7 @@ struct ARViewContainer: UIViewRepresentable {
             print("Debug3 \(modelName)")
             let filename = modelName+".usdz"
             let modelEntity = try! ModelEntity.loadModel(named: filename)
-            let anchorEntity = AnchorEntity()
+            let anchorEntity = AnchorEntity(plane: .any)
             anchorEntity.addChild(modelEntity)
             uiView.scene.addAnchor(anchorEntity)
             
@@ -103,52 +102,50 @@ struct ARViewContainer: UIViewRepresentable {
     
 }
 struct placeButtons: View{
-    @Binding var isPlacementEnabled: Bool
-    @Binding var selectedModel: String?
-    @Binding var modelConfirmed: String?
+    @EnvironmentObject var settings: AppSettings
     var body: some View{
         HStack {
             Button(action:{
                 print("Debug1")
-                self.isPlacementEnabled = false
-                self.selectedModel = nil
+                self.settings.isPlacementEnabled = false
+                self.settings.selectedModel = nil
             }){
                 Image(systemName: "xmark").frame(width: 40, height: 40).font(.title).background(Color.white.opacity(0.75)).cornerRadius(20).padding(0)
             }
             Button(action:{
                 print("Debug2")
-                self.modelConfirmed = self.selectedModel
-                self.isPlacementEnabled = false
-                self.selectedModel = nil
+                self.settings.modelConfirmed = self.settings.selectedModel
+                self.settings.isPlacementEnabled = false
+                self.settings.selectedModel = nil
             }){
                 Image(systemName: "checkmark").frame(width: 40, height: 40).font(.title).background(Color.white.opacity(0.75)).cornerRadius(20).padding(0)
             }
         }
     }
 }
-struct ModelPickerView: View{
-    @Binding var isPlacementEnabled: Bool
-    @Binding var selectedModel: String?
-    var models: [String]
-    var body: some View{
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 30){
-                ForEach(0..<self.models.count){
-                    index in
-                    Button(action: {
-                        print("Debug: \(self.models[index])")
-                        self.selectedModel = self.models[index]
-                        self.isPlacementEnabled = true
-                        
-                    }) {
-                        Image(uiImage: UIImage(named: self.models[index])!).resizable().frame(height:80).aspectRatio(1/1, contentMode: .fit).background(Color.white).cornerRadius(12)
-                    }.buttonStyle(PlainButtonStyle())
-                }
-            }
-        }
-        .padding(20).background(Color.black.opacity(0.5))
-    }
-}
+//struct ModelPickerView: View{
+//    @Binding var isPlacementEnabled: Bool
+//    @Binding var selectedModel: String?
+//    var models: [String]
+//    var body: some View{
+//        ScrollView(.horizontal, showsIndicators: false) {
+//            HStack(spacing: 30){
+//                ForEach(0..<self.models.count){
+//                    index in
+//                    Button(action: {
+//                        print("Debug: \(self.models[index])")
+//                        self.selectedModel = self.models[index]
+//                        self.isPlacementEnabled = true
+//
+//                    }) {
+//                        Image(uiImage: UIImage(named: self.models[index])!).resizable().frame(height:80).aspectRatio(1/1, contentMode: .fit).background(Color.white).cornerRadius(12)
+//                    }.buttonStyle(PlainButtonStyle())
+//                }
+//            }
+//        }
+//        .padding(20).background(Color.black.opacity(0.5))
+//    }
+//}
 
 struct CameraView: View {
 

@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C085445292EF09900903C12 /* hair.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 1C085444292EF09900903C12 /* hair.usdz */; };
+		1C085445292EF09900903C12 /* Short1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 1C085444292EF09900903C12 /* Short1.usdz */; };
+		1C085449292F3E9000903C12 /* Short2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 1C085448292F3E9000903C12 /* Short2.usdz */; };
+		1C08544B292F3EB000903C12 /* PonyTail.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 1C08544A292F3EB000903C12 /* PonyTail.usdz */; };
+		1C08544D292F3ECD00903C12 /* Medium1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 1C08544C292F3ECD00903C12 /* Medium1.usdz */; };
 		1CAD07452929763D00E67F21 /* HairestheticsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD07442929763D00E67F21 /* HairestheticsApp.swift */; };
 		1CAD07472929763D00E67F21 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD07462929763D00E67F21 /* ContentView.swift */; };
 		1CAD07492929763E00E67F21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CAD07482929763E00E67F21 /* Assets.xcassets */; };
@@ -44,7 +47,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1C085444292EF09900903C12 /* hair.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = hair.usdz; sourceTree = "<group>"; };
+		1C085444292EF09900903C12 /* Short1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Short1.usdz; sourceTree = "<group>"; };
+		1C085448292F3E9000903C12 /* Short2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Short2.usdz; sourceTree = "<group>"; };
+		1C08544A292F3EB000903C12 /* PonyTail.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = PonyTail.usdz; sourceTree = "<group>"; };
+		1C08544C292F3ECD00903C12 /* Medium1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Medium1.usdz; sourceTree = "<group>"; };
+		1C08544E292F41AF00903C12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1CAD07412929763D00E67F21 /* Hairesthetics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hairesthetics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CAD07442929763D00E67F21 /* HairestheticsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairestheticsApp.swift; sourceTree = "<group>"; };
 		1CAD07462929763D00E67F21 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,7 +65,7 @@
 		1CAD077129298F5E00E67F21 /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		1CAD07732929C16E00E67F21 /* HairstyleMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairstyleMenu.swift; sourceTree = "<group>"; };
 		1CAD07752929CF3600E67F21 /* HaircolorMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaircolorMenu.swift; sourceTree = "<group>"; };
-		1CB0E2E4292EE2B200584141 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		1CB0E2E4292EE2B200584141 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "/Users/CharlotteCheng/Desktop/Hairesthetics/src/Hairesthetics/Hairesthetics/Launch Screen/Launch Screen.storyboard"; sourceTree = "<absolute>"; };
 		1CB0E2E7292EE5FB00584141 /* textRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = textRow.swift; sourceTree = "<group>"; };
 		1CB0E2E8292EE5FB00584141 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		1CB0E2E9292EE5FB00584141 /* Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
@@ -94,7 +101,10 @@
 		1C085443292EF08900903C12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1C085444292EF09900903C12 /* hair.usdz */,
+				1C08544A292F3EB000903C12 /* PonyTail.usdz */,
+				1C08544C292F3ECD00903C12 /* Medium1.usdz */,
+				1C085448292F3E9000903C12 /* Short2.usdz */,
+				1C085444292EF09900903C12 /* Short1.usdz */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -122,6 +132,7 @@
 		1CAD07432929763D00E67F21 /* Hairesthetics */ = {
 			isa = PBXGroup;
 			children = (
+				1C08544E292F41AF00903C12 /* Info.plist */,
 				1C085443292EF08900903C12 /* Models */,
 				1CB0E2EF292EE62100584141 /* Extension */,
 				1CB0E2E3292EE29500584141 /* Launch Screen */,
@@ -310,7 +321,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CB0E2E5292EE2B200584141 /* Launch Screen.storyboard in Resources */,
-				1C085445292EF09900903C12 /* hair.usdz in Resources */,
+				1C08544D292F3ECD00903C12 /* Medium1.usdz in Resources */,
+				1C08544B292F3EB000903C12 /* PonyTail.usdz in Resources */,
+				1C085449292F3E9000903C12 /* Short2.usdz in Resources */,
+				1C085445292EF09900903C12 /* Short1.usdz in Resources */,
 				1CAD074C2929763E00E67F21 /* Preview Assets.xcassets in Resources */,
 				1CAD07492929763E00E67F21 /* Assets.xcassets in Resources */,
 			);
@@ -504,13 +518,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Hairesthetics/Preview Content\"";
-				DEVELOPMENT_TEAM = ZJ3WV524JF;
+				DEVELOPMENT_TEAM = 7C3RFH7X8Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Hairesthetics/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = apps;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSCameraUsageDescription = Hairesthetics;
@@ -518,6 +534,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -525,7 +542,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.emotionaldamage.hairesthetics.Hairesthetics1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.emotionaldamage.hairesthetics2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -539,12 +556,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Hairesthetics/Preview Content\"";
-				DEVELOPMENT_TEAM = ZJ3WV524JF;
+				DEVELOPMENT_TEAM = 7C3RFH7X8Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Hairesthetics/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = apps;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSCameraUsageDescription = Hairesthetics;
@@ -552,6 +571,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -559,7 +579,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.emotionaldamage.hairesthetics.Hairesthetics1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.emotionaldamage.hairesthetics2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

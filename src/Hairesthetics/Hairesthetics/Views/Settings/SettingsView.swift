@@ -6,8 +6,8 @@ struct SettingsView: View {
     @Environment(\.presentationMode) var presentationMode
 
     
-    var colorBrown = Color(UIColor(rgb: 0x968C83))
-    var colorGreen = Color(UIColor(rgb: 0x8DB596))
+    var colorBrown = Color(UIColor(rgb: 0x000080))
+    var colorGreen = Color(UIColor(rgb: 0xCBC3E3))
     // MARK: - View
     var body: some View {
         
