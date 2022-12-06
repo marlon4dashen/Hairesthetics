@@ -14,7 +14,7 @@ HAIR_SEGMENTATION_MODEL = './model/best_model_simplifier.onnx'
 EXPANDING_FACTOR = 0.75
 MEAN = [0.485, 0.456, 0.406]
 STD = [0.229, 0.224, 0.225]
-ALPHA = 0.25
+ALPHA = 0.1
 
 # BGR Format
 COLORS = {
@@ -148,7 +148,7 @@ def perform_hair_segmentation(session, input_name, input_width, input_height, ou
     return masked_img
 
 
-def change_color(img, mask, target_color):
+def change_color(img, mask, target_color, part=[11, 12]):
     # Resize the segmented hair region
     # hair_region = cv2.resize(
     #     mask, (img.shape[1], img.shape[0]), interpolation=cv2.INTER_AREA)
@@ -167,10 +167,28 @@ def change_color(img, mask, target_color):
     # # Combine both images where the condition is satisfied
     # output = np.where(cond == False, img, mask_color1)
     # return output
-    colored_hair = np.copy(img)
-    colored_hair[(mask > 0).all(axis=2)] = target_color
-    output = cv2.addWeighted(colored_hair, ALPHA, img,
-                             1-ALPHA, 0, colored_hair)
+    # colored_hair = np.copy(img)
+    # colored_hair[(mask > 0).all(axis=2)] = target_color
+    # output = cv2.addWeighted(colored_hair, ALPHA, img,
+    #                          1-ALPHA, 0, colored_hair)
+    image = (mask * 255.).astype(np.uint8)
+
+    b, g, r = target_color
+    tar_color = np.zeros_like(image, dtype=np.uint8)
+    tar_color[:, :, 0] = b
+    tar_color[:, :, 1] = g
+    tar_color[:, :, 2] = r
+
+    image_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    tar_hsv = cv2.cvtColor(tar_color, cv2.COLOR_BGR2HSV)
+
+    if part[0] == 13:
+        image_hsv[:, :, 0:1] = tar_hsv[:, :, 0:1]
+    elif part[0] == 11 or part[1] == 12:
+        image_hsv[:, :, 0:2] = tar_hsv[:, :, 0:2]
+
+    changed = cv2.cvtColor(image_hsv, cv2.COLOR_HSV2BGR)
+    output = cv2.addWeighted(changed, ALPHA, img, 1-ALPHA, 0, changed)
     return output
 
 
