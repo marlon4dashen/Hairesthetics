@@ -20,6 +20,7 @@
 \usepackage{graphicx}
 \usepackage{enumitem}
 \usepackage[round]{natbib}
+\usepackage[normalem]{ulem}
 
 %\usepackage{refcheck}
 
@@ -125,9 +126,9 @@
 \newcounter{prrreqnum} % Privacy Requirement Number
 \newcommand{\rtheprrreqnum}{P\theprrreqnum}
 \newcounter{aurreqnum} % Audit Requirement Number
-\newcommand{\rthererrreqnum}{P\thererrreqnum}
-\newcounter{rerrreqnum} % release Requirement Number
 \newcommand{\rtheaurreqnum}{P\theaurreqnum}
+\newcounter{rerrreqnum} % release Requirement Number
+\newcommand{\rthererrreqnum}{P\thererrreqnum}
 \newcounter{msrreqnum} % maintenance Requirement Number
 \newcommand{\rthemsrreqnum}{P\themsrreqnum}
 \newcounter{adrreqnum} % adaptability Requirement Number
@@ -235,6 +236,7 @@
 \midrule
 Oct 1 & 1.0 & Initial Drafts\\
 Oct 4 & 1.1 & Update template based on rubric\\
+Dec 6 & 2.0 & Updates on functional requirement
 \bottomrule
 \end{tabularx}
 
@@ -252,7 +254,10 @@ Oct 4 & 1.1 & Update template based on rubric\\
 The purpose for this document is to provide the basic requirements for a software application that helps user simulate hairstyles and hair colors virtually. It should include the essential functional requirements, which specify the behavioral capability of the system, as well as the non-functional requirements in order to create a successful and robust application. \\
 \newline
 \noindent
-This document should also act like an agreement between the stakeholders and the developers that the design should be based on the critical information provided in this document. The requirements should be the guiding principles in the design phase to guarantee that all the requirements are met. 
+This document should also act like an agreement between the stakeholders and the developers that the design should be based on the critical information provided in this document. The requirements should be the guiding principles in the design phase to guarantee that all the requirements are met. \\
+\newline
+The template for this document is a modified version 
+of the Volere template (\textcolor{blue}{RobertsonAndRobertson2012}).
 
 \subsection{Stakeholders}
 \subsubsection{User}
@@ -280,6 +285,24 @@ It is assumed that all system users have experience operating with iOS applicati
 ~\newpage
 
 \section{Project Constraints}
+
+\subsection{Naming Conventions and Terminology}
+\subsubsection{Abbreviations and Acronyms}
+\begin{enumerate}
+\item \textbf{UI} - User Interface
+\item \textbf{GUI} - Graphical User Interface
+\item \textbf{UI} - A high-level, modern programming language that is used both on the client-side and server-side.
+\item \textbf{AI} - Artificial Intelligence
+\item \textbf{API} - Application programming interface
+\item \textbf{REST} - Representational state transfer
+\item \textbf{OS} - Operating System
+\item \textbf{RGB} - Red, Green, Blue
+\item \textbf{AR} - Augmented Reality
+\item \textbf{IOS} - A mobile operating system developed by Apple Inc
+\item \textbf{SRS} - Software Requirement Specification
+\item \textbf{VnV} - Validation and Verification
+\end{enumerate}
+
 \subsection{Mandated Constraints}
 \subsubsection{Solution Constraints}
 \textbf{Description}: The product shall operate using iOS 14 and above. \\
@@ -309,20 +332,6 @@ The workplace could be anywhere with a visible screen and camera. When The workp
 Project must be completed before the end of the academic year. This will limit the amount, complexity and quality of the additional features upon initial release date.
 \subsubsection{Budget Constraints}
 The cost of the project must not exceed \$750. This limitation will constrain the number of requirements that can be included in the project.
-\subsection{Naming Conventions and Terminology}
-\subsubsection{Abbreviations and Acronyms}
-\begin{enumerate}
-\item \textbf{UI} - User Interface
-\item \textbf{GUI} - Graphical User Interface
-\item \textbf{UI} - A high-level, modern programming language that is used both on the client-side and server-side.
-\item \textbf{AI} - Artificial Intelligence
-\item \textbf{API} - Application programming interface
-\item \textbf{REST} - Representational state transfer
-\item \textbf{OS} - Operating System
-\item \textbf{RGB} - Red, Green, Blue
-
-\end{enumerate}
-
   
 \subsection{Relevant Facts and Assumptions}
 \begin{itemize}
@@ -361,8 +370,8 @@ The goal of our application can be found below:
  \begin{itemize}
      \item Identify user facial features
      \item Simulate 3D virtual hairstyles
-     \item Change hair colors
-     \item Make hairstyle suggestions
+     \item Change hair color
+     \item Recommend local hair salon
  \end{itemize}
 
 \subsubsection{Out of Scope}
@@ -386,9 +395,11 @@ The stretch goals are currently out of the scope of our requirements document, w
         \hline
         BE2: User pick new hair color & image/video(in), transformed image/video(out) & The system will transform desired hair color on user's image/video\\
         \hline
-        BE3: User save image & image/video(in) & The system will save the user's image/video\\
+        \sout{BE3: User save image} & \sout{image/video(in)} & \sout{The system will save the user's image/video}\\
         \hline
-        BE4: User download image & image/video(out) & The system will download the user's save image/video\\
+        \sout{BE4: User download image} & \sout{image/video(out)} & \sout{The system will download the user's save image/video}\\
+        \hline
+        BE3: User pick a hair salon & location & Nearby hair salon locations \\
         \bottomrule
     \end{tabularx}
 \end{table}
@@ -398,17 +409,17 @@ The stretch goals are currently out of the scope of our requirements document, w
 \begin{UC}
     \item Change hairstyle: The user wants to change a hairstyle
     \item Change hair color: The user wants to change a hair color
-    \item Upload images: The user wants to upload images (after transformation) to their account
-    \item Save images: The user wants to save their images (after transformation)
-    \item Log into account: The user wants to log into their account
+    \item \sout{UC3: Upload images: The user wants to upload images (after transformation) to their account}
+    \item \sout{Save images: The user wants to save their images (after transformation)}
+    \item \sout{Log into account: The user wants to log into their account}
+    \item Pick a hair salon: The user wants to pick a local hair salon
 \end{UC}
 
 \subsection{The Context of the System}
-\graphicspath{ {./system_context_diagram.jpg/} }
-\includegraphics[width=\textwidth]{system_context_diagram}
+% \graphicspath{ {./system_context_diagram.jpg/} }
 \begin{figure}[h!]
 \begin{center}
- \includegraphics[width=0.6\textwidth]{SystemContextFigure}
+ \includegraphics[width=1\textwidth]{system_context_diagram_1}
 \caption{Context of System Diagram}
 \end{center}
 \end{figure}
@@ -420,9 +431,9 @@ The stretch goals are currently out of the scope of our requirements document, w
         \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must pre-process the image by transforming the input facial image to grayscale
         \item[] Rationale: Increase the contrastness of the image to better detect the edges
         \item[] Math Specification: newImage $:=$ process($image$) $\Rightarrow$ ($\forall p :$ Pixels in image $|$ p[$Red$]*0.21 + p[$Green$]*0.72 + p[$Blue$]*0.07)
-        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must load the grayscale facial image into a pre-trained facial detection model for face shape detection
+        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must perform face shape detection on grayscale facial image
         \item[] Rationale: The pre-trained facial detection model needs a grayscale image as an input to provide a more accurate result
-        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must load the pre-processed image into a pre-trained hair detection model for hair extraction
+        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must perform hair extraction on pre-processed image.
         \item[] Rationale: The pre-trained hair detection model needs a grayscale image as an input to provide a more accurate result
         \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system compute the hair edge coordinates
         \item[] Rationale: the pre-trained models will compute a series of important coordinates related to the hair. These coordinates will be used for various transformation.
@@ -455,21 +466,21 @@ The stretch goals are currently out of the scope of our requirements document, w
         \item[] Rationale: the user reviews is a good indicator for deciding which one to go to
     \end{itemize}
     
-\subsubsection{Authentication System}
+\subsubsection{\sout{Authentication System}}
     \begin{itemize}
-        \item[AR\refstepcounter{arreqnum}\thearreqnum \label{R_Inputs}:] The user must enter valid username and password to access their profile in the system
-        \item[AR\refstepcounter{arreqnum}\thearreqnum \label{R_Inputs}:] The system must allow the user to upload their face image before and after hair transformation
-        \item[] Rationale: users might want to save the images for future references
-        \item[AR\refstepcounter{arreqnum}\thearreqnum \label{R_Inputs}:] The system shall upload images after successful log in
-        \item[AR\refstepcounter{arreqnum}\thearreqnum \label{R_Inputs}:] The system must allow the user to log out
+        \item[AR\refstepcounter{arreqnum}\thearreqnum \label{R_Inputs}:] \sout{The user must enter valid username and password to access their profile in the system}
+        \item[AR\refstepcounter{arreqnum}\thearreqnum \label{R_Inputs}:] \sout{The system must allow the user to upload their face image before and after hair transformation}
+        \item[] \sout{Rationale: users might want to save the images for future references}
+        \item[AR\refstepcounter{arreqnum}\thearreqnum \label{R_Inputs}:] \sout{The system shall upload images after successful log in}
+        \item[AR\refstepcounter{arreqnum}\thearreqnum \label{R_Inputs}:] \sout{The system must allow the user to log out}
     \end{itemize}
 
 \subsection{Finite State Machine}
-\graphicspath{ {./fsm.jpg/} }
-\includegraphics[width=\textwidth]{FSM}
+% \graphicspath{ {./fsm_1.jpg/} }
+% \includegraphics[width=\textwidth]{FSM}
 \begin{figure}[h!]
 \begin{center}
- \includegraphics[width=0.8\textwidth]{FSMFigure}
+ \includegraphics[width=1\textwidth]{fsm_1}
 \caption{Finite State Machine}
 \end{center}
 \end{figure}
