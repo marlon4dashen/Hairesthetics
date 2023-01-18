@@ -1,10 +1,12 @@
 \documentclass{article}
 \usepackage{pdflscape}
 \usepackage{booktabs}
+\usepackage{xcolor}
 \usepackage{tabularx}
 \usepackage{hyperref}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 \usepackage{changepage}
+\usepackage[normalem]{ulem}
 
 \newcounter{acrreqnum} % Access Requirement Number
 \newcommand{\rtheacrreqnum}{P\theacrreqnum}
@@ -54,7 +56,7 @@
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
 Oct 11 & All & Initial Draft\\
-Date2 & Name(s) & Description of changes\\
+Jan 13 & Marlon Liu & Change based on reviews\\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
@@ -88,18 +90,18 @@ The system referred to in this document that the hazard analysis will be conduct
         \item Authentication System       
     \end{itemize}
     \item User Device, iPhone
-    \item MongoDB database where all data will be stored
-    \item Cloud database backup programs
+    \item \sout{MongoDB database where all data will be stored}
+    \item \sout{Cloud database backup programs}
 \end{enumerate}
 
-\noindent The system boundary in this case includes the entire application, user device, the database, and the data backup program. The user device and cloud hosting, hardware, and down-time of the database are elements that are not controlled by this project. The user device is controlled by the user and portions of the database are controlled by MongoDB. However, they are still critical elements of the system and were thus included in this hazard analysis.
+\noindent The system boundary in this case includes the entire application, user device, \sout{the database, and the data backup program.} The user device and cloud hosting, hardware, \sout{and down-time of the database} are elements that are not controlled by this project. The user device is controlled by the user \sout{and portions of the database are controlled by MongoDB}. However, they are still critical elements of the system and were thus included in this hazard analysis.
 
 \section{Critical Assumptions}
 The application will be tested on Apple-provided iPhone simulators as well as developers' devices (iOS 14 and above). It is assumed that all physical devices are in good condition to be used for the project and if the application is compatible with Apple-provided iPhone simulators, then it is compatible and functions properly on actual iPhones with iOS 14 and above.\\
 \\
 \noindent The scope and specifications of the project will not change when the project takes place. However, when conducting the project, there might be cases where the scope and specifications need to be altered to cater to clients' requirements and needs of the project.\\
 \\
-\noindent The data will be automatically updated in the database, and all information in the database is synchronized.
+\noindent \sout{The data will be automatically updated in the database, and all information in the database is synchronized.}
 
 
 \section{Failure Mode and Effect Analysis}
@@ -124,18 +126,18 @@ The failure modes \& effects analysis (FMEA) was chosen as a tool to identify an
   | p{0.9cm} | }
 \hline
 	\centering{Component} & \centering{Failure Mode} & \centering{Effects of Failure} & \centering{Causes of Failure} & \centering{Recommended Action} & \centering{SR} & Ref \\ \hline
-    Facial Recognition System & The facial landmarks aren't computed properly & Inaccurate simulation results & User might not input proper image / video & Ask the user for inputs again & FR5, FR6 & H1-1 \\ \cline{2-7}
-     & System Crash & Overall application crash & Model execution failure & Display error message to prevent further actions & RAR1 & H1-2 \\ \hline
+    Facial Recognition System & The facial landmarks aren't computed properly & Inaccurate simulation results & User might not input proper image / video & Ask the user for inputs again & \sout{FR5, FR6} \textcolor{red}{IR6} & H1-1 \\ \cline{2-7}
+     & System Crash & Overall application crash & Model execution failure & Display error message to prevent further actions & \sout{RAR1} \textcolor{red}{IR7} & H1-2 \\ \hline
      
-     Hair Modification System & Failed to load hairstyle models & Virtual hair simulation won't appear on the screen  & Database failure & Backup data or reboot & HM6  & H2-1 \\  \cline{2-7}
+     Hair Modification System & Failed to load hairstyle models & Virtual hair simulation won't appear on the screen  & \sout{Database failure} \textcolor{red}{File not exist, incorrect file format, file broken}  & \sout{Backup data or reboot} \textcolor{red}{manually check the file validity and replace if it's in bad condition} & \sout{HM6} \textcolor{red}{IR7} & H2-1 \\  \cline{2-7}
      
      ~ & Algorithm failed to detect hair coordinates  & User's hair color fails to change as selected  &  
      Hair coordination data failed to be retrieved. \newline 
      Facial recognition system crash
-     & Refer to H1-1 & HM3 \newline HM4 & H2-2 \\ \hline
+     & Refer to H1-1 & \sout{HM3 \newline HM4} \textcolor{red}{IR7} & H2-2 \\ \hline
      
-     Hair Salon Recommendation System & Failed to compute recommendations, Invalid user input & User gets no recommendation and lose interests & Database failure & Inform user to try again & HR2 & H3-1 \\ \cline{2-7}
-     ~ & System freeze or crash & system crash or overall application crash & Database failure, Invalid user input & Backup data or reboot & HR1, SLR1 & H3-2 \\ \hline
+     Hair Salon Recommendation System & Failed to compute recommendations, Invalid user input & User gets no recommendation and lose interests & \sout{Database failure} \textcolor{red}{Backend API fails to retrieve information, invalid GCP token} & \sout{Inform user to try again} \textcolor{red}{Update token in config and rerun the application} & \sout{HR2} \textcolor{red}{IR1, IR2} & H3-1 \\ \cline{2-7}
+     ~ & System freeze or crash & system crash or overall application crash & \sout{Database failure}, Invalid user input & Backup data or reboot & \sout{HR1, SLR1} \textcolor{red}{IR7} & H3-2 \\ \hline
      
 
 \end{tabularx}
@@ -157,24 +159,24 @@ The failure modes \& effects analysis (FMEA) was chosen as a tool to identify an
 	\centering{Component} & \centering{Failure Mode} & \centering{Effects of Failure} & \centering{Causes of Failure} & \centering{Recommended Action} & \centering{SR} & Ref \\ \hline
      
 
-     Authentication System & User can not login to the app & User can not use the functionality of the application  & Login credentials do not match the records in the database & Inform user to try again or reset credentials & AR1 & H4-1 \\ \cline{2-7}
-     ~ & System failed to use the default camera with the device  & The application can not be used since there's no input source & 
-    User denied the access of the camera.  \newline
-    The device has no proper camera system.
+     \sout{Authentication System} & \sout{User can not login to the app} & \sout{User can not use the functionality of the application}  & \sout{Login credentials do not match the records in the database} & \sout{Inform user to try again or reset credentials} & \sout{AR1} & \sout{H4-1} \\ \cline{2-7}
+     ~ & \sout{System failed to use the default camera with the device}  & \sout{The application can not be used since there's no input source} & 
+    \sout{User denied the access of the camera.}  \newline
+    \sout{The device has no proper camera system.}
      & 
-     Prompt the user to allow camera access. \newline
-     Try another device with a valid camera.
-     & AR2 \newline AR3 & H4-2 \\ \hline     
+     \sout{Prompt the user to allow camera access.} \newline
+     \sout{Try another device with a valid camera.}
+     & \sout{AR2} \newline \sout{AR3} & \sout{H4-2} \\ \hline   
 
     General & App crashes unexpectedly & User loses the current progress  &
     The device runs out of battery. \newline 
     The application crashes due to instability.  &
     Charge the device. \newline 
     Reboot and restart the app. & 
-    RAR1 \newline
-    RAR2
+    \sout{RAR1 \newline
+    RAR2} \textcolor{red}{IR7}
     &  H5-1 \\  \cline{2-7}
-    ~ & Failed to save the images locally & The user won't have the simulation result & User denied the system access to the local storage. & Prompt the user to allow access to local storage & AR2 & H5-2 \\   
+    ~ & Failed to save the images locally & The user won't have the simulation result & User denied the system access to the local storage. \textcolor{red}{The local storage is full.} & Prompt the user to allow access to local storage, \textcolor{red}{Prompt users to clear up local storage before retrying} & \sout{AR2} \textcolor{red}{IR1, IR2, IR7} & H5-2 \\   
     \hline
 
 \end{tabularx}
@@ -191,7 +193,7 @@ Requirements that have been included in Revision 0 of the Software Requirements 
 \begin{itemize}
     \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:] \textbf{Users will be able to access images they previously stored.}
     \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:]
-    \textbf{Admins and supervisors will be able to unlock locked resources.}
+    \textbf{Admins will be able to unlock locked resources.}
     \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:]
     \textbf{Only admins will be able to modify application information.}
     \item[ACR\refstepcounter{acrreqnum}\theacrreqnum\label{R_Inputs}:] 
@@ -202,10 +204,19 @@ Requirements that have been included in Revision 0 of the Software Requirements 
 \subsubsection{Integrity Requirements}
 \begin{itemize}
     \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] \textbf{The product will not modify data unnecessary.}
+    \textcolor{red}{The product will not touch or modify data/objects in the local storage.}
     \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] \textbf{The product will not modify any data unrelated to its execution.}
-    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] \textbf{Data will be automatically backed up daily.}
-    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] \textbf{Unsaved data will be stored locally on the user's device if it cannot be uploaded to the remote database and is not explicitly discarded.}
+    \textcolor{red}{The product will only access local storage for saving images, will not modify other data.}
+    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] \sout{\textbf{Data will be automatically backed up daily.}}
+    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] \sout{\textbf{Unsaved data will be stored locally on the user's device if it cannot be uploaded to the remote database and is not explicitly discarded.}}
+    \textcolor{red}{The data will only be saved in local storage upon users' requests.}
     \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] All locked resources will be unlocked once the user sends the request to admins and admins approves the request.
+    \textcolor{red}{
+    \item[IR\refstepcounter{irreqnum}\theirreqnum
+    \label{R_Inputs}:] The data input is accurate, complete, and consistent.
+    \item[IR\refstepcounter{irreqnum}\theirreqnum
+    \label{R_Inputs}:] The application will execute fully functionally}
+    
 \end{itemize}
 
 \subsubsection{Privacy Requirements}

@@ -655,13 +655,26 @@ N/A
 \subsubsection{Integrity Requirements}
 \begin{itemize}
     \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] The product will not modify data unnecessary.
+    \textcolor{red}{The product will not touch or modify data/objects in the local storage.}
     \item[] Fit Criteria: Developers will run tests in a sandbox to verify that data is only modified when necessary.
     \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] The product will not modify any data unrelated to its execution.
+     \textcolor{red}{The product will only access local storage for saving images, will not modify other data.}
     \item[] Fit Criteria: Developers will run tests in a sandbox to verify that data is only modified when it is related to its execution.
-    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] Data will be automatically backed up daily.
-     \item[] Fit Criteria: Developers will verify that the cloud database is backed up daily.
-    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] Unsaved data will be stored locally on the user's device if it cannot be uploaded to the remote database and is not explicitly discarded.
+    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:]\sout{ Data will be automatically backed up daily. 
+     \item[] Fit Criteria: Developers will verify that the cloud database is backed up daily.}
+    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] \sout{Unsaved data will be stored locally on the user's device if it cannot be uploaded to the remote database and is not explicitly discarded.}
+    \textcolor{red}{The data will only be saved in local storage upon users' requests.}
     \item[] Fit Criteria: Developers will run tests in user role to ensure that unsaved data is stored locally on the user's device if it cannot be uploaded to the remote database and is not explicitly discarded.
+    \item[IR\refstepcounter{irreqnum}\theirreqnum
+    \label{R_Inputs}:] \textcolor{red}{All locked resources will be unlocked once the user sends the request to admins and admins approves the request.
+    \item[] Fit Criteria: This could be measured through tracking the number of requests made by users and the number of approvals given by admins, as well as monitoring the status of the resources before and after approval to ensure they have been successfully unlocked.}
+    \textcolor{red}{
+    \item[IR\refstepcounter{irreqnum}\theirreqnum
+    \label{R_Inputs}:] The data input is accurate, complete, and consistent.
+    \item[] Fit Criteria: Calculate the percentage of errors or inconsistencies in the data input. A low error rate would indicate a high level of accuracy and consistency.
+    \item[IR\refstepcounter{irreqnum}\theirreqnum
+    \label{R_Inputs}:] The application will execute fully functionally.
+    \item[] Fit Criteria: Test the application's performance under different loads and conditions to ensure that it can handle the expected usage.}
 \end{itemize}
 
 \subsubsection{Privacy Requirements}
@@ -717,13 +730,13 @@ N/A
 \noindent \begin{itemize}
 
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
-This project will only result in the development of a mobile iOS app. However, an android application may also be developed to work with, or in place of, the iOS application in the future.
+This project will only result in the development of a \sout{mobile iOS} \textcolor{red}{MacOS} app. However, an android application may also be developed to work with, or in place of, the \sout{mobile iOS} \textcolor{red}{MacOS} application in the future.
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
 The application may be extended to offer compatibility as a web application.
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
 The application will not initially pursue functionality for users to "cut" their 3D simulated hair.
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
-The application may require more data for the facial recognition feature.
+\sout{The application may require more data for the facial recognition feature.}
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
 The load capacity of the system is initially set low for the first edition of this application. As demand for the application increases, the load capacity must also increase to support a larger user base.
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
