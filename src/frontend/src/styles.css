@@ -2,6 +2,31 @@ body {
   background: #000;
   color: #fff;
 }
+
+.output_canvas {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 9;
+  width: 640;
+  height: 480;
+}
+
+.input_video {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: -1;
+  width: 640;
+  height: 480;
+}
+
 /* column wise on mobile */
 .video-container {
   display: flex;
@@ -42,7 +67,7 @@ body {
 }
 
 /* side by side on desktop  */
-@media screen and (min-width: 900px) {
+/* @media screen and (min-width: 900px) {
   .video-container {
     flex-direction: row;
   }
@@ -56,4 +81,4 @@ body {
 .output_canvas {
   width: 100%;
   height: auto;
-}
+} */

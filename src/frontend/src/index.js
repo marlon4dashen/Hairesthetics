@@ -11,13 +11,9 @@ const template = `
     Loading ...
   </span>
   <div>
-    <h2>Original Video</h2>
-    <video class="input_video" controls playsinline>
+    <video class="input_video" controls>
       <source  src="${PUBLIC_PATH}/video/videoplayback2.mp4">
     </video>
-  </div>
-  <div>
-    <h2>Processed Video</h2>
     <canvas class="output_canvas"></canvas>
   </div>
 </div>
