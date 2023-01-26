@@ -1,0 +1,23 @@
+.inputVideo {
+    position: "absolute";
+    margin-left: "auto";
+    margin-right: "auto";
+    left: 0;
+    right: 0;
+    text-align: "center";
+    z-index: 0;
+    width: 640;
+    height: 480;
+}
+
+.output_canvas {
+    position: "absolute";
+    margin-left: "auto";
+    margin-right: "auto";
+    left: 0;
+    right: 0;
+    text-align: "center";
+    z-index: 9;
+    width: 640;
+    height: 480;
+}
