@@ -3,6 +3,7 @@ import React, { useRef, useEffect } from "react";
 import * as Facemesh from "@mediapipe/face_mesh";
 import * as cam from "@mediapipe/camera_utils";
 import Webcam from "react-webcam";
+import '../css/HairStyleView.css';
 function FaceView() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
@@ -71,32 +72,34 @@ function FaceView() {
       <div className="App">
         <Webcam
           ref={webcamRef}
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 9,
-            width: 640,
-            height: 480,
-          }}
+          className="inputVideo"
+          hidden
+          // style={{
+          //   position: "absolute",
+          //   marginLeft: "auto",
+          //   marginRight: "auto",
+          //   left: 0,
+          //   right: 0,
+          //   textAlign: "center",
+          //   zindex: 9,
+          //   width: 640,
+          //   height: 480,
+          // }}
         />{" "}
         <canvas
           ref={canvasRef}
           className="output_canvas"
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 9,
-            width: 640,
-            height: 480,
-          }}
+          // style={{
+          //   position: "absolute",
+          //   marginLeft: "auto",
+          //   marginRight: "auto",
+          //   left: 0,
+          //   right: 0,
+          //   textAlign: "center",
+          //   zindex: 9,
+          //   width: 640,
+          //   height: 480,
+          // }}
         ></canvas>
       </div>
     </center>
