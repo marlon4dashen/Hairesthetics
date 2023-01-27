@@ -34,6 +34,12 @@
 
              border: 1px solid black;
          }
+         #photo1 {
+             width: 640px;
+             height: 480px;
+
+             border: 1px solid black;
+         }
         </style>
     </head>
     <body>
@@ -43,6 +49,7 @@
                 <canvas id="canvasElement"></canvas>
 
                 <img id="photo">
+                <img id="photo1" src="{{ url_for('video_feed') }}">
             </div>
         </div>
 
