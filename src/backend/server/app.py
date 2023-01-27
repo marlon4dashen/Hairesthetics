@@ -10,13 +10,21 @@ import numpy as np
 import base64
 import io
 from imageio import imread
-# import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 app.logger.addHandler(logging.StreamHandler(stdout))
 app.config['SECRET_KEY'] = 'secret!'
 app.config['DEBUG'] = True
-socketio = SocketIO(app)
+
+# if os.environ.get("FLASK_ENV") == "production":
+#     origins = [
+#         "http://actual-app-url.herokuapp.com",
+#         "https://actual-app-url.herokuapp.com"
+#     ]
+# else:
+#     origins = "*"
+    
+socketio = SocketIO(app, cors_allowed_origins="*")
 camera = Camera(Makeup_artist())
 
 
