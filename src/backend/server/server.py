@@ -10,6 +10,7 @@ import cv2
 import numpy as np
 import base64
 import io
+
 import imageio.v2 as imageio
 import logging
 # import matplotlib.pyplot as plt
@@ -22,6 +23,17 @@ app.config['DEBUG'] = True
 socketio = SocketIO(app)
 camera = Camera(Hair_Artist())
 
+# if os.environ.get("FLASK_ENV") == "production":
+#     origins = [
+#         "http://actual-app-url.herokuapp.com",
+#         "https://actual-app-url.herokuapp.com"
+#     ]
+# else:
+#     origins = "*"
+    
+socketio = SocketIO(app, cors_allowed_origins="*")
+camera = Camera(Makeup_artist())
+
 
 @socketio.on('input image', namespace='/test')
 def test_message(input):
@@ -32,6 +44,7 @@ def test_message(input):
 
     img = imageio.imread(io.BytesIO(base64.b64decode(image_data)))
     cv2_img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+
     retval, buffer = cv2.imencode('.jpg', cv2_img)
     b = base64.b64encode(buffer)
     b = b.decode()

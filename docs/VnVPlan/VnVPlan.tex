@@ -4,6 +4,7 @@
 \usepackage{tabularx}
 \usepackage{hyperref}
 \usepackage{pdflscape}
+\usepackage[normalem]{ulem}
 \hypersetup{
     colorlinks,
     citecolor=blue,
@@ -185,7 +186,7 @@ place themselves in the mind of their target user and stay on track with what th
 \begin{enumerate}
 
 \item{FRS-T1\\}
-Type: Functional, Dynamic, Automated
+Type: Functional, Dynamic, Manual
 					
 Initial State: Home page
 					
@@ -328,65 +329,70 @@ Output: The app will open user's default browser and redirect to the clicked lin
 					
 How test will be performed: Click on the link and see if a browser is being opened redirected to the selected hair salon website
 \end{enumerate}
-\subsubsection{Authentication System}
+
+\subsubsection{\sout{Authentication System} (Removed from SRS)}
 \begin{enumerate}
-\item{AS-T1}\\
-Type: Functional, Dynamic, Manual
+\item{\sout{AS-T1}}\\
+\sout{
+Type: Functional, Dynamic, Manual\\
 					
-Initial State: Home screen
+Initial State: Home screen\\
 					
-Input: Correct email and password and click register
+Input: Correct email and password and click register\\
 					
-Output: Successful registration
+Output: Successful registration\\
 					
 How test will be performed: Create a test user using proper email format (xxx$@$xxx) and password. Click register and check if successful registration
-
-\item{AS-T2}\\
-Type: Functional, Dynamic, Manual
+}
+\item{\sout{AS-T2}}\\
+\sout{
+Type: Functional, Dynamic, Manual\\
 					
-Initial State: Home screen
+Initial State: Home screen\\
 					
-Input: Incorrect email and password and click register
+Input: Incorrect email and password and click register\\
 					
-Output: Failed registration with incorrect email format message
+Output: Failed registration with incorrect email format message\\
 					
 How test will be performed: Create a test user using improper email format (without $@$ sign) and password. Click register and check if the registration failed.
-
-\item{AS-T3}\\
-Type: Functional, Dynamic, Manual
+}
+\item{\sout{AS-T3}}\\
+\sout{
+Type: Functional, Dynamic, Manual\\
 					
-Initial State: Home screen
+Initial State: Home screen\\
 					
-Input: Email and password
+Input: Email and password\\
 					
-Output: Successful login
+Output: Successful login\\
 					
-How test will be performed: Create a test user. Enter correct credentials and check if the internal state of the system is logged in.
+How test will be performed: Create a test user. Enter correct credentials and check if the internal state of the system is logged in.\\
+}
+\item{\sout{AS-T4}}\\
+\sout{
+Type: Functional, Dynamic, Manual\\
 					
-\item{AS-T4}\\
-Type: Functional, Dynamic, Manual
+Initial State: Home screen\\
 					
-Initial State: Home screen
+Input: Incorrect email and password\\
 					
-Input: Incorrect email and password
+Output: Failed login\\
 					
-Output: Failed login
+How test will be performed: Create a test user. Enter incorrect credentials and check if the internal state of the system is not logged in.\\
+}
+\item{\sout{AS-T5}}\\
+\sout{
+Type: Functional, Dynamic, Manual\\
 					
-How test will be performed: Create a test user. Enter incorrect credentials and check if the internal state of the system is not logged in.
-
-\item{AS-T5}\\
-Type: Functional, Dynamic, Manual
+Initial State: User personal page (logged in)\\
 					
-Initial State: User personal page (logged in)
+Input: Open gallery\\
 					
-Input: Open gallery
+Output: Display user's saved images\\
 					
-Output: Display user's saved images
-					
-How test will be performed: Create a test user with sample images. Then login as the test user and see if the sample images show up in the gallery.
+How test will be performed: Create a test user with sample images. Then login as the test user and see if the sample images show up in the gallery.\\
+}
 \end{enumerate}
-
-...
 
 \subsection{Tests for Nonfunctional Requirements}
 
