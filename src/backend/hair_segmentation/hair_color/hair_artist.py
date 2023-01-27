@@ -1,5 +1,5 @@
 from PIL import Image
-import hair_color
+from . import hair_color
 from model import model_utils
 
 class Hair_Artist(object):

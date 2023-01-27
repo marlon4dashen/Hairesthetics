@@ -1,7 +1,7 @@
 import threading
 import binascii
 from time import sleep
-from utils import base64_to_pil_image, pil_image_to_base64
+from utils.utils import base64_to_pil_image, pil_image_to_base64
 
 
 class Camera(object):
@@ -26,7 +26,7 @@ class Camera(object):
 
         ################## where the hard work is done ############
         # output_img is an PIL image
-        output_img = self.makeup_artist.apply_makeup(input_img)
+        output_img = self.makeup_artist.apply_hair_color(input_img, "brown")
 
         # output_str is a base64 string in ascii
         output_str = pil_image_to_base64(output_img)
