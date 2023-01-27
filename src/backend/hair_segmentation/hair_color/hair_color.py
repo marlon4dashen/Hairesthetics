@@ -77,8 +77,8 @@ def initialize_mediapipe():
 
 def initialize_hair_segmentation_model(hair_segmentation_model):
 
-    model = model_utils.Model()
-    return model.session, model.input_name, self.input_width, self.input_height, self.output_name
+    model = model_utils.Model(hair_segmentation_model)
+    return model
 
 
 
@@ -118,9 +118,6 @@ def perform_hair_segmentation(session, input_name, input_width, input_height, ou
 
     masked_img = cv2.bitwise_or(img, img, mask=hair_mask)
 
-    print(hair_mask.shape)
-    print(hair_mask)
-
     # debug
     # cv2.imshow("masked_img", hair_mask)
     # cv2.waitKey(0)
@@ -153,69 +150,59 @@ def change_color(img, mask, target_color):
     return output
 
 
-def change_hair_color(target_color):
+def change_hair_color(img, target_color, session, input_name, input_width, input_height, output_names, mpFaceDetection):
     """
     Change Hair Color
     """
-    # Initialize mediapipe face detection sub-module
-    mpFaceDetection = initialize_mediapipe()
-    session, input_name, input_width, input_height, output_names = initialize_hair_segmentation_model(
-        HAIR_SEGMENTATION_MODEL)
+    # Preserve a copy of the original
+    frame = img.copy()
 
-    # Read Input Image
-    cap = cv2.VideoCapture(0)
-    while True:
-        success, img = cap.read()
-        # img = cv2.imread(input_path)
+    # convert from bgr to rgb
+    rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-        # Preserve a copy of the original
-        frame = img.copy()
+    # Detect faces using the rgb frame
+    faces = mpFaceDetection.process(rgb_frame)
 
-        # convert from bgr to rgb
-        rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    output = []
+    output_info = []
 
-        # Detect faces using the rgb frame
-        faces = mpFaceDetection.process(rgb_frame)
+    # Loop over the faces detected
+    if faces.detections:
+        # append output
+        output_msg = {'msg': "{} face(s) detected.".format(
+            len(faces.detections)), 'category': "info"}
+        output_info.append(output_msg)
+        # for idx, face_detected in enumerate(faces.detections):
+            # Output message
+            # label = f"Face ID = {(idx+1)} - Detection Score {int(face_detected.score[0]*100)}%"
+            # output_msg = {'msg': label, 'category': "info"}
+            # output_info.append(output_msg)
+            # print(output_msg.get('category'), output_msg.get('msg'))
 
-        output = []
-        output_info = []
+            # Get the face relative bounding box
+            # relativeBoundingBox = face_detected.location_data.relative_bounding_box
+            # frameHeight, frameWidth, frameChannels = frame.shape
+            # faceBoundingBox = int(relativeBoundingBox.xmin*frameWidth), int(relativeBoundingBox.ymin*frameHeight), int(
+            #     relativeBoundingBox.width*frameWidth), int(relativeBoundingBox.height*frameHeight)
+            # # Get the coordinates of the face bounding box
+            # x, y, w, h = faceBoundingBox
+            # # Enlarge the bounding box
+            # x1, y1, w1, h1 = enlarge_bounding_box(x, y, w, h)
+            # # Crop out the enlarged region
+            # roi_face_color = frame[y1:y1 + h1, x1:x1 + w1]
 
-        # Loop over the faces detected
-        if faces.detections:
-            # append output
-            output_msg = {'msg': "{} face(s) detected.".format(
-                len(faces.detections)), 'category': "info"}
-            output_info.append(output_msg)
-            for idx, face_detected in enumerate(faces.detections):
-                # Output message
-                label = f"Face ID = {(idx+1)} - Detection Score {int(face_detected.score[0]*100)}%"
-                output_msg = {'msg': label, 'category': "info"}
-                output_info.append(output_msg)
-                print(output_msg.get('category'), output_msg.get('msg'))
+        masked_img = perform_hair_segmentation(
+            session, input_name, input_width, input_height, output_names, frame)
+        # Change the color of the segmented hair area
+        processed_frame = change_color(
+            img=frame, mask=masked_img, target_color=COLORS[target_color])
 
-                # Get the face relative bounding box
-                # relativeBoundingBox = face_detected.location_data.relative_bounding_box
-                # frameHeight, frameWidth, frameChannels = frame.shape
-                # faceBoundingBox = int(relativeBoundingBox.xmin*frameWidth), int(relativeBoundingBox.ymin*frameHeight), int(
-                #     relativeBoundingBox.width*frameWidth), int(relativeBoundingBox.height*frameHeight)
-                # # Get the coordinates of the face bounding box
-                # x, y, w, h = faceBoundingBox
-                # # Enlarge the bounding box
-                # x1, y1, w1, h1 = enlarge_bounding_box(x, y, w, h)
-                # # Crop out the enlarged region
-                # roi_face_color = frame[y1:y1 + h1, x1:x1 + w1]
+        label = "Changing hair color to {}".format(target_color)
+        # print(label)
 
-                masked_img = perform_hair_segmentation(
-                    session, input_name, input_width, input_height, output_names, frame)
-                # Change the color of the segmented hair area
-                processed_frame = change_color(
-                    img=frame, mask=masked_img, target_color=COLORS[target_color])
-
-                label = "Changing hair color to {}".format(target_color)
-                print(label)
-                cv2.imshow("Hair segmentation", processed_frame)
-                if cv2.waitKey(1) & 0xFF == 27:
-                    exit(0)
+        return processed_frame
+    else:
+        return img
     ######################
     # write output
     # output_filepath = os.path.join('./outputs',
@@ -237,41 +224,41 @@ def change_hair_color(target_color):
     # return output_info , output
 
 
-def is_valid_path(path):
-    """
-    Validates the path inputted and makes sure that is a file of type image
-    """
-    if not path:
-        raise ValueError(f"Invalid Path")
-    if os.path.isfile(path) and 'image' in filetype.guess(path).mime:
-        return path
-    else:
-        raise ValueError(f"Invalid Path {path}")
+# def is_valid_path(path):
+#     """
+#     Validates the path inputted and makes sure that is a file of type image
+#     """
+#     if not path:
+#         raise ValueError(f"Invalid Path")
+#     if os.path.isfile(path) and 'image' in filetype.guess(path).mime:
+#         return path
+#     else:
+#         raise ValueError(f"Invalid Path {path}")
 
 
-def parse_args():
-    """
-    Get user command line parameters
-    """
-    parser = argparse.ArgumentParser(description="Available Options")
+# def parse_args():
+#     """
+#     Get user command line parameters
+#     """
+#     parser = argparse.ArgumentParser(description="Available Options")
 
-    parser.add_argument('-c', '--hair_color', dest='hair_color', default=False,
-                        required=True, help="Enter the color of hair you want to change")
+#     parser.add_argument('-c', '--hair_color', dest='hair_color', default=False,
+#                         required=True, help="Enter the color of hair you want to change")
 
-    args = vars(parser.parse_args())
+#     args = vars(parser.parse_args())
 
-    # To Display The Command Line Arguments
-    print("## Command Arguments #################################################")
-    print("\n".join("{}:{}".format(i, j) for i, j in args.items()))
-    print("######################################################################")
+#     # To Display The Command Line Arguments
+#     print("## Command Arguments #################################################")
+#     print("\n".join("{}:{}".format(i, j) for i, j in args.items()))
+#     print("######################################################################")
 
-    return args
+#     return args
 
 
-if __name__ == '__main__':
-    # Parsing command line arguments entered by user
+# if __name__ == '__main__':
+#     # Parsing command line arguments entered by user
 
-    args = parse_args()
-    change_hair_color(
-        target_color=args['hair_color'])
-    change_hair_color()
+#     args = parse_args()
+#     change_hair_color(
+#         target_color=args['hair_color'])
+#     change_hair_color()

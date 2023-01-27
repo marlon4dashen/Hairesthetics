@@ -11,9 +11,11 @@ import numpy as np
 import base64
 import io
 import imageio.v2 as imageio
+import logging
 # import matplotlib.pyplot as plt
 
 app = Flask(__name__)
+logger = logging.getLogger()
 app.logger.addHandler(logging.StreamHandler(stdout))
 app.config['SECRET_KEY'] = 'secret!'
 app.config['DEBUG'] = True

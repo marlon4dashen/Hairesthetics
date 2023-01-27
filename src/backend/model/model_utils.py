@@ -1,5 +1,6 @@
 import onnxruntime
 import logging
+import os
 
 
 logger = logging.getLogger(__name__)
@@ -14,6 +15,7 @@ class Model:
         # Initialize Model and start inference session
         # Inference session is used to load and run an ONNX model as well to specify
         # environment and configuration options.
+        print(os.getcwd())
         self.session = onnxruntime.InferenceSession(self.model_location)
 
         # The ONNX session consumes and produces data
