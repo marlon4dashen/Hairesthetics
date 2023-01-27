@@ -2,9 +2,9 @@ import React from 'react'
 import './App.css';
 import HomeView from "./pages/HomeView"
 import HairStyleView from "./pages/HairStyleView"
-import HairColorView from "./pages/FaceView"
+import HairColorView from "./pages/HairColorView"
 import FaceView from "./pages/FaceView"
-import { BrowserRouter, HashRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
