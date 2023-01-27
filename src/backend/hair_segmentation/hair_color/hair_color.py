@@ -6,6 +6,7 @@ import mediapipe
 import cv2
 import filetype
 import numpy as np
+from model import model_utils
 # import config
 # import webcolors
 import onnxruntime
@@ -75,32 +76,10 @@ def initialize_mediapipe():
 
 
 def initialize_hair_segmentation_model(hair_segmentation_model):
-    # Initialize Model and start inference session
-    # Inference session is used to load and run an ONNX model as well to specify
-    # environment and configuration options.
-    session = onnxruntime.InferenceSession(hair_segmentation_model)
 
-    # The ONNX session consumes and produces data
-    # Query the model metadata
-    # Get the definition of the inputs metadata
-    input_name, input_type, input_shape = session.get_inputs()[0].name, \
-        session.get_inputs()[0].type, \
-        session.get_inputs()[0].shape
-    input_height, input_width = input_shape[2], input_shape[3]
+    model = model_utils.Model()
+    return model.session, model.input_name, self.input_width, self.input_height, self.output_name
 
-    print(f'Input Details: Name={input_name} -- Type={input_type} '
-          f'-- Shape={input_shape} -- Height={input_height} -- Width={input_width}')
-
-    # Get the definition of the outputs metadata
-    output_name, output_type, output_shape = session.get_outputs()[0].name, \
-        session.get_outputs()[0].type, \
-        session.get_outputs()[0].shape
-
-    output_height, output_width = output_shape[2], output_shape[3]
-    print(f'Output Details: Name={output_name} -- Type={input_type} '
-          f'--Shape={output_shape} -- Height={output_height} -- Width={output_width}')
-
-    return session, input_name, input_width, input_height, output_name
 
 
 def perform_hair_segmentation(session, input_name, input_width, input_height, output_name, img):
