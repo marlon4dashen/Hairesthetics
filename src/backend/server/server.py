@@ -8,9 +8,9 @@ from flask_socketio import SocketIO, emit
 from .camera import Camera
 import cv2
 import numpy as np
+from time import sleep
 import base64
 import io
-
 import imageio.v2 as imageio
 import logging
 # import matplotlib.pyplot as plt
@@ -21,7 +21,7 @@ app.logger.addHandler(logging.StreamHandler(stdout))
 app.config['SECRET_KEY'] = 'secret!'
 app.config['DEBUG'] = True
 socketio = SocketIO(app)
-camera = Camera(Hair_Artist())
+camera = None
 
 # if os.environ.get("FLASK_ENV") == "production":
 #     origins = [
@@ -39,8 +39,8 @@ camera = Camera(Makeup_artist())
 def test_message(input):
     input = input.split(",")[1]
     camera.enqueue_input(input)
-    image_data = input # Do your magical Image processing here!!
-    #image_data = image_data.decode("utf-8")
+    # image_data = input # Do your magical Image processing here!!
+    # #image_data = image_data.decode("utf-8")
 
     img = imageio.imread(io.BytesIO(base64.b64decode(image_data)))
     cv2_img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
@@ -50,15 +50,21 @@ def test_message(input):
     b = b.decode()
     image_data = "data:image/jpeg;base64," + b
 
-    # print("OUTPUT " + image_data)
-    emit('out-image-event', {'image_data': image_data}, namespace='/test')
-    #camera.enqueue_input(base64_to_pil_image(input))
+    # # print("OUTPUT " + image_data)
+    # emit('out-image-event', {'image_data': image_data}, namespace='/test')
+    # camera.enqueue_input(base64_to_pil_image(input))
 
 
 @socketio.on('connect', namespace='/test')
 def test_connect():
-    app.logger.info("client connected")
+    print("client connected")
+    global camera
+    camera = init_camera()
 
+
+def init_camera():
+    hair_artist = Hair_Artist()
+    return Camera(hair_artist)
 
 @app.route('/')
 def index():
@@ -72,8 +78,6 @@ def gen():
     app.logger.info("starting to generate frames!")
     while True:
         frame = camera.get_frame() #pil_image_to_base64(camera.get_frame())
-
-        print(type(frame))
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
@@ -81,6 +85,8 @@ def gen():
 @app.route('/video_feed')
 def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
+    while not camera:
+        sleep(0.05)
     return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
