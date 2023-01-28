@@ -20,7 +20,7 @@ logger = logging.getLogger()
 app.logger.addHandler(logging.StreamHandler(stdout))
 app.config['SECRET_KEY'] = 'secret!'
 app.config['DEBUG'] = True
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
 camera = None
 
 # if os.environ.get("FLASK_ENV") == "production":
@@ -30,9 +30,6 @@ camera = None
 #     ]
 # else:
 #     origins = "*"
-    
-socketio = SocketIO(app, cors_allowed_origins="*")
-camera = Camera(Makeup_artist())
 
 
 @socketio.on('input image', namespace='/test')
