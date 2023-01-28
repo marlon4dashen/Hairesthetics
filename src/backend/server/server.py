@@ -80,7 +80,7 @@ def gen():
     app.logger.info("starting to generate frames!")
     while True:
         read_return_code, frame = vc.read()
-        output = hair_artist.apply_hair_color(frame, "darkred")
+        output = hair_artist.apply_hair_color(frame, "pink")
         output = cv2.cvtColor(output, cv2.COLOR_BGR2RGB)
         output_str = binascii.a2b_base64(cv2_image_to_base64(output))
         # frame = camera.get_frame() #pil_image_to_base64(camera.get_frame())
