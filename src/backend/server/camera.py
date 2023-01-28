@@ -1,6 +1,6 @@
 import threading
 import binascii
-from time import sleep
+from time import sleep, time
 from utils.utils import base64_to_cv2_image, cv2_image_to_base64
 
 
@@ -18,6 +18,7 @@ class Camera(object):
         if not self.to_process:
             return
 
+        time_start = time()
         # input is an ascii string.
         input_str = self.to_process.pop(0)
 
@@ -26,13 +27,15 @@ class Camera(object):
 
         ################## where the hard work is done ############
         # output_img is an PIL image
-        output_img = self.makeup_artist.apply_hair_color(input_img, "brown")
+        output_img = self.makeup_artist.apply_makeup(input_img)
+        # output_img = self.makeup_artist.apply_hair_color(input_img, "pink")
 
         # output_str is a base64 string in ascii
         output_str = cv2_image_to_base64(output_img)
 
         # convert eh base64 string in ascii to base64 string in _bytes_
         self.to_output.append(binascii.a2b_base64(output_str))
+        print("Lapsed time: {}".format(time() - time_start))
 
     def keep_processing(self):
         while True:
