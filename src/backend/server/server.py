@@ -13,6 +13,8 @@ import base64
 import io
 import imageio.v2 as imageio
 import logging
+from utils.utils import *
+import binascii
 # import matplotlib.pyplot as plt
 
 app = Flask(__name__)
@@ -22,6 +24,8 @@ app.config['SECRET_KEY'] = 'secret!'
 app.config['DEBUG'] = True
 socketio = SocketIO(app, cors_allowed_origins="*")
 camera = None
+hair_artist = None
+vc = cv2.VideoCapture(0)
 
 # if os.environ.get("FLASK_ENV") == "production":
 #     origins = [
@@ -32,20 +36,20 @@ camera = None
 #     origins = "*"
 
 
-@socketio.on('input image', namespace='/test')
-def test_message(input):
-    input = input.split(",")[1]
-    camera.enqueue_input(input)
+# @socketio.on('input image', namespace='/test')
+# def test_message(input):
+#     input = input.split(",")[1]
+#     camera.enqueue_input(input)
     # image_data = input # Do your magical Image processing here!!
     # #image_data = image_data.decode("utf-8")
 
-    img = imageio.imread(io.BytesIO(base64.b64decode(image_data)))
-    cv2_img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    # img = imageio.imread(io.BytesIO(base64.b64decode(image_data)))
+    # cv2_img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
-    retval, buffer = cv2.imencode('.jpg', cv2_img)
-    b = base64.b64encode(buffer)
-    b = b.decode()
-    image_data = "data:image/jpeg;base64," + b
+    # retval, buffer = cv2.imencode('.jpg', cv2_img)
+    # b = base64.b64encode(buffer)
+    # b = b.decode()
+    # image_data = "data:image/jpeg;base64," + b
 
     # # print("OUTPUT " + image_data)
     # emit('out-image-event', {'image_data': image_data}, namespace='/test')
@@ -60,6 +64,7 @@ def test_connect():
 
 
 def init_camera():
+    global hair_artist
     hair_artist = Hair_Artist()
     return Camera(hair_artist)
 
@@ -74,15 +79,19 @@ def gen():
 
     app.logger.info("starting to generate frames!")
     while True:
-        frame = camera.get_frame() #pil_image_to_base64(camera.get_frame())
+        read_return_code, frame = vc.read()
+        output = hair_artist.apply_hair_color(frame, "darkred")
+        output = cv2.cvtColor(output, cv2.COLOR_BGR2RGB)
+        output_str = binascii.a2b_base64(cv2_image_to_base64(output))
+        # frame = camera.get_frame() #pil_image_to_base64(camera.get_frame())
         yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+               b'Content-Type: image/jpeg\r\n\r\n' + output_str + b'\r\n')
 
 
 @app.route('/video_feed')
 def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
-    while not camera:
+    while not hair_artist:
         sleep(0.05)
     return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
 

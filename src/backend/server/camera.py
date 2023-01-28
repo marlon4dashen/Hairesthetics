@@ -1,5 +1,6 @@
 import threading
 import binascii
+import sys
 from time import sleep, time
 from utils.utils import base64_to_cv2_image, cv2_image_to_base64
 
@@ -32,6 +33,7 @@ class Camera(object):
 
         # output_str is a base64 string in ascii
         output_str = cv2_image_to_base64(output_img)
+
 
         # convert eh base64 string in ascii to base64 string in _bytes_
         self.to_output.append(binascii.a2b_base64(output_str))

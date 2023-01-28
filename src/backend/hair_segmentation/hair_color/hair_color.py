@@ -172,7 +172,7 @@ def change_hair_color(img, target_color, session, input_name, input_width, input
         output_msg = {'msg': "{} face(s) detected.".format(
             len(faces.detections)), 'category': "info"}
         output_info.append(output_msg)
-        # for idx, face_detected in enumerate(faces.detections):
+        for idx, face_detected in enumerate(faces.detections):
             # Output message
             # label = f"Face ID = {(idx+1)} - Detection Score {int(face_detected.score[0]*100)}%"
             # output_msg = {'msg': label, 'category': "info"}
@@ -191,16 +191,16 @@ def change_hair_color(img, target_color, session, input_name, input_width, input
             # # Crop out the enlarged region
             # roi_face_color = frame[y1:y1 + h1, x1:x1 + w1]
 
-        masked_img = perform_hair_segmentation(
-            session, input_name, input_width, input_height, output_names, frame)
-        # Change the color of the segmented hair area
-        processed_frame = change_color(
-            img=frame, mask=masked_img, target_color=COLORS[target_color])
+            masked_img = perform_hair_segmentation(
+                session, input_name, input_width, input_height, output_names, frame)
+            # Change the color of the segmented hair area
+            processed_frame = change_color(
+                img=frame, mask=masked_img, target_color=COLORS[target_color])
 
-        label = "Changing hair color to {}".format(target_color)
-        # print(label)
+            label = "Changing hair color to {}".format(target_color)
+            # print(label)
 
-        return processed_frame
+            return processed_frame
     else:
         return img
     ######################
