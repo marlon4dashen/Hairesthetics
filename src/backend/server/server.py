@@ -4,14 +4,8 @@ from sys import stdout
 from hair_segmentation.hair_color.hair_artist import Hair_Artist
 import logging
 from flask import Flask, render_template, Response
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO
 from .camera import Camera
-import cv2
-import numpy as np
-import base64
-import io
-
-import imageio.v2 as imageio
 import logging
 # import matplotlib.pyplot as plt
 
@@ -20,9 +14,6 @@ logger = logging.getLogger()
 app.logger.addHandler(logging.StreamHandler(stdout))
 app.config['SECRET_KEY'] = 'secret!'
 app.config['DEBUG'] = True
-socketio = SocketIO(app)
-camera = Camera(Hair_Artist())
-
 # if os.environ.get("FLASK_ENV") == "production":
 #     origins = [
 #         "http://actual-app-url.herokuapp.com",
@@ -30,28 +21,26 @@ camera = Camera(Hair_Artist())
 #     ]
 # else:
 #     origins = "*"
-    
 socketio = SocketIO(app, cors_allowed_origins="*")
-camera = Camera(Makeup_artist())
+camera = Camera(Hair_Artist())
 
 
 @socketio.on('input image', namespace='/test')
 def test_message(input):
     input = input.split(",")[1]
     camera.enqueue_input(input)
-    image_data = input # Do your magical Image processing here!!
-    #image_data = image_data.decode("utf-8")
+    # image_data = input # Do your magical Image processing here!!
+    # #image_data = image_data.decode("utf-8")
 
-    img = imageio.imread(io.BytesIO(base64.b64decode(image_data)))
-    cv2_img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    # img = imageio.imread(io.BytesIO(base64.b64decode(image_data)))
+    # cv2_img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    # retval, buffer = cv2.imencode('.jpg', cv2_img)
+    # b = base64.b64encode(buffer)
+    # b = b.decode()
+    # image_data = "data:image/jpeg;base64," + b
 
-    retval, buffer = cv2.imencode('.jpg', cv2_img)
-    b = base64.b64encode(buffer)
-    b = b.decode()
-    image_data = "data:image/jpeg;base64," + b
-
-    # print("OUTPUT " + image_data)
-    emit('out-image-event', {'image_data': image_data}, namespace='/test')
+    # # print("OUTPUT " + image_data)
+    # emit('out-image-event', {'image_data': image_data}, namespace='/test')
     #camera.enqueue_input(base64_to_pil_image(input))
 
 
@@ -72,8 +61,6 @@ def gen():
     app.logger.info("starting to generate frames!")
     while True:
         frame = camera.get_frame() #pil_image_to_base64(camera.get_frame())
-
-        print(type(frame))
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
