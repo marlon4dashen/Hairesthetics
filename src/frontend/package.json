@@ -42,6 +42,7 @@
     "@react-three/fiber": "^8.10.1",
     "react-bootstrap": "^2.7.0",
     "react-color": "^2.19.3",
+    "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.3.0",
     "react-webcam": "^7.0.1",
     "socket.io": "^4.5.4",
