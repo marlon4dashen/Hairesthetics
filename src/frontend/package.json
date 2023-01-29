@@ -38,8 +38,10 @@
   "devDependencies": {
     "@mediapipe/camera_utils": "^0.3.1640029074",
     "@mediapipe/face_mesh": "^0.4.1633559619",
+    "@react-google-maps/api": "^2.17.1",
     "@react-three/drei": "^9.56.1",
     "@react-three/fiber": "^8.10.1",
+    "axios": "^1.2.6",
     "react-bootstrap": "^2.7.0",
     "react-color": "^2.19.3",
     "react-router-bootstrap": "^0.25.0",
