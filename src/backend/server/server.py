@@ -2,13 +2,16 @@ import eventlet
 eventlet.monkey_patch()
 from sys import stdout
 from hair_segmentation.hair_color.hair_artist import Hair_Artist
+import requests
 import logging
-from flask import Flask, render_template, Response
+import os
+from flask import Flask, render_template, Response, jsonify, request
+from flask_cors import cross_origin
 from flask_socketio import SocketIO
 from .camera import Camera
-import logging
+from dotenv import load_dotenv
 # import matplotlib.pyplot as plt
-
+load_dotenv()
 app = Flask(__name__)
 logger = logging.getLogger()
 app.logger.addHandler(logging.StreamHandler(stdout))
@@ -54,10 +57,38 @@ def index():
     """Video streaming home page."""
     return render_template('index.html')
 
+@app.route('/salons', methods=['GET'])
+@cross_origin()
+def get_salons():
+    args = request.args
+    userLat = args.get("lat", default="", type=str)
+    userlng = args.get("lng", default="", type=str)
+    if not userLat or not userlng:
+        return jsonify({'code': 'error'})
+    apiKey = os.getenv('GOOGLE_API_KEY')
+    url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={userLat}%2C{userlng}&radius=1500&type=hair_care&keyword=salon&key={apiKey}"
+    payload={}
+    headers = {}
+
+    response = requests.request("GET", url, headers=headers, data=payload)
+    results = response.json()['results']
+    salons = []
+    size = 0
+    for result in results:
+        salon = dict()
+        salon['name'] = result['name']
+        salon['lat'] = result['geometry']['location']['lat']
+        salon['lng'] = result['geometry']['location']['lng']
+        salon['place_id'] = result['place_id']
+        salon['rating'] = result['rating']
+        salon['user_ratings_total'] = result['user_ratings_total']
+        size += 1
+        salons.append(salon)
+    return jsonify({'code': 'success', 'length': size, 'salons': salons})
+
 
 def gen():
     """Video streaming generator function."""
-
     app.logger.info("starting to generate frames!")
     while True:
         frame = camera.get_frame() #pil_image_to_base64(camera.get_frame())

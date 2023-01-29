@@ -10,21 +10,6 @@ const containerStyle = {
   height: '500px'
 };
 
-const center = {
-  lat: 43.7754219,
-  lng: -79.346529,
-};
-
-const myStyles =[
-    {
-        featureType: "poi",
-        elementType: "labels",
-        stylers: [
-              { visibility: "off" }
-        ]
-    }
-];
-
 function SalonRecommendationView() {
     const { isLoaded } = useLoadScript({
         // id: 'google-map-script',
@@ -35,7 +20,6 @@ function SalonRecommendationView() {
     const [lat, setLat] = useState(null)
     const [lng, setLng] = useState(null)
     const [geoError, setGeoError] = useState(null)
-    const [initialMarker, showInitialMarker] = useState(false)
     const [resultsLength, setResultLength] = useState(0)
     const [searchResults, setSearchResults] = useState([])
     const [inputAddress, setAddress] = useState("")
@@ -79,8 +63,6 @@ function SalonRecommendationView() {
                 setLat(position.coords.latitude);
                 setLng(position.coords.longitude);
                 setAddress(`${position.coords.latitude}, ${position.coords.longitude}`)
-                showInitialMarker(true);
-                console.log(position);
             },
             function(error) {
                 setGeoError(error);
@@ -116,7 +98,6 @@ function SalonRecommendationView() {
                         value={inputAddress}
                     />
                     <Button variant="outline-primary" onClick={searchNearbySalon}>
-                        {/* Button */}
                         <FaSearch />
                     </Button>
                     <Button variant="outline-info" onClick={searchNearbySalon}>Use current location</Button>
