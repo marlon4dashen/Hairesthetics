@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
 // import Map from "../components/Map";
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-import {Container, Button, Row, Col, Card, ListGroup} from 'react-bootstrap'
+import {Container, Button, Row, Col, Card, ListGroup, Form, InputGroup} from 'react-bootstrap'
+import {FaSearch} from 'react-icons/fa';
 import axios from 'axios';
 
 const containerStyle = {
@@ -27,7 +28,7 @@ const myStyles =[
 function SalonRecommendationView() {
     const { isLoaded } = useLoadScript({
         // id: 'google-map-script',
-        googleMapsApiKey: "AIzaSyCiuVjPJnpVZ3663dJS9feygWlhoflC0t8",
+        googleMapsApiKey: "",
     })
     const [map, setMap] = useState(null)
     const [geolocation, setGeolocation] = useState (null)
@@ -37,6 +38,7 @@ function SalonRecommendationView() {
     const [initialMarker, showInitialMarker] = useState(false)
     const [resultsLength, setResultLength] = useState(0)
     const [searchResults, setSearchResults] = useState([])
+    const [inputAddress, setAddress] = useState("")
 
     const onLoad = React.useCallback(function callback(map) {
         // This is just an example of getting and using the map instance!!! don't just blindly copy!
@@ -76,6 +78,7 @@ function SalonRecommendationView() {
                 setGeolocation(position.coords);
                 setLat(position.coords.latitude);
                 setLng(position.coords.longitude);
+                setAddress(`${position.coords.latitude}, ${position.coords.longitude}`)
                 showInitialMarker(true);
                 console.log(position);
             },
@@ -104,13 +107,27 @@ function SalonRecommendationView() {
                 
                 </GoogleMap>
             ) : <div>Loading...</div>} */}
-            <Button onClick={searchNearbySalon}>Use current location</Button>
-            {geolocation ? (<><p>{geolocation.latitude.toFixed(4)}</p>
-            <p>{geolocation.longitude.toFixed(4)}</p></>):(<p>Not found</p>)}
+            <Container>
+                <InputGroup className="my-3">
+                    <Form.Control
+                        placeholder="Enter a street address"
+                        aria-label="Recipient's username"
+                        aria-describedby="basic-addon2"
+                        value={inputAddress}
+                    />
+                    <Button variant="outline-primary" onClick={searchNearbySalon}>
+                        {/* Button */}
+                        <FaSearch />
+                    </Button>
+                    <Button variant="outline-info" onClick={searchNearbySalon}>Use current location</Button>
+                </InputGroup>
+            </Container>
+            {/* {geolocation ? (<><p>{geolocation.latitude.toFixed(4)}</p>
+            <p>{geolocation.longitude.toFixed(4)}</p></>):(<p>Not found</p>)} */}
             <Container fluid>
                 <p>{resultsLength} results found</p>
                 {( resultsLength >0 ) ? (
-                    <Row xs={1} md={2} lg={4}>
+                    <Row className="my-2" xs={1} md={2} lg={4}>
                         {searchResults.map((salon) => (
                             <Col key={salon.place_id}>
                             <Card border='primary'>
