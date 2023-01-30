@@ -6,7 +6,7 @@ from utils.utils import base64_to_cv2_image, cv2_image_to_base64
 from collections import deque
 
 
-class Camera(object):
+class Worker(object):
     def __init__(self, makeup_artist):
         self.to_process = deque([])
         self.to_output = deque([])

@@ -5,7 +5,7 @@ from hair_segmentation.hair_color.hair_artist import Hair_Artist
 import logging
 from flask import Flask, render_template, Response
 from flask_socketio import SocketIO, emit
-from .camera import Camera
+from .worker import Worker
 import cv2
 import numpy as np
 from time import sleep, time
@@ -15,7 +15,6 @@ import imageio.v2 as imageio
 import logging
 from utils.utils import *
 import binascii
-# import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 logger = logging.getLogger()
@@ -23,7 +22,7 @@ app.logger.addHandler(logging.StreamHandler(stdout))
 app.config['SECRET_KEY'] = 'secret!'
 app.config['DEBUG'] = True
 socketio = SocketIO(app, cors_allowed_origins="*")
-camera = None
+worker = None
 hair_artist = None
 # vc = cv2.VideoCapture(0)
 
@@ -31,7 +30,7 @@ hair_artist = None
 @socketio.on('input image', namespace='/test')
 def test_message(input):
     input = input.split(",")[1]
-    camera.enqueue_input(input)
+    worker.enqueue_input(input)
     # image_data = input # Do your magical Image processing here!!
     # #image_data = image_data.decode("utf-8")
 
@@ -51,14 +50,14 @@ def test_message(input):
 @socketio.on('connect', namespace='/test')
 def test_connect():
     print("client connected")
-    global camera
-    camera = init_camera()
+    global worker
+    worker = init_camera()
 
 
 def init_camera():
     global hair_artist
     hair_artist = Hair_Artist()
-    return Camera(hair_artist)
+    return Worker(hair_artist)
 
 @app.route('/')
 def index():
@@ -77,7 +76,7 @@ def gen():
         # output = cv2.cvtColor(output, cv2.COLOR_BGR2RGB)
         # output_str = binascii.a2b_base64(cv2_image_to_base64(output))
         # print("Lapsed time: {}".format(time() - start))
-        frame = camera.get_frame() #pil_image_to_base64(camera.get_frame())
+        frame = worker.get_frame() #pil_image_to_base64(camera.get_frame())
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
@@ -85,7 +84,7 @@ def gen():
 @app.route('/video_feed')
 def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
-    while not camera:
+    while not worker:
         sleep(0.05)
     return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
 

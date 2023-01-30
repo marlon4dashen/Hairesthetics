@@ -5,7 +5,6 @@ import numpy as np
 from model import model_utils
 
 
-HAIR_SEGMENTATION_MODEL = './model/best_model_simplifier.onnx'
 EXPANDING_FACTOR = 0.75
 MEAN = [0.485, 0.456, 0.406]
 STD = [0.229, 0.224, 0.225]
