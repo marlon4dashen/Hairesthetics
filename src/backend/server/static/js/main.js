@@ -47,9 +47,11 @@ $(document).ready(function(){
     video.srcObject = stream;
     localMediaStream = stream;
 
+    fps = 10;
+
     setInterval(function () {
       sendSnapshot();
-    }, 100);
+    }, 1000/fps);
   }).catch(function(error) {
     console.log(error);
   });
