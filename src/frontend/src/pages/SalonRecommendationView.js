@@ -48,7 +48,7 @@ function SalonRecommendationView() {
         return (
             <>
             <GoogleMap
-                zoom={10}
+                zoom={12}
                 center={(selected) ? selected : center}
                 mapContainerClassName="map-container"
             >
@@ -75,8 +75,7 @@ function SalonRecommendationView() {
                     {/* Display location information */}
                     <div className="infoWindow" style={{fontWeight: 'bold', color: 'blue'}}>
                         <h4>{selectedPlace.name}</h4>
-                        <p>Ratings: {selectedPlace.rating}</p>
-                        <p>Total Reviews: {selectedPlace.user_ratings_total}</p>
+                        <p>{selectedPlace.address}</p>
                     </div>
                 </InfoWindow>
                 )}
@@ -201,8 +200,12 @@ function SalonRecommendationView() {
                                         <Card.Body>
                                              <Card.Title>{salon.name}</Card.Title>
                                              <ListGroup className="list-group-flush">
-                                                 <ListGroup.Item>Ratings: {salon.rating}</ListGroup.Item>
-                                                 <ListGroup.Item>Total Reviews: {salon.user_ratings_total}</ListGroup.Item>
+                                                 <ListGroup.Item>{salon.address}</ListGroup.Item>
+                                                 <ListGroup.Item>
+                                                    Ratings: {salon.rating} | 
+                                                    Total Reviews: {salon.user_ratings_total} | 
+                                                    {(salon.website) && (<a href={salon.website} target="_blank" rel="noreferrer">Website</a>)}
+                                                </ListGroup.Item>
                                              </ListGroup>
                                          </Card.Body>
                                         </Card>                                        

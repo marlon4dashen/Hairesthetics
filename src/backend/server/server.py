@@ -66,22 +66,37 @@ def get_salons():
     if not userLat or not userlng:
         return jsonify({'code': 'error'})
     apiKey = os.getenv('GOOGLE_API_KEY')
-    url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={userLat}%2C{userlng}&radius=1500&type=hair_care&keyword=salon&key={apiKey}"
+    try:
+        nearbySearchAPI = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={userLat}%2C{userlng}&radius=1200&type=hair_care&keyword=salon&key={apiKey}"
+    except Exception as e:
+        return jsonify({'code': 'error'})
     payload={}
     headers = {}
-
-    response = requests.request("GET", url, headers=headers, data=payload)
+    response = requests.request("GET", nearbySearchAPI, headers=headers, data=payload)
     results = response.json()['results']
     salons = []
     size = 0
+
     for result in results:
         salon = dict()
         salon['name'] = result['name']
         salon['lat'] = result['geometry']['location']['lat']
         salon['lng'] = result['geometry']['location']['lng']
-        salon['place_id'] = result['place_id']
+        placeId = result['place_id']
+        placeDetailsAPI = f"https://maps.googleapis.com/maps/api/place/details/json?place_id={placeId}&key={apiKey}"
+        placeDetails = None
+        try:
+            response = requests.request("GET", placeDetailsAPI, headers=headers, data=payload)
+            placeDetails = response.json()['result']
+        except Exception as e:
+            print(e)
+            continue
+        salon['place_id'] = placeId
         salon['rating'] = result['rating']
         salon['user_ratings_total'] = result['user_ratings_total']
+        if placeDetails:
+            salon['address'] = placeDetails.get("formatted_address", '')
+            salon['website'] = placeDetails.get('website','')
         size += 1
         salons.append(salon)
     return jsonify({'code': 'success', 'length': size, 'salons': salons})
