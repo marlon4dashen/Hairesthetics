@@ -179,29 +179,39 @@ function SalonRecommendationView() {
             <Container>
                 <PlacesAutocomplete setSelected={setSelected} />
             </Container>
-            <Container>
+            {/* <Container>
          
-            {isLoaded && <Map />}
-            </Container>
-            <Container fluid>
-                <p>{resultsLength} results found</p>
-                {( resultsLength >0 ) ? (
-                    <Row className="my-2" xs={1} md={2} lg={4}>
-                        {searchResults.map((salon) => (
-                            <Col key={salon.place_id}>
-                            <Card border='primary'>
-                                <Card.Body>
-                                    <Card.Title>{salon.name}</Card.Title>
-                                    <ListGroup className="list-group-flush">
-                                        <ListGroup.Item>Ratings: {salon.rating}</ListGroup.Item>
-                                        <ListGroup.Item>Total Reviews: {salon.user_ratings_total}</ListGroup.Item>
-                                    </ListGroup>
-                                </Card.Body>
-                            </Card>
-                            </Col>
-                        ))}
-                    </Row>
-                ): <></>}
+            
+            </Container> */}
+            <Container class="main-container">
+                <Row>
+                    <Col sm={8}>{isLoaded && <Map />}</Col>
+                    <Col sm={4} className="results-col">
+                        <p>{resultsLength} results found</p>
+         
+                        {( resultsLength >0 ) ? (
+                            <ListGroup>
+                                {searchResults.map((salon) => (
+                                    <ListGroup.Item
+                                        as="li"
+                                        className="d-flex align-items-start"
+                                        key={salon.place_id}
+                                    >
+                                        <Card border='primary' className="salon-card">
+                                        <Card.Body>
+                                             <Card.Title>{salon.name}</Card.Title>
+                                             <ListGroup className="list-group-flush">
+                                                 <ListGroup.Item>Ratings: {salon.rating}</ListGroup.Item>
+                                                 <ListGroup.Item>Total Reviews: {salon.user_ratings_total}</ListGroup.Item>
+                                             </ListGroup>
+                                         </Card.Body>
+                                        </Card>                                        
+                                    </ListGroup.Item>
+                                ))}
+                            </ListGroup>           
+                        ): <></>}
+                    </Col>
+                </Row>
             </Container>
         </>
     );

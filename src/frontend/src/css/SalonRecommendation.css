@@ -16,3 +16,12 @@
   width: 100%;
   padding: 0.5rem;
 }
+
+.results-col {
+  height: 80vh !important;
+  overflow-y: scroll !important;
+}
+
+.salon-card {
+  width: 100% !important;
+}
