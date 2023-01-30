@@ -8,7 +8,7 @@ from flask_socketio import SocketIO, emit
 from .camera import Camera
 import cv2
 import numpy as np
-from time import sleep
+from time import sleep, time
 import base64
 import io
 import imageio.v2 as imageio
@@ -25,7 +25,7 @@ app.config['DEBUG'] = True
 socketio = SocketIO(app, cors_allowed_origins="*")
 camera = None
 hair_artist = None
-vc = cv2.VideoCapture(0)
+# vc = cv2.VideoCapture(0)
 
 # if os.environ.get("FLASK_ENV") == "production":
 #     origins = [
@@ -36,10 +36,10 @@ vc = cv2.VideoCapture(0)
 #     origins = "*"
 
 
-# @socketio.on('input image', namespace='/test')
-# def test_message(input):
-#     input = input.split(",")[1]
-#     camera.enqueue_input(input)
+@socketio.on('input image', namespace='/test')
+def test_message(input):
+    input = input.split(",")[1]
+    camera.enqueue_input(input)
     # image_data = input # Do your magical Image processing here!!
     # #image_data = image_data.decode("utf-8")
 
@@ -79,19 +79,21 @@ def gen():
 
     app.logger.info("starting to generate frames!")
     while True:
-        read_return_code, frame = vc.read()
-        output = hair_artist.apply_hair_color(frame, "pink")
-        output = cv2.cvtColor(output, cv2.COLOR_BGR2RGB)
-        output_str = binascii.a2b_base64(cv2_image_to_base64(output))
-        # frame = camera.get_frame() #pil_image_to_base64(camera.get_frame())
+        # start = time()
+        # read_return_code, frame = vc.read()
+        # output = hair_artist.apply_hair_color(frame, "pink")
+        # output = cv2.cvtColor(output, cv2.COLOR_BGR2RGB)
+        # output_str = binascii.a2b_base64(cv2_image_to_base64(output))
+        # print("Lapsed time: {}".format(time() - start))
+        frame = camera.get_frame() #pil_image_to_base64(camera.get_frame())
         yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + output_str + b'\r\n')
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 
 @app.route('/video_feed')
 def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
-    while not hair_artist:
+    while not camera:
         sleep(0.05)
     return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
 

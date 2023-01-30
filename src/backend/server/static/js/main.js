@@ -43,15 +43,15 @@ $(document).ready(function(){
     }
   };
 
-  // navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
-  //   video.srcObject = stream;
-  //   localMediaStream = stream;
+  navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+    video.srcObject = stream;
+    localMediaStream = stream;
 
-  //   setInterval(function () {
-  //     sendSnapshot();
-  //   }, 30);
-  // }).catch(function(error) {
-  //   console.log(error);
-  // });
+    setInterval(function () {
+      sendSnapshot();
+    }, 100);
+  }).catch(function(error) {
+    console.log(error);
+  });
 });
 

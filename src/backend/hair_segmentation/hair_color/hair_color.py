@@ -15,7 +15,7 @@ HAIR_SEGMENTATION_MODEL = './model/best_model_simplifier.onnx'
 EXPANDING_FACTOR = 0.75
 MEAN = [0.485, 0.456, 0.406]
 STD = [0.229, 0.224, 0.225]
-ALPHA = 0.25
+ALPHA = 0.20
 
 # BGR Format
 COLORS = {
@@ -28,6 +28,7 @@ COLORS = {
     "orange": [0, 165, 255],
     "cyan": [209, 206, 0],
     "darkred": [0, 0, 139],
+    "darkred1": [139, 0, 0]
 }
 
 
@@ -125,24 +126,7 @@ def perform_hair_segmentation(session, input_name, input_width, input_height, ou
 
 
 def change_color(img, mask, target_color):
-    # Resize the segmented hair region
-    # hair_region = cv2.resize(
-    #     mask, (img.shape[1], img.shape[0]), interpolation=cv2.INTER_AREA)
-    # mask_color = hair_region.copy()
-    # # Consider only colored area
-    # cond = np.where((hair_region > 0).all(axis=2))
-    # # Colorize the mask representing the hair area with the new color.
-    # mask_color[cond] = target_color
-    # # Maintain the natural look of the hair
-    # mask_color1 = cv2.add(img, mask_color)
-    # #mask_color1 = mask_color
 
-    # # Overlay the segmented and processed hair region on top of the original image
-    # cond = np.stack((hair_region,)*3, axis=-1) > 0
-    # cond = cond[..., 0]
-    # # Combine both images where the condition is satisfied
-    # output = np.where(cond == False, img, mask_color1)
-    # return output
     colored_hair = np.copy(img)
     colored_hair[(mask > 0).all(axis=2)] = target_color
     output = cv2.addWeighted(colored_hair, ALPHA, img,
@@ -168,38 +152,14 @@ def change_hair_color(img, target_color, session, input_name, input_width, input
 
     # Loop over the faces detected
     if faces.detections:
-        # append output
-        output_msg = {'msg': "{} face(s) detected.".format(
-            len(faces.detections)), 'category': "info"}
-        output_info.append(output_msg)
-        for idx, face_detected in enumerate(faces.detections):
-            # Output message
-            # label = f"Face ID = {(idx+1)} - Detection Score {int(face_detected.score[0]*100)}%"
-            # output_msg = {'msg': label, 'category': "info"}
-            # output_info.append(output_msg)
-            # print(output_msg.get('category'), output_msg.get('msg'))
-
-            # Get the face relative bounding box
-            # relativeBoundingBox = face_detected.location_data.relative_bounding_box
-            # frameHeight, frameWidth, frameChannels = frame.shape
-            # faceBoundingBox = int(relativeBoundingBox.xmin*frameWidth), int(relativeBoundingBox.ymin*frameHeight), int(
-            #     relativeBoundingBox.width*frameWidth), int(relativeBoundingBox.height*frameHeight)
-            # # Get the coordinates of the face bounding box
-            # x, y, w, h = faceBoundingBox
-            # # Enlarge the bounding box
-            # x1, y1, w1, h1 = enlarge_bounding_box(x, y, w, h)
-            # # Crop out the enlarged region
-            # roi_face_color = frame[y1:y1 + h1, x1:x1 + w1]
-
             masked_img = perform_hair_segmentation(
                 session, input_name, input_width, input_height, output_names, frame)
             # Change the color of the segmented hair area
             processed_frame = change_color(
                 img=frame, mask=masked_img, target_color=COLORS[target_color])
 
-            label = "Changing hair color to {}".format(target_color)
-            # print(label)
 
+            label = "Changing hair color to {}".format(target_color)
             return processed_frame
     else:
         return img
