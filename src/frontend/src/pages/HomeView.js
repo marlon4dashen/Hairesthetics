@@ -62,7 +62,7 @@ class HomeView extends Component {
                             <Card.Text>
                             blah
                             </Card.Text>
-                            <Button variant="outline-primary" as={Link} to="/">Try it out</Button>
+                            <Button variant="outline-primary" as={Link} to="/salon">Try it out</Button>
                         </Card.Body>
                         </Card>
                     </Col>
