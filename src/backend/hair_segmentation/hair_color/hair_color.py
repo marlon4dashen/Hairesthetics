@@ -19,16 +19,15 @@ ALPHA = 0.20
 
 # BGR Format
 COLORS = {
-    "brown": [19, 69, 139],
-    "pink": [203, 192, 255],
+    "brown": [139, 69, 13],
+    "pink": [255, 192, 203],
     "darkgrey": [169, 169, 169],
     "white": [255, 255, 255],
-    "purple": [211, 0, 148],
-    "green": [113, 179, 60],
-    "orange": [0, 165, 255],
-    "cyan": [209, 206, 0],
-    "darkred": [0, 0, 139],
-    "darkred1": [139, 0, 0]
+    "purple": [148, 0, 211],
+    "green": [60, 179, 113],
+    "orange": [255, 165, 0],
+    "cyan": [0, 206, 209],
+    "darkred": [139, 0, 0]
 }
 
 
@@ -80,7 +79,6 @@ def initialize_hair_segmentation_model(hair_segmentation_model):
 
     model = model_utils.Model(hair_segmentation_model)
     return model
-
 
 
 def perform_hair_segmentation(session, input_name, input_width, input_height, output_name, img):
@@ -152,15 +150,14 @@ def change_hair_color(img, target_color, session, input_name, input_width, input
 
     # Loop over the faces detected
     if faces.detections:
-            masked_img = perform_hair_segmentation(
-                session, input_name, input_width, input_height, output_names, frame)
-            # Change the color of the segmented hair area
-            processed_frame = change_color(
-                img=frame, mask=masked_img, target_color=COLORS[target_color])
+        masked_img = perform_hair_segmentation(
+            session, input_name, input_width, input_height, output_names, frame)
+        # Change the color of the segmented hair area
+        processed_frame = change_color(
+            img=frame, mask=masked_img, target_color=COLORS[target_color])
 
-
-            label = "Changing hair color to {}".format(target_color)
-            return processed_frame
+        label = "Changing hair color to {}".format(target_color)
+        return processed_frame
     else:
         return img
     ######################
