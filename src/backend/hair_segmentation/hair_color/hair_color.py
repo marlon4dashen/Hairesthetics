@@ -1,22 +1,17 @@
 # Import Libraries
-import os
-import argparse
-import uuid
 import mediapipe
 import cv2
-import filetype
 import numpy as np
 from model import model_utils
-# import config
-# import webcolors
-import onnxruntime
+
 
 HAIR_SEGMENTATION_MODEL = './model/best_model_simplifier.onnx'
 EXPANDING_FACTOR = 0.75
 MEAN = [0.485, 0.456, 0.406]
 STD = [0.229, 0.224, 0.225]
 ALPHA = 0.20
-
+# To reduce Mediapipe false results increase the confidence level
+MIN_CONFIDENCE_LEVEL = 0.5
 # BGR Format
 COLORS = {
     "brown": [139, 69, 13],
@@ -31,10 +26,6 @@ COLORS = {
 }
 
 
-# To reduce Mediapipe false results increase the confidence level
-MIN_CONFIDENCE_LEVEL = 0.5
-
-
 def initialize_mediapipe():
     """
     Initializing mediapipe face detection sub-module
@@ -44,35 +35,6 @@ def initialize_mediapipe():
         MIN_CONFIDENCE_LEVEL)
 
     return mpFaceDetection
-
-
-# def find_closest_color(req_color):
-#     # This is the function which converts an RGB pixel to a color name
-#     min_colours = {}
-#     for name, key in webcolors.CSS3_HEX_TO_NAMES.items():
-#         r_c, g_c, b_c = webcolors.hex_to_rgb(name)
-#         rd = (r_c - req_color[0]) ** 2
-#         gd = (g_c - req_color[1]) ** 2
-#         bd = (b_c - req_color[2]) ** 2
-#         min_colours[(rd + gd + bd)] = key
-#         closest_name = min_colours[min(min_colours.keys())]
-#     return closest_name
-
-
-# def enlarge_bounding_box(x, y, w, h):
-#     """
-#     Enlarge the bounding box based on the expanding factor
-#     """
-#     # create a larger bounding box with buffer around keypoints
-#     x1 = int(x - EXPANDING_FACTOR * w)
-#     w1 = int(w + 2 * EXPANDING_FACTOR * w)
-#     y1 = int(y - EXPANDING_FACTOR * h)
-#     h1 = int(h + 2 * EXPANDING_FACTOR * h)
-#     #print('x1,y1,w1,h1', x1, y1, w1, h1)
-#     x1 = 0 if x1 < 0 else x1
-#     y1 = 0 if y1 < 0 else y1
-#     #print('x1,y1,w1,h1', x1, y1, w1, h1)
-#     return x1, y1, w1, h1
 
 
 def initialize_hair_segmentation_model(hair_segmentation_model):
@@ -103,10 +65,8 @@ def perform_hair_segmentation(session, input_name, input_width, input_height, ou
     # Convert to float type
     input_tensor = input_tensor.astype(np.float32)
 
-    ####################################################################
     # Perform inference on the image
     outputs = session.run([output_name], {input_name: input_tensor})
-    ####################################################################
 
     # Process output data
     hair_mask = np.squeeze(outputs[0])
@@ -117,9 +77,6 @@ def perform_hair_segmentation(session, input_name, input_width, input_height, ou
 
     masked_img = cv2.bitwise_or(img, img, mask=hair_mask)
 
-    # debug
-    # cv2.imshow("masked_img", hair_mask)
-    # cv2.waitKey(0)
     return masked_img
 
 
@@ -145,9 +102,6 @@ def change_hair_color(img, target_color, session, input_name, input_width, input
     # Detect faces using the rgb frame
     faces = mpFaceDetection.process(rgb_frame)
 
-    output = []
-    output_info = []
-
     # Loop over the faces detected
     if faces.detections:
         masked_img = perform_hair_segmentation(
@@ -160,62 +114,3 @@ def change_hair_color(img, target_color, session, input_name, input_width, input
         return processed_frame
     else:
         return img
-    ######################
-    # write output
-    # output_filepath = os.path.join('./outputs',
-    #                                str(uuid.uuid4().hex) + os.path.splitext(input_path)[1])
-    # cv2.imwrite(output_filepath, processed_frame)
-    #     output_item = {'id': 1, 'folder': './outputs'
-    #                           , 'name': os.path.basename(output_filepath)
-    #                           , 'msg': label}
-    #     output.append(output_item)
-    #     ######################
-    #     if display_output:
-    #        # Display Image on screen
-    #        cv2.imshow(f"Face {(idx+1)}", processed_frame)
-    #        cv2.waitKey(0)
-    # if display_output:
-    #    # Cleanup
-    #    cv2.destroyAllWindows()
-    # mpFaceDetection.close()
-    # return output_info , output
-
-
-# def is_valid_path(path):
-#     """
-#     Validates the path inputted and makes sure that is a file of type image
-#     """
-#     if not path:
-#         raise ValueError(f"Invalid Path")
-#     if os.path.isfile(path) and 'image' in filetype.guess(path).mime:
-#         return path
-#     else:
-#         raise ValueError(f"Invalid Path {path}")
-
-
-# def parse_args():
-#     """
-#     Get user command line parameters
-#     """
-#     parser = argparse.ArgumentParser(description="Available Options")
-
-#     parser.add_argument('-c', '--hair_color', dest='hair_color', default=False,
-#                         required=True, help="Enter the color of hair you want to change")
-
-#     args = vars(parser.parse_args())
-
-#     # To Display The Command Line Arguments
-#     print("## Command Arguments #################################################")
-#     print("\n".join("{}:{}".format(i, j) for i, j in args.items()))
-#     print("######################################################################")
-
-#     return args
-
-
-# if __name__ == '__main__':
-#     # Parsing command line arguments entered by user
-
-#     args = parse_args()
-#     change_hair_color(
-#         target_color=args['hair_color'])
-#     change_hair_color()

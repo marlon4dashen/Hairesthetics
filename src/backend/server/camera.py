@@ -24,18 +24,16 @@ class Camera(object):
         # input is an ascii string.
         input_str = self.to_process.popleft()
 
-        # convert it to a pil image
+        # convert it to a cv2 image
         input_img = base64_to_cv2_image(input_str)
 
-        ################## where the hard work is done ############
-        # output_img is an PIL image
         # output_img = self.makeup_artist.apply_makeup(input_img)
         output_img = self.makeup_artist.apply_hair_color(input_img, "cyan")
 
         # output_str is a base64 string in ascii
         output_str = cv2_image_to_base64(output_img)
 
-        # convert eh base64 string in ascii to base64 string in _bytes_
+        # convert the base64 string in ascii to base64 string in _bytes_
         self.to_output.append(binascii.a2b_base64(output_str))
         print("Lapsed time: {}, to_process: {}, to_output: {}".format(
             time() - time_start, len(self.to_process), len(self.to_output)))
