@@ -27,14 +27,6 @@ camera = None
 hair_artist = None
 # vc = cv2.VideoCapture(0)
 
-# if os.environ.get("FLASK_ENV") == "production":
-#     origins = [
-#         "http://actual-app-url.herokuapp.com",
-#         "https://actual-app-url.herokuapp.com"
-#     ]
-# else:
-#     origins = "*"
-
 
 @socketio.on('input image', namespace='/test')
 def test_message(input):
