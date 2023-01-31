@@ -56,14 +56,14 @@ export class Glasses {
     let leftEyeInnerCorner = scaleLandmark(this.landmarks[463], this.width, this.height);
     let rightEyeInnerCorner = scaleLandmark(this.landmarks[243], this.width, this.height);
     let noseBottom = scaleLandmark(this.landmarks[2], this.width, this.height);
-    
+
     // These points seem appropriate 446, 265, 372, 264
     let leftEyeUpper1 = scaleLandmark(this.landmarks[264], this.width, this.height);
     // These points seem appropriate 226, 35, 143, 34
     let rightEyeUpper1 = scaleLandmark(this.landmarks[34], this.width, this.height);
 
     if (this.glasses) {
-  
+
       // position
       this.glasses.position.set(
         midEyes.x,
@@ -114,7 +114,7 @@ export class Glasses {
       let yRot =  (
         new THREE.Vector3(sideVector.x, 0, sideVector.z)
       ).angleTo(new THREE.Vector3(0, 0, 1)) - (Math.PI / 2);
-      
+
       this.glasses.rotation.set(xRot, yRot, zRot);
 
     }
