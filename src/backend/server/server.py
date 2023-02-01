@@ -4,19 +4,36 @@ from sys import stdout
 from hair_segmentation.hair_color.hair_artist import Hair_Artist
 import requests
 import logging
+
 import os
 from flask import Flask, render_template, Response, jsonify, request
+from flask_socketio import SocketIO, emit
 from flask_cors import cross_origin
-from flask_socketio import SocketIO
-from .camera import Camera
+from .worker import Worker
+import cv2
+import numpy as np
+from time import sleep, time
+import base64
+import io
+import imageio.v2 as imageio
+import logging
+from utils.utils import *
+import binascii
 from dotenv import load_dotenv
-# import matplotlib.pyplot as plt
 load_dotenv()
+
+
+from .camera import Camera
 app = Flask(__name__)
 logger = logging.getLogger()
 app.logger.addHandler(logging.StreamHandler(stdout))
 app.config['SECRET_KEY'] = 'secret!'
 app.config['DEBUG'] = True
+
+socketio = SocketIO(app, cors_allowed_origins="*")
+worker = None
+hair_artist = None
+# vc = cv2.VideoCapture(0)
 # if os.environ.get("FLASK_ENV") == "production":
 #     origins = [
 #         "http://actual-app-url.herokuapp.com",
@@ -24,19 +41,23 @@ app.config['DEBUG'] = True
 #     ]
 # else:
 #     origins = "*"
-socketio = SocketIO(app, cors_allowed_origins="*")
-camera = Camera(Hair_Artist())
+# socketio = SocketIO(app, cors_allowed_origins="*")
+# camera = Camera(Hair_Artist())
+
 
 
 @socketio.on('input image', namespace='/test')
 def test_message(input):
     input = input.split(",")[1]
-    camera.enqueue_input(input)
+    worker.enqueue_input(input)
+    #camera.enqueue_input(input)
+
     # image_data = input # Do your magical Image processing here!!
     # #image_data = image_data.decode("utf-8")
 
     # img = imageio.imread(io.BytesIO(base64.b64decode(image_data)))
     # cv2_img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+
     # retval, buffer = cv2.imencode('.jpg', cv2_img)
     # b = base64.b64encode(buffer)
     # b = b.decode()
@@ -44,13 +65,24 @@ def test_message(input):
 
     # # print("OUTPUT " + image_data)
     # emit('out-image-event', {'image_data': image_data}, namespace='/test')
-    #camera.enqueue_input(base64_to_pil_image(input))
+
+    # camera.enqueue_input(base64_to_pil_image(input))
+
+    # camera.enqueue_input(base64_to_pil_image(input))
+
 
 
 @socketio.on('connect', namespace='/test')
 def test_connect():
-    app.logger.info("client connected")
+    print("client connected")
+    global worker
+    worker = init_camera()
 
+
+def init_camera():
+    global hair_artist
+    hair_artist = Hair_Artist()
+    return Worker(hair_artist)
 
 @app.route('/')
 def index():
@@ -106,7 +138,17 @@ def gen():
     """Video streaming generator function."""
     app.logger.info("starting to generate frames!")
     while True:
-        frame = camera.get_frame() #pil_image_to_base64(camera.get_frame())
+
+        # start = time()
+        # read_return_code, frame = vc.read()
+        # output = hair_artist.apply_hair_color(frame, "pink")
+        # output = cv2.cvtColor(output, cv2.COLOR_BGR2RGB)
+        # output_str = binascii.a2b_base64(cv2_image_to_base64(output))
+        # print("Lapsed time: {}".format(time() - start))
+        frame = worker.get_frame() #pil_image_to_base64(camera.get_frame())
+
+        # frame = camera.get_frame() #pil_image_to_base64(camera.get_frame())
+
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
@@ -115,6 +157,8 @@ def gen():
 @cross_origin()
 def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
+    while not worker:
+        sleep(0.05)
     return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
