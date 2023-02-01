@@ -138,6 +138,13 @@ def get_salons():
         salons.append(salon)
     return jsonify({'code': 'success', 'length': size, 'salons': salons})
 
+@app.route('/clear')
+@cross_origin()
+def clear_cache():
+    if worker:
+        worker.clean_up()
+    return jsonify({'code': 'success'})
+
 
 def gen():
     """Video streaming generator function."""

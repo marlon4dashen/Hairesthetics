@@ -6,6 +6,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import {BsPlayCircle, BsStopCircle, BsUpload} from 'react-icons/bs'
 
 import "../css/HairColorView.css"
+import axios from "axios";
 
 const socket = io.connect('http://localhost:5001/test')
 function HairColorView() {
@@ -51,6 +52,8 @@ function HairColorView() {
             clearInterval(currentInterval);
         }
         setIsShowVideo(false);
+        //clean up buffer
+        axios.get("http://localhost:5001/clear")
     }
 
     const paintToCanvas = () => {
@@ -67,6 +70,8 @@ function HairColorView() {
         console.log(hairColor);
         socket.emit('input image', { image: dataURL, r:hairColor.r, g:hairColor.g, b:hairColor.b });
     };
+
+
 
     return (    
     <>

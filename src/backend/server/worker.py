@@ -50,3 +50,7 @@ class Worker(object):
         while not self.to_output:
             sleep(0.01)
         return self.to_output.popleft()
+
+    def clean_up(self):
+        self.to_process.clear()
+        self.to_output.clear()
