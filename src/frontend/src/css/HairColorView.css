@@ -1,5 +1,8 @@
+.video-container {
+  height: 300px;
+}
 .picker-container {
-    margin-top: 50px;
+    margin-top: 30px;
     display: flex;
     justify-content: center;
 }
@@ -15,6 +18,14 @@
 
 .webcam-video {
   display: none;
+}
+
+.container-divider {
+  border-color: black !important;
+  border-width: thin !important;
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
+  /* opacity: 0 !important; */
 }
 
 .output-video {
