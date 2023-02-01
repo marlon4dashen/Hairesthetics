@@ -46,10 +46,10 @@ $(document).ready(function(){
   navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
     video.srcObject = stream;
     localMediaStream = stream;
-
+    fps = 10;
     setInterval(function () {
       sendSnapshot();
-    }, 30);
+    }, 1000/fps);
   }).catch(function(error) {
     console.log(error);
   });
