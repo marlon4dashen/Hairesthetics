@@ -8,16 +8,7 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-// import {
-//   Combobox,
-//   ComboboxInput,
-//   ComboboxPopover,
-//   ComboboxList,
-//   ComboboxOption,
-// } from "@reach/combobox";
 import AsyncSelect from 'react-select/async'
-import Select from 'react-select'
-// import "@reach/combobox/styles.css";
 
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
 function SalonRecommendationView() {
@@ -60,7 +51,7 @@ function SalonRecommendationView() {
                     <Marker 
                         key={salon.place_id} 
                         position={{lat: salon.lat, lng:salon.lng}}
-                        icon="./assets/icons/seat.png"
+                        // icon="./assets/icons/seat.png"
                         onClick={() => {
                             setSelectedPlace(salon);
                         }}
@@ -122,9 +113,10 @@ function SalonRecommendationView() {
                 <Row className="my-3">
                     <Col>
                         <AsyncSelect isSearchable={true} 
-                        placeholder="🔍 Search an address"
-                        loadOptions={loadOptions}
-                        onChange={handleSelect}
+                            placeholder="🔍 Search an address"
+                            loadOptions={loadOptions}
+                            onChange={handleSelect}
+                            isDisabled={!ready}
                         />
                     </Col>
                     <Col xs="auto" md="auto">
@@ -166,9 +158,7 @@ function SalonRecommendationView() {
                 setResultLength(data.length)
                 setSearchResults(data.salons)
                 console.log(data.salons)
-            }
-            
-        })
+            }})
         .catch(error => alert(error))
     }
 
@@ -181,10 +171,7 @@ function SalonRecommendationView() {
             <Container>
                 <PlacesAutocomplete setSelected={setSelected} />
             </Container>
-            {/* <Container>
-         
-            
-            </Container> */}
+
             <Container className="">
                 <Row>
                     <Col sm={8}>{isLoaded && <Map />}</Col>
@@ -206,7 +193,7 @@ function SalonRecommendationView() {
                                                  <ListGroup.Item>{salon.address}</ListGroup.Item>
                                                  <ListGroup.Item>
                                                     Ratings: {salon.rating} | 
-                                                    Total Reviews: {salon.user_ratings_total} | 
+                                                    Total Reviews: {salon.user_ratings_total}   
                                                     {(salon.website) && (<a href={salon.website} target="_blank" rel="noreferrer">Website</a>)}
                                                 </ListGroup.Item>
                                              </ListGroup>

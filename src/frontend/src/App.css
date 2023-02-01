@@ -5,7 +5,7 @@
 
 .page-container {
   position: relative;
-  min-height: 90vh;
+  min-height: 85vh;
 }
 
 .app-header {
@@ -15,6 +15,8 @@
 .app-footer {
   background-color: gray!important;
   color: white;
+  bottom: 0;
+  position: relative;
   /* margin-top: 10px; */
 }
 
