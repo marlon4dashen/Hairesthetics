@@ -4,6 +4,7 @@
 }
 
 .page-container {
+  padding-top: 15px;
   position: relative;
   min-height: 85vh;
 }
@@ -17,7 +18,6 @@
   color: white;
   bottom: 0;
   position: relative;
-  /* margin-top: 10px; */
 }
 
 .app-footer .copyright-section {

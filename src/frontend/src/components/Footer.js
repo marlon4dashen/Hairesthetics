@@ -21,19 +21,14 @@ function Footer() {
                 <Button variant="secondary"><SiOnnx /></Button>
             </Col>
             <Col>
-                <Container>© {new Date().getFullYear()} Copyright: Hairesthetics. All Rights Reserved</Container>
+                <Container>© {new Date().getFullYear()} Copyright: HairEsthetics. All Rights Reserved</Container>
             </Col>
             <Col>
-                {/* <ButtonGroup aria-label="Basic example"> */}
                 <Button variant="secondary"><FaGithub /></Button>
                 <Button variant="secondary"><RxDiscordLogo /></Button>
                 <Button variant="secondary"><HiOutlineMail /></Button>
-                {/* </ButtonGroup> */}
             </Col>
         </Row>
-        {/* <Row>
-
-        </Row> */}
     </footer>
   );
 }
