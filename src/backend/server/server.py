@@ -23,7 +23,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-from .camera import Camera
+from .worker import Worker
 app = Flask(__name__)
 logger = logging.getLogger()
 app.logger.addHandler(logging.StreamHandler(stdout))
