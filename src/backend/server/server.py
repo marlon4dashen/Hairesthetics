@@ -48,8 +48,13 @@ hair_artist = None
 
 @socketio.on('input image', namespace='/test')
 def test_message(input):
-    input = input.split(",")[1]
-    worker.enqueue_input(input)
+    image = input.get("image", None)
+    if not image:
+        raise Exception("No image")
+    image = image.split(",")[1]
+    r, g, b = input.get("r"), input.get("g"), input.get("b")
+    print([r,g,b])
+    worker.enqueue_input((image, [r, g, b]))
     #camera.enqueue_input(input)
 
     # image_data = input # Do your magical Image processing here!!

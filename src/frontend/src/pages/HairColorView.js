@@ -15,6 +15,7 @@ function HairColorView() {
     const { r, g, b, a } = hairColor;
     const [isShowVideo, setIsShowVideo] = useState(false);
     const [localMediaStream, setLocalMediaStream] = useState(null);
+    const [currentInterval, setCurrentInterval] = useState(null);
  
     const constraints = {
         video: {
@@ -33,10 +34,11 @@ function HairColorView() {
         navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
             videoRef.current.srcObject = stream;
             setLocalMediaStream(stream)
-            let fps = 10;
-            setInterval(function () {
-                paintToCanvas();
-            }, 1000/fps);
+            let fps = 5;
+            if (currentInterval){
+                clearInterval(currentInterval);
+            }
+            setCurrentInterval(setInterval(paintToCanvas, 1000/fps));
         }).catch(function(error) {
             console.log(error);
         });
@@ -45,6 +47,9 @@ function HairColorView() {
     const stopCam = () => {
         const tracks = localMediaStream.getTracks();
         tracks.forEach(track => track.stop());
+        if (currentInterval){
+            clearInterval(currentInterval);
+        }
         setIsShowVideo(false);
     }
 
@@ -59,7 +64,8 @@ function HairColorView() {
         photo.height = height;
         ctx.drawImage(video, 0, 0, width, height);
         let dataURL = photo.toDataURL('image/jpeg');
-        socket.emit('input image', dataURL);
+        console.log(hairColor);
+        socket.emit('input image', { image: dataURL, r:hairColor.r, g:hairColor.g, b:hairColor.b });
     };
 
     return (    
@@ -88,6 +94,11 @@ function HairColorView() {
                             color = {hairColor}
                             onChangeComplete={(color) => {
                                 setHairColor(color.rgb);
+                                if (currentInterval){
+                                    clearInterval(currentInterval);
+                                    setCurrentInterval(setInterval(paintToCanvas, 1000/5));
+                                }
+                                    
                             }}
                             className="color-picker"
                         />
