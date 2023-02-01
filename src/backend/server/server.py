@@ -23,7 +23,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-from .camera import Camera
+from .worker import Worker
 app = Flask(__name__)
 logger = logging.getLogger()
 app.logger.addHandler(logging.StreamHandler(stdout))
@@ -48,8 +48,13 @@ hair_artist = None
 
 @socketio.on('input image', namespace='/test')
 def test_message(input):
-    input = input.split(",")[1]
-    worker.enqueue_input(input)
+    image = input.get("image", None)
+    if not image:
+        raise Exception("No image")
+    image = image.split(",")[1]
+    r, g, b = input.get("r"), input.get("g"), input.get("b")
+    print([r,g,b])
+    worker.enqueue_input((image, [r, g, b]))
     #camera.enqueue_input(input)
 
     # image_data = input # Do your magical Image processing here!!
@@ -132,6 +137,13 @@ def get_salons():
         size += 1
         salons.append(salon)
     return jsonify({'code': 'success', 'length': size, 'salons': salons})
+
+@app.route('/clear')
+@cross_origin()
+def clear_cache():
+    if worker:
+        worker.clean_up()
+    return jsonify({'code': 'success'})
 
 
 def gen():
