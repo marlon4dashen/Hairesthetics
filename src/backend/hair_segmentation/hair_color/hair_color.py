@@ -84,7 +84,7 @@ def change_color(img, mask, target_color):
     colored_hair = np.copy(img)
     colored_hair[(mask > 0).all(axis=2)] = target_color
     output = cv2.addWeighted(colored_hair, ALPHA, img,
-                             1-ALPHA, 0, colored_hair)
+                             1-ALPHA, 0.5, colored_hair)
     return output
 
 
@@ -101,15 +101,12 @@ def change_hair_color(img, target_color, session, input_name, input_width, input
     # Detect faces using the rgb frame
     faces = mpFaceDetection.process(rgb_frame)
 
-    # Loop over the faces detected
-    if faces.detections:
-        masked_img = perform_hair_segmentation(
-            session, input_name, input_width, input_height, output_names, frame)
-        # Change the color of the segmented hair area
-        processed_frame = change_color(
-            img=frame, mask=masked_img, target_color=COLORS[target_color])
+    masked_img = perform_hair_segmentation(
+        session, input_name, input_width, input_height, output_names, frame)
+    # Change the color of the segmented hair area
+    processed_frame = change_color(
+        img=frame, mask=masked_img, target_color=COLORS[target_color])
 
-        label = "Changing hair color to {}".format(target_color)
-        return processed_frame
-    else:
-        return img
+    label = "Changing hair color to {}".format(target_color)
+    return processed_frame
+
