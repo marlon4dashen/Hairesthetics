@@ -46,9 +46,7 @@ $(document).ready(function(){
   navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
     video.srcObject = stream;
     localMediaStream = stream;
-
     fps = 10;
-
     setInterval(function () {
       sendSnapshot();
     }, 1000/fps);

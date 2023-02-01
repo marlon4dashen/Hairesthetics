@@ -1,7 +1,3 @@
-/* .video_container {
-    height: auto;
-} */
-
 .picker-container {
     margin-top: 50px;
     display: flex;
@@ -15,6 +11,10 @@
 .material-picker {
     width: 130px !important;
     height: 120px !important;
+}
+
+.webcam-video {
+  display: none;
 }
 
 .output-video {

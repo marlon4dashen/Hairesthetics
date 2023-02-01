@@ -16,10 +16,8 @@ function SalonRecommendationView() {
         googleMapsApiKey: GOOGLE_MAPS_API_KEY,
         libraries: ["places"],
     });
-    
     const [resultsLength, setResultLength] = useState(0)
     const [searchResults, setSearchResults] = useState([])
-    const [inputAddress, setAddress] = useState("")
     const [selected, setSelected] = useState(null);
 
     function Map() {
@@ -28,12 +26,11 @@ function SalonRecommendationView() {
         const [selectedPlace, setSelectedPlace] = useState(null)
         useEffect(() => {
             const listener = e => {
-            if (e.key === "Escape") {
-                setSelectedPlace(null);
-            }
+                if (e.key === "Escape") {
+                    setSelectedPlace(null);
+                }
             };
             window.addEventListener("keydown", listener);
-
             return () => {
                 window.removeEventListener("keydown", listener);
             };
@@ -135,10 +132,8 @@ function SalonRecommendationView() {
                 let lng = position.coords.longitude
                 setSelected({lat: lat, lng: lng})
                 searchNearbySalon(lat, lng);
-                setAddress(`${position.coords.latitude}, ${position.coords.longitude}`)
             },
             function(error) {
-                // setGeoError(error);
                 console.error("Error Code = " + error.code + " - " + error.message);
             }
         );
@@ -162,17 +157,13 @@ function SalonRecommendationView() {
         .catch(error => alert(error))
     }
 
-	useEffect(() => {
-        
-	}, [])
-
     return (
         <Container className="page-container">
             <Container>
                 <PlacesAutocomplete setSelected={setSelected} />
             </Container>
 
-            <Container className="">
+            <Container>
                 <Row>
                     <Col sm={8}>{isLoaded && <Map />}</Col>
                     <Col sm={4} className="results-col">
