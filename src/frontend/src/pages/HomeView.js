@@ -12,7 +12,7 @@ class HomeView extends Component {
     render() {
         return (
         <>
-        <Container fluid>
+        <Container fluid className='page-container'>
             <h1>Hairesthetics</h1>
                 <Row xs={1} md={2} lg={3} className="g-4">
                     <Col>

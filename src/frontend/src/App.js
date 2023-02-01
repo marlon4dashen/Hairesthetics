@@ -4,9 +4,10 @@ import HomeView from "./pages/HomeView"
 import HairStyleView from "./pages/HairStyleView"
 import HairColorView from "./pages/HairColorView"
 import FaceView from "./pages/FaceView"
-// import SalonRecommendationView from './pages/SalonRecommendationView';
+import SalonRecommendationView from './pages/SalonRecommendationView';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Header from './components/Navbar';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
           <Route path="/face" component={FaceView}/>
           <Route path="/style" component={HairStyleView}/>
           <Route path="/color" component={HairColorView}/>
-          {/* <Route path="/salon" component={SalonRecommendationView} /> */}
+          <Route path="/salon" component={SalonRecommendationView} />
         </Switch>
+        <Footer />
       </BrowserRouter>
     </div>
   );

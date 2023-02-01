@@ -71,7 +71,7 @@ function HairColorView() {
 
   return (
     <>
-    <Container fluid>    
+    <Container fluid className="page-container">    
         <Container fluid className="video-container">
             <Webcam ref={webcamRef} hidden />
             <canvas ref={photoRef}  />

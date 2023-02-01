@@ -8,14 +8,7 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
-import "@reach/combobox/styles.css";
+import AsyncSelect from 'react-select/async'
 
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
 function SalonRecommendationView() {
@@ -58,7 +51,7 @@ function SalonRecommendationView() {
                     <Marker 
                         key={salon.place_id} 
                         position={{lat: salon.lat, lng:salon.lng}}
-                        icon="./assets/icons/seat.png"
+                        // icon="./assets/icons/seat.png"
                         onClick={() => {
                             setSelectedPlace(salon);
                         }}
@@ -88,12 +81,18 @@ function SalonRecommendationView() {
         const {
             ready,
             value,
-            setValue,
             suggestions: { status, data },
+            setValue,
             clearSuggestions,
-        } = usePlacesAutocomplete();
+        } = usePlacesAutocomplete({
+            requestOptions: {
+            /* Define search scope here */
+            },
+            debounce: 300,
+        });
 
-        const handleSelect = async (address) => {
+        const handleSelect = async (inputText) => {
+            let address = inputText.label;
             setValue(address, false);
             clearSuggestions();
             const results = await getGeocode({ address });
@@ -102,27 +101,23 @@ function SalonRecommendationView() {
             searchNearbySalon(lat, lng);
         };
 
+        const loadOptions = async (inputText, callback) => {
+            setValue(inputText);
+            if (status === "OK") {
+                callback(data.map(({ place_id, description }) => ({label: description, value: place_id})))
+            }
+        }
+
         return (
             <>
                 <Row className="my-3">
-                    <Col xs={12} md={9} lg={10}>
-                        <Combobox onSelect={handleSelect}>
-                        <ComboboxInput
-                            value={value}
-                            onChange={(e) => setValue(e.target.value)}
-                            disabled={!ready}
-                            className="combobox-input"
-                            placeholder="Search an address"
+                    <Col>
+                        <AsyncSelect isSearchable={true} 
+                            placeholder="🔍 Search an address"
+                            loadOptions={loadOptions}
+                            onChange={handleSelect}
+                            isDisabled={!ready}
                         />
-                        <ComboboxPopover>
-                            <ComboboxList>
-                            {status === "OK" &&
-                                data.map(({ place_id, description }) => (
-                                <ComboboxOption key={place_id} value={description} />
-                                ))}
-                            </ComboboxList>
-                        </ComboboxPopover>
-                        </Combobox>
                     </Col>
                     <Col xs="auto" md="auto">
                         <Button variant="outline-info" onClick={locateUserLocation}><IoMdLocate /> Use current location</Button>
@@ -163,9 +158,7 @@ function SalonRecommendationView() {
                 setResultLength(data.length)
                 setSearchResults(data.salons)
                 console.log(data.salons)
-            }
-            
-        })
+            }})
         .catch(error => alert(error))
     }
 
@@ -174,15 +167,12 @@ function SalonRecommendationView() {
 	}, [])
 
     return (
-        <>
+        <Container className="page-container">
             <Container>
                 <PlacesAutocomplete setSelected={setSelected} />
             </Container>
-            {/* <Container>
-         
-            
-            </Container> */}
-            <Container class="main-container">
+
+            <Container className="">
                 <Row>
                     <Col sm={8}>{isLoaded && <Map />}</Col>
                     <Col sm={4} className="results-col">
@@ -203,7 +193,7 @@ function SalonRecommendationView() {
                                                  <ListGroup.Item>{salon.address}</ListGroup.Item>
                                                  <ListGroup.Item>
                                                     Ratings: {salon.rating} | 
-                                                    Total Reviews: {salon.user_ratings_total} | 
+                                                    Total Reviews: {salon.user_ratings_total}   
                                                     {(salon.website) && (<a href={salon.website} target="_blank" rel="noreferrer">Website</a>)}
                                                 </ListGroup.Item>
                                              </ListGroup>
@@ -216,7 +206,7 @@ function SalonRecommendationView() {
                     </Col>
                 </Row>
             </Container>
-        </>
+        </Container>
     );
 }
 
