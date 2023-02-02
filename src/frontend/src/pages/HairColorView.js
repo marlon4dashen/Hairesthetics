@@ -20,9 +20,9 @@ function HairColorView() {
     const [localMediaStream, setLocalMediaStream] = useState(null);
     const [currentInterval, setCurrentInterval] = useState(null);
     const [uploadedFile, setUploadFile] = useState(null);
+    const [uploadedFileURL, setUploadFileURL] = useState(null);
     const [downloadedFile, setDownloadedFile] = useState(null);
     const hiddenFileInput = useRef(null);
-
     const mediaWidth = 300;
     const mediaHeight = 300;
     const constraints = {
@@ -34,8 +34,8 @@ function HairColorView() {
     };
 
     const startCam = () => {
+        clearUploadedFile();
         setIsShowVideo(true);
-        setIsShowImage(false);
         socket.on('connect', function() {
             console.log('Connected!');
         });
@@ -46,6 +46,7 @@ function HairColorView() {
             let fps = 5;
             if (currentInterval){
                 clearInterval(currentInterval);
+                setCurrentInterval(null);
             }
             setCurrentInterval(setInterval(paintToCanvas, 1000/fps));
         }).catch(function(error) {
@@ -54,13 +55,16 @@ function HairColorView() {
     }
 
     const stopCam = () => {
-        const tracks = localMediaStream.getTracks();
-        tracks.forEach(track => track.stop());
-        if (currentInterval){
-            clearInterval(currentInterval);
+        if (localMediaStream){
+            const tracks = localMediaStream.getTracks();
+            tracks.forEach(track => track.stop());
+            if (currentInterval){
+                clearInterval(currentInterval);
+                setCurrentInterval(null);
+            }
+            setIsShowVideo(false);
+            axios.get("http://localhost:5001/clear")
         }
-        setIsShowVideo(false);
-        axios.get("http://localhost:5001/clear")
     }
 
     const paintToCanvas = () => {
@@ -71,19 +75,24 @@ function HairColorView() {
         photo.height = mediaHeight;
         ctx.drawImage(video, 0, 0, mediaWidth, mediaHeight);
         let dataURL = photo.toDataURL('image/jpeg');
-        console.log(hairColor);
+        // console.log(hairColor);
         socket.emit('input image', { image: dataURL, r:hairColor.r, g:hairColor.g, b:hairColor.b });
     };
 
     const handleClick = (event) => {
         hiddenFileInput.current.click();
+        stopCam()
     };
 
     const handleFileChange = (event) => {
-        setIsShowVideo(false);
         setIsShowImage(true);
         const file = event.target.files[0];
-        setUploadFile(URL.createObjectURL(file));
+        setUploadFile(file);
+        setUploadFileURL(URL.createObjectURL(file));
+        processImage(file);
+    };
+
+    const processImage = (file)  => {
         const formData = new FormData();
         formData.append('imgFile', file);
         axios.post("http://localhost:5001/image", formData, {params: {r: r, g: g, b: b}})
@@ -102,7 +111,24 @@ function HairColorView() {
             // }
         })
         .catch(error => console.log(error));
-    };
+    }
+
+    const onColorChange = (color) => {
+        setHairColor(color.rgb);
+        if (isShowImage && uploadedFile){
+            processImage(uploadedFile)
+        } else if (currentInterval){
+            clearInterval(currentInterval);
+            setCurrentInterval(setInterval(paintToCanvas, 1000/5));
+        }
+            
+    }
+
+    const clearUploadedFile = () => {
+        setUploadFile(null);
+        setDownloadedFile(null);
+        setIsShowImage(false);
+    }
 
     useEffect(()=>{
         return () => URL.revokeObjectURL(uploadedFile)
@@ -114,7 +140,9 @@ function HairColorView() {
             <Container>
                 <Button className='mx-1' onClick={startCam}><BsPlayCircle /> Start Video Feed</Button>
                 <Button className='mx-1' onClick={stopCam}><BsStopCircle /> Stop Video Feed</Button>
-                <input type="file" accept="image/*" ref={hiddenFileInput} onChange={handleFileChange} style={{display:'none'}} /> 
+                <input type="file" accept="image/*" ref={hiddenFileInput} onChange={handleFileChange} onClick={(event)=> { 
+               event.target.value = null
+          }} style={{display:'none'}} /> 
                 <Button className='mx-1' onClick={handleClick}><BsUpload /> Upload an Image</Button>
             </Container>
             <Divider variant="middle" className="container-divider"/>
@@ -123,7 +151,7 @@ function HairColorView() {
                     <Col>
                         {isShowVideo &&(<video className="webcam-video" autoPlay={true} ref={videoRef}></video>)}
                         {isShowVideo &&(<canvas ref={photoRef}/>)}
-                        {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}} src={uploadedFile} />}
+                        {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}} src={uploadedFileURL} />}
                     </Col>
                     <Col>
                         {isShowVideo && <img src="http://localhost:5001/video_feed"  alt="transformed_output"></img>}
@@ -138,14 +166,7 @@ function HairColorView() {
                     <Col>
                         <CirclePicker
                             color = {hairColor}
-                            onChangeComplete={(color) => {
-                                setHairColor(color.rgb);
-                                if (currentInterval){
-                                    clearInterval(currentInterval);
-                                    setCurrentInterval(setInterval(paintToCanvas, 1000/5));
-                                }
-                                    
-                            }}
+                            onChangeComplete={onColorChange}
                             className="color-picker"
                         />
                     </Col>
