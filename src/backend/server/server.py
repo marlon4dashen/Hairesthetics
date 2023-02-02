@@ -4,21 +4,15 @@ from sys import stdout
 from hair_segmentation.hair_color.hair_artist import Hair_Artist
 import requests
 import logging
-
+import cv2
 import os
-from flask import Flask, render_template, Response, jsonify, request
+from flask import Flask, render_template, Response, jsonify, request, make_response
 from flask_socketio import SocketIO, emit
 from flask_cors import cross_origin
-from .worker import Worker
-import cv2
-import numpy as np
+from .worker import Worker, ImageWorker
 from time import sleep, time
-import base64
-import io
-import imageio.v2 as imageio
 import logging
 from utils.utils import *
-import binascii
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -48,8 +42,13 @@ hair_artist = None
 
 @socketio.on('input image', namespace='/test')
 def test_message(input):
-    input = input.split(",")[1]
-    worker.enqueue_input(input)
+    image = input.get("image", None)
+    if not image:
+        raise Exception("No image")
+    image = image.split(",")[1]
+    r, g, b = input.get("r"), input.get("g"), input.get("b")
+    print([r,g,b])
+    worker.enqueue_input((image, [r, g, b]))
     #camera.enqueue_input(input)
 
     # image_data = input # Do your magical Image processing here!!
@@ -88,6 +87,24 @@ def init_camera():
 def index():
     """Video streaming home page."""
     return render_template('index.html')
+
+@app.route('/image', methods=['POST'])
+@cross_origin()
+def process_image():
+    args = request.args
+    files = request.files
+    inputImage = files.get('imgFile', default=None)
+    if not inputImage:
+        return jsonify({'code': 'error'})
+    global hair_artist
+    if not hair_artist:
+        hair_artist = Hair_Artist()
+    r, g, b = args.get("r", 0), args.get("g", 0), args.get("b", 0)
+    worker = ImageWorker(hair_artist)
+    output_str = worker.process_one(inputImage, [r, g, b])
+    response = make_response(output_str)
+    response.headers['Content-Type'] = 'image/jpeg'
+    return response        
 
 @app.route('/salons', methods=['GET'])
 @cross_origin()
@@ -132,6 +149,13 @@ def get_salons():
         size += 1
         salons.append(salon)
     return jsonify({'code': 'success', 'length': size, 'salons': salons})
+
+@app.route('/clear')
+@cross_origin()
+def clear_cache():
+    if worker:
+        worker.clean_up()
+    return jsonify({'code': 'success'})
 
 
 def gen():

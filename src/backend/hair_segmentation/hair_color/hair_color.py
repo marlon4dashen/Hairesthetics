@@ -105,7 +105,7 @@ def change_hair_color(img, target_color, session, input_name, input_width, input
         session, input_name, input_width, input_height, output_names, frame)
     # Change the color of the segmented hair area
     processed_frame = change_color(
-        img=frame, mask=masked_img, target_color=COLORS[target_color])
+        img=frame, mask=masked_img, target_color=target_color)
 
     label = "Changing hair color to {}".format(target_color)
     return processed_frame
