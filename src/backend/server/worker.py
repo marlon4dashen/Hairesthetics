@@ -2,7 +2,7 @@ import threading
 import binascii
 import sys
 from time import sleep, time
-from utils.utils import base64_to_cv2_image, cv2_image_to_base64
+from utils.utils import base64_to_cv2_image, cv2_image_to_base64, bytes_to_cv2_image
 from collections import deque
 
 
@@ -54,3 +54,15 @@ class Worker(object):
     def clean_up(self):
         self.to_process.clear()
         self.to_output.clear()
+
+
+class ImageWorker:
+    
+    def __init__(self, makeup_artist):
+        self.makeup_artist = makeup_artist
+    
+    def process_one(self, input_image, color):
+        input_image = bytes_to_cv2_image(input_image)
+        output_img = self.makeup_artist.apply_hair_color(input_image, color)
+        output_str = cv2_image_to_base64(output_img)
+        return output_str

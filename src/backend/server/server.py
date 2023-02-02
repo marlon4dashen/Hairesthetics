@@ -4,21 +4,15 @@ from sys import stdout
 from hair_segmentation.hair_color.hair_artist import Hair_Artist
 import requests
 import logging
-
+import cv2
 import os
-from flask import Flask, render_template, Response, jsonify, request
+from flask import Flask, render_template, Response, jsonify, request, make_response
 from flask_socketio import SocketIO, emit
 from flask_cors import cross_origin
-from .worker import Worker
-import cv2
-import numpy as np
+from .worker import Worker, ImageWorker
 from time import sleep, time
-import base64
-import io
-import imageio.v2 as imageio
 import logging
 from utils.utils import *
-import binascii
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -93,6 +87,24 @@ def init_camera():
 def index():
     """Video streaming home page."""
     return render_template('index.html')
+
+@app.route('/image', methods=['POST'])
+@cross_origin()
+def process_image():
+    args = request.args
+    files = request.files
+    inputImage = files.get('imgFile', default=None)
+    if not inputImage:
+        return jsonify({'code': 'error'})
+    global hair_artist
+    if not hair_artist:
+        hair_artist = Hair_Artist()
+    r, g, b = args.get("r", 0), args.get("g", 0), args.get("b", 0)
+    worker = ImageWorker(hair_artist)
+    output_str = worker.process_one(inputImage, [r, g, b])
+    response = make_response(output_str)
+    response.headers['Content-Type'] = 'image/jpeg'
+    return response        
 
 @app.route('/salons', methods=['GET'])
 @cross_origin()

@@ -14,3 +14,6 @@ def cv2_image_to_base64(cv_img):
 def base64_to_cv2_image(base64_img):
     img = Image.open(BytesIO(base64.b64decode(base64_img)))
     return numpy.array(img) 
+
+def bytes_to_cv2_image(bytes_img):
+    return numpy.array(Image.open(bytes_img))
