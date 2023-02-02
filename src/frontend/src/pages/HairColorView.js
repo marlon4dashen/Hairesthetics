@@ -20,9 +20,9 @@ function HairColorView() {
     const [localMediaStream, setLocalMediaStream] = useState(null);
     const [currentInterval, setCurrentInterval] = useState(null);
     const [uploadedFile, setUploadFile] = useState(null);
+    const [uploadedFileURL, setUploadFileURL] = useState(null);
     const [downloadedFile, setDownloadedFile] = useState(null);
     const hiddenFileInput = useRef(null);
-
     const mediaWidth = 300;
     const mediaHeight = 300;
     const constraints = {
@@ -55,14 +55,16 @@ function HairColorView() {
     }
 
     const stopCam = () => {
-        const tracks = localMediaStream.getTracks();
-        tracks.forEach(track => track.stop());
-        if (currentInterval){
-            clearInterval(currentInterval);
-            setCurrentInterval(null);
+        if (localMediaStream){
+            const tracks = localMediaStream.getTracks();
+            tracks.forEach(track => track.stop());
+            if (currentInterval){
+                clearInterval(currentInterval);
+                setCurrentInterval(null);
+            }
+            setIsShowVideo(false);
+            axios.get("http://localhost:5001/clear")
         }
-        setIsShowVideo(false);
-        axios.get("http://localhost:5001/clear")
     }
 
     const paintToCanvas = () => {
@@ -85,7 +87,12 @@ function HairColorView() {
     const handleFileChange = (event) => {
         setIsShowImage(true);
         const file = event.target.files[0];
-        setUploadFile(URL.createObjectURL(file));
+        setUploadFile(file);
+        setUploadFileURL(URL.createObjectURL(file));
+        processImage(file);
+    };
+
+    const processImage = (file)  => {
         const formData = new FormData();
         formData.append('imgFile', file);
         axios.post("http://localhost:5001/image", formData, {params: {r: r, g: g, b: b}})
@@ -104,7 +111,18 @@ function HairColorView() {
             // }
         })
         .catch(error => console.log(error));
-    };
+    }
+
+    const onColorChange = (color) => {
+        setHairColor(color.rgb);
+        if (isShowImage && uploadedFile){
+            processImage(uploadedFile)
+        } else if (currentInterval){
+            clearInterval(currentInterval);
+            setCurrentInterval(setInterval(paintToCanvas, 1000/5));
+        }
+            
+    }
 
     const clearUploadedFile = () => {
         setUploadFile(null);
@@ -133,7 +151,7 @@ function HairColorView() {
                     <Col>
                         {isShowVideo &&(<video className="webcam-video" autoPlay={true} ref={videoRef}></video>)}
                         {isShowVideo &&(<canvas ref={photoRef}/>)}
-                        {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}} src={uploadedFile} />}
+                        {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}} src={uploadedFileURL} />}
                     </Col>
                     <Col>
                         {isShowVideo && <img src="http://localhost:5001/video_feed"  alt="transformed_output"></img>}
@@ -148,14 +166,7 @@ function HairColorView() {
                     <Col>
                         <CirclePicker
                             color = {hairColor}
-                            onChangeComplete={(color) => {
-                                setHairColor(color.rgb);
-                                if (currentInterval){
-                                    clearInterval(currentInterval);
-                                    setCurrentInterval(setInterval(paintToCanvas, 1000/5));
-                                }
-                                    
-                            }}
+                            onChangeComplete={onColorChange}
                             className="color-picker"
                         />
                     </Col>
