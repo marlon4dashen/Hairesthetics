@@ -34,8 +34,8 @@ function HairColorView() {
     };
 
     const startCam = () => {
+        clearUploadedFile();
         setIsShowVideo(true);
-        setIsShowImage(false);
         socket.on('connect', function() {
             console.log('Connected!');
         });
@@ -46,6 +46,7 @@ function HairColorView() {
             let fps = 5;
             if (currentInterval){
                 clearInterval(currentInterval);
+                setCurrentInterval(null);
             }
             setCurrentInterval(setInterval(paintToCanvas, 1000/fps));
         }).catch(function(error) {
@@ -58,6 +59,7 @@ function HairColorView() {
         tracks.forEach(track => track.stop());
         if (currentInterval){
             clearInterval(currentInterval);
+            setCurrentInterval(null);
         }
         setIsShowVideo(false);
         axios.get("http://localhost:5001/clear")
@@ -71,16 +73,16 @@ function HairColorView() {
         photo.height = mediaHeight;
         ctx.drawImage(video, 0, 0, mediaWidth, mediaHeight);
         let dataURL = photo.toDataURL('image/jpeg');
-        console.log(hairColor);
+        // console.log(hairColor);
         socket.emit('input image', { image: dataURL, r:hairColor.r, g:hairColor.g, b:hairColor.b });
     };
 
     const handleClick = (event) => {
         hiddenFileInput.current.click();
+        stopCam()
     };
 
     const handleFileChange = (event) => {
-        setIsShowVideo(false);
         setIsShowImage(true);
         const file = event.target.files[0];
         setUploadFile(URL.createObjectURL(file));
@@ -104,6 +106,12 @@ function HairColorView() {
         .catch(error => console.log(error));
     };
 
+    const clearUploadedFile = () => {
+        setUploadFile(null);
+        setDownloadedFile(null);
+        setIsShowImage(false);
+    }
+
     useEffect(()=>{
         return () => URL.revokeObjectURL(uploadedFile)
     }, [uploadedFile])
@@ -114,7 +122,9 @@ function HairColorView() {
             <Container>
                 <Button className='mx-1' onClick={startCam}><BsPlayCircle /> Start Video Feed</Button>
                 <Button className='mx-1' onClick={stopCam}><BsStopCircle /> Stop Video Feed</Button>
-                <input type="file" accept="image/*" ref={hiddenFileInput} onChange={handleFileChange} style={{display:'none'}} /> 
+                <input type="file" accept="image/*" ref={hiddenFileInput} onChange={handleFileChange} onClick={(event)=> { 
+               event.target.value = null
+          }} style={{display:'none'}} /> 
                 <Button className='mx-1' onClick={handleClick}><BsUpload /> Upload an Image</Button>
             </Container>
             <Divider variant="middle" className="container-divider"/>
