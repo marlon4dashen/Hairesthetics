@@ -10,6 +10,8 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 import AsyncSelect from 'react-select/async'
 import Divider from '@mui/material/Divider';
+import blackDot from "../assets/icons/black-marker.png";
+import seat from "../assets/icons/seat.png"
 
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
 function SalonRecommendationView() {
@@ -27,14 +29,10 @@ function SalonRecommendationView() {
         const [selectedPlace, setSelectedPlace] = useState(null)
         useEffect(() => {
             const listener = e => {
-                if (e.key === "Escape") {
-                    setSelectedPlace(null);
-                }
+                if (e.key === "Escape") {setSelectedPlace(null);}
             };
             window.addEventListener("keydown", listener);
-            return () => {
-                window.removeEventListener("keydown", listener);
-            };
+            return () => { window.removeEventListener("keydown", listener);};
         }, []);
         return (
             <>
@@ -43,13 +41,14 @@ function SalonRecommendationView() {
                 center={(selected) ? selected : center}
                 mapContainerClassName="map-container"
             >
-                {/* {selected && <Marker position={selected} />} */}
+                {selected && <Marker position={selected} icon={blackDot}/>}
                 {searchResults.length > 0 && 
                 searchResults.map((salon)=>(
                     <Marker 
                         key={salon.place_id} 
                         position={{lat: salon.lat, lng:salon.lng}}
-                        // icon="./assets/icons/seat.png"
+                        icon={seat}
+                        className="salon-marker"
                         onClick={() => {
                             setSelectedPlace(salon);
                         }}
