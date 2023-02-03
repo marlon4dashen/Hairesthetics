@@ -21,8 +21,8 @@ function Header() {
             {/* </LinkContainer> */}
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">Help</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
+            {/* <Nav.Link href="#deets">Help</Nav.Link> */}
+            <Nav.Link eventKey={2} href="https://github.com/marlon4dashen/Hairesthetics">
               Contact
             </Nav.Link>
           </Nav>
