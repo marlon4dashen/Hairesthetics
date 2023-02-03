@@ -61,10 +61,11 @@ function SalonRecommendationView() {
                     onCloseClick={() => {
                         setSelectedPlace(null);
                     }}
+                    className="info-window"
                 >
                     {/* Display location information */}
-                    <div className="infoWindow" style={{fontWeight: 'bold', color: 'blue'}}>
-                        <h4>{selectedPlace.name}</h4>
+                    <div>
+                        <h4 style={{fontWeight: 'bold'}}>{selectedPlace.name}</h4>
                         <p>{selectedPlace.address}</p>
                     </div>
                 </InfoWindow>
