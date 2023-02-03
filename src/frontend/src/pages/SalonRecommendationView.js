@@ -12,8 +12,9 @@ import AsyncSelect from 'react-select/async'
 import Divider from '@mui/material/Divider';
 import blackDot from "../assets/icons/black-marker.png";
 import seat from "../assets/icons/seat.png"
-
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
+
+
 function SalonRecommendationView() {
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: GOOGLE_MAPS_API_KEY,
@@ -25,50 +26,43 @@ function SalonRecommendationView() {
 
     function Map() {
         const center = useMemo(() => ({ lat: 43.6532, lng: -79.3832 }), []);
-        
         const [selectedPlace, setSelectedPlace] = useState(null)
         useEffect(() => {
-            const listener = e => {
-                if (e.key === "Escape") {setSelectedPlace(null);}
-            };
+            const listener = e => {if (e.key === "Escape") {setSelectedPlace(null);}};
             window.addEventListener("keydown", listener);
             return () => { window.removeEventListener("keydown", listener);};
         }, []);
         return (
             <>
-            <GoogleMap
-                zoom={12}
-                center={(selected) ? selected : center}
-                mapContainerClassName="map-container"
-            >
+            <GoogleMap zoom={13} center={(selected) ? selected : center} mapContainerClassName="map-container">
                 {selected && <Marker position={selected} icon={blackDot}/>}
                 {searchResults.length > 0 && 
-                searchResults.map((salon)=>(
-                    <Marker 
-                        key={salon.place_id} 
-                        position={{lat: salon.lat, lng:salon.lng}}
-                        icon={seat}
-                        className="salon-marker"
-                        onClick={() => {
-                            setSelectedPlace(salon);
-                        }}
-                    />
+                    searchResults.map((salon)=>(
+                        <Marker 
+                            key={salon.place_id} 
+                            position={{lat: salon.lat, lng:salon.lng}}
+                            icon={seat}
+                            className="salon-marker"
+                            onClick={() => {
+                                setSelectedPlace(salon);
+                            }}
+                        />
                 ))}
                 {selectedPlace && (
-                <InfoWindow
-                    // info window open at clicked location
-                    position={{lat: selectedPlace.lat, lng: selectedPlace.lng}}
-                    onCloseClick={() => {
-                        setSelectedPlace(null);
-                    }}
-                    className="info-window"
-                >
-                    {/* Display location information */}
-                    <div>
-                        <h4 style={{fontWeight: 'bold'}}>{selectedPlace.name}</h4>
-                        <p>{selectedPlace.address}</p>
-                    </div>
-                </InfoWindow>
+                    <InfoWindow
+                        // info window open at clicked location
+                        position={{lat: selectedPlace.lat, lng: selectedPlace.lng}}
+                        onCloseClick={() => {
+                            setSelectedPlace(null);
+                        }}
+                        className="info-window"
+                    >
+                        {/* Display location information */}
+                        <div>
+                            <h4 style={{fontWeight: 'bold'}}>{selectedPlace.name}</h4>
+                            <p>{selectedPlace.address}</p>
+                        </div>
+                    </InfoWindow>
                 )}
             </GoogleMap>
             </>
@@ -83,9 +77,7 @@ function SalonRecommendationView() {
             setValue,
             clearSuggestions,
         } = usePlacesAutocomplete({
-            requestOptions: {
-            /* Define search scope here */
-            },
+            requestOptions: {/* Define search scope here */},
             debounce: 300,
         });
 
@@ -181,7 +173,6 @@ function SalonRecommendationView() {
                 <Row>
                     <Col sm={8}>{isLoaded && <Map />}</Col>
                     <Col sm={4} className="results-col">
-                        {/* <p>{resultsLength} results found</p> */}
                         <Divider className=""   
                             sx={{
                                 "&::before, &::after": {
@@ -192,11 +183,7 @@ function SalonRecommendationView() {
                         {( resultsLength >0 ) ? (
                             <ListGroup className="card-list-container">
                                 {searchResults.map((salon) => (
-                                    <ListGroup.Item
-                                        as="li"
-                                        className="d-flex align-items-start"
-                                        key={salon.place_id}
-                                    >
+                                    <ListGroup.Item as="li" className="d-flex align-items-start" key={salon.place_id}>
                                         <Card border='dark' className="salon-card">
                                             <Card.Header className="card-header">{salon.name}</Card.Header>
                                         <Card.Body>

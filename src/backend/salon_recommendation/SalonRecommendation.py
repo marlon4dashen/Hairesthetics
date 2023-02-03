@@ -46,7 +46,6 @@ class SalonRecommendation:
         headers = {}
         response = requests.request("GET", nearby_search_api, headers=headers, data=payload)
         results = response.json()['results']
-        print(results)
         return results
 
     def __fetch_place_details(self, place_id):
