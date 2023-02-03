@@ -1,13 +1,24 @@
 
 import React, { useEffect, useRef, useState } from "react"
 import io from "socket.io-client"
+import axios from "axios";
 import { CirclePicker, MaterialPicker } from 'react-color';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
-import {BsNutFill, BsPlayCircle, BsStopCircle, BsUpload} from 'react-icons/bs'
+import {BsPlayCircle, BsStopCircle, BsUpload} from 'react-icons/bs'
 import Divider from '@mui/material/Divider';
+import { styled } from '@mui/material/styles';
+import MuiGrid from '@mui/material/Grid';
+import Chip from '@mui/material/Chip';
 
 import "../css/HairColorView.css"
-import axios from "axios";
+
+const Grid = styled(MuiGrid)(({ theme }) => ({
+  width: '100%',
+  ...theme.typography.body2,
+  '& [role="separator"]': {
+    margin: theme.spacing(0, 2),
+  },
+}));
 
 const socket = io.connect('http://localhost:5001/test')
 function HairColorView() {
@@ -93,13 +104,6 @@ function HairColorView() {
                 let imageBytes = res.data;
                 setDownloadedFile(imageBytes);
             }
-            // check if user is successfully submitted
-            // if (res.data.message === "successful submission"){
-            //     alert("Review Submitted")
-            //     this.resetUserInfo()
-            // }else {
-            //     alert("Some errors occured. Try again later")
-            // }
         })
         .catch(error => console.log(error));
     };
@@ -112,12 +116,44 @@ function HairColorView() {
     <>
         <Container fluid className="page-container">    
             <Container>
-                <Button className='mx-1' onClick={startCam}><BsPlayCircle /> Start Video Feed</Button>
-                <Button className='mx-1' onClick={stopCam}><BsStopCircle /> Stop Video Feed</Button>
-                <input type="file" accept="image/*" ref={hiddenFileInput} onChange={handleFileChange} style={{display:'none'}} /> 
-                <Button className='mx-1' onClick={handleClick}><BsUpload /> Upload an Image</Button>
+            <Grid container className="my-3">
+                <Grid item xs>
+                    <div>
+                        <Divider className="option-title"   
+                            sx={{
+                                "&::before, &::after": {
+                                borderColor: "rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))",
+                            }}}>
+                            LIVE ACTION
+                        </Divider>
+                        <p className="my-2">See your hair color changes in real time</p>
+                        <Button variant="success" className='mx-1' onClick={startCam}><BsPlayCircle /> Start Video Feed</Button>
+                        <Button variant="danger" className='mx-1' onClick={stopCam}><BsStopCircle /> Stop Video Feed</Button>
+                    </div>
+                    
+                </Grid>
+                <Divider orientation="vertical" flexItem sx={{
+                                "&::before, &::after": {
+                                borderColor: "rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))",
+                            }}}>
+                    <Chip label="OR" />
+                </Divider>
+                <Grid item xs>
+                    <div>
+                        <Divider className="option-title" sx={{
+                                "&::before, &::after": {
+                                borderColor: "rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))",
+                            }}}>
+                            IMAGE
+                        </Divider>
+                        <p className="my-2">Upload an image with people in it and check how their hair color changes</p>
+                        <input type="file" accept="image/*" ref={hiddenFileInput} onChange={handleFileChange} style={{display:'none'}} /> 
+                        <Button variant="dark" className='mx-1' onClick={handleClick}><BsUpload /> Upload an Image</Button>
+                    </div>
+                </Grid>
+                </Grid>
             </Container>
-            <Divider variant="middle" className="container-divider"/>
+            <Divider orientation="horizontal"/>
             <Container fluid className="video-container">
                 <Row>
                     <Col>
@@ -132,8 +168,16 @@ function HairColorView() {
                     </Col>
                 </Row>
             </Container>
-            <Divider variant="middle" className="container-divider"/>
-            <Container fluid className="picker-container">
+            <Container>
+            <Divider sx={{
+                        "&::before, &::after": {
+                            borderColor: "rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))",
+                        }}}>
+                <Chip variant="outlined" label="Choose a color" />
+            </Divider>
+            </Container>
+
+            <Container fluid className="picker-container">                
                 <Row lg={12}>
                     <Col>
                         <CirclePicker

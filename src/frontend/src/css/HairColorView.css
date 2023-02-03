@@ -28,6 +28,12 @@
   /* opacity: 0 !important; */
 }
 
+.option-title {
+  font-size: 25px !important;
+  /* padding-top: 15px !important;
+  padding-bottom: 15px !important; */
+}
+
 .output-video {
   position: absolute;
   margin-left: auto;
