@@ -8,6 +8,7 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
+import { StylesConfig }from 'react-select'
 import AsyncSelect from 'react-select/async'
 
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
@@ -114,10 +115,23 @@ function SalonRecommendationView() {
                             loadOptions={loadOptions}
                             onChange={handleSelect}
                             isDisabled={!ready}
+                            theme={(theme) => ({
+                                ...theme,
+                                borderRadius: 0,
+                                colors: {
+                                    ...theme.colors,
+                                    primary25: 'lightgrey',
+                                    primary: 'black',
+                            },})}
+                            styles={{option: (base) => ({
+                                ...base,
+                                border: `1px solid black`,
+                                height: '100%',
+                            }),}}
                         />
                     </Col>
                     <Col xs="auto" md="auto">
-                        <Button variant="outline-info" onClick={locateUserLocation}><IoMdLocate /> Use current location</Button>
+                        <Button variant="dark" onClick={locateUserLocation}><IoMdLocate /> Use current location</Button>
                     </Col>
                 </Row>
             </>
