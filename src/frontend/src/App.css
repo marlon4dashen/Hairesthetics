@@ -10,14 +10,16 @@
 }
 
 .app-header {
-
+  height: 8vh;
 }
 
 .app-footer {
   background-color: gray!important;
   color: white;
   bottom: 0;
-  position: relative;
+  height: 8vh;
+  width: 100vw;
+  position: fixed;
 }
 
 .app-footer .copyright-section {
@@ -25,4 +27,13 @@
   align-items: center;
   padding-top: 15px;
   padding-bottom: 15px;
+}
+
+
+
+.rect-img {
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
+
 }

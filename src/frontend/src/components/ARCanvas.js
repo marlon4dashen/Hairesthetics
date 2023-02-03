@@ -90,13 +90,12 @@ const ThreeGrabber = (props) => {
 
 const compute_sizing = () => {
   // compute  size of the canvas:
-  const height = window.innerHeight
-  const wWidth = window.innerWidth
-  const width = Math.min(wWidth, height)
-
+  const height = window.innerHeight * 84/100
+  const width = window.innerWidth *5/6
+  // const width = Math.min(wWidth, height)
   // compute position of the canvas:
-  const top = 0
-  const left = (wWidth - width ) / 2
+  const top = window.outterWidth * 8/100
+  const left = window.innerWidth *1/12
   return {width, height, top, left}
 }
 
@@ -198,7 +197,7 @@ const ARCanvas = () => {
     return JEELIZFACEFILTER.destroy
   }, [isInitialized])
 
-  console.log('RENDER AppCanvas component')
+  console.log('RENDER ARCanvas component')
   return (
     <div>
       {/* Canvas managed by three fiber, for AR: */}

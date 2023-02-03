@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function Header() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className = "app-header">
       <Container>
         <Navbar.Brand as={Link} to="/">HairEsthetics</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -15,7 +15,7 @@ function Header() {
             <Nav.Link as={Link} to="/salon">Salon Recommendation</Nav.Link>
           </Nav>
           {/* Right Side */}
-          {/* <Nav> 
+          {/* <Nav>
             <Nav.Link href="#deets">Help</Nav.Link>
             <Nav.Link eventKey={2} href="#memes">
               Contact
