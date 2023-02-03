@@ -8,8 +8,8 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-import { StylesConfig }from 'react-select'
 import AsyncSelect from 'react-select/async'
+import Divider from '@mui/material/Divider';
 
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
 function SalonRecommendationView() {
@@ -108,7 +108,7 @@ function SalonRecommendationView() {
 
         return (
             <>
-                <Row className="my-3">
+                <Row className="pt-2 pb-3">
                     <Col>
                         <AsyncSelect isSearchable={true} 
                             placeholder="🔍 Search an address"
@@ -177,29 +177,35 @@ function SalonRecommendationView() {
                 <PlacesAutocomplete setSelected={setSelected} />
             </Container>
 
-            <Container>
+            <Container className='pb-4'>
                 <Row>
                     <Col sm={8}>{isLoaded && <Map />}</Col>
                     <Col sm={4} className="results-col">
-                        <p>{resultsLength} results found</p>
-         
+                        {/* <p>{resultsLength} results found</p> */}
+                        <Divider className=""   
+                            sx={{
+                                "&::before, &::after": {
+                                borderColor: "rgba(var(--bs-dark-rgb),1)",
+                            }}}>
+                            {resultsLength} results found
+                        </Divider>
                         {( resultsLength >0 ) ? (
-                            <ListGroup>
+                            <ListGroup className="card-list-container">
                                 {searchResults.map((salon) => (
                                     <ListGroup.Item
                                         as="li"
                                         className="d-flex align-items-start"
                                         key={salon.place_id}
                                     >
-                                        <Card border='primary' className="salon-card">
+                                        <Card border='dark' className="salon-card">
+                                            <Card.Header className="card-header">{salon.name}</Card.Header>
                                         <Card.Body>
-                                             <Card.Title>{salon.name}</Card.Title>
                                              <ListGroup className="list-group-flush">
                                                  <ListGroup.Item>{salon.address}</ListGroup.Item>
                                                  <ListGroup.Item>
                                                     Ratings: {salon.rating} | 
-                                                    Total Reviews: {salon.user_ratings_total}   
-                                                    {(salon.website) && (<a href={salon.website} target="_blank" rel="noreferrer">Website</a>)}
+                                                    Total Reviews: {salon.user_ratings_total}
+                                                    {(salon.website) && (<>{' '}|{' '} <a className="salon-link" href={salon.website} target="_blank" rel="noreferrer">Website</a></>)}
                                                 </ListGroup.Item>
                                              </ListGroup>
                                          </Card.Body>
