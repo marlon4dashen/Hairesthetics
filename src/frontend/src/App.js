@@ -21,7 +21,7 @@ function App() {
           <Route path="/color" component={HairColorView}/>
           <Route path="/salon" component={SalonRecommendationView} />
         </Switch>
-        {/* <Footer /> */}
+        <Footer />
       </BrowserRouter>
     </div>
   );

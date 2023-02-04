@@ -62,14 +62,19 @@ const useStyles = makeStyles((theme) => ({
     zIndex:"10",
 
   },
+  blank:{
+    height: "16vh",
+    width: "100vw",
+
+  },
   card: {
     height: "16vh",
     width: "17vh",
   },
   img:{
     "object-fit": "cover",
-    width: "12vh",
-    height: "12vh"
+    width: "17vh",
+    height: "12.5vh"
   }
 }));
 
@@ -93,7 +98,7 @@ function HairStyleView() {
     // { key: 5, label: "Short" },
     // { key: 6, label: "Medium" },
     // { key: 7, label: "Long" },
-    // { key: 8, label: "Ponytai" },
+    // { key: 8, label: "Ponytail" },
     // { key: 9, label: "Braids" }
   ]);
     return (
