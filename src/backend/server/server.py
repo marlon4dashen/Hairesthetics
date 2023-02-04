@@ -2,19 +2,18 @@ import eventlet
 eventlet.monkey_patch()
 from sys import stdout
 from hair_segmentation.hair_color.hair_artist import Hair_Artist
-import requests
+from salon_recommendation.SalonRecommendation import SalonRecommendation
 import logging
-import cv2
-import os
 from flask import Flask, render_template, Response, jsonify, request, make_response
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO
 from flask_cors import cross_origin
 from .worker import Worker, ImageWorker
-from time import sleep, time
+from time import sleep
 import logging
-from utils.utils import *
+import os
 from dotenv import load_dotenv
 load_dotenv()
+from utils.utils import *
 
 
 from .worker import Worker
@@ -69,8 +68,6 @@ def test_message(input):
 
     # camera.enqueue_input(base64_to_pil_image(input))
 
-
-
 @socketio.on('connect', namespace='/test')
 def test_connect():
     print("client connected")
@@ -114,40 +111,13 @@ def get_salons():
     userlng = args.get("lng", default="", type=str)
     if not userLat or not userlng:
         return jsonify({'code': 'error'})
-    apiKey = os.getenv('GOOGLE_API_KEY')
     try:
-        nearbySearchAPI = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={userLat}%2C{userlng}&radius=1200&type=hair_care&keyword=salon&key={apiKey}"
+        api_key = os.getenv('GOOGLE_API_KEY')
+        salon_handler = SalonRecommendation(userLat, userlng, api_key)
+        salons = salon_handler.get_nearby_salons()
+        size = salon_handler.get_size()
     except Exception as e:
         return jsonify({'code': 'error'})
-    payload={}
-    headers = {}
-    response = requests.request("GET", nearbySearchAPI, headers=headers, data=payload)
-    results = response.json()['results']
-    salons = []
-    size = 0
-
-    for result in results:
-        salon = dict()
-        salon['name'] = result['name']
-        salon['lat'] = result['geometry']['location']['lat']
-        salon['lng'] = result['geometry']['location']['lng']
-        placeId = result['place_id']
-        placeDetailsAPI = f"https://maps.googleapis.com/maps/api/place/details/json?place_id={placeId}&key={apiKey}"
-        placeDetails = None
-        try:
-            response = requests.request("GET", placeDetailsAPI, headers=headers, data=payload)
-            placeDetails = response.json()['result']
-        except Exception as e:
-            print(e)
-            continue
-        salon['place_id'] = placeId
-        salon['rating'] = result['rating']
-        salon['user_ratings_total'] = result['user_ratings_total']
-        if placeDetails:
-            salon['address'] = placeDetails.get("formatted_address", '')
-            salon['website'] = placeDetails.get('website','')
-        size += 1
-        salons.append(salon)
     return jsonify({'code': 'success', 'length': size, 'salons': salons})
 
 @app.route('/clear')
