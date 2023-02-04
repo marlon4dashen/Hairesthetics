@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { OrbitControls, Environment, Loader } from "@react-three/drei"
 
 // import main script and neural network model from  FaceFilter NPM package
 import { JEELIZFACEFILTER, NN_4EXPR } from 'facefilter'
@@ -30,7 +31,7 @@ const FaceFollower = (props) => {
 
   return (
     <object3D ref={objRef}>
-      <Suspense fallback={null}>
+
         {/* <mesh name="mainCube">
           <boxBufferGeometry args={[1, 1, 1]} />
           <meshNormalMaterial />
@@ -47,8 +48,6 @@ const FaceFollower = (props) => {
           colorWrite={false}
           renderOrder={1}
         /> */}
-      </Suspense>
-
 
     </object3D>
   )
@@ -90,12 +89,12 @@ const ThreeGrabber = (props) => {
 
 const compute_sizing = () => {
   // compute  size of the canvas:
-  const height = window.innerHeight * 84/100
-  const width = window.innerWidth *5/6
+  const height = window.innerHeight * 68/100
+  const width = window.innerWidth *7/10
   // const width = Math.min(wWidth, height)
   // compute position of the canvas:
   const top = window.outterWidth * 8/100
-  const left = window.innerWidth *1/12
+  const left = window.innerWidth *1.5/10
   return {width, height, top, left}
 }
 
@@ -200,6 +199,7 @@ const ARCanvas = () => {
   console.log('RENDER ARCanvas component')
   return (
     <div>
+      <Suspense fallback={null}>
       {/* Canvas managed by three fiber, for AR: */}
       <Canvas className='mirrorX' style={{
         position: 'fixed',
@@ -216,12 +216,20 @@ const ARCanvas = () => {
         <FaceFollower faceIndex={0} expression={_expressions[0]} />
       </Canvas>
 
+
+
     {/* Canvas managed by FaceFilter, just displaying the video (and used for WebGL computations) */}
       <canvas className='mirrorX' ref={faceFilterCanvasRef} style={{
         position: 'fixed',
         zIndex: 1,
         ...sizing
       }} width = {sizing.width} height = {sizing.height} />
+      </Suspense>
+      <Loader
+        styles={{
+          "backgroundColor": 'black',
+        }}
+      />
     </div>
   )
 }

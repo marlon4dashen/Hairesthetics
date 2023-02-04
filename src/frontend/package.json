@@ -13,6 +13,9 @@
     ]
   },
   "dependencies": {
+    "@mui/icons-material": "^5.0.6",
+    "@mui/styles": "^5.11.7",
+    "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.1",
