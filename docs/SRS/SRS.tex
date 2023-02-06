@@ -261,7 +261,7 @@ of the Volere template (\textcolor{blue}{RobertsonAndRobertson2012}).
 
 \subsection{Stakeholders}
 \subsubsection{User}
-\item People who have the demand to change their hair style and see how other hairstyles and different hair colors match their appearance virtually are welcome to explore in this iOS application.
+\item People who have the demand to change their hair style and see how other hairstyles and different hair colors match their appearance virtually are welcome to explore in this web application.
 
 \subsubsection{Client}
 
@@ -278,7 +278,7 @@ The identified users of the project can be categorized into 2 distinct groups. T
 It is assumed that all system users have experience operating with iOS applications. More specifically, all users are assumed to have experience working with iPhone, iOS 14, and above. They have been exposed to the camera app and most common icons by Apple.
 \begin{itemize}
     \item Novice User: The application requires no prior training, and it is meant for the public, so all non-administrative users are novice users. Their intention is to use the application to simulate hairstyles and hair colors virtually. Anyone who does not have optic disabilities and other physical disabilities that make them unable to use the application on a smartphone can use the application.
-    \item Administrative User: Their intention is not to use the application to simulate hairstyles, but to calibrate, configure, and maintain the application to make sure it functions properly and to its maximal capabilities. They wish to fix bugs, maintain database, and implement new features. They have a basic knowledge of computers, data management and app development.
+    \item Administrative User: Their intention is not to use the application to simulate hairstyles, but to calibrate, configure, and maintain the application to make sure it functions properly and to its maximal capabilities. They wish to fix bugs, maintain database, and implement new features. They have a basic knowledge of computers, data management and \sout{app} \textcolor{red}{web} development.
     
 \end{itemize}
 
@@ -305,19 +305,19 @@ It is assumed that all system users have experience operating with iOS applicati
 
 \subsection{Mandated Constraints}
 \subsubsection{Solution Constraints}
-\textbf{Description}: The product shall operate using iOS 14 and above. \\
-\textbf{Rationale}: The users use iOS 14 and do not want to update system. \\
-\textbf{Fit Criterion}: The product shall be approved as iOS 14 compliant by developers. \\
+\textbf{Description}: The product shall operate using \sout{iOS 14 and above.}\textcolor{red}{website browsers} \\
+\textbf{Rationale}: The users use \sout{iOS 14} \textcolor{red}{website browsers} and do not want to update system. \\
+\textbf{Fit Criterion}: The product shall be approved as \sout{iOS 14} \textcolor{red}{different borwsers} compliant by developers. \\
 \newline
-\textbf{Description}: The product shall use the default camera system on the iphone device to obtain the input image and videos from users. \\
+\textbf{Description}: The product shall use any camera input connected to the device to obtain the input image and videos from users. \\
 \textbf{Rationale}: The users will not pay for a new graphic input device. \\
 \textbf{Fit Criterion}: All graphical inputs should come from the default camera with the device. \\
 \subsubsection{Implementation Environment of the Current System}
 \begin{itemize}
-    \item Source code is entirely written in Python and swift.
+    \item Source code is entirely written in Python and \sout{swift} \textcolor{red}{JavaScript}.
     \item \sout{Backend framework Flask is used to create user login system.}
     \item \sout{MongoDB is used for storing and manipulating the password database.}
-    \item iOS AR kit is used for developing AR components.
+    \item \scout{\sout{iOS AR kit} \textcolor{red}{Three.js} }\textcolor{red}{ and React.js }is used for developing AR components.
     \item OpenCV is mainly used for capturing and analysing user's facial feature
 \end{itemize}
 \subsubsection{Off-The-Shelf Software}
@@ -335,7 +335,7 @@ The cost of the project must not exceed \$750. This limitation will constrain th
   
 \subsection{Relevant Facts and Assumptions}
 \begin{itemize}
-    \item Users will have access to the internet through WiFi or though their data plan from their mobile phone.
+    \item Users will have access to the internet through WiFi or though \textcolor{red}{ Cellular Data} from \sout{their mobile phone.}\textcolor{red}{ individual devices.}
     \item Users can understand English text.
     \item Users have healthy vision and have no difficulties in seeing colors, graphs and words on the mobile screen.
 \end{itemize}
@@ -412,7 +412,7 @@ The stretch goals are currently out of the scope of our requirements document, w
     \item \sout{UC3: Upload images: The user wants to upload images (after transformation) to their account}
     \item \sout{Save images: The user wants to save their images (after transformation)}
     \item \sout{Log into account: The user wants to log into their account}
-    \item Pick a hair salon: The user wants to pick a local hair salon
+    \item \sout{Pick a} \textcolor{red}{ Obatain information of recommended} hair salon: The user wants to pick a local hair salon \textcolor{red}{ with a high ranking.}
 \end{UC}
 
 \subsection{The Context of the System}
@@ -433,36 +433,38 @@ The stretch goals are currently out of the scope of our requirements document, w
         \item[] Math Specification: newImage $:=$ process($image$) $\Rightarrow$ ($\forall p :$ Pixels in image $|$ p[$Red$]*0.21 + p[$Green$]*0.72 + p[$Blue$]*0.07)
         \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must perform face shape detection on grayscale facial image
         \item[] Rationale: The pre-trained facial detection model needs a grayscale image as an input to provide a more accurate result
-        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must perform hair extraction on pre-processed image.
-        \item[] Rationale: The pre-trained hair detection model needs a grayscale image as an input to provide a more accurate result
-        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system compute the hair edge coordinates
-        \item[] Rationale: the pre-trained models will compute a series of important coordinates related to the hair. These coordinates will be used for various transformation.
+        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] \sout{The system must perform hair extraction on pre-processed image.}
+        \item[] \sout{Rationale: The pre-trained hair detection model needs a grayscale image as an input to provide a more accurate result}
+        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] \sout{The system compute the hair edge coordinates}
+        \item[] \sout{Rationale: the pre-trained models will compute a series of important coordinates related to the hair. These coordinates will be used for various transformation.}
         \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must mark the corners and shape with facial landmark coordinates.
         \item[] Rationale: Marking the boundary is important, because the transformations will only apply to the hair not the face.
-        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must store the coordinates from the hair and facial features.
+        \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must store the coordinates from the \sout{hair and} facial features.
     \end{itemize}
 
 \subsubsection{Hair Modification System}
     \begin{itemize}
         \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The user must choose a color from the provided options if hair color transformation is selected
         \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system must load the hair feature data for hair color transition
-        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system should map the hair coordinates on the image and apply the new rgb values to the region
-        \item[] Rationale: The hair coordinates are retrieved from facial recognition system, so new rgb colors can be applied to those regions
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system should map the hair coordinates on the \sout{image} \textcolor{red}{frame} and apply the new rgb values to the region
+        \item[] Rationale: The \textcolor{red}{facial} coordinates are retrieved from facial recognition system, and \textcolor{red}{the hair edges are computed in this system, so new rgb colors can be applied to the hair regions}.
         \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system must load the facial coordinates for hair style transformation
-        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The user must choose a hair style from the provided options if hair style transformation is selected
-        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system should load the selected hair style dataset from the database
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:]The user must choose a hair style from the provided options if hair style transformation is selected
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:]\sout{ The system should load the selected hair style dataset from the database}
         \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] the system should adjust the coordinate to be proportional with the image scale
         \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system should add the new hair style coordinates above the facial coordinates.
         \item[] Rationale: depends on the hair style, some can be placed on top of the existing hair style, or re-construct
-        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system should output the transformed face in image or video.
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system should output the transformed face in image or \sout{video} \textcolor{red}{streaming}.
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] \textcolor{red}{The system must perform hair extraction on pre-processed image.}
+        \item[] \textcolor{red}{Rationale: The pre-trained hair detection model needs a grayscale image as an input to provide a more accurate result}
     \end{itemize}
 \subsubsection{Hair Salon Recommendation System}
     \begin{itemize}
         \item[HR\refstepcounter{hrreqnum}\thehrreqnum \label{R_Inputs}:] The user must enter a address or turn on current location to use the recommendation system
-        \item[HR\refstepcounter{hrreqnum}\thehrreqnum \label{R_Inputs}:] The system must retrieve 5 nearby hair salon locations based on the input address
+        \item[HR\refstepcounter{hrreqnum}\thehrreqnum \label{R_Inputs}:] The system must retrieve \sout{5} nearby hair salon locations based on the input address
         \item[HR\refstepcounter{hrreqnum}\thehrreqnum \label{R_Inputs}:] The system should label the retrieved locations on a map
         \item[] Rationale: marking the locations on the map allows the user to see the distance to their current location visually
-        \item[HR\refstepcounter{hrreqnum}\thehrreqnum \label{R_Inputs}:] The system should rank the locations based on user review
+        \item[HR\refstepcounter{hrreqnum}\thehrreqnum \label{R_Inputs}:] The system should rank the locations \sout{based on user review} \textcolor{red}{using Bayesian average with average user rating and total number of user ratings}
         \item[] Rationale: the user reviews is a good indicator for deciding which one to go to
     \end{itemize}
     
@@ -478,7 +480,7 @@ The stretch goals are currently out of the scope of our requirements document, w
 \subsection{Finite State Machine}
 % \graphicspath{ {./fsm_1.jpg/} }
 % \includegraphics[width=\textwidth]{FSM}
-\begin{figure}[h!]
+\begin{figure}[H]
 \begin{center}
  \includegraphics[width=1\textwidth]{fsm_1}
 \caption{Finite State Machine}
@@ -551,8 +553,8 @@ N/A
 
 \subsubsection{Precision and Accuracy Requirements}
 \begin{itemize}
-    \item[PAR\refstepcounter{parreqnum}\theparreqnum \label{R_Inputs}:] The position of the AR hair must fit the users' head position on the screen within 1 millimeter accuracy.
-    \item[PAR\refstepcounter{parreqnum}\theparreqnum \label{R_Inputs}:] When users move their heads, the AR hair must move along the users' heads within 2 millimeters accuracy.
+    \item[PAR\refstepcounter{parreqnum}\theparreqnum \label{R_Inputs}:] The position of the AR hair must fit the users' head position on the screen within \sout{1 millimeter} \textcolor{red}{1 centimeter} accuracy.
+    \item[PAR\refstepcounter{parreqnum}\theparreqnum \label{R_Inputs}:] When users move their heads, the AR hair must move along the users' heads within \sout{2 millimeters} \textcolor{red}{1 centimeter} accuracy.
 \end{itemize}
 
 \subsubsection{Reliability and Availability Requirements}
@@ -572,9 +574,9 @@ N/A
 
 \subsubsection{Capacity Requirements}
 \begin{itemize}
-    \item[CCR\refstepcounter{ccrreqnum}\theccrreqnum \label{R_Inputs}:] The application must have a database to store every user's account information.
-    \item[] Fit Criteria: Database developer will do tests on the database such that the count of users' account information in the database equals the actual registered number of user accounts.
-    \item[CCR\refstepcounter{ccrreqnum}\theccrreqnum \label{R_Inputs}:] The product must have a database to store at least 10 different hairstyles.
+    \item[CCR\refstepcounter{ccrreqnum}\theccrreqnum \label{R_Inputs}:]\sout{The application must have a database to store every user's account information.
+    \item[] Fit Criteria: Database developer will do tests on the database such that the count of users' account information in the database equals the actual registered number of user accounts.}
+    \item[CCR\refstepcounter{ccrreqnum}\theccrreqnum \label{R_Inputs}:] \sout{The product must have a database to store at least 10 different hairstyles.}
 \end{itemize}
 
 \subsubsection{Scalability and Extensibility Requirements}
@@ -598,8 +600,8 @@ N/A
 
 \subsubsection{Productization Requirements}
 \begin{itemize}
-    \item[PDR\refstepcounter{pdrreqnum}\thepdrreqnum \label{R_Inputs}:] The product must be available to download via Apple App Store.
-    \item[] Fit Criteria: Volunteers and developers will search and download the application via Apple App Store and all people should download the application successfully.
+    \item[PDR\refstepcounter{pdrreqnum}\thepdrreqnum \label{R_Inputs}:] \sout{The product must be available to download via Apple App Store.} \textcolor{red}{The product must be accessed through any browser that support react implementation.}
+    \item[] Fit Criteria: Volunteers and developers will search and \sout{download the application via Apple App Store and all people should download the application successfully.} \textcolor{red}{access the web application from the browser using any devices with internet connection}
 \end{itemize}
 
 \subsubsection{Release Requirements}
@@ -624,13 +626,13 @@ N/A
 \subsubsection{Supportability Requirements}
 \begin{itemize}
     \item[SPR\refstepcounter{sprreqnum}\thesprreqnum \label{R_Inputs}:] 
-    The product shall be available on iPhone with iOS system 14 and after.
+    The product shall be available on \sout{iPhone with iOS system 14 and after.} \textcolor{red}{browsers that support react implementation.}
 \end{itemize}
 
 \subsubsection{Adaptablity Requirements}
 \begin{itemize}
     \item[ADR\refstepcounter{adrreqnum}\theadrreqnum \label{R_Inputs}:] 
-    The product shall be compatible with iOS system 14 and after.
+    The product shall be compatible with \sout{iOS system 14 and after.} \textcolor{red}{browsers that support react implementation.}
     
 \end{itemize}
 
@@ -681,8 +683,10 @@ N/A
 \begin{itemize}
     \item[PRR\refstepcounter{prrreqnum}\theprrreqnum \label{R_Inputs}:] Users will not be able to access data generated by other users.
     \item[] Fit Criteria: Developers will run tests in user role to ensure that users cannot access data generated by other users.
-    \item[PRR\refstepcounter{prrreqnum}\theprrreqnum \label{R_Inputs}:] Users will be required to register and login to the application with their emails.
+    
+    \item[PRR\refstepcounter{prrreqnum}\theprrreqnum \label{R_Inputs}:]\sout{Users will be required to register and login to the application with their emails.
     \item[] Fit Criteria: Developers will run tests in user role to ensure that users cannot access data generated by other users.
+    }
 \end{itemize}
 
 \subsubsection{Audit Requirements}
@@ -708,7 +712,7 @@ N/A
 \subsubsection{Compliance Requirements}
 \begin{itemize}
     \item[CPR\refstepcounter{cprreqnum}\thecprreqnum \label{R_Inputs}:] The product must state that the application does not take responsibility for any accidents resulting from its use. 
-    \item[] Fit Criteria: Developers will do user tests on application; when the application starts, application will pop up a window to ask the user to agree on the statements, and in the statements it must state that the application does not take responsibility for any accidents resulting from its use.
+    \item[]\sout{ Fit Criteria: Developers will do user tests on application; when the application starts, application will pop up a window to ask the user to agree on the statements, and in the statements it must state that the application does not take responsibility for any accidents resulting from its use.}
 \end{itemize}
 
 \subsubsection{Standards Requirements}
@@ -717,8 +721,8 @@ N/A
     \item[] Fit Criteria: There should be error handling in the application to catch any possible errors. Every time before a developer pushes the changes to GitHub, the developer must test the application to ensure the application is in error-safe state.
     \item[SDR\refstepcounter{sdrreqnum}\thesdrreqnum \label{R_Inputs}:] The product must follow modular design principles to allow for easy maintenance.
     \item[] Fit Criteria: The project will be split into different modules in later capstone documents, and every developer should follow the modular design in the document to implement the application.
-    \item[SDR\refstepcounter{sdrreqnum}\thesdrreqnum \label{R_Inputs}:] The application must be developed using iOS application style guides. 
-    \item[] Every time there is a pull request on GitHub, the team should run the application in XCode to see if it violates the iOS application style guides.
+    \item[SDR\refstepcounter{sdrreqnum}\thesdrreqnum \label{R_Inputs}:] The application must be developed using \sout{iOS} \textcolor{red}{web} application style guides. 
+    \item[] Every time there is a pull request on GitHub, the team should run the application in \sout{XCode} \textcolor{red}{their device} to see if it violates the \sout{iOS} \textcolor{red}{web} application style guides.
 
 \end{itemize}
 
@@ -730,9 +734,9 @@ N/A
 \noindent \begin{itemize}
 
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
-This project will only result in the development of a \sout{mobile iOS} \textcolor{red}{MacOS} app. However, an android application may also be developed to work with, or in place of, the \sout{mobile iOS} \textcolor{red}{MacOS} application in the future.
+This project will only result in the development of a \sout{mobile iOS} \sout{\textcolor{red}{MacOS}} \textcolor{red}{web} app. \sout{However, an android application may also be developed to work with, or in place of, the \sout{mobile iOS} \textcolor{red}{MacOS} application in the future.}
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
-The application may be extended to offer compatibility as a web application.
+The application may be extended to offer compatibility as a \sout{web} \textcolor{red}{mobile} application.
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
 The application will not initially pursue functionality for users to "cut" their 3D simulated hair.
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
@@ -741,9 +745,9 @@ The application will not initially pursue functionality for users to "cut" their
 The load capacity of the system is initially set low for the first edition of this application. As demand for the application increases, the load capacity must also increase to support a larger user base.
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
 The application may be required to include new features as discovered through use of the system in real-world scenarios.
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:]\sout{ 
 The format of the
-input and output data of facial recognition, hair modification, hair salon recommendation system.
+input and output data of facial recognition, hair modification, hair salon recommendation system.}
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
 The interface style requirements might change since no metric has been provided for this by stakeholders. 
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] 
@@ -865,7 +869,7 @@ Until now, there are a few similar open source projects online for us to go thro
     \begin{tabularx}{\linewidth}{|l|X|}
         \toprule {\bf Task Name} & {\bf Description}\\
         \midrule
-        Implement basic UI & An iOS UI that can access the camera and get camera inputs and pass it to back end\\
+        Implement basic UI & An \sout{iOS} \textcolor{red}{web} UI that can access the camera and get camera inputs and pass it to back end\\
         \hline
         Implement Computer Vision & A component in the back end that receives camera inputs and use computer vision technique to analyze human face and output to the front end\\
         \hline
@@ -900,11 +904,11 @@ N/A
 
 \subsection{Waiting Room}
 
-The application shall allow users to cut and make changes to their hairstyles, in order to enhance user experiences.
+The application shall allow users to \sout{cut and} make changes to their hairstyles, in order to enhance user experiences.
 
 \subsection{Ideas for Solutions}
 \begin{itemize}
-    \item Add function in computer vision to capture user hand gestures, with the specific gesture motion on a specific area of hair, the hair beneath the hand will be cut.
+    \item\sout{ Add function in computer vision to capture user hand gestures, with the specific gesture motion on a specific area of hair, the hair beneath the hand will be cut.}
 \end{itemize}
 
 \section{Traceability Matrix}
@@ -914,7 +918,7 @@ The application shall allow users to cut and make changes to their hairstyles, i
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-	& FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & HM1 & HM2 & HM3 & HM4 & HM5 & HM6 & HM7 & HM8 & HM9 \\
+	& FR1 & FR2 & FR3 & \textcolor{red}{HM10} & \sout{FR5} & FR6 & FR7 & HM1 & HM2 & HM3 & HM4 & HM5 & HM6 & HM7 & HM8 & HM9 \\
 \hline
 APR1        & & & & & & & & & & & & & & & & \\ \hline
 APR2        & & & & & & & & & & & & & & & &  \\ \hline
@@ -953,7 +957,7 @@ RER1        & & & & & & & & & & & & & & & & \\ \hline
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-	& FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & HM1 & HM2 & HM3 & HM4 & HM5 & HM6 & HM7 & HM8 & HM9 \\
+	& FR1 & FR2 & FR3 & \textcolor{red}{HM10} & \sout{FR5} & FR6 & FR7 & HM1 & HM2 & HM3 & HM4 & HM5 & HM6 & HM7 & HM8 & HM9 \\
 \hline
 RER2        & & & & & & & & & & & & & & & & \\ \hline
 MSR1        & & & & & & & & & & & & & & & & \\ \hline
