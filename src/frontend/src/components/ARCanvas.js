@@ -11,6 +11,7 @@ import { ThreeFiberHelper } from '../helpers/ThreeFiberHelper.js'
 import { ShortHair } from './Models/ShortHair.js'
 import { Braids } from './models/Braids.js'
 import { Head } from './Models/Head.js'
+import { Hat } from './Models/Hat.js'
 
 const _maxFacesDetected = 1 // max number of detected faces
 const _faceFollowers = new Array(_maxFacesDetected)
@@ -46,9 +47,17 @@ const FaceFollower = (props) => {
         }
         {props.selectedHair.selectedHair == 1 &&
           <Braids
-          rotation={[-Math.PI/2, Math.PI, 0]}
+          rotation={[-Math.PI, 0, 0]}
           position={[0, 0.45, -0.2]}
-          scale={[25, 25, 25]}
+          scale={[2, 2, 2]}
+          renderOrder={2}
+          />
+        }
+        {props.selectedHair.selectedHair == 2 &&
+          <Hat
+          rotation={[0, -Math.PI, 0]}
+          position={[0, 2.3, -1.5]}
+          scale={[2, 2, 2]}
           renderOrder={2}
           />
         }
