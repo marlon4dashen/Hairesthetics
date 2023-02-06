@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
 
   },
   blank:{
-    height: "68vh",
+    height: "70vh",
     width: "100vw",
 
   },
