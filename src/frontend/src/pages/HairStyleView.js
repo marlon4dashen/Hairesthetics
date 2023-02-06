@@ -108,7 +108,7 @@ function HairStyleView() {
     return (
       <ThemeProvider theme={themeDark}>
         <CssBaseline />
-        <div className="page-container">
+        <div className="hairstyle-page">
         <ARCanvas
           selectedHair={selectedHair}
         />

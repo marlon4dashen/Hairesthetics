@@ -13,13 +13,13 @@ import hairColor from "../assets/color_change.jpeg";
 import map from "../assets/map.png";
 
 function HomeView() {
-    
+
     return (
         <>
             <Grid container sx={{ marginTop: '5%' }}>
                 <Grid item xs={2}></Grid>
                 <Grid item xs={8}>
-                    <Typography variant='h3' color='#212529' sx={{ fontWeight: 'bold' }}>Hairesthetics</Typography>
+                    <Typography variant='h3' color='#212529' sx={{ fontWeight: 'bold' }}>HairEsthetics</Typography>
                 </Grid>
                 <Grid item xs={2}></Grid>
 
@@ -54,7 +54,7 @@ function HomeView() {
                     <Typography variant='h4' color='#212529' sx={{ fontWeight: 'bold' }}>Your personal hair stylist</Typography>
                 </Grid>
                 <Grid item xs={2}></Grid>
-                
+
                 <Grid item xs={2}></Grid>
                 <Grid item xs={8}>
                     <Typography variant='h6' color='#4f5d75' >
