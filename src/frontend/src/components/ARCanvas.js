@@ -10,6 +10,8 @@ import { JEELIZFACEFILTER, NN_4EXPR } from 'facefilter'
 import { ThreeFiberHelper } from '../helpers/ThreeFiberHelper.js'
 import { ShortHair } from './Models/ShortHair.js'
 import { Braids } from './models/Braids.js'
+import { Braids2 } from './models/Braids2.js'
+import { Ponytails } from './models/Ponytails.js'
 import { Head } from './Models/Head.js'
 import { Hat } from './Models/Hat.js'
 
@@ -46,6 +48,14 @@ const FaceFollower = (props) => {
           />
         }
         {props.selectedHair.selectedHair == 1 &&
+          <Hat
+          rotation={[0, -Math.PI, 0]}
+          position={[0, 2.2, -1.5]}
+          scale={[2, 2, 2]}
+          renderOrder={2}
+          />
+        }
+        {props.selectedHair.selectedHair == 2 &&
           <Braids
           rotation={[-Math.PI, 0, 0]}
           position={[0, 0.45, -0.2]}
@@ -53,20 +63,30 @@ const FaceFollower = (props) => {
           renderOrder={2}
           />
         }
-        {props.selectedHair.selectedHair == 2 &&
-          <Hat
-          rotation={[0, -Math.PI, 0]}
-          position={[0, 2.3, -1.5]}
+
+        {props.selectedHair.selectedHair == 3 &&
+          <Braids2
+          rotation={[0, Math.PI, 0]}
+          position={[0, 0.45, -0.2]}
           scale={[2, 2, 2]}
+          renderOrder={2}
+          />
+        }
+        {props.selectedHair.selectedHair == 4 &&
+          <Ponytails
+          rotation={[0, 0, 0]}
+          position={[0, 0.3, -0.8]}
+          scale={[0.12, 0.12, 0.12]}
           renderOrder={2}
           />
         }
 
         {/* <Head
-          position={[0, -0.9, 0]}
-          scale={[0.7, 0.7, 0.7]}
+          position={[0, -1.2, 0]}
+          scale={[0.5, 0.5, 0.5]}
           colorWrite={false}
-          renderOrder={1}
+          transparent={true}
+          renderOrder={20}
         /> */}
 
     </object3D>

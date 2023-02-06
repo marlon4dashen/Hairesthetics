@@ -9,7 +9,8 @@ Title: Wizard's hat
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-import url from '../../../public/scene-transformed.glb'
+import url from '../../../public/hat-transformed.glb'
+
 export function Hat(props) {
   const { nodes, materials } = useGLTF(url)
   return (
