@@ -1,0 +1,54 @@
+.places-container {
+  position: absolute;
+  z-index: 10;
+  width: 300px;
+}
+
+.map-container {
+  width: 100%;
+  min-height: 80vh;
+  /* height: 100%; */
+  border: 1px solid black;
+}
+
+.map-container .gm-style .gm-style-iw-c {
+  border: 2px solid black !important;
+}
+
+.combobox-input {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.results-col {
+  height: 80vh !important;
+  overflow-y: scroll !important;
+}
+
+.salon-card {
+  width: 100% !important;
+}
+
+.css-1im77uy-control {
+  border-color: black !important;
+  border-width: 2px !important;
+}
+
+.card-list-container {
+  --bs-list-group-border-color: none !important;
+}
+
+.card-header {
+  background-color: rgba(var(--bs-dark-rgb),1) !important;
+  color: white;
+}
+
+.salon-link {
+  text-decoration: none;
+  color: black;
+}
+
+.info-window {
+  border: 1px solid black !important;
+  color: black !important;
+}

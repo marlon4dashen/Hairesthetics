@@ -1,0 +1,32 @@
+.App {
+  text-align: center;
+
+  /* height: 100%; */
+}
+
+.page-container {
+  padding-top: 15px;
+  position: relative;
+  min-height: calc(100vh-85px);
+}
+
+.app-header {
+  height: 8vh;
+}
+
+.app-footer {
+  /* position: absolute; */
+  background-color: rgba(var(--bs-dark-rgb),1) !important;
+  color: white;
+  bottom: 0;
+  height: 8vh;
+  width: 100vw;
+}
+
+.app-footer .copyright-section {
+  display: flex;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+

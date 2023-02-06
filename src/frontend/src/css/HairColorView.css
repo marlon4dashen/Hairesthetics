@@ -1,0 +1,37 @@
+.video-container {
+  height: 300px;
+}
+.picker-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.color-picker {
+    height: 120px !important;
+}
+
+.material-picker {
+    width: 130px !important;
+    height: 120px !important;
+}
+
+.webcam-video {
+  display: none;
+}
+
+.option-title {
+  font-size: 25px !important;
+}
+
+.input-col {
+  display: flex !important;
+  justify-content: right;
+  padding-right: 30px !important;
+}
+
+.output-col {
+  display: flex !important;
+  justify-content: left;
+  padding-left: 30px !important;
+}
