@@ -7,6 +7,9 @@ import hair0 from "../../public/assets/hairstyles/hair0.png"
 import hair1 from "../../public/assets/hairstyles/hair1.png"
 import hair2 from "../../public/assets/hairstyles/hair2.png"
 import hair3 from "../../public/assets/hairstyles/hair3.png"
+import hair4 from "../../public/assets/hairstyles/hair4.png"
+import hair5 from "../../public/assets/hairstyles/hair5.png"
+import hair6 from "../../public/assets/hairstyles/hair6.png"
 import CssBaseline from "@mui/material/CssBaseline";
 
 import "../css/HairStyleView.css"
@@ -18,7 +21,7 @@ import {ThemeProvider} from '@mui/styles';
 
 
 
-const theme = createTheme({
+const themeDark = createTheme({
   palette: {
     background: {
       default: "#33374111;"
@@ -57,24 +60,26 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
     overflow: "auto",
     maxWidth: "100%",
-    position:"fixed",
-    top:"76vh",
-    zIndex:"10",
+    zIndex:3,
+
 
   },
   blank:{
-    height: "16vh",
+    height: "68vh",
     width: "100vw",
 
   },
   card: {
-    height: "16vh",
-    width: "17vh",
+    borderRadius: 0,
+    boxShadow: 'none',
+    height: "14vh",
+    width: "14vh",
   },
   img:{
+    borderRadius: 0,
     "object-fit": "cover",
-    width: "17vh",
-    height: "12.5vh"
+    width: "14vh",
+    height: "11vh"
   }
 }));
 
@@ -85,14 +90,13 @@ function HairStyleView() {
   const classes = useStyles();
 
   const [hairList, setHairList] = useState([
-    { key: 0, label: "Short", img:"/_/public/assets/hairstyles/hair0.png" },
+    { key: 0, label: "Bob", img:"/_/public/assets/hairstyles/hair0.png" },
     { key: 1, label: "Braids", img:"/_/public/assets/hairstyles/hair1.png"  },
-    { key: 2, label: "Medium", img:"/_/public/assets/hairstyles/hair2.png" },
-    { key: 3, label: "Long", img:"/_/public/assets/hairstyles/hair3.png" },
-    { key: 4, label: "Short", img:"/_/public/assets/hairstyles/hair0.png" },
-    { key: 5, label: "Braids", img:"/_/public/assets/hairstyles/hair1.png"  },
-    { key: 6, label: "Medium", img:"/_/public/assets/hairstyles/hair2.png" },
-    { key: 7, label: "Long", img:"/_/public/assets/hairstyles/hair3.png" }
+    { key: 2, label: "Straight", img:"/_/public/assets/hairstyles/hair2.png" },
+    { key: 3, label: "Long Curls", img:"/_/public/assets/hairstyles/hair3.png" },
+    { key: 4, label: "Afro", img:"/_/public/assets/hairstyles/hair4.png" },
+    { key: 5, label: "Ponytail", img:"/_/public/assets/hairstyles/hair5.png" },
+    { key: 6, label: "Undercut", img:"/_/public/assets/hairstyles/hair6.png" },
     // { key: 3, label: "Ponytail" },
     // { key: 4, label: "Braids" },
     // { key: 5, label: "Short" },
@@ -102,9 +106,13 @@ function HairStyleView() {
     // { key: 9, label: "Braids" }
   ]);
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeDark}>
         <CssBaseline />
-        <ARCanvas/>
+        <div className="page-container">
+        <ARCanvas
+          selectedHair={selectedHair}
+        />
+        <div className={classes.blank}/>
         <Box className={classes.root} >
         <Tabs
           variant="scrollable"
@@ -112,7 +120,7 @@ function HairStyleView() {
           allowScrollButtonsMobile
           TabIndicatorProps={{
             style: {
-              backgroundColor: "#444444"
+              backgroundColor: "#FFFFFF"
             }
           }}
           aria-label="scrollable auto tabs"
@@ -121,6 +129,7 @@ function HairStyleView() {
           {hairList.map((data) => (
           <Card
               className={classes.card}
+              style={{ borderRadius: 0, boxShadow: "none", backgroundColor:"#000000" }}
               label={data.label}
               selected={data.key === selectedHair}
               key={data.key}
@@ -134,7 +143,7 @@ function HairStyleView() {
                   image={data.img}
                   alt='hair-img'
                 />
-                  <Typography gutterBottom variant="h6" component="div">
+                  <Typography gutterBottom variant="h6" component="div" color="common.white">
                     {data.label}
                   </Typography>
               </CardActionArea>
@@ -143,7 +152,7 @@ function HairStyleView() {
           ))}
         </Tabs>
         </Box>
-
+        </div>
       </ThemeProvider>
     )
 }

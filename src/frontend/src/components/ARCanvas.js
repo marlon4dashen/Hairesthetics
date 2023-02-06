@@ -9,6 +9,7 @@ import { JEELIZFACEFILTER, NN_4EXPR } from 'facefilter'
 // The helper is not minified, feel free to customize it (and submit pull requests bro):
 import { ThreeFiberHelper } from '../helpers/ThreeFiberHelper.js'
 import { ShortHair } from './Models/ShortHair.js'
+import { Braids } from './models/Braids.js'
 import { Head } from './Models/Head.js'
 
 const _maxFacesDetected = 1 // max number of detected faces
@@ -28,7 +29,6 @@ const FaceFollower = (props) => {
 
 
   console.log('RENDER FaceFollower component')
-
   return (
     <object3D ref={objRef}>
 
@@ -36,12 +36,23 @@ const FaceFollower = (props) => {
           <boxBufferGeometry args={[1, 1, 1]} />
           <meshNormalMaterial />
         </mesh> */}
-        <ShortHair
-            rotation={[-Math.PI/2, 0, 0]}
-            position={[0, 0.45, -0.2]}
-            scale={[80, 80, 80]}
-            renderOrder={2}
+        {props.selectedHair.selectedHair == 0 &&
+          <ShortHair
+          rotation={[-Math.PI/2, 0, 0]}
+          position={[0, 0.45, -0.2]}
+          scale={[80, 80, 80]}
+          renderOrder={2}
           />
+        }
+        {props.selectedHair.selectedHair == 1 &&
+          <Braids
+          rotation={[-Math.PI/2, Math.PI, 0]}
+          position={[0, 0.45, -0.2]}
+          scale={[25, 25, 25]}
+          renderOrder={2}
+          />
+        }
+
         {/* <Head
           position={[0, -0.9, 0]}
           scale={[0.7, 0.7, 0.7]}
@@ -89,17 +100,17 @@ const ThreeGrabber = (props) => {
 
 const compute_sizing = () => {
   // compute  size of the canvas:
-  const height = window.innerHeight * 68/100
+  const height = window.innerHeight * 7/10
   const width = window.innerWidth *7/10
   // const width = Math.min(wWidth, height)
   // compute position of the canvas:
-  const top = window.outterWidth * 8/100
+  const top = window.innerHeight * 8/100
   const left = window.innerWidth *1.5/10
   return {width, height, top, left}
 }
 
 
-const ARCanvas = () => {
+const ARCanvas = (selectedHair) => {
 
   // init state:
   _expressions = []
@@ -213,7 +224,7 @@ const ARCanvas = () => {
       >
         <ambientLight />
         <ThreeGrabber sizing={sizing} />
-        <FaceFollower faceIndex={0} expression={_expressions[0]} />
+        <FaceFollower faceIndex={0} expression={_expressions[0]} selectedHair={selectedHair}/>
       </Canvas>
 
 
