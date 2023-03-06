@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "6cf7092a-571a-42fe-b357-78b4c208537d",
+		"name": "Salon Recommendation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18428621"
+	},
+	"item": [
+		{
+			"name": "Get Salon - Domain",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json()",
+							"",
+							"pm.test(\"response status\", function() {",
+							"    pm.response.to.have.status(200)",
+							"    pm.expect(responseJson).to.haveOwnProperty(\"code\")",
+							"    pm.expect(responseJson.code).to.eql(\"success\")",
+							"})",
+							"",
+							"pm.test(\"results length\", function() {",
+							"    pm.expect(responseJson).to.haveOwnProperty(\"length\")",
+							"    pm.expect(responseJson.length).to.eql(6)",
+							"})",
+							"",
+							"pm.test(\"results\", function() {",
+							"    pm.expect(responseJson).to.haveOwnProperty(\"salons\")",
+							"    pm.expect(responseJson.salons).to.be.an(\"array\")",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/salons?lat=43.258261094185&lng=-79.93406743889203",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"salons"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "43.258261094185"
+						},
+						{
+							"key": "lng",
+							"value": "-79.93406743889203"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Salon - Boundary",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json()",
+							"",
+							"pm.test(\"response status\", function() {",
+							"    pm.response.to.have.status(200)",
+							"    pm.expect(responseJson).to.haveOwnProperty(\"code\")",
+							"    pm.expect(responseJson.code).to.eql(\"success\")",
+							"})",
+							"",
+							"pm.test(\"results length\", function() {",
+							"    pm.expect(responseJson).to.haveOwnProperty(\"length\")",
+							"    pm.expect(responseJson.length).to.eql(0)",
+							"})",
+							"",
+							"pm.test(\"results\", function() {",
+							"    pm.expect(responseJson).to.haveOwnProperty(\"salons\")",
+							"    pm.expect(responseJson.salons).to.be.an(\"array\")",
+							"    pm.expect(responseJson.salons).to.eql([])",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/salons?lat=42.38739166651101&lng=-81.81503313888344",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"salons"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "42.38739166651101"
+						},
+						{
+							"key": "lng",
+							"value": "-81.81503313888344"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const responseJson = pm.response.json()",
+					"",
+					"pm.test(\"response status\", function() {",
+					"    pm.response.to.have.status(200)",
+					"    pm.expect(responseJson).to.haveOwnProperty(\"code\")",
+					"    pm.expect(responseJson.code).to.eql(\"success\")",
+					"})",
+					"",
+					"pm.test(\"results length\", function() {",
+					"    pm.expect(responseJson).to.haveOwnProperty(\"length\")",
+					"    pm.expect(responseJson.length).to.eql(6)",
+					"})",
+					"",
+					"pm.test(\"results\", function() {",
+					"    pm.expect(responseJson).to.haveOwnProperty(\"salons\")",
+					"    pm.expect(responseJson.salons).to.be.an(\"array\")",
+					"})",
+					"",
+					"const responseJson = pm.response.json()",
+					"",
+					"pm.test(\"response status\", function() {",
+					"    pm.response.to.have.status(200)",
+					"    pm.expect(responseJson).to.haveOwnProperty(\"code\")",
+					"    pm.expect(responseJson.code).to.eql(\"success\")",
+					"})",
+					"",
+					"pm.test(\"results length\", function() {",
+					"    pm.expect(responseJson).to.haveOwnProperty(\"length\")",
+					"    pm.expect(responseJson.length).to.eql(0)",
+					"})",
+					"",
+					"pm.test(\"results\", function() {",
+					"    pm.expect(responseJson).to.haveOwnProperty(\"salons\")",
+					"    pm.expect(responseJson.salons).to.be.an(\"array\")",
+					"    pm.expect(responseJson.salons).to.eql([])",
+					"})"
+				]
+			}
+		}
+	]
+}
