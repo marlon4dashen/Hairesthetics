@@ -11,7 +11,3 @@ describe("cameraDistance function", () => {
 
   });
 });
-
-const cameraDistance = (height, fov) => {
-  return (height / 2) / Math.tan((fov/2) * Math.PI / 180);
-}
