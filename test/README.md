@@ -1,5 +1,14 @@
-# Automated tests
+# Unit Tests
+### Backend
+* [Python Code Tests](./src/backend/testing)
 
-The folders and files for this folder are as follows:
+### Frontend
+* [Component Tests](./src/frontend/test/components)
+* [Model Tests](./src/frontend/test/models)
 
-Describe ...
+# Integration Tests
+### Backend
+* [Endpoint Tests](./src/backend/testing/endpoint)
+
+### Frontend
+* [View Tests](./src/frontend/test/pages)
