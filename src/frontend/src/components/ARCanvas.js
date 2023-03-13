@@ -12,7 +12,7 @@ import { ShortHair } from './Models/ShortHair.js'
 import { Braids } from './models/Braids.js'
 import { Braids2 } from './models/Braids2.js'
 import { Ponytails } from './models/Ponytails.js'
-import { Head } from './Models/Head.js'
+import { Head2 } from './models/Head2.js'
 import { MarilynMonroe } from './Models/MarilynMonroe.js'
 import { LowpolyHead } from './Models/LowpolyHead'
 import { Hat } from './Models/Hat.js'
@@ -51,10 +51,10 @@ const FaceFollower = (props) => {
           />
         }
         {props.selectedHair.selectedHair == 1 &&
-          <Hat
-          rotation={[0, -Math.PI, 0]}
-          position={[0, 1.825, -0.17]}
-          scale={[1.9, 1.9, 1.9]}
+          <Ponytails
+          rotation={[0, 0, 0]}
+          position={[0, 0.3, -0.8]}
+          scale={[0.12, 0.12, 0.12]}
           renderOrder={2}
           />
         }
@@ -67,23 +67,9 @@ const FaceFollower = (props) => {
           />
         }
 
-        {props.selectedHair.selectedHair == 3 &&
-          <Braids2
-          rotation={[0, Math.PI, 0]}
-          position={[0, 0.45, -0.2]}
-          scale={[2, 2, 2]}
-          renderOrder={2}
-          />
-        }
-        {props.selectedHair.selectedHair == 4 &&
-          <Ponytails
-          rotation={[0, 0, 0]}
-          position={[0, 0.3, -0.8]}
-          scale={[0.12, 0.12, 0.12]}
-          renderOrder={2}
-          />
-        }
-        <Head
+
+
+        <Head2
           position={[0, -1.0, 0]}
           scale={[0.5, 0.45, 0.45]}
           renderOrder={-1}

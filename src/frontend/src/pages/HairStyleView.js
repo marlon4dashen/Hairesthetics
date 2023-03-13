@@ -10,7 +10,7 @@ import hair3 from "../../public/assets/hairstyles/hair3.png"
 import hair4 from "../../public/assets/hairstyles/hair4.png"
 import hair5 from "../../public/assets/hairstyles/hair5.png"
 import hair6 from "../../public/assets/hairstyles/hair6.png"
-import hat from "../../public/assets/hairstyles/hat.png"
+import hair7 from "../../public/assets/hairstyles/hair7.png"
 import CssBaseline from "@mui/material/CssBaseline";
 
 import "../css/HairStyleView.css"
@@ -92,8 +92,8 @@ function HairStyleView() {
 
   const [hairList, setHairList] = useState([
     { key: 0, label: "Bob", img:"/_/public/assets/hairstyles/hair0.png" },
-    { key: 1, label: "Sorting Hat", img:"/_/public/assets/hairstyles/hat.png" },
-    { key: 2, label: "Braids", img:"/_/public/assets/hairstyles/hair1.png"  },
+    { key: 1, label: "Two Ponytails", img:"/_/public/assets/hairstyles/hair1.png" },
+    { key: 2, label: "Braids", img:"/_/public/assets/hairstyles/hair7.png"  },
     { key: 3, label: "Straight", img:"/_/public/assets/hairstyles/hair2.png" },
     { key: 4, label: "Long Curls", img:"/_/public/assets/hairstyles/hair3.png" },
     { key: 5, label: "Afro", img:"/_/public/assets/hairstyles/hair4.png" },
