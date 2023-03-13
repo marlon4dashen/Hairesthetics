@@ -10,21 +10,15 @@ Title: Male Head
 import React, { useRef } from 'react'
 import * as THREE from 'three'
 import { useGLTF } from '@react-three/drei'
-import url from "../../../public/head-transformed.glb"
+import url from "../../../public/manhead-transformed.glb"
 
 export function Head(props) {
   const { nodes, materials } = useGLTF(url)
-  const material = new THREE.MeshBasicMaterial({
-    color: 0x00ff00,
-    transparent: false,
-    colorWrite: false,
-  });
 
   const HiderMat = new THREE.MeshPhongMaterial({
     attach: 'material',
     color: 'hotpink',
     colorWrite: false,
-    renderOrder: 20,
   });
   return (
     <group {...props} dispose={null}>

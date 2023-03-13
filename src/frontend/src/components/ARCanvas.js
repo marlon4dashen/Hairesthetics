@@ -13,6 +13,8 @@ import { Braids } from './models/Braids.js'
 import { Braids2 } from './models/Braids2.js'
 import { Ponytails } from './models/Ponytails.js'
 import { Head } from './Models/Head.js'
+import { MarilynMonroe } from './Models/MarilynMonroe.js'
+import { LowpolyHead } from './Models/LowpolyHead'
 import { Hat } from './Models/Hat.js'
 
 const _maxFacesDetected = 1 // max number of detected faces
@@ -35,6 +37,7 @@ const FaceFollower = (props) => {
   return (
     <object3D ref={objRef}>
 
+
         {/* <mesh name="mainCube">
           <boxBufferGeometry args={[1, 1, 1]} />
           <meshNormalMaterial />
@@ -50,16 +53,16 @@ const FaceFollower = (props) => {
         {props.selectedHair.selectedHair == 1 &&
           <Hat
           rotation={[0, -Math.PI, 0]}
-          position={[0, 2.2, -1.5]}
-          scale={[2, 2, 2]}
+          position={[0, 1.825, -0.17]}
+          scale={[1.9, 1.9, 1.9]}
           renderOrder={2}
           />
         }
         {props.selectedHair.selectedHair == 2 &&
-          <Braids
-          rotation={[-Math.PI, 0, 0]}
+          <MarilynMonroe
+          rotation={[Math.PI/2, 0, 0]}
           position={[0, 0.45, -0.2]}
-          scale={[2, 2, 2]}
+          scale={[0.3, 0.3, 0.3]}
           renderOrder={2}
           />
         }
@@ -80,13 +83,15 @@ const FaceFollower = (props) => {
           renderOrder={2}
           />
         }
-
-        {/* <Head
-          position={[0, -1.2, 0]}
-          scale={[0.5, 0.5, 0.5]}
-          colorWrite={false}
-          transparent={true}
-          renderOrder={20}
+        <Head
+          position={[0, -1.0, 0]}
+          scale={[0.5, 0.45, 0.45]}
+          renderOrder={-1}
+        />
+        {/* <LowpolyHead
+          position={[0, -0.35, -0.1]}
+          scale={[0.60, 0.50, 0.5]}
+          renderOrder={-1}
         /> */}
 
     </object3D>
