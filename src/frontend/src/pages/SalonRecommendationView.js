@@ -10,6 +10,8 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 import AsyncSelect from 'react-select/async'
 import Divider from '@mui/material/Divider';
+import { Triangle } from  'react-loader-spinner'
+
 import blackDot from "../assets/icons/black-marker.png";
 import seat from "../assets/icons/seat.png"
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
@@ -23,6 +25,8 @@ function SalonRecommendationView() {
     const [resultsLength, setResultLength] = useState(0)
     const [searchResults, setSearchResults] = useState([])
     const [selected, setSelected] = useState(null);
+    const [complete, setComplete] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     function Map() {
         const center = useMemo(() => ({ lat: 43.6532, lng: -79.3832 }), []);
@@ -34,7 +38,7 @@ function SalonRecommendationView() {
         }, []);
         return (
             <>
-            <GoogleMap zoom={13} center={(selected) ? selected : center} mapContainerClassName="map-container">
+            <GoogleMap zoom={15} center={(selected) ? selected : center} mapContainerClassName="map-container">
                 {selected && <Marker position={selected} icon={blackDot}/>}
                 {searchResults.length > 0 && 
                     searchResults.map((salon)=>(
@@ -88,6 +92,7 @@ function SalonRecommendationView() {
             const results = await getGeocode({ address });
             const { lat, lng } = await getLatLng(results[0]);
             setSelected({lat: lat, lng: lng });
+            setLoading(true)
             searchNearbySalon(lat, lng);
         };
 
@@ -117,13 +122,13 @@ function SalonRecommendationView() {
                             },})}
                             styles={{option: (base) => ({
                                 ...base,
-                                border: `1px solid black`,
+                                border: `1px solid white`,
                                 height: '100%',
                             }),}}
                         />
                     </Col>
                     <Col xs="auto" md="auto">
-                        <Button variant="dark" onClick={locateUserLocation}><IoMdLocate /> Use current location</Button>
+                        <Button variant="outline-light" onClick={locateUserLocation}><IoMdLocate /> Use current location</Button>
                     </Col>
                 </Row>
             </>
@@ -137,6 +142,7 @@ function SalonRecommendationView() {
                 let lat = position.coords.latitude;
                 let lng = position.coords.longitude
                 setSelected({lat: lat, lng: lng})
+                setLoading(true)
                 searchNearbySalon(lat, lng);
             },
             function(error) {
@@ -149,17 +155,23 @@ function SalonRecommendationView() {
     }
 
     const searchNearbySalon = (inputLat, inputLng) => {
+        setComplete(false)
+        // setLoading(true)
         axios.get(`http://localhost:5001/salons?lat=${inputLat}&lng=${inputLng}`)
         .then(response => {
             const data = response.data
             var responseCode = data.code
             if (responseCode === 'error'){
                 alert("server error");
+                
             } else{
                 setResultLength(data.length)
                 setSearchResults(data.salons)
-                console.log(data.salons)
-            }})
+                // console.log(data.salons)
+            }
+            setComplete(true)
+            setLoading(false)
+            })
         .catch(error => alert(error))
     }
 
@@ -168,15 +180,16 @@ function SalonRecommendationView() {
             <Container>
                 <PlacesAutocomplete setSelected={setSelected} />
             </Container>
-
+            
             <Container className='pb-4'>
+                {complete ? (
                 <Row>
                     <Col sm={8}>{isLoaded && <Map />}</Col>
                     <Col sm={4} className="results-col">
-                        <Divider className=""   
+                        <Divider className="results-col-header"   
                             sx={{
                                 "&::before, &::after": {
-                                borderColor: "rgba(var(--bs-dark-rgb),1)",
+                                borderColor: "white",
                             }}}>
                             {resultsLength} results found
                         </Divider>
@@ -202,7 +215,17 @@ function SalonRecommendationView() {
                             </ListGroup>           
                         ): <></>}
                     </Col>
-                </Row>
+                </Row>) :
+                (loading && 
+                    <Triangle
+                        wrapperClass="loading-container"
+                        height="25%"
+                        width="25%"
+                        color="#FDFEFE"
+                        ariaLabel="triangle-loading"
+                        visible={!complete}
+                    />                
+                )}
             </Container>
         </Container>
     );

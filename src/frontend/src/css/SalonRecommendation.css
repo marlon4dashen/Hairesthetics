@@ -8,7 +8,7 @@
   width: 100%;
   min-height: 80vh;
   /* height: 100%; */
-  border: 1px solid black;
+  border: 2px solid white;
 }
 
 .map-container .gm-style .gm-style-iw-c {
@@ -30,12 +30,14 @@
 }
 
 .css-1im77uy-control {
-  border-color: black !important;
-  border-width: 2px !important;
+  border-color: white !important;
+  border-width: 1px !important;
+  background-color: transparent !important;
 }
 
 .card-list-container {
   --bs-list-group-border-color: none !important;
+  --bs-list-group-bg: transparent !important;
 }
 
 .card-header {
@@ -46,6 +48,15 @@
 .salon-link {
   text-decoration: none;
   color: black;
+}
+
+.results-col-header {
+  color: white;
+}
+
+.loading-container {
+  justify-content: center;
+  align-items: center;
 }
 
 .info-window {
