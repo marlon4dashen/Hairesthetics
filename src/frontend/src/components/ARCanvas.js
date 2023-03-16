@@ -14,7 +14,7 @@ import { Head2 } from './models/Head2.js'
 import { Hat } from './Models/Hat.js'
 import { Mm } from './Models/Mm.js'
 import { MediumHair } from './Models/MediumHair.js'
-MediumHair
+import { B2} from './Models/B2.js'
 import { Beard } from './Models/Beard.js'
 
 const _maxFacesDetected = 1 // max number of detected faces
@@ -79,8 +79,17 @@ const FaceFollower = (props) => {
         {props.selectedHair.selectedHair == 4 &&
           <Beard
           rotation={[0, 0, 0]}
-          position={[0, -0.4, 0.4]}
+          position={[0, -0.45, 0.4]}
           scale={[0.08, 0.08, 0.08]}
+          renderOrder={2}
+          color={props.selectedHair.color}
+          />
+        }
+        {props.selectedHair.selectedHair == 5 &&
+          <B2
+          rotation={[0, 0, 0]}
+          position={[0, -1.0, 0.2]}
+          scale={[0.20, 0.15, 0.15]}
           renderOrder={2}
           color={props.selectedHair.color}
           />
