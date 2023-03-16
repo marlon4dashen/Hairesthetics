@@ -172,6 +172,7 @@ const ARCanvas = (selectedHair) => {
     console.log('INFO: FACEFILTER IS READY')
     // there is only 1 face to track, so 1 face follower:
     ThreeFiberHelper.init(spec, _faceFollowers, callbackDetect)
+
   }
 
 

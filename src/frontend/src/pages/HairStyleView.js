@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function HairStyleView() {
-  const [selectedHair, setSelectedHair] = useState(0);
+  const [selectedHair, setSelectedHair] = useState(-1);
   const classes = useStyles();
 
   const [hairList, setHairList] = useState([
