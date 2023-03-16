@@ -6,9 +6,9 @@
 
 .map-container {
   width: 100%;
-  min-height: 80vh;
+  min-height: 50vh;
   /* height: 100%; */
-  border: 1px solid black;
+  border: 2px solid white;
 }
 
 .map-container .gm-style .gm-style-iw-c {
@@ -21,34 +21,36 @@
 }
 
 .results-col {
-  height: 80vh !important;
+  margin-top: 20px;
+  height: 30vh !important;
   overflow-y: scroll !important;
 }
 
-.salon-card {
-  width: 100% !important;
-}
-
 .css-1im77uy-control {
-  border-color: black !important;
-  border-width: 2px !important;
-}
-
-.card-list-container {
-  --bs-list-group-border-color: none !important;
-}
-
-.card-header {
-  background-color: rgba(var(--bs-dark-rgb),1) !important;
-  color: white;
+  border-color: white !important;
+  border-width: 1px !important;
+  background-color: transparent !important;
+  color: black !important;
 }
 
 .salon-link {
   text-decoration: none;
-  color: black;
+}
+
+.results-col-header {
+  color: white;
+}
+
+.loading-container {
+  justify-content: center;
+  align-items: center;
 }
 
 .info-window {
   border: 1px solid black !important;
   color: black !important;
 }
+
+/* .css-1im77uy-control {
+  color: black !important
+} */

@@ -35,3 +35,37 @@
   justify-content: left;
   padding-left: 30px !important;
 }
+
+.color-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    overflow: "auto";
+    max-width: 100%;
+    z-index: 3;
+}
+
+.color-card {
+  border-radius: 0;
+  box-shadow: none;
+  height: 10vh;
+  width: 10vh;
+}
+
+.color-img {
+  border-radius: 0;
+  object-fit: cover;
+  width: 10vh;
+  height: 10vh;
+  border: 1px solid white;
+}
+
+.option-tab {
+  color: white;
+}
+
+.tab-label {
+  color: white !important;
+}

@@ -1,0 +1,45 @@
+.banner-container {
+    /* padding-top: 13vh;
+    padding-bottom: 13vh; */
+    height: 35vh;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.features-container {
+    background-color: white;
+    min-height: 55vh;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 200px;
+    padding-right: 200px;
+}
+
+.feature-card {
+    /* margin-left: 20px;
+    margin-right: 20px; */
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    border-radius: 20px !important;
+}
+
+.feature-image {
+    height: 45vh;
+    border-top-left-radius: 20px !important;
+    border-top-right-radius: 20px !important;
+}
+
+.feature-body {
+    height: 25vh;
+}
+
+.feature-button {
+    background-color: transparent !important;
+    color: black !important;
+    border-color: black !important;
+}
+
+.feature-button:hover {
+    background-color: black !important;
+    color: white !important;
+}
