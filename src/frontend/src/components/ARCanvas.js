@@ -13,13 +13,10 @@ import { Ponytails } from './models/Ponytails.js'
 import { Head2 } from './models/Head2.js'
 import { Hat } from './Models/Hat.js'
 import { Mm } from './Models/Mm.js'
-<<<<<<< HEAD
 import { MediumHair } from './Models/MediumHair.js'
 MediumHair
-=======
 import { Beard } from './Models/Beard.js'
 
->>>>>>> a646813 (add beard)
 const _maxFacesDetected = 1 // max number of detected faces
 const _faceFollowers = new Array(_maxFacesDetected)
 let _expressions = null
