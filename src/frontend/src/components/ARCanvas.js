@@ -13,7 +13,8 @@ import { Ponytails } from './models/Ponytails.js'
 import { Head2 } from './models/Head2.js'
 import { Hat } from './Models/Hat.js'
 import { Mm } from './Models/Mm.js'
-
+import { MediumHair } from './Models/MediumHair.js'
+MediumHair
 const _maxFacesDetected = 1 // max number of detected faces
 const _faceFollowers = new Array(_maxFacesDetected)
 let _expressions = null
@@ -62,6 +63,15 @@ const FaceFollower = (props) => {
           rotation={[0, 0, 0]}
           position={[-0.2, -1.7, -0.5]}
           scale={[0.08, 0.08, 0.08]}
+          renderOrder={2}
+          color={props.selectedHair.color}
+          />
+        }
+        {props.selectedHair.selectedHair == 3 &&
+          <MediumHair
+          rotation={[0, 0, 0]}
+          position={[0, 0, -0.5]}
+          scale={[0.1675, 0.1675, 0.1675]}
           renderOrder={2}
           color={props.selectedHair.color}
           />
