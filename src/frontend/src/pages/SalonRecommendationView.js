@@ -10,6 +10,7 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 import AsyncSelect from 'react-select/async'
 import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
 import { Triangle } from  'react-loader-spinner'
 
 import blackDot from "../assets/icons/black-marker.png";
@@ -136,20 +137,22 @@ function SalonRecommendationView() {
     };
 
     const locateUserLocation = () => {
+        setLoading(true)
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
             function(position) {
                 let lat = position.coords.latitude;
                 let lng = position.coords.longitude
                 setSelected({lat: lat, lng: lng})
-                setLoading(true)
                 searchNearbySalon(lat, lng);
             },
             function(error) {
+                setLoading(false)
                 console.error("Error Code = " + error.code + " - " + error.message);
             }
         );
         }else {
+            setLoading(false)
             alert("Geolocation is not supported")
         }
     }
@@ -182,10 +185,12 @@ function SalonRecommendationView() {
             </Container>
             
             <Container className='pb-4'>
+                <Row>
+                    <Col>{isLoaded && <Map />}</Col>
+                </Row>
                 {complete ? (
                 <Row>
-                    <Col sm={8}>{isLoaded && <Map />}</Col>
-                    <Col sm={4} className="results-col">
+                    <Col className="results-col">
                         <Divider className="results-col-header"   
                             sx={{
                                 "&::before, &::after": {
@@ -194,11 +199,11 @@ function SalonRecommendationView() {
                             {resultsLength} results found
                         </Divider>
                         {( resultsLength >0 ) ? (
-                            <ListGroup className="card-list-container">
+                            <Grid container className='card-list-container' spacing={3} justifyContent="center" alignItems="center">
                                 {searchResults.map((salon) => (
-                                    <ListGroup.Item as="li" className="d-flex align-items-start" key={salon.place_id}>
-                                        <Card border='dark' className="salon-card">
-                                            <Card.Header className="card-header">{salon.name}</Card.Header>
+                                    <Grid item xs={9} md={4} key={salon.place_id}>
+                                        <Card border='light' className="salon-card">
+                                        <Card.Header className="card-header">{salon.name}</Card.Header>
                                         <Card.Body>
                                              <ListGroup className="list-group-flush">
                                                  <ListGroup.Item>{salon.address}</ListGroup.Item>
@@ -209,10 +214,10 @@ function SalonRecommendationView() {
                                                 </ListGroup.Item>
                                              </ListGroup>
                                          </Card.Body>
-                                        </Card>                                        
-                                    </ListGroup.Item>
+                                        </Card>      
+                                    </Grid>                                  
                                 ))}
-                            </ListGroup>           
+                            </Grid>           
                         ): <></>}
                     </Col>
                 </Row>) :

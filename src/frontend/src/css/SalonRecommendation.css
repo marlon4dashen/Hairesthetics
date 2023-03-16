@@ -6,7 +6,7 @@
 
 .map-container {
   width: 100%;
-  min-height: 80vh;
+  min-height: 50vh;
   /* height: 100%; */
   border: 2px solid white;
 }
@@ -21,33 +21,20 @@
 }
 
 .results-col {
-  height: 80vh !important;
+  margin-top: 20px;
+  height: 30vh !important;
   overflow-y: scroll !important;
-}
-
-.salon-card {
-  width: 100% !important;
 }
 
 .css-1im77uy-control {
   border-color: white !important;
   border-width: 1px !important;
   background-color: transparent !important;
-}
-
-.card-list-container {
-  --bs-list-group-border-color: none !important;
-  --bs-list-group-bg: transparent !important;
-}
-
-.card-header {
-  background-color: rgba(var(--bs-dark-rgb),1) !important;
-  color: white;
+  color: black !important;
 }
 
 .salon-link {
   text-decoration: none;
-  color: black;
 }
 
 .results-col-header {
@@ -63,3 +50,7 @@
   border: 1px solid black !important;
   color: black !important;
 }
+
+/* .css-1im77uy-control {
+  color: black !important
+} */
