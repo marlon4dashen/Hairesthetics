@@ -3,7 +3,6 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import {Link} from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
 import Button from '@mui/material/Button';
 import EastIcon from '@mui/icons-material/East';
 
@@ -13,7 +12,7 @@ import hairColor from "../assets/color_change.jpeg";
 import map from "../assets/map.png";
 
 import "../css/HomeView.css"
-import bannerImg from "../assets/b1.jpg"
+import bannerImg from "../assets/b4.jpg"
 
 function HomeView() {
 
@@ -25,7 +24,6 @@ function HomeView() {
             </Grid>
             
             <Grid container className='features-container' spacing={3} justifyContent="center" alignItems="center">
-            {/* <CardGroup className='features-container'> */}
             <Grid item xs={9} md={4}>
                 <Card className="feature-card">
                 <Card.Img variant="top" src={hairStyle} className="feature-image"/>
@@ -62,7 +60,6 @@ function HomeView() {
                 </Card.Body>
                 </Card>
             </Grid>
-            {/* </CardGroup> */}
             </Grid>
         </>
     );
