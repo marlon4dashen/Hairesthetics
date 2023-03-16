@@ -11,6 +11,8 @@ import { ThreeFiberHelper } from '../helpers/ThreeFiberHelper.js'
 import { ShortHair } from './Models/ShortHair.js'
 import { Ponytails } from './models/Ponytails.js'
 import { Head2 } from './models/Head2.js'
+import { Head1 } from './models/Head1.js'
+import { Head } from './models/Head.js'
 import { Hat } from './Models/Hat.js'
 import { Mm } from './Models/Mm.js'
 import { MediumHair } from './Models/MediumHair.js'
@@ -76,7 +78,12 @@ const FaceFollower = (props) => {
           color={props.selectedHair.color}
           />
         }
-        <Head2
+        {/* <Head2
+          position={[0, -1.0, 0]}
+          scale={[0.5, 0.45, 0.45]}
+          renderOrder={-1}
+        /> */}
+         <Head1
           position={[0, -1.0, 0]}
           scale={[0.5, 0.45, 0.45]}
           renderOrder={-1}
