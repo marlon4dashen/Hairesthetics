@@ -45,6 +45,7 @@ const FaceFollower = (props) => {
           position={[0, 0.45, -0.2]}
           scale={[80, 80, 80]}
           renderOrder={2}
+          color={props.selectedHair.color}
           />
         }
         {props.selectedHair.selectedHair == 1 &&
@@ -53,6 +54,7 @@ const FaceFollower = (props) => {
           position={[0, 0.3, -0.8]}
           scale={[0.12, 0.12, 0.12]}
           renderOrder={2}
+          color={props.selectedHair.color}
           />
         }
         {props.selectedHair.selectedHair == 2 &&
@@ -61,6 +63,7 @@ const FaceFollower = (props) => {
           position={[-0.2, -1.7, -0.5]}
           scale={[0.08, 0.08, 0.08]}
           renderOrder={2}
+          color={props.selectedHair.color}
           />
         }
         <Head2

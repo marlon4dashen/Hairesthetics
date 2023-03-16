@@ -12,6 +12,7 @@ import hair5 from "../../public/assets/hairstyles/hair5.png"
 import hair6 from "../../public/assets/hairstyles/hair6.png"
 import hair7 from "../../public/assets/hairstyles/hair7.png"
 import CssBaseline from "@mui/material/CssBaseline";
+import { CirclePicker, MaterialPicker } from 'react-color';
 
 import "../css/HairStyleView.css"
 
@@ -90,6 +91,7 @@ function HairStyleView() {
   const [selectedHair, setSelectedHair] = useState(-1);
   const classes = useStyles();
 
+  const [selectedColor, setColor] = useState("");
   const [hairList, setHairList] = useState([
     { key: 0, label: "Bob", img:"/_/public/assets/hairstyles/hair0.png" },
     { key: 1, label: "Two Ponytails", img:"/_/public/assets/hairstyles/hair1.png" },
@@ -107,12 +109,18 @@ function HairStyleView() {
     // { key: 8, label: "Ponytail" },
     // { key: 9, label: "Braids" }
   ]);
+
+  const onColorChange = (color) => {
+    console.log(color)
+    setColor(color.hex)
+  }
     return (
       <ThemeProvider theme={themeDark}>
         <CssBaseline />
         <div className="hairstyle-page">
         <ARCanvas
           selectedHair={selectedHair}
+          color={selectedColor}
         />
         <div className={classes.blank}/>
         <Box className={classes.root} >
@@ -154,6 +162,10 @@ function HairStyleView() {
           ))}
         </Tabs>
         </Box>
+        <CirclePicker
+            color = {selectedColor}
+            onChangeComplete={onColorChange}
+        />
         </div>
       </ThemeProvider>
     )

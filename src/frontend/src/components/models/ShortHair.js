@@ -11,7 +11,7 @@ export function ShortHair(props) {
   const { nodes, materials } = useGLTF(url)
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Geom.geometry} material={materials.Nancy_Hair} />
+      <mesh geometry={nodes.Geom.geometry} material={materials.Nancy_Hair} material-color={props.color} />
     </group>
   )
 }
