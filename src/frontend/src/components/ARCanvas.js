@@ -9,13 +9,12 @@ import { JEELIZFACEFILTER, NN_4EXPR } from 'facefilter'
 // The helper is not minified, feel free to customize it (and submit pull requests bro):
 import { ThreeFiberHelper } from '../helpers/ThreeFiberHelper.js'
 import { ShortHair } from './Models/ShortHair.js'
-import { Braids } from './models/Braids.js'
 import { Braids2 } from './models/Braids2.js'
 import { Ponytails } from './models/Ponytails.js'
 import { Head2 } from './models/Head2.js'
-import { MarilynMonroe } from './Models/MarilynMonroe.js'
-import { LowpolyHead } from './Models/LowpolyHead'
 import { Hat } from './Models/Hat.js'
+import { Mm } from './Models/Mm.js'
+import { Nadu } from './Models/Nadu.js'
 
 const _maxFacesDetected = 1 // max number of detected faces
 const _faceFollowers = new Array(_maxFacesDetected)
@@ -59,16 +58,33 @@ const FaceFollower = (props) => {
           />
         }
         {props.selectedHair.selectedHair == 2 &&
-          <MarilynMonroe
-          rotation={[Math.PI/2, 0, 0]}
-          position={[0, 0.45, -0.2]}
-          scale={[0.3, 0.3, 0.3]}
+          <Mm
+          rotation={[0, 0, 0]}
+          position={[-0.2, -1.7, -0.5]}
+          scale={[0.08, 0.08, 0.08]}
           renderOrder={2}
           />
         }
 
 
 
+        
+        {props.selectedHair.selectedHair == 3 &&
+          <Braids2
+          rotation={[Math.PI, Math.PI, Math.PI]}
+          position={[0, 0, 0.2]}
+          scale={[2.5, 2.5, 2.5]}
+          renderOrder={2}
+          />
+        }
+        {props.selectedHair.selectedHair == 4 &&
+          <Nadu
+          rotation={[0, 0, 0]}
+          position={[0, -0.4, 0]}
+          scale={[3, 3, 3]}
+          renderOrder={2}
+          />
+        }
         <Head2
           position={[0, -1.0, 0]}
           scale={[0.5, 0.45, 0.45]}
