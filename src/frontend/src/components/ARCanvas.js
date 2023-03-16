@@ -254,6 +254,10 @@ const ARCanvas = (selectedHair) => {
       <Loader
         styles={{
           "backgroundColor": 'black',
+          "fontSize": "5vw",
+        }}
+        dataStyles={{
+          "fontSize": "1.4vw",
         }}
       />
     </div>
