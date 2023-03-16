@@ -89,6 +89,7 @@ const useStyles = makeStyles((theme) => ({
 
 function HairStyleView() {
   const [selectedHair, setSelectedHair] = useState(-1);
+  const [selectedColor, setSelectedColor] = useState(-1);
   const classes = useStyles();
 
   const [hairList, setHairList] = useState([
@@ -108,10 +109,24 @@ function HairStyleView() {
     // { key: 8, label: "Ponytail" },
     // { key: 9, label: "Braids" }
   ]);
+  const colorList = [
+    { key: 0, label: "Smoky Black", hex:"#100C07", rgb: {r: "16", g: "12", b: "7"} },
+    { key: 1, label: "Liver", hex:"#5A3825", rgb: {r: "90", g: "56", b: "37"} },
+    { key: 2, label: "Brown Yellow", hex:"#CC9966", rgb: {r: "204", g: "153", b: "102"} },
+    { key: 3, label: "Indigo", hex:"#580271", rgb: {r: "88", g: "2", b: "113"} },
+    { key: 4, label: "Deep Magenta", hex:"#DB02C2", rgb: {r: "219", g: "2", b: "194"} },
+    { key: 5, label: "Crayola's Maize", hex:"#FFCC47", rgb: {r: "255", g: "204", b: "71"} },
+    { key: 6, label: "Golden Brown", hex:"#996515", rgb: {r: "153", g: "101", b: "21"} },
+    { key: 7, label: "Falu Red", hex:"#801818", rgb: {r: "128", g: "24", b: "24"} },
+    { key: 8, label: "Beer", hex:"#FF9321", rgb: {r: "255", g: "147", b: "33"} },
+    { key: 9, label: "Navy Blue", hex:"#1273DE", rgb: {r: "18", g: "115", b: "222"} },
+    { key: 10, label: "green", hex:"#4CAF50", rgb: {r: "76", g: "175", b: "80"} },
+];
     return (
       <ThemeProvider theme={themeDark}>
         <CssBaseline />
         <div className="hairstyle-page">
+
         <ARCanvas
           selectedHair={selectedHair}
         />
@@ -156,12 +171,54 @@ function HairStyleView() {
           ))}
         </Tabs>
         }
-        {
-          selectedHair != -1 &&
-
+        {selectedHair != -1 &&
+          <div>
+          <Grid container spacing={2}>
+            <Grid item xs={2}>
               <IconButton onClick={() => setSelectedHair(-1)}>
                 <ChevronLeftIcon style={{ color: 'white', fontSize: 40 }} />
               </IconButton>
+            </Grid>
+            <Grid item xs={10} >
+              <Tabs
+                variant="scrollable"
+                scrollButtons="auto"
+                allowScrollButtonsMobile
+                TabIndicatorProps={{
+                  style: {
+                    backgroundColor: "#FFFFFF"
+                  }
+                }}
+                aria-label="scrollable auto tabs"
+                >
+                {colorList.map((data) => (
+                <Card
+                    className={classes.card}
+                    style={{ borderRadius: 0, boxShadow: "none", backgroundColor:"#000000" }}
+                    label={data.label}
+                    key={data.key}
+                    onClick={() => setSelectedColor(data.key)}
+
+                >
+                    <CardActionArea>
+                      <CardMedia
+                        className={classes.img}
+                        style={{backgroundColor: data.hex}}
+                        alt='hair-img'
+                      />
+                        <Typography gutterBottom variant="h6" component="div" color="common.white">
+                          {data.label}
+                        </Typography>
+                    </CardActionArea>
+                  </Card>
+
+                ))}
+              </Tabs>
+            </Grid>
+          </Grid>
+
+        </div>
+
         }
 
         </Box>
