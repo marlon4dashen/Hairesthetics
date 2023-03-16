@@ -10,22 +10,14 @@ import url from "../../../public/mm-transformed.glb"
 export function Mm(props) {
   const { nodes, materials } = useGLTF(url)
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} onPointerDown={(e) => {e.stopPropagation(); state.current = e.object.material.name; console.log(state.current)}}
+    onPointerMissed={(e) =>{state.current = null} }>
       <group position={[2.04, 2.97, 3.69]} rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group position={[3.42, 31.24, 5.24]} rotation={[0.7, 0.32, 1.32]} scale={[101.73, 120.74, 102.19]}>
-            <mesh geometry={nodes.hair_monroe_HairMatAniso_mesh_0.geometry} material={materials.HairMatAniso_mesh} />
-            <mesh geometry={nodes.hair_monroe_HairMatAniso_mesh_0001.geometry} material={materials.HairMatAniso_mesh} />
-            <mesh geometry={nodes.hair_monroe_HairMatAniso_mesh_0002.geometry} material={materials.HairMatAniso_mesh} />
-          </group>
-        </group>
-      </group>
-      <group position={[2.04, 2.97, 3.69]} rotation={[-Math.PI / 2, 0, 0]}>
-        <group rotation={[Math.PI / 2, 0, 0]}>
-          <group position={[3.42, 31.24, 5.24]} rotation={[0.7, 0.32, 1.32]} scale={[101.73, 120.74, 102.19]}>
-            <mesh geometry={nodes.hair_monroe_HairMatAniso_mesh_0003.geometry} material={materials.HairMatAniso_mesh} />
-            <mesh geometry={nodes.hair_monroe_HairMatAniso_mesh_0004.geometry} material={materials.HairMatAniso_mesh} />
-            <mesh geometry={nodes.hair_monroe_HairMatAniso_mesh_0005.geometry} material={materials.HairMatAniso_mesh} />
+            <mesh geometry={nodes.hair_monroe_HairMatAniso_mesh_0.geometry} material={materials.HairMatAniso_mesh} material-color={props.color}/>
+            <mesh geometry={nodes.hair_monroe_HairMatAniso_mesh_0001.geometry} material={materials.HairMatAniso_mesh} material-color={props.color}/>
+            <mesh geometry={nodes.hair_monroe_HairMatAniso_mesh_0002.geometry} material={materials.HairMatAniso_mesh} material-color={props.color}/>
           </group>
         </group>
       </group>

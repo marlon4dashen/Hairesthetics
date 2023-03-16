@@ -13,6 +13,7 @@ import hair5 from "../../public/assets/hairstyles/hair5.png"
 import hair6 from "../../public/assets/hairstyles/hair6.png"
 import hair7 from "../../public/assets/hairstyles/hair7.png"
 import CssBaseline from "@mui/material/CssBaseline";
+import { CirclePicker, MaterialPicker } from 'react-color';
 
 import "../css/HairStyleView.css"
 
@@ -89,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
 
 function HairStyleView() {
   const [selectedHair, setSelectedHair] = useState(-1);
-  const [selectedColor, setSelectedColor] = useState(-1);
+  const [selectedColor, setSelectedColor] = useState("");
   const classes = useStyles();
 
   const [hairList, setHairList] = useState([
@@ -110,18 +111,19 @@ function HairStyleView() {
     // { key: 9, label: "Braids" }
   ]);
   const colorList = [
-    { key: 0, label: "Smoky Black", hex:"#100C07", rgb: {r: "16", g: "12", b: "7"} },
-    { key: 1, label: "Liver", hex:"#5A3825", rgb: {r: "90", g: "56", b: "37"} },
-    { key: 2, label: "Brown Yellow", hex:"#CC9966", rgb: {r: "204", g: "153", b: "102"} },
-    { key: 3, label: "Indigo", hex:"#580271", rgb: {r: "88", g: "2", b: "113"} },
-    { key: 4, label: "Deep Magenta", hex:"#DB02C2", rgb: {r: "219", g: "2", b: "194"} },
-    { key: 5, label: "Crayola's Maize", hex:"#FFCC47", rgb: {r: "255", g: "204", b: "71"} },
-    { key: 6, label: "Golden Brown", hex:"#996515", rgb: {r: "153", g: "101", b: "21"} },
-    { key: 7, label: "Falu Red", hex:"#801818", rgb: {r: "128", g: "24", b: "24"} },
-    { key: 8, label: "Beer", hex:"#FF9321", rgb: {r: "255", g: "147", b: "33"} },
-    { key: 9, label: "Navy Blue", hex:"#1273DE", rgb: {r: "18", g: "115", b: "222"} },
-    { key: 10, label: "green", hex:"#4CAF50", rgb: {r: "76", g: "175", b: "80"} },
-];
+    { key: 0, label: "Original", hex:"#FFFFFF", rgb: {r: "255", g: "255", b: "255"} },
+    { key: 1, label: "Smoky Black", hex:"#100C07", rgb: {r: "16", g: "12", b: "7"} },
+    { key: 2, label: "Liver", hex:"#5A3825", rgb: {r: "90", g: "56", b: "37"} },
+    { key: 3, label: "Brown Yellow", hex:"#CC9966", rgb: {r: "204", g: "153", b: "102"} },
+    { key: 4, label: "Indigo", hex:"#580271", rgb: {r: "88", g: "2", b: "113"} },
+    { key: 5, label: "Deep Magenta", hex:"#DB02C2", rgb: {r: "219", g: "2", b: "194"} },
+    { key: 6, label: "Crayola's Maize", hex:"#FFCC47", rgb: {r: "255", g: "204", b: "71"} },
+    { key: 7, label: "Golden Brown", hex:"#996515", rgb: {r: "153", g: "101", b: "21"} },
+    { key: 8, label: "Falu Red", hex:"#801818", rgb: {r: "128", g: "24", b: "24"} },
+    { key: 9, label: "Beer", hex:"#FF9321", rgb: {r: "255", g: "147", b: "33"} },
+    { key: 10, label: "Navy Blue", hex:"#1273DE", rgb: {r: "18", g: "115", b: "222"} },
+    { key: 11, label: "green", hex:"#4CAF50", rgb: {r: "76", g: "175", b: "80"} }];
+
     return (
       <ThemeProvider theme={themeDark}>
         <CssBaseline />
@@ -129,6 +131,7 @@ function HairStyleView() {
 
         <ARCanvas
           selectedHair={selectedHair}
+          color={selectedColor}
         />
         <div className={classes.blank}/>
         <Box className={classes.root} >
@@ -197,7 +200,7 @@ function HairStyleView() {
                     style={{ borderRadius: 0, boxShadow: "none", backgroundColor:"#000000" }}
                     label={data.label}
                     key={data.key}
-                    onClick={() => setSelectedColor(data.key)}
+                    onClick={() => setSelectedColor(data.hex)}
 
                 >
                     <CardActionArea>
