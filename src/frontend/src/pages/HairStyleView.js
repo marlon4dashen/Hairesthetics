@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import {Card, CardContent, CardMedia, CardActionArea, Button, Typography, Grid, Paper, IconButton, Chip, Box, Tabs} from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import styled from "@emotion/styled";
 import hair0 from "../../public/assets/hairstyles/hair0.png"
 import hair1 from "../../public/assets/hairstyles/hair1.png"
@@ -116,6 +117,7 @@ function HairStyleView() {
         />
         <div className={classes.blank}/>
         <Box className={classes.root} >
+        {selectedHair == -1 &&
         <Tabs
           variant="scrollable"
           scrollButtons="auto"
@@ -153,6 +155,15 @@ function HairStyleView() {
 
           ))}
         </Tabs>
+        }
+        {
+          selectedHair != -1 &&
+
+              <IconButton onClick={() => setSelectedHair(-1)}>
+                <ChevronLeftIcon style={{ color: 'white', fontSize: 40 }} />
+              </IconButton>
+        }
+
         </Box>
         </div>
       </ThemeProvider>
