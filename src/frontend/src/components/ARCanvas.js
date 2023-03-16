@@ -9,13 +9,10 @@ import { JEELIZFACEFILTER, NN_4EXPR } from 'facefilter'
 // The helper is not minified, feel free to customize it (and submit pull requests bro):
 import { ThreeFiberHelper } from '../helpers/ThreeFiberHelper.js'
 import { ShortHair } from './Models/ShortHair.js'
-import { Braids } from './models/Braids.js'
-import { Braids2 } from './models/Braids2.js'
 import { Ponytails } from './models/Ponytails.js'
-import { Head } from './Models/Head.js'
-import { MarilynMonroe } from './Models/MarilynMonroe.js'
-import { LowpolyHead } from './Models/LowpolyHead'
+import { Head2 } from './models/Head2.js'
 import { Hat } from './Models/Hat.js'
+import { Mm } from './Models/Mm.js'
 
 const _maxFacesDetected = 1 // max number of detected faces
 const _faceFollowers = new Array(_maxFacesDetected)
@@ -51,31 +48,6 @@ const FaceFollower = (props) => {
           />
         }
         {props.selectedHair.selectedHair == 1 &&
-          <Hat
-          rotation={[0, -Math.PI, 0]}
-          position={[0, 1.825, -0.17]}
-          scale={[1.9, 1.9, 1.9]}
-          renderOrder={2}
-          />
-        }
-        {props.selectedHair.selectedHair == 2 &&
-          <MarilynMonroe
-          rotation={[Math.PI/2, 0, 0]}
-          position={[0, 0.45, -0.2]}
-          scale={[0.3, 0.3, 0.3]}
-          renderOrder={2}
-          />
-        }
-
-        {props.selectedHair.selectedHair == 3 &&
-          <Braids2
-          rotation={[0, Math.PI, 0]}
-          position={[0, 0.45, -0.2]}
-          scale={[2, 2, 2]}
-          renderOrder={2}
-          />
-        }
-        {props.selectedHair.selectedHair == 4 &&
           <Ponytails
           rotation={[0, 0, 0]}
           position={[0, 0.3, -0.8]}
@@ -83,7 +55,15 @@ const FaceFollower = (props) => {
           renderOrder={2}
           />
         }
-        <Head
+        {props.selectedHair.selectedHair == 2 &&
+          <Mm
+          rotation={[0, 0, 0]}
+          position={[-0.2, -1.7, -0.5]}
+          scale={[0.08, 0.08, 0.08]}
+          renderOrder={2}
+          />
+        }
+        <Head2
           position={[0, -1.0, 0]}
           scale={[0.5, 0.45, 0.45]}
           renderOrder={-1}
@@ -192,6 +172,7 @@ const ARCanvas = (selectedHair) => {
     console.log('INFO: FACEFILTER IS READY')
     // there is only 1 face to track, so 1 face follower:
     ThreeFiberHelper.init(spec, _faceFollowers, callbackDetect)
+
   }
 
 
@@ -273,6 +254,10 @@ const ARCanvas = (selectedHair) => {
       <Loader
         styles={{
           "backgroundColor": 'black',
+          "fontSize": "5vw",
+        }}
+        dataStyles={{
+          "fontSize": "1.4vw",
         }}
       />
     </div>
