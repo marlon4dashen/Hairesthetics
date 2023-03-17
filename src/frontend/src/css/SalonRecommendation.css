@@ -21,15 +21,16 @@
 }
 
 .results-col {
-  margin-top: 20px;
+  padding-top: 20px;
   height: 30vh !important;
   overflow-y: scroll !important;
+  /* background-color: white; */
 }
 
 .css-1im77uy-control {
   border-color: white !important;
   border-width: 1px !important;
-  background-color: transparent !important;
+  background-color: black !important;
   color: black !important;
 }
 
@@ -38,7 +39,8 @@
 }
 
 .results-col-header {
-  color: white;
+  color: #4DB6AC;
+  font-weight: bold;
 }
 
 .loading-container {
