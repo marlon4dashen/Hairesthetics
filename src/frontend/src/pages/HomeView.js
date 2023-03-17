@@ -12,10 +12,9 @@ import hairColor from "../assets/color_change.jpeg";
 import map from "../assets/map.png";
 
 import "../css/HomeView.css"
-import bannerImg from "../assets/b4.jpg"
+import bannerImg from "../assets/b6.jpg"
 
 function HomeView() {
-
     return (
         <>
             <Grid container direction="column" className='banner-container' justifyContent="center" alignItems="center" style={{backgroundImage: `url(${bannerImg})`}}>
@@ -24,7 +23,7 @@ function HomeView() {
             </Grid>
             
             <Grid container className='features-container' spacing={3} justifyContent="center" alignItems="center">
-            <Grid item xs={9} md={4}>
+            <Grid item xs={9} md={4} className='grid-item'>
                 <Card className="feature-card">
                 <Card.Img variant="top" src={hairStyle} className="feature-image"/>
                 <Card.Body className='feature-body'>
@@ -36,19 +35,19 @@ function HomeView() {
                 </Card.Body>
                 </Card>
             </Grid>
-            <Grid item xs={9} md={4}>
+            <Grid item xs={9} md={4} className='grid-item'>
                 <Card className="feature-card">
                 <Card.Img variant="top" src={hairColor} className="feature-image"/>
                 <Card.Body className='feature-body'>
                     <Card.Title>Realtime Hair Color Segmentation</Card.Title>
                     <Card.Text>
-                    Using advanced deep learning techniques we can dynamically change hair color in live video and images.
+                    Using advanced deep learning techniques, we can dynamically change hair color in live video and image.
                     </Card.Text>
                     <Button className="feature-button" variant="outlined" component={Link} to="/color" endIcon={<EastIcon />}>Get Started</Button>
                 </Card.Body>
                 </Card>
             </Grid>
-            <Grid item xs={9} md={4}>
+            <Grid item xs={9} md={4} className='grid-item'>
                 <Card className="feature-card">
                 <Card.Img variant="top" src={map} className="feature-image"/>
                 <Card.Body className='feature-body'>

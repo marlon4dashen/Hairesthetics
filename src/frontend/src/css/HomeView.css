@@ -1,24 +1,25 @@
 .banner-container {
-    /* padding-top: 13vh;
-    padding-bottom: 13vh; */
-    height: 35vh;
+    height: 40vh;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    background-attachment: fixed;
 }
 
 .features-container {
     background-color: white;
     min-height: 55vh;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
     padding-left: 200px;
     padding-right: 200px;
 }
 
+.grid-item {
+    padding-top: 0px !important;
+}
+
 .feature-card {
-    /* margin-left: 20px;
-    margin-right: 20px; */
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     border-radius: 20px !important;
 }
@@ -42,4 +43,47 @@
 .feature-button:hover {
     background-color: black !important;
     color: white !important;
+}
+
+@media screen and (max-width: 1250px) {
+    .features-container {
+        padding-top: 3vh;
+        padding-bottom: 3vh;
+        padding-left: 130px;
+        padding-right: 130px;
+    }
+
+    .feature-body {
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .features-container {
+        padding-top: 3vh;
+        padding-bottom: 3vh;
+        padding-left: 70px;
+        padding-right: 70px;
+    }
+
+    .feature-body {
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .features-container {
+        padding-top: 1vh;
+    }
+
+    .grid-item {
+        padding-top: 20px !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .features-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 }

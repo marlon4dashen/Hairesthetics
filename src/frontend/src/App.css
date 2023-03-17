@@ -1,13 +1,17 @@
 .App {
   text-align: center;
   background-color: black;
-  /* height: 100%; */
 }
 
 .page-container {
   padding-top: 15px;
   position: relative;
+  width: 100%;
   min-height: calc(100vh-85px);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .app-header {
@@ -15,11 +19,10 @@
 }
 
 .app-footer {
-  /* position: absolute; */
   background-color: rgba(var(--bs-dark-rgb),1) !important;
   color: white;
   bottom: 0;
-  height: 8vh;
+  /* height: 8vh; */
   width: 100vw;
 }
 
