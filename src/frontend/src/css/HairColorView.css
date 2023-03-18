@@ -2,18 +2,14 @@
   height: 50vh;
 }
 .picker-container {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-}
-
-.color-picker {
-    height: 120px !important;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
 }
 
 .material-picker {
-    width: 130px !important;
-    height: 120px !important;
+  width: 130px !important;
+  height: 120px !important;
 }
 
 .webcam-video {
@@ -36,30 +32,19 @@
   padding-left: 30px !important;
 }
 
-.color-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
-    margin: 0;
-    overflow: "auto";
-    max-width: 100%;
-    z-index: 3;
-}
-
-.color-card {
+.color-tab {
   border-radius: 0;
   box-shadow: none;
-  height: 10vh;
-  width: 10vh;
+  height: 14vh;
+  width: 14vh;
+  border: 1px solid white !important;
 }
 
-.color-img {
-  border-radius: 0;
-  object-fit: cover;
-  width: 10vh;
-  height: 10vh;
-  border: 1px solid white;
+.css-ptiqhd-MuiSvgIcon-root {
+  color: #4DB6AC;
+  font-weight: bold;
+  width: 3em !important;
+  height: 3em !important;
 }
 
 .option-tab {
