@@ -13,7 +13,6 @@ import hair5 from "../../public/assets/hairstyles/hair5.png"
 import hair6 from "../../public/assets/hairstyles/hair6.png"
 import hair7 from "../../public/assets/hairstyles/hair7.png"
 import CssBaseline from "@mui/material/CssBaseline";
-import { CirclePicker, MaterialPicker } from 'react-color';
 
 import "../css/HairStyleView.css"
 
