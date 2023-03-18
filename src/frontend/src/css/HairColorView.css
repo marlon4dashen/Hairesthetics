@@ -1,15 +1,7 @@
 .video-container {
   height: 50vh;
-}
-.picker-container {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-}
-
-.material-picker {
-  width: 130px !important;
-  height: 120px !important;
+  padding-top: 30px;
+  border-top: 1px solid #4DB6AC;
 }
 
 .webcam-video {
@@ -20,16 +12,9 @@
   font-size: 25px !important;
 }
 
-.input-col {
-  display: flex !important;
-  justify-content: right;
-  padding-right: 30px !important;
-}
-
-.output-col {
-  display: flex !important;
-  justify-content: left;
-  padding-left: 30px !important;
+.color-picker {
+  margin-top: 20px;
+  margin-bottom: 15px;
 }
 
 .color-tab {
@@ -81,4 +66,17 @@
 .stop-button:hover {
   background-color: red !important;
   color: white !important;
+}
+
+@media screen and (max-width: 900px) {
+  .video-container {
+    min-height: auto;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .tab-label {
+    font-size: 15px !important;
+    width: 150px !important;
+  }
 }

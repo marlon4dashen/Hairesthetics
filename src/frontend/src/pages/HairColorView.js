@@ -4,10 +4,7 @@ import io from "socket.io-client"
 import axios from "axios";
 import { Container, Row, Col } from 'react-bootstrap'
 import {BsPlayCircle, BsStopCircle, BsUpload} from 'react-icons/bs'
-import Divider from '@mui/material/Divider';
-import { styled } from '@mui/material/styles';
-import MuiGrid from '@mui/material/Grid';
-import Chip from '@mui/material/Chip';
+import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -65,11 +62,6 @@ function HairColorView() {
             audio: false,
         }
     };
-    const [valueC, setValueC] = React.useState(0);
-
-    const handleChangeC = (event, newValue) => {
-        setValueC(newValue);
-    };
 
     const colorList = [
         { key: 0, label: "Smoky Black", hex:"#100C07", rgb: {r: "16", g: "12", b: "7"} },
@@ -95,9 +87,13 @@ function HairColorView() {
     ];
 
     const [tab, setTab] = React.useState(0);
-
     const handleChange = (event, newValue) => {
         setTab(newValue);
+    };
+
+    const [colorTab, setColorTab] = React.useState(0);
+    const handleColorTabChange = (event, newValue) => {
+        setColorTab(newValue);
     };
 
     const startCam = () => {
@@ -209,73 +205,57 @@ function HairColorView() {
                 <TabPanel value={tab} index={0} className="option-tab">
                     <p className="my-2">Upload an image with people in it and check how their hair color changes</p>
                     <input type="file" accept="image/*" ref={hiddenFileInput} onChange={handleFileChange} onClick={(event)=>{event.target.value = null}} style={{display:'none'}} /> 
-                    <Button variant="contained" className='mx-1 start-button' onClick={handleClick} startIcon={<BsUpload />}> Upload an Image</Button>
+                    <Button variant="contained" className='mx-1 my-1 start-button' onClick={handleClick} startIcon={<BsUpload />}> Upload an Image</Button>
                 </TabPanel>
                 <TabPanel value={tab} index={1} className="option-tab">
                     <p className="my-2">See your hair color changes in real time</p>
-                    <Button variant="contained"  className='mx-1 start-button' onClick={startCam} startIcon={<BsPlayCircle />}>Start Video Feed</Button>
-                    <Button variant="outlined" className='mx-1 stop-button' onClick={stopCam} startIcon={<BsStopCircle />}>Stop Video Feed</Button>
+                    <Button variant="contained"  className='mx-1 my-1 start-button' onClick={startCam} startIcon={<BsPlayCircle />}>Start Video Feed</Button>
+                    <Button variant="outlined" className='mx-1 my-1 stop-button' onClick={stopCam} startIcon={<BsStopCircle />}>Stop Video Feed</Button>
                 </TabPanel>
            
             </Container>
-            <Container className=''>
-                <Divider sx={{
-                            "&::before, &::after": {
-                                borderColor: "#4DB6AC",
-                            }}}>
-                    {' '}
-                </Divider>
-            </Container>
             <Container fluid className="video-container">
-                <Row>
-                    <Col className="input-col">
+                <Grid container spacing={2} justifyContent="center">
+                    <Grid item xs={9} md={4} className="input-col" justifyContent="center">
                         {isShowVideo &&(<video className="webcam-video" autoPlay={true} ref={videoRef}></video>)}
                         {isShowVideo &&(<canvas ref={photoRef} />)}
                         {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}} src={uploadedFileURL} />}
-                    </Col>
-                    <Col className="output-col">
+                    </Grid>
+                    <Grid item xs={9} md={4} className="output-col" justifyContent="center">
                         {isShowVideo && <img src="http://localhost:5001/video_feed"  alt="transformed_output"></img>}
                         {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}} 
                         src={`data:image/jpeg;base64,${downloadedFile}`} />}
-                    </Col>
-                </Row>
+                    </Grid>
+                </Grid>
             </Container>
-            <Container className='mt-3'>
-                <Divider sx={{
-                            "&::before, &::after": {
-                                borderColor: "rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))",
-                            }}}>
-                    <Chip variant="outlined" label="Choose a color" sx={{border: "1px solid"}}/>
-                </Divider>
+            <Container className="color-picker">   
+                <Tabs
+                    value={colorTab}
+                    onChange={handleColorTabChange}
+                    variant="scrollable"
+                    scrollButtons
+                    allowScrollButtonsMobile
+                    aria-label="scrollable force tabs example"
+                    TabIndicatorProps={{
+                        style: {
+                            backgroundColor: "#FFFFFF"
+                        }
+                    }}
+                    sx={{
+                        [`& .${tabsClasses.scrollButtons}`]: {
+                            '&.Mui-disabled': { opacity: 0.3 },
+                        },
+                    }}
+                >
+                    {colorList.map((data) => (
+                        <Tab style={{ backgroundColor:data.hex }} 
+                            className="color-tab"
+                            key={data.key}
+                            onClick={() => onColorChange(data)}
+                    />
+                    ))}
+                </Tabs>
             </Container>
-        <Container className="color-picker">   
-        <Tabs
-            value={valueC}
-            onChange={handleChangeC}
-            variant="scrollable"
-            scrollButtons
-            allowScrollButtonsMobile
-            aria-label="scrollable force tabs example"
-            TabIndicatorProps={{
-                style: {
-                    backgroundColor: "#FFFFFF"
-                }
-            }}
-            sx={{
-                [`& .${tabsClasses.scrollButtons}`]: {
-                    '&.Mui-disabled': { opacity: 0.3 },
-                },
-            }}
-        >
-            {colorList.map((data) => (
-                <Tab style={{ backgroundColor:data.hex }} 
-                    className="color-tab"
-                    key={data.key}
-                    onClick={() => onColorChange(data)}
-              />
-            ))}
-        </Tabs>
-        </Container>
         </Container>
     </>
   );
