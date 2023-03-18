@@ -54,7 +54,6 @@
     "postcss-loader": "^4.0.3",
     "postcss-preset-env": "^6.7.0",
     "react-bootstrap": "^2.7.0",
-    "react-color": "^2.19.3",
     "react-hot-loader": "^4.13.0",
     "react-icons": "^4.7.1",
     "react-loader-spinner": "^5.3.4",
