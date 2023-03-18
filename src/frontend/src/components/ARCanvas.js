@@ -8,14 +8,14 @@ import { JEELIZFACEFILTER, NN_4EXPR } from 'facefilter'
 // import THREE.js helper, useful to compute pose
 // The helper is not minified, feel free to customize it (and submit pull requests bro):
 import { ThreeFiberHelper } from '../helpers/ThreeFiberHelper.js'
-import { ShortHair } from './Models/ShortHair.js'
+import { ShortHair } from './models/ShortHair.js'
 import { Ponytails } from './models/Ponytails.js'
 import { Head2 } from './models/Head2.js'
 import { Hat } from './Models/Hat.js'
-import { Mm } from './Models/Mm.js'
-import { MediumHair } from './Models/MediumHair.js'
-import { B2} from './Models/B2.js'
-import { Beard } from './Models/Beard.js'
+import { Mm } from './models/Mm.js'
+import { MediumHair } from './models/MediumHair.js'
+import { B2} from './models/B2.js'
+import { Beard } from './models/Beard.js'
 
 const _maxFacesDetected = 1 // max number of detected faces
 const _faceFollowers = new Array(_maxFacesDetected)
