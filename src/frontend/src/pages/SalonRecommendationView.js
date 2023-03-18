@@ -16,7 +16,7 @@ import { Triangle } from  'react-loader-spinner'
 import blackDot from "../assets/icons/black-marker.png";
 import seat from "../assets/icons/seat.png"
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
-
+import bgImg from "../assets/b1.jpg"
 
 function SalonRecommendationView() {
     const { isLoaded } = useLoadScript({
@@ -179,7 +179,7 @@ function SalonRecommendationView() {
     }
 
     return (
-        <Container className="page-container">
+        <div className="page-container" style={{backgroundImage: `url(${bgImg})`}}>
             <Container>
                 <PlacesAutocomplete setSelected={setSelected} />
             </Container>
@@ -194,7 +194,7 @@ function SalonRecommendationView() {
                         <Divider className="results-col-header"   
                             sx={{
                                 "&::before, &::after": {
-                                borderColor: "white",
+                                borderColor: "#4DB6AC",
                             }}}>
                             {resultsLength} results found
                         </Divider>
@@ -232,7 +232,7 @@ function SalonRecommendationView() {
                     />                
                 )}
             </Container>
-        </Container>
+        </div>
     );
 }
 

@@ -192,33 +192,30 @@ function HairColorView() {
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs centered value={tab} onChange={handleChange} aria-label="basic tabs example"
                       TabIndicatorProps={{
-                        style: {
-                        backgroundColor: "white",
-                        }
-                        
+                        style: {backgroundColor: "white",}
                     }}>
-                    <Tab label="Option 1 - Image" className="tab-label"/>
-                    <Tab label="Option 2 - Live Action" className="tab-label"/>
+                    <Tab label="❏ Image" className="tab-label"/>
+                    <Tab label="❏ Live Action" className="tab-label"/>
                 </Tabs>
                 </Box>
                 <TabPanel value={tab} index={0} className="option-tab">
                     <p className="my-2">Upload an image with people in it and check how their hair color changes</p>
                     <input type="file" accept="image/*" ref={hiddenFileInput} onChange={handleFileChange} onClick={(event)=>{event.target.value = null}} style={{display:'none'}} /> 
-                    <Button variant="contained" style={{backgroundColor: "rgba(var(--bs-dark-rgb),1)"}} className='mx-1' onClick={handleClick} startIcon={<BsUpload />}> Upload an Image</Button>
+                    <Button variant="contained" className='mx-1 start-button' onClick={handleClick} startIcon={<BsUpload />}> Upload an Image</Button>
                 </TabPanel>
                 <TabPanel value={tab} index={1} className="option-tab">
                     <p className="my-2">See your hair color changes in real time</p>
-                    <Button variant="contained" style={{backgroundColor: "rgba(var(--bs-dark-rgb),1)"}} className='mx-1' onClick={startCam} startIcon={<BsPlayCircle />}>Start Video Feed</Button>
-                    <Button variant="outlined" style={{borderColor: "rgba(var(--bs-dark-rgb),1)", color: "white"}} className='mx-1' onClick={stopCam} startIcon={<BsStopCircle />}>Stop Video Feed</Button>
+                    <Button variant="contained"  className='mx-1 start-button' onClick={startCam} startIcon={<BsPlayCircle />}>Start Video Feed</Button>
+                    <Button variant="outlined" className='mx-1 stop-button' onClick={stopCam} startIcon={<BsStopCircle />}>Stop Video Feed</Button>
                 </TabPanel>
            
             </Container>
             <Container className=''>
                 <Divider sx={{
                             "&::before, &::after": {
-                                borderColor: "white",
+                                borderColor: "#4DB6AC",
                             }}}>
-                    <Chip variant="outlined" label="" sx={{border: "1px solid white"}}/>
+                    {' '}
                 </Divider>
             </Container>
             <Container fluid className="video-container">
