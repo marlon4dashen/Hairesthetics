@@ -11,7 +11,7 @@ export function Ponytails(props) {
   const { nodes, materials } = useGLTF(url)
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Object_2.geometry} material={materials.lambert6SG} rotation={[-Math.PI / 2, 0, 0]} />
+      <mesh geometry={nodes.Object_2.geometry} material={materials.lambert6SG} rotation={[-Math.PI / 2, 0, 0]} material-color={props.color}/>
     </group>
   )
 }

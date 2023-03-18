@@ -13,6 +13,9 @@ import { Ponytails } from './models/Ponytails.js'
 import { Head2 } from './models/Head2.js'
 import { Hat } from './Models/Hat.js'
 import { Mm } from './Models/Mm.js'
+import { MediumHair } from './Models/MediumHair.js'
+import { B2} from './Models/B2.js'
+import { Beard } from './Models/Beard.js'
 
 const _maxFacesDetected = 1 // max number of detected faces
 const _faceFollowers = new Array(_maxFacesDetected)
@@ -45,6 +48,7 @@ const FaceFollower = (props) => {
           position={[0, 0.45, -0.2]}
           scale={[80, 80, 80]}
           renderOrder={2}
+          color={props.selectedHair.color}
           />
         }
         {props.selectedHair.selectedHair == 1 &&
@@ -53,6 +57,7 @@ const FaceFollower = (props) => {
           position={[0, 0.3, -0.8]}
           scale={[0.12, 0.12, 0.12]}
           renderOrder={2}
+          color={props.selectedHair.color}
           />
         }
         {props.selectedHair.selectedHair == 2 &&
@@ -61,6 +66,32 @@ const FaceFollower = (props) => {
           position={[-0.2, -1.7, -0.5]}
           scale={[0.08, 0.08, 0.08]}
           renderOrder={2}
+          color={props.selectedHair.color}
+          />
+        }
+        {props.selectedHair.selectedHair == 3 &&
+          <MediumHair
+          rotation={[0, 0, 0]}
+          position={[0, 0, -0.5]}
+          scale={[0.1675, 0.1675, 0.1675]}
+          />
+        }
+        {props.selectedHair.selectedHair == 4 &&
+          <Beard
+          rotation={[0, 0, 0]}
+          position={[0, -0.45, 0.4]}
+          scale={[0.08, 0.08, 0.08]}
+          renderOrder={2}
+          color={props.selectedHair.color}
+          />
+        }
+        {props.selectedHair.selectedHair == 5 &&
+          <B2
+          rotation={[0, 0, 0]}
+          position={[0, -1.0, 0.2]}
+          scale={[0.20, 0.15, 0.15]}
+          renderOrder={2}
+          color={props.selectedHair.color}
           />
         }
         <Head2
