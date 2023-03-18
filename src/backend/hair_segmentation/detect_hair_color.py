@@ -2,7 +2,7 @@
 import os,argparse,uuid
 import mediapipe,cv2,filetype
 import numpy as np
-# import config
+import config
 import webcolors
 from sklearn.cluster import KMeans
 from collections import Counter
