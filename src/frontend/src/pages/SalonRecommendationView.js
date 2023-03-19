@@ -9,9 +9,12 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 import AsyncSelect from 'react-select/async'
-import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import { Triangle } from  'react-loader-spinner'
+import LinearProgress from '@mui/material/LinearProgress';
+import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
+import CloseIcon from '@mui/icons-material/Close';
 
 import blackDot from "../assets/icons/black-marker.png";
 import seat from "../assets/icons/seat.png"
@@ -28,6 +31,8 @@ function SalonRecommendationView() {
     const [selected, setSelected] = useState(null);
     const [complete, setComplete] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [openAlert, setAlertOpen] = useState(false);
+    const [alertMessage, setAlertMessage] = useState({type: "info", msg: ""});
 
     function Map() {
         const center = useMemo(() => ({ lat: 43.6532, lng: -79.3832 }), []);
@@ -39,7 +44,7 @@ function SalonRecommendationView() {
         }, []);
         return (
             <>
-            <GoogleMap zoom={15} center={(selected) ? selected : center} mapContainerClassName="map-container">
+            <GoogleMap zoom={14} center={(selected) ? selected : center} mapContainerClassName="map-container">
                 {selected && <Marker position={selected} icon={blackDot}/>}
                 {searchResults.length > 0 && 
                     searchResults.map((salon)=>(
@@ -62,7 +67,6 @@ function SalonRecommendationView() {
                         }}
                         className="info-window"
                     >
-                        {/* Display location information */}
                         <div>
                             <h4 style={{fontWeight: 'bold'}}>{selectedPlace.name}</h4>
                             <p>{selectedPlace.address}</p>
@@ -148,34 +152,41 @@ function SalonRecommendationView() {
             },
             function(error) {
                 setLoading(false)
-                console.error("Error Code = " + error.code + " - " + error.message);
+                setAlertMessage({type: "error", message: `Client Error - ${error.message}`}) 
+                setAlertOpen(true)
             }
         );
         }else {
             setLoading(false)
-            alert("Geolocation is not supported")
+            setAlertMessage({type: "warning", message: `Client Error - Geolocation is not supported on this browser`}) 
+            setAlertOpen(true)
         }
     }
 
     const searchNearbySalon = (inputLat, inputLng) => {
         setComplete(false)
-        // setLoading(true)
+        setAlertOpen(false)
         axios.get(`http://localhost:5001/salons?lat=${inputLat}&lng=${inputLng}`)
         .then(response => {
             const data = response.data
             var responseCode = data.code
             if (responseCode === 'error'){
-                alert("server error");
-                
+                setAlertMessage({type: "error", message: "Server Error - Please try again later"}) 
+                setAlertOpen(true)
             } else{
                 setResultLength(data.length)
                 setSearchResults(data.salons)
-                // console.log(data.salons)
+                setAlertMessage({type: "success", message: `Success - ${data.length} results found`})   
+                setAlertOpen(true)
             }
             setComplete(true)
             setLoading(false)
             })
-        .catch(error => alert(error))
+        .catch(error => {
+            setAlertMessage({type: "error", message: "Server Error - Please try again later"})   
+            setAlertOpen(true)
+            setLoading(false)
+        })
     }
 
     return (
@@ -185,19 +196,34 @@ function SalonRecommendationView() {
             </Container>
             
             <Container className='pb-4'>
-                <Row>
-                    <Col>{isLoaded && <Map />}</Col>
-                </Row>
+                {!loading && 
+                    <Row>
+                        <Col>{isLoaded && <Map />}</Col>
+                    </Row>                         
+                }
+                <Collapse in={openAlert}>
+                    <Alert
+                        severity={alertMessage.type}
+                        action={
+                            <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                                setAlertOpen(false);
+                            }}
+                            >
+                            <CloseIcon fontSize="inherit" />
+                            </IconButton>
+                        }
+                        sx={{ mt: 1 }}
+                    >
+                        <strong>{alertMessage.message}</strong>
+                    </Alert>
+                </Collapse>
                 {complete ? (
                 <Row>
                     <Col className="results-col">
-                        <Divider className="results-col-header"   
-                            sx={{
-                                "&::before, &::after": {
-                                borderColor: "#4DB6AC",
-                            }}}>
-                            {resultsLength} results found
-                        </Divider>
                         {( resultsLength >0 ) ? (
                             <Grid container className='card-list-container' spacing={3} justifyContent="center" alignItems="center">
                                 {searchResults.map((salon) => (
@@ -222,14 +248,7 @@ function SalonRecommendationView() {
                     </Col>
                 </Row>) :
                 (loading && 
-                    <Triangle
-                        wrapperClass="loading-container"
-                        height="25%"
-                        width="25%"
-                        color="#FDFEFE"
-                        ariaLabel="triangle-loading"
-                        visible={!complete}
-                    />                
+                    <LinearProgress className="loading-bar" />              
                 )}
             </Container>
         </div>

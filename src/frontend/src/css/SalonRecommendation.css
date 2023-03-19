@@ -48,11 +48,21 @@
   align-items: center;
 }
 
+.loading-bar{
+  height: 14px !important;
+  margin-top: 10px;
+  background-color: white !important;
+}
+
+.loading-bar .css-5ir5xx-MuiLinearProgress-bar1{
+  background-color: #4DB6AC !important;
+}
+
+.loading-bar .css-1r8wrcl-MuiLinearProgress-bar2{
+  background-color: #4DB6AC !important;
+}
+
 .info-window {
   border: 1px solid black !important;
   color: black !important;
 }
-
-/* .css-1im77uy-control {
-  color: black !important
-} */
