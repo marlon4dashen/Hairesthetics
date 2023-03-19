@@ -16,7 +16,7 @@ import { Triangle } from  'react-loader-spinner'
 import blackDot from "../assets/icons/black-marker.png";
 import seat from "../assets/icons/seat.png"
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
-import bgImg from "../assets/b1.jpg"
+import bgImg from "../assets/banner/b1.jpg"
 
 function SalonRecommendationView() {
     const { isLoaded } = useLoadScript({
