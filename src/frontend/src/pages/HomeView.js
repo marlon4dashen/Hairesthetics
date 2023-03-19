@@ -7,12 +7,12 @@ import Button from '@mui/material/Button';
 import EastIcon from '@mui/icons-material/East';
 
 // Images
-import hairStyle from "../assets/hair_style.jpg";
-import hairColor from "../assets/color_change.jpeg";
-import map from "../assets/map.png";
+import bannerImg from "../assets/banner/b6.jpg"
+import hairStyle from "../assets/feature/h1.gif";
+import hairColor from "../assets/feature/c2.gif";
+import map from "../assets/feature/m1.jpeg";
 
 import "../css/HomeView.css"
-import bannerImg from "../assets/b6.jpg"
 
 function HomeView() {
     return (
@@ -27,7 +27,7 @@ function HomeView() {
                 <Card className="feature-card">
                 <Card.Img variant="top" src={hairStyle} className="feature-image"/>
                 <Card.Body className='feature-body'>
-                    <Card.Title>Modern Hair Styles</Card.Title>
+                    <Card.Title>Hair Styles Simulation</Card.Title>
                     <Card.Text>
                     Get your new hair style by playing with our frontier AR technology.
                     </Card.Text>
@@ -39,7 +39,7 @@ function HomeView() {
                 <Card className="feature-card">
                 <Card.Img variant="top" src={hairColor} className="feature-image"/>
                 <Card.Body className='feature-body'>
-                    <Card.Title>Realtime Hair Color Segmentation</Card.Title>
+                    <Card.Title>Real-time Hair Color Segmentation</Card.Title>
                     <Card.Text>
                     Using advanced deep learning techniques, we can dynamically change hair color in live video and image.
                     </Card.Text>
@@ -51,7 +51,7 @@ function HomeView() {
                 <Card className="feature-card">
                 <Card.Img variant="top" src={map} className="feature-image"/>
                 <Card.Body className='feature-body'>
-                    <Card.Title>Get Nearby Salons</Card.Title>
+                    <Card.Title>Nearby Salon Recommendation</Card.Title>
                     <Card.Text>
                     Integrating with Google Maps and Places API, we recommand the top rated salons around you.
                     </Card.Text>
