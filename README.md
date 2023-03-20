@@ -1,4 +1,5 @@
 # HairEsthetics :scissors:
+![license](https://img.shields.io/npm/l/express?style=for-the-badge) ![npm](https://img.shields.io/github/actions/workflow/status/marlon4dashen/Hairesthetics/frontend-production.yml?style=for-the-badge) ![CICD](https://img.shields.io/badge/CI%2FCD-CHECKED-brightgreen?style=for-the-badge) ![react](https://img.shields.io/badge/React-17.0.2-blue?style=for-the-badge) ![python](https://img.shields.io/badge/Python-3.8-blue?style=for-the-badge)
 ### Project Details
 Date of project start: Sept 16th
 
