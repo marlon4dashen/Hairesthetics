@@ -2,12 +2,14 @@
 import React, { useEffect, useRef, useState } from "react"
 import io from "socket.io-client"
 import axios from "axios";
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import {BsPlayCircle, BsStopCircle, BsUpload} from 'react-icons/bs'
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
 import {Typography, Box} from '@mui/material';
 import PropTypes from 'prop-types';
 // import Cookies from "js-cookie";
@@ -15,8 +17,7 @@ import PropTypes from 'prop-types';
 import "../css/HairColorView.css"
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
+    const { children, value, index, ...other } = props;
   return (
     <div
       role="tabpanel"
@@ -67,6 +68,7 @@ function HairColorView() {
     const [uploadedFile, setUploadFile] = useState(null);
     const [uploadedFileURL, setUploadFileURL] = useState(null);
     const [downloadedFile, setDownloadedFile] = useState(null);
+    const [openAlert, setAlertOpen] = useState(false);
     const hiddenFileInput = useRef(null);
     const mediaWidth = 300;
     const mediaHeight = 300;
@@ -178,13 +180,15 @@ function HairColorView() {
         formData.append('imgFile', file);
         axios.post(`https://${host}/image`, formData, {params: {r: r, g: g, b: b}})
         .then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             if (res.status === 200) {
                 let imageBytes = res.data;
                 setDownloadedFile(imageBytes);
+            } else {
+                setAlertOpen(true)
             }
         })
-        .catch(error => console.log(error));
+        .catch(error => {console.log(error); setAlertOpen(true)});
     }
 
     const onColorChange = (color) => {
@@ -261,8 +265,17 @@ function HairColorView() {
                         src={`data:image/jpeg;base64,${downloadedFile}`} />}
                     </Grid>
                 </Grid>
+                <Collapse in={openAlert} className="alert-container">
+                    <Alert
+                        severity="error"
+                        sx={{ mt: 1 }}
+                    >
+                        <strong>Server Error - Please try again later</strong>
+                    </Alert>
+                </Collapse>
             </Container>
-            <Container className="color-picker">   
+
+            <Container className="color-picker">
                 <Tabs
                     value={colorTab}
                     onChange={handleColorTabChange}

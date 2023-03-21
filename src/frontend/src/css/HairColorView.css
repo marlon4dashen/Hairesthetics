@@ -12,6 +12,11 @@
   font-size: 25px !important;
 }
 
+.alert-container {
+  margin-left: 12%;
+  margin-right: 12%;
+}
+
 .color-picker {
   margin-top: 20px;
   margin-bottom: 15px;
@@ -70,7 +75,7 @@
 
 @media screen and (max-width: 900px) {
   .video-container {
-    min-height: auto;
+    min-height: 700px;
   }
 }
 
