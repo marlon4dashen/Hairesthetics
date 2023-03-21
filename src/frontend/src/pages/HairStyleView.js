@@ -1,7 +1,10 @@
 
 import React, { useState } from "react";
-import {Card, CardContent, CardMedia, CardActionArea, Button, Typography, Grid, Paper, IconButton, Chip, Box, Tabs} from '@mui/material';
+import {Card, CardContent, CardMedia, CardActionArea, Button, Typography, Grid, Paper, IconButton, Chip, Box} from '@mui/material';
+import Tabs, { tabsClasses } from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import { makeStyles } from '@mui/styles';
+import { Container } from 'react-bootstrap'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import styled from "@emotion/styled";
 import hair0 from "../../public/assets/hairstyles/hair0.png"
@@ -99,27 +102,30 @@ function HairStyleView() {
     { key: 5, label: "Afro", img:"/_/public/assets/hairstyles/hair4.png" },
     { key: 6, label: "Ponytail", img:"/_/public/assets/hairstyles/hair5.png" },
     { key: 7, label: "Undercut", img:"/_/public/assets/hairstyles/hair6.png" },
-    // { key: 3, label: "Ponytail" },
-    // { key: 4, label: "Braids" },
-    // { key: 5, label: "Short" },
-    // { key: 6, label: "Medium" },
-    // { key: 7, label: "Long" },
-    // { key: 8, label: "Ponytail" },
-    // { key: 9, label: "Braids" }
   ]);
+
   const colorList = [
-    { key: 0, label: "Original", hex:"#FFFFFF", rgb: {r: "255", g: "255", b: "255"} },
-    { key: 1, label: "Smoky Black", hex:"#100C07", rgb: {r: "16", g: "12", b: "7"} },
-    { key: 2, label: "Liver", hex:"#5A3825", rgb: {r: "90", g: "56", b: "37"} },
-    { key: 3, label: "Brown Yellow", hex:"#CC9966", rgb: {r: "204", g: "153", b: "102"} },
-    { key: 4, label: "Indigo", hex:"#580271", rgb: {r: "88", g: "2", b: "113"} },
-    { key: 5, label: "Deep Magenta", hex:"#DB02C2", rgb: {r: "219", g: "2", b: "194"} },
-    { key: 6, label: "Crayola's Maize", hex:"#FFCC47", rgb: {r: "255", g: "204", b: "71"} },
-    { key: 7, label: "Golden Brown", hex:"#996515", rgb: {r: "153", g: "101", b: "21"} },
-    { key: 8, label: "Falu Red", hex:"#801818", rgb: {r: "128", g: "24", b: "24"} },
-    { key: 9, label: "Beer", hex:"#FF9321", rgb: {r: "255", g: "147", b: "33"} },
-    { key: 10, label: "Navy Blue", hex:"#1273DE", rgb: {r: "18", g: "115", b: "222"} },
-    { key: 11, label: "green", hex:"#4CAF50", rgb: {r: "76", g: "175", b: "80"} }];
+    { key: 0, label: "Smoky Black", hex:"#100C07", rgb: {r: "16", g: "12", b: "7"} },
+    { key: 1, label: "Liver", hex:"#5A3825", rgb: {r: "90", g: "56", b: "37"} },
+    { key: 2, label: "Brown Yellow", hex:"#CC9966", rgb: {r: "204", g: "153", b: "102"} },
+    { key: 3, label: "Indigo", hex:"#580271", rgb: {r: "88", g: "2", b: "113"} },
+    { key: 4, label: "Deep Magenta", hex:"#DB02C2", rgb: {r: "219", g: "2", b: "194"} },
+    { key: 5, label: "Flirt", hex:"#970572", rgb: {r: "151", g: "5", b: "114"} },
+    { key: 6, label: "Fuzzy Wuzzy", hex:"#F78DA7", rgb: {r: "247", g: "141", b: "167"} },
+    { key: 7, label: "Crayola's Maize", hex:"#FFCC47", rgb: {r: "255", g: "204", b: "71"} },
+    { key: 8, label: "Crayola's Gold", hex:"#E6BE8A", rgb: {r: "230", g: "190", b: "138"} },
+    { key: 9, label: "Golden Brown", hex:"#996515", rgb: {r: "153", g: "101", b: "21"} },
+    { key: 10, label: "Falu Red", hex:"#801818", rgb: {r: "128", g: "24", b: "24"} },
+    { key: 11, label: "Beer", hex:"#FF9321", rgb: {r: "255", g: "147", b: "33"} },
+    { key: 12, label: "Metallic Orange", hex:"#DA680F", rgb: {r: "218", g: "104", b: "15"} },
+    { key: 13, label: "Blue", hex:"#1273DE", rgb: {r: "18", g: "115", b: "222"} },
+    { key: 14, label: "Navy Blue", hex:"#8ED1FC", rgb: {r: "142", g: "209", b: "252"} },
+    { key: 15, label: "Green", hex:"#4CAF50", rgb: {r: "76", g: "175", b: "80"} },
+    { key: 16, label: "Light Green", hex:"#00D084", rgb: {r: "0", g: "208", b: "132"} },
+    { key: 17, label: "Dark Charcoal", hex:"#333333", rgb: {r: "51", g: "51", b: "51"} },
+    { key: 18, label: "White", hex:"#FFFFFF", rgb: {r: "255", g: "255", b: "255"} },
+    { key: 19, label: "Philippine Silver", hex:"#B8B8B8", rgb: {r: "184", g: "184", b: "184"} },
+];
 
     return (
       <ThemeProvider theme={themeDark}>
@@ -173,47 +179,39 @@ function HairStyleView() {
         }
         {selectedHair != -1 &&
           <div>
-          <Grid container spacing={2}>
+          <Grid container spacing={0}>
             <Grid item xs={2}>
               <IconButton onClick={() => setSelectedHair(-1)}>
                 <ChevronLeftIcon style={{ color: 'white', fontSize: 40 }} />
               </IconButton>
             </Grid>
             <Grid item xs={10} >
-              <Tabs
-                variant="scrollable"
-                scrollButtons="auto"
-                allowScrollButtonsMobile
-                TabIndicatorProps={{
-                  style: {
-                    backgroundColor: "#FFFFFF"
-                  }
-                }}
-                aria-label="scrollable auto tabs"
+            <Container>
+                <Tabs
+                    variant="scrollable"
+                    scrollButtons
+                    allowScrollButtonsMobile
+                    aria-label="scrollable force tabs example"
+                    TabIndicatorProps={{
+                        style: {
+                            backgroundColor: "#FFFFFF"
+                        }
+                    }}
+                    sx={{
+                        [`& .${tabsClasses.scrollButtons}`]: {
+                            '&.Mui-disabled': { opacity: 0.3 },
+                        },
+                    }}
                 >
-                {colorList.map((data) => (
-                <Card
-                    className={classes.card}
-                    style={{ borderRadius: 0, boxShadow: "none", backgroundColor:"#000000" }}
-                    label={data.label}
-                    key={data.key}
-                    onClick={() => setSelectedColor(data.hex)}
-
-                >
-                    <CardActionArea>
-                      <CardMedia
-                        className={classes.img}
-                        style={{backgroundColor: data.hex}}
-                        alt='hair-img'
-                      />
-                        <Typography gutterBottom variant="h6" component="div" color="common.white">
-                          {data.label}
-                        </Typography>
-                    </CardActionArea>
-                  </Card>
-
-                ))}
-              </Tabs>
+                    {colorList.map((data) => (
+                        <Tab style={{ backgroundColor:data.hex }}
+                            className="color-tab"
+                            key={data.key}
+                            onClick={() => setSelectedColor(data.hex)}
+                    />
+                    ))}
+                </Tabs>
+            </Container>
             </Grid>
           </Grid>
 
