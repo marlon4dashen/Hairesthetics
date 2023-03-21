@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {Card, CardContent, CardMedia, CardActionArea, Button, Typography, Grid, Paper, IconButton, Chip, Box, Tabs} from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -13,14 +13,10 @@ import hair5 from "../../public/assets/hairstyles/hair5.png"
 import hair6 from "../../public/assets/hairstyles/hair6.png"
 import hair7 from "../../public/assets/hairstyles/hair7.png"
 import CssBaseline from "@mui/material/CssBaseline";
-import { CirclePicker, MaterialPicker } from 'react-color';
-
-import "../css/HairStyleView.css"
-
 import ARCanvas from '../components/ARCanvas';
-
 import {createTheme} from '@mui/material';
 import {ThemeProvider} from '@mui/styles';
+import "../css/HairStyleView.css"
 
 
 

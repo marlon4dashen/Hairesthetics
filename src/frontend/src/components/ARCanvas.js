@@ -10,13 +10,12 @@ import { JEELIZFACEFILTER, NN_4EXPR } from 'facefilter'
 import { ThreeFiberHelper } from '../helpers/ThreeFiberHelper.js'
 import { ShortHair } from './Models/ShortHair.js'
 import { Ponytails } from './models/Ponytails.js'
-import { Head2 } from './models/Head2.js'
-import { Head1 } from './models/Head1.js'
 import { Head } from './models/Head.js'
 import { Hat } from './Models/Hat.js'
 import { Mm } from './Models/Mm.js'
-import { MediumHair } from './Models/MediumHair.js'
-MediumHair
+import { MediumHair } from './models/MediumHair.js'
+import { ManHair0 } from './models/ManHair0.js'
+import { Malehair } from './models/Malehair.js'
 const _maxFacesDetected = 1 // max number of detected faces
 const _faceFollowers = new Array(_maxFacesDetected)
 let _expressions = null
@@ -54,7 +53,7 @@ const FaceFollower = (props) => {
         {props.selectedHair.selectedHair == 1 &&
           <Ponytails
           rotation={[0, 0, 0]}
-          position={[0, 0.3, -0.8]}
+          position={[0, 0.0, -0.8]}
           scale={[0.12, 0.12, 0.12]}
           renderOrder={2}
           color={props.selectedHair.color}
@@ -78,21 +77,32 @@ const FaceFollower = (props) => {
           color={props.selectedHair.color}
           />
         }
-        {/* <Head2
-          position={[0, -1.0, 0]}
-          scale={[0.5, 0.45, 0.45]}
-          renderOrder={-1}
-        /> */}
-         <Head1
+
+      {props.selectedHair.selectedHair == 4 &&
+          <ManHair0
+          rotation={[0, 0, 0]}
+          position={[0, -0.15, 0]}
+          scale={[1.35, 1.35, 1.35]}
+          renderOrder={2}
+          color={props.selectedHair.color}
+          />
+        }
+      {props.selectedHair.selectedHair == 6 &&
+          <Malehair
+          rotation={[0, 0, 0]}
+          position={[0, 0.21, -0.425]}
+          scale={[0.88, 0.94, 0.88]}
+          renderOrder={2}
+          color={props.selectedHair.color}
+          />
+        }
+
+        <Head
           position={[0, -1.0, 0]}
           scale={[0.5, 0.45, 0.45]}
           renderOrder={-1}
         />
-        {/* <LowpolyHead
-          position={[0, -0.35, -0.1]}
-          scale={[0.60, 0.50, 0.5]}
-          renderOrder={-1}
-        /> */}
+
 
     </object3D>
   )
