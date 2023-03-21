@@ -8,7 +8,7 @@ import { JEELIZFACEFILTER, NN_4EXPR } from 'facefilter'
 // import THREE.js helper, useful to compute pose
 // The helper is not minified, feel free to customize it (and submit pull requests bro):
 import { ThreeFiberHelper } from '../helpers/ThreeFiberHelper.js'
-import { ShortHair } from './Models/ShortHair.js'
+import { ShortHair } from './models/ShortHair.js'
 import { Ponytails } from './models/Ponytails.js'
 import { Head } from './models/Head.js'
 import { Hat } from './Models/Hat.js'
@@ -16,6 +16,9 @@ import { Mm } from './Models/Mm.js'
 import { MediumHair } from './models/MediumHair.js'
 import { ManHair0 } from './models/ManHair0.js'
 import { Malehair } from './models/Malehair.js'
+import { B2} from './models/B2.js'
+import { Beard } from './models/Beard.js'
+
 const _maxFacesDetected = 1 // max number of detected faces
 const _faceFollowers = new Array(_maxFacesDetected)
 let _expressions = null
@@ -73,12 +76,28 @@ const FaceFollower = (props) => {
           rotation={[0, 0, 0]}
           position={[0, 0, -0.5]}
           scale={[0.1675, 0.1675, 0.1675]}
+          />
+        }
+        {props.selectedHair.selectedHair == 4 &&
+          <Beard
+          rotation={[0, 0, 0]}
+          position={[0, -0.45, 0.4]}
+          scale={[0.08, 0.08, 0.08]}
+          renderOrder={2}
+          color={props.selectedHair.color}
+          />
+        }
+        {props.selectedHair.selectedHair == 5 &&
+          <B2
+          rotation={[0, 0, 0]}
+          position={[0, -1.0, 0.2]}
+          scale={[0.20, 0.15, 0.15]}
           renderOrder={2}
           color={props.selectedHair.color}
           />
         }
 
-      {props.selectedHair.selectedHair == 4 &&
+      {props.selectedHair.selectedHair == 7 &&
           <ManHair0
           rotation={[0, 0, 0]}
           position={[0, -0.15, 0]}

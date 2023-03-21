@@ -4,23 +4,14 @@ import io from "socket.io-client"
 import axios from "axios";
 import { Container, Row, Col } from 'react-bootstrap'
 import {BsPlayCircle, BsStopCircle, BsUpload} from 'react-icons/bs'
-import Divider from '@mui/material/Divider';
-import { styled } from '@mui/material/styles';
-import MuiGrid from '@mui/material/Grid';
-import Chip from '@mui/material/Chip';
+import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import {Card, CardContent, CardMedia, CardActionArea, Typography, Box, Tabs, Tab} from '@mui/material';
+import Tabs, { tabsClasses } from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import {Typography, Box} from '@mui/material';
 import PropTypes from 'prop-types';
 
 import "../css/HairColorView.css"
-
-const Grid = styled(MuiGrid)(({ theme }) => ({
-  width: '100%',
-  ...theme.typography.body2,
-  '& [role="separator"]': {
-    margin: theme.spacing(0, 2),
-  },
-}));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -71,25 +62,38 @@ function HairColorView() {
             audio: false,
         }
     };
-    // const [selectedHair, setSelectedHair] = useState(0);
+
     const colorList = [
         { key: 0, label: "Smoky Black", hex:"#100C07", rgb: {r: "16", g: "12", b: "7"} },
         { key: 1, label: "Liver", hex:"#5A3825", rgb: {r: "90", g: "56", b: "37"} },
         { key: 2, label: "Brown Yellow", hex:"#CC9966", rgb: {r: "204", g: "153", b: "102"} },
         { key: 3, label: "Indigo", hex:"#580271", rgb: {r: "88", g: "2", b: "113"} },
         { key: 4, label: "Deep Magenta", hex:"#DB02C2", rgb: {r: "219", g: "2", b: "194"} },
-        { key: 5, label: "Crayola's Maize", hex:"#FFCC47", rgb: {r: "255", g: "204", b: "71"} },
-        { key: 6, label: "Golden Brown", hex:"#996515", rgb: {r: "153", g: "101", b: "21"} },
-        { key: 7, label: "Falu Red", hex:"#801818", rgb: {r: "128", g: "24", b: "24"} },
-        { key: 8, label: "Beer", hex:"#FF9321", rgb: {r: "255", g: "147", b: "33"} },
-        { key: 9, label: "Navy Blue", hex:"#1273DE", rgb: {r: "18", g: "115", b: "222"} },
-        { key: 10, label: "green", hex:"#4CAF50", rgb: {r: "76", g: "175", b: "80"} },
+        { key: 5, label: "Flirt", hex:"#970572", rgb: {r: "151", g: "5", b: "114"} },
+        { key: 6, label: "Fuzzy Wuzzy", hex:"#F78DA7", rgb: {r: "247", g: "141", b: "167"} },
+        { key: 7, label: "Crayola's Maize", hex:"#FFCC47", rgb: {r: "255", g: "204", b: "71"} },
+        { key: 8, label: "Crayola's Gold", hex:"#E6BE8A", rgb: {r: "230", g: "190", b: "138"} },
+        { key: 9, label: "Golden Brown", hex:"#996515", rgb: {r: "153", g: "101", b: "21"} },
+        { key: 10, label: "Falu Red", hex:"#801818", rgb: {r: "128", g: "24", b: "24"} },
+        { key: 11, label: "Beer", hex:"#FF9321", rgb: {r: "255", g: "147", b: "33"} },
+        { key: 12, label: "Metallic Orange", hex:"#DA680F", rgb: {r: "218", g: "104", b: "15"} },
+        { key: 13, label: "Blue", hex:"#1273DE", rgb: {r: "18", g: "115", b: "222"} },
+        { key: 14, label: "Navy Blue", hex:"#8ED1FC", rgb: {r: "142", g: "209", b: "252"} },
+        { key: 15, label: "Green", hex:"#4CAF50", rgb: {r: "76", g: "175", b: "80"} },
+        { key: 16, label: "Light Green", hex:"#00D084", rgb: {r: "0", g: "208", b: "132"} },
+        { key: 17, label: "Dark Charcoal", hex:"#333333", rgb: {r: "51", g: "51", b: "51"} },
+        { key: 18, label: "White", hex:"#FFFFFF", rgb: {r: "255", g: "255", b: "255"} },
+        { key: 19, label: "Philippine Silver", hex:"#B8B8B8", rgb: {r: "184", g: "184", b: "184"} },     
     ];
 
     const [tab, setTab] = React.useState(0);
-
     const handleChange = (event, newValue) => {
         setTab(newValue);
+    };
+
+    const [colorTab, setColorTab] = React.useState(0);
+    const handleColorTabChange = (event, newValue) => {
+        setColorTab(newValue);
     };
 
     const startCam = () => {
@@ -192,93 +196,66 @@ function HairColorView() {
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs centered value={tab} onChange={handleChange} aria-label="basic tabs example"
                       TabIndicatorProps={{
-                        style: {
-                        backgroundColor: "white",
-                        }
-                        
+                        style: {backgroundColor: "white",}
                     }}>
-                    <Tab label="Option 1 - Image" className="tab-label"/>
-                    <Tab label="Option 2 - Live Action" className="tab-label"/>
+                    <Tab label="❏ Image" className="tab-label"/>
+                    <Tab label="❏ Live Action" className="tab-label"/>
                 </Tabs>
                 </Box>
                 <TabPanel value={tab} index={0} className="option-tab">
                     <p className="my-2">Upload an image with people in it and check how their hair color changes</p>
                     <input type="file" accept="image/*" ref={hiddenFileInput} onChange={handleFileChange} onClick={(event)=>{event.target.value = null}} style={{display:'none'}} /> 
-                    <Button variant="contained" style={{backgroundColor: "rgba(var(--bs-dark-rgb),1)"}} className='mx-1' onClick={handleClick} startIcon={<BsUpload />}> Upload an Image</Button>
+                    <Button variant="contained" className='mx-1 my-1 start-button' onClick={handleClick} startIcon={<BsUpload />}> Upload an Image</Button>
                 </TabPanel>
                 <TabPanel value={tab} index={1} className="option-tab">
                     <p className="my-2">See your hair color changes in real time</p>
-                    <Button variant="contained" style={{backgroundColor: "rgba(var(--bs-dark-rgb),1)"}} className='mx-1' onClick={startCam} startIcon={<BsPlayCircle />}>Start Video Feed</Button>
-                    <Button variant="outlined" style={{borderColor: "rgba(var(--bs-dark-rgb),1)", color: "white"}} className='mx-1' onClick={stopCam} startIcon={<BsStopCircle />}>Stop Video Feed</Button>
+                    <Button variant="contained"  className='mx-1 my-1 start-button' onClick={startCam} startIcon={<BsPlayCircle />}>Start Video Feed</Button>
+                    <Button variant="outlined" className='mx-1 my-1 stop-button' onClick={stopCam} startIcon={<BsStopCircle />}>Stop Video Feed</Button>
                 </TabPanel>
            
             </Container>
-            <Container className=''>
-                <Divider sx={{
-                            "&::before, &::after": {
-                                borderColor: "white",
-                            }}}>
-                    <Chip variant="outlined" label="" sx={{border: "1px solid white"}}/>
-                </Divider>
-            </Container>
             <Container fluid className="video-container">
-                <Row>
-                    <Col className="input-col">
+                <Grid container spacing={2} justifyContent="center">
+                    <Grid item xs={9} md={4} className="input-col" justifyContent="center">
                         {isShowVideo &&(<video className="webcam-video" autoPlay={true} ref={videoRef}></video>)}
                         {isShowVideo &&(<canvas ref={photoRef} />)}
                         {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}} src={uploadedFileURL} />}
-                    </Col>
-                    <Col className="output-col">
+                    </Grid>
+                    <Grid item xs={9} md={4} className="output-col" justifyContent="center">
                         {isShowVideo && <img src="http://localhost:5001/video_feed"  alt="transformed_output"></img>}
                         {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}} 
                         src={`data:image/jpeg;base64,${downloadedFile}`} />}
-                    </Col>
-                </Row>
+                    </Grid>
+                </Grid>
             </Container>
-            <Container className='mt-3'>
-                <Divider sx={{
-                            "&::before, &::after": {
-                                borderColor: "rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))",
-                            }}}>
-                    <Chip variant="outlined" label="Choose a color" sx={{border: "1px solid"}}/>
-                </Divider>
+            <Container className="color-picker">   
+                <Tabs
+                    value={colorTab}
+                    onChange={handleColorTabChange}
+                    variant="scrollable"
+                    scrollButtons
+                    allowScrollButtonsMobile
+                    aria-label="scrollable force tabs example"
+                    TabIndicatorProps={{
+                        style: {
+                            backgroundColor: "#FFFFFF"
+                        }
+                    }}
+                    sx={{
+                        [`& .${tabsClasses.scrollButtons}`]: {
+                            '&.Mui-disabled': { opacity: 0.3 },
+                        },
+                    }}
+                >
+                    {colorList.map((data) => (
+                        <Tab style={{ backgroundColor:data.hex }} 
+                            className="color-tab"
+                            key={data.key}
+                            onClick={() => onColorChange(data)}
+                    />
+                    ))}
+                </Tabs>
             </Container>
-        <Box className="color-box" >
-        <Tabs
-          variant="scrollable"
-          scrollButtons="auto"
-          allowScrollButtonsMobile
-          TabIndicatorProps={{
-            style: {
-              backgroundColor: "#FFFFFF"
-            }
-          }}
-          aria-label="scrollable auto tabs"
-        >
-          {colorList.map((data) => (
-          <Card
-              className="color-card"
-              style={{ borderRadius: 0, boxShadow: "none", backgroundColor:"#000000" }}
-              label={data.label}
-              key={data.key}
-              onClick={() => onColorChange(data)}
-
-          >
-              <CardActionArea>
-                <CardMedia
-                  className="color-img"
-                    style={{backgroundColor: data.hex}}
-                  alt='hair-img'
-                />
-                  <Typography gutterBottom variant="h6" component="div" color="common.white">
-                    {data.label}
-                  </Typography>
-              </CardActionArea>
-            </Card>
-
-          ))}
-        </Tabs>
-        </Box>
         </Container>
     </>
   );

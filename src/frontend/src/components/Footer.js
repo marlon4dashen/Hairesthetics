@@ -10,23 +10,22 @@ function Footer() {
   return (
     <footer className='app-footer'>
         <Row className='copyright-section'>
-            <Col>
-                {/* Built with: */}
+            {/* <Col>
                 <Button variant="dark"><SiReact /></Button>
                 <Button variant="dark"><SiFlask /></Button>
                 <Button variant="dark"><SiThreedotjs /></Button>
                 <Button variant="dark"><SiOpencv /></Button>
                 <Button variant="dark"><SiTensorflow /></Button>
                 <Button variant="dark"><SiOnnx /></Button>
-            </Col>
+            </Col> */}
             <Col>
                 <Container>© {new Date().getFullYear()} Copyright. HairEsthetics. All Rights Reserved</Container>
             </Col>
-            <Col>
+            {/* <Col>
                 <Button variant="dark"><FaGithub /></Button>
                 <Button variant="dark"><RxDiscordLogo /></Button>
                 <Button variant="dark"><HiOutlineMail /></Button>
-            </Col>
+            </Col> */}
         </Row>
     </footer>
   );
