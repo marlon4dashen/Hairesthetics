@@ -14,13 +14,6 @@ function Header() {
             <Nav.Link as={Link} to="/color">Hair Color</Nav.Link>
             <Nav.Link as={Link} to="/salon">Salon Recommendation</Nav.Link>
           </Nav>
-          {/* Right Side */}
-          {/* <Nav>
-            <Nav.Link href="#deets">Help</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              Contact
-            </Nav.Link>
-          </Nav> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>
