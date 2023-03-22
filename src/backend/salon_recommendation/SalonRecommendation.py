@@ -23,7 +23,7 @@ class SalonRecommendation:
             salon['lng'] = result['geometry']['location']['lng']
             salon['rating'] = result['rating']
             salon['user_ratings_total'] = result['user_ratings_total']
-            self._total_average_ratings += result['rating']
+            self._total_average_ratings += float(result['rating'])
             place_id = result['place_id']
             place_details = None
             try:
@@ -58,7 +58,8 @@ class SalonRecommendation:
         return place_details
 
     def __rank_salons(self):
-        self._salons = sorted(self._salons, key=lambda salon: self.__bayesian_average(salon['user_ratings_total'], salon['rating'], self._total_average_ratings, 25))
+        self._salons = sorted(self._salons, key=lambda salon: self.__bayesian_average(salon['user_ratings_total'], salon['rating'], self._total_average_ratings, 80), reverse=True)
     
-    def __bayesian_average(self, salon_ratings_count, salon_ratings_avg, total_avg_ratings_count, C):
-        return (salon_ratings_count*salon_ratings_avg + total_avg_ratings_count*C) / (salon_ratings_count+C)
+    def __bayesian_average(self, salon_ratings_count, salon_ratings_avg, total_avg_ratings_count, confidence_number):
+        return (confidence_number*total_avg_ratings_count + salon_ratings_avg*salon_ratings_count) / (confidence_number+total_avg_ratings_count)
+        # return (salon_ratings_count*salon_ratings_avg + total_avg_ratings_count*confidence_number) / (salon_ratings_count+confidence_number)

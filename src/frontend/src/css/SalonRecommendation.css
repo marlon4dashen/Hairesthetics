@@ -30,7 +30,7 @@
 .css-1im77uy-control {
   border-color: white !important;
   border-width: 1px !important;
-  background-color: black !important;
+  background-color: transparent !important;
   color: black !important;
 }
 
@@ -59,6 +59,14 @@
 }
 
 .loading-bar .css-1r8wrcl-MuiLinearProgress-bar2{
+  background-color: #4DB6AC !important;
+}
+
+.loading-bar .css-jswo0y{
+  background-color: #4DB6AC !important;
+}
+
+.loading-bar .css-1dheygv{
   background-color: #4DB6AC !important;
 }
 

@@ -19,7 +19,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import blackDot from "../assets/icons/black-marker.png";
 import seat from "../assets/icons/seat.png"
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
-import bgImg from "../assets/banner/b1.jpg"
+
 
 function SalonRecommendationView() {
     const { isLoaded } = useLoadScript({
@@ -87,7 +87,7 @@ function SalonRecommendationView() {
             clearSuggestions,
         } = usePlacesAutocomplete({
             requestOptions: {/* Define search scope here */},
-            debounce: 300,
+            debounce: 200,
         });
 
         const handleSelect = async (inputText) => {
@@ -190,7 +190,7 @@ function SalonRecommendationView() {
     }
 
     return (
-        <div className="page-container" style={{backgroundImage: `url(${bgImg})`}}>
+        <div className="page-container">
             <Container>
                 <PlacesAutocomplete setSelected={setSelected} />
             </Container>
