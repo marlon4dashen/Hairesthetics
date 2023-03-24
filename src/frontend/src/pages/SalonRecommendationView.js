@@ -19,7 +19,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import blackDot from "../assets/icons/black-marker.png";
 import seat from "../assets/icons/seat.png"
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
-import bgImg from "../assets/banner/b1.jpg"
+
 
 function SalonRecommendationView() {
     const { isLoaded } = useLoadScript({
@@ -87,7 +87,7 @@ function SalonRecommendationView() {
             clearSuggestions,
         } = usePlacesAutocomplete({
             requestOptions: {/* Define search scope here */},
-            debounce: 300,
+            debounce: 200,
         });
 
         const handleSelect = async (inputText) => {
@@ -110,8 +110,8 @@ function SalonRecommendationView() {
 
         return (
             <>
-                <Row className="pt-2 pb-3">
-                    <Col>
+                <Row className="pt-1 pb-2">
+                    <Col className="pt-1 pb-1">
                         <AsyncSelect isSearchable={true} 
                             placeholder="🔍 Search an address"
                             loadOptions={loadOptions}
@@ -132,7 +132,7 @@ function SalonRecommendationView() {
                             }),}}
                         />
                     </Col>
-                    <Col xs="auto" md="auto">
+                    <Col xs={12} md="auto" className="pt-1 pb-1">
                         <Button variant="outline-light" onClick={locateUserLocation}><IoMdLocate /> Use current location</Button>
                     </Col>
                 </Row>
@@ -190,7 +190,7 @@ function SalonRecommendationView() {
     }
 
     return (
-        <div className="page-container" style={{backgroundImage: `url(${bgImg})`}}>
+        <div className="page-container">
             <Container>
                 <PlacesAutocomplete setSelected={setSelected} />
             </Container>
@@ -204,18 +204,18 @@ function SalonRecommendationView() {
                 <Collapse in={openAlert}>
                     <Alert
                         severity={alertMessage.type}
-                        action={
-                            <IconButton
-                            aria-label="close"
-                            color="inherit"
-                            size="small"
-                            onClick={() => {
-                                setAlertOpen(false);
-                            }}
-                            >
-                            <CloseIcon fontSize="inherit" />
-                            </IconButton>
-                        }
+                        // action={
+                        //     <IconButton
+                        //     aria-label="close"
+                        //     color="inherit"
+                        //     size="small"
+                        //     onClick={() => {
+                        //         setAlertOpen(false);
+                        //     }}
+                        //     >
+                        //     <CloseIcon fontSize="inherit" />
+                        //     </IconButton>
+                        // }
                         sx={{ mt: 1 }}
                     >
                         <strong>{alertMessage.message}</strong>

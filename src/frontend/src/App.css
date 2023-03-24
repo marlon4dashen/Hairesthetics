@@ -18,6 +18,15 @@
   height: 8vh;
 }
 
+.navbar-collapse {
+  background-color: rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))!important;
+  z-index: 300;
+}
+
+.navbar-nav {
+  --bs-nav-link-color: #F2F3F4 !important;
+}
+
 .app-footer {
   background-color: rgba(var(--bs-dark-rgb),1) !important;
   color: white;

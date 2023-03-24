@@ -12,6 +12,11 @@
   font-size: 25px !important;
 }
 
+.alert-container {
+  margin-left: 12%;
+  margin-right: 12%;
+}
+
 .color-picker {
   margin-top: 20px;
   margin-bottom: 15px;
@@ -30,6 +35,10 @@
   font-weight: bold;
   width: 3em !important;
   height: 3em !important;
+}
+
+.css-1k33q06 {
+  color: #4DB6AC;
 }
 
 .option-tab {
@@ -70,7 +79,7 @@
 
 @media screen and (max-width: 900px) {
   .video-container {
-    min-height: auto;
+    min-height: 700px;
   }
 }
 
@@ -78,5 +87,8 @@
   .tab-label {
     font-size: 15px !important;
     width: 150px !important;
+  }
+  .video-container .MuiGrid-item{
+    padding-left: 0px !important;
   }
 }
