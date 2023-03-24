@@ -232,7 +232,7 @@ function SalonRecommendationView() {
                                         <Card.Header className="card-header">{salon.name}</Card.Header>
                                         <Card.Body>
                                              <ListGroup className="list-group-flush">
-                                                 <ListGroup.Item>{salon.address}</ListGroup.Item>
+                                                 <ListGroup.Item className="card-address">{salon.address}</ListGroup.Item>
                                                  <ListGroup.Item>
                                                     Ratings: {salon.rating} | 
                                                     Total Reviews: {salon.user_ratings_total}

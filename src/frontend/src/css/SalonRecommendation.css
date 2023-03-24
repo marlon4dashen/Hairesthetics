@@ -34,6 +34,10 @@
   color: black !important;
 }
 
+.card-address {
+  min-height: 65px !important;
+}
+
 .salon-link {
   text-decoration: none;
 }
