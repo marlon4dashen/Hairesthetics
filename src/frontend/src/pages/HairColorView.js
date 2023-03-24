@@ -107,10 +107,6 @@ function HairColorView() {
         setTab(newValue);
     };
 
-    const RemoveCookie = () => {
-        Cookies.remove(userid);
-      };
-
     const [colorTab, setColorTab] = React.useState(0);
     const handleColorTabChange = (event, newValue) => {
         setColorTab(newValue);
