@@ -12,6 +12,7 @@ import Alert from '@mui/material/Alert';
 import Collapse from '@mui/material/Collapse';
 import {Typography, Box} from '@mui/material';
 import PropTypes from 'prop-types';
+// import Cookies from "js-cookie";
 
 import "../css/HairColorView.css"
 
@@ -40,10 +41,24 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
+
 const socket = io.connect('http://localhost:5001/test')
+const makeid = (length) => {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+}
+
 function HairColorView() {
     const photoRef = useRef(null);
     const videoRef = useRef(null);
+    const outputVideoRef = useRef(null);
     const [ hairColor, setHairColor ] = useState({r: "244",g: "67",b: "54",a: "1",})
     const { r, g, b, a } = hairColor;
     const [isShowVideo, setIsShowVideo] = useState(false);
@@ -57,6 +72,7 @@ function HairColorView() {
     const hiddenFileInput = useRef(null);
     const mediaWidth = 300;
     const mediaHeight = 300;
+    const [userid, setUserID] = useState(makeid(5));
     const constraints = {
         video: {
             width: 300,
@@ -85,7 +101,7 @@ function HairColorView() {
         { key: 16, label: "Light Green", hex:"#00D084", rgb: {r: "0", g: "208", b: "132"} },
         { key: 17, label: "Dark Charcoal", hex:"#333333", rgb: {r: "51", g: "51", b: "51"} },
         { key: 18, label: "White", hex:"#FFFFFF", rgb: {r: "255", g: "255", b: "255"} },
-        { key: 19, label: "Philippine Silver", hex:"#B8B8B8", rgb: {r: "184", g: "184", b: "184"} },     
+        { key: 19, label: "Philippine Silver", hex:"#B8B8B8", rgb: {r: "184", g: "184", b: "184"} },
     ];
 
     const [tab, setTab] = React.useState(0);
@@ -103,7 +119,9 @@ function HairColorView() {
         socket.on('connect', function() {
             console.log('Connected!');
         });
-        
+        // const id = makeid(5)
+        // setUserID(id)
+
         navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
             setIsShowVideo(true);
             setAlertOpen({visible: false, message: ""})
@@ -130,8 +148,8 @@ function HairColorView() {
                 setCurrentInterval(null);
             }
             setIsShowVideo(false);
-            setAlertOpen({visible: false, message: ""})
-            axios.get("http://localhost:5001/clear")
+            axios.get(`http://localhost:5001/clear?userid=${userid}`)
+            // setUserID(null);
         }
     }
 
@@ -143,7 +161,7 @@ function HairColorView() {
         photo.height = mediaHeight;
         ctx.drawImage(video, 0, 0, mediaWidth, mediaHeight);
         let dataURL = photo.toDataURL('image/jpeg');
-        socket.emit('input image', { image: dataURL, r:hairColor.r, g:hairColor.g, b:hairColor.b });
+        socket.emit('input image', { userid: userid, image: dataURL, r:hairColor.r, g:hairColor.g, b:hairColor.b });
     };
 
     const handleClick = (event) => {
@@ -184,7 +202,7 @@ function HairColorView() {
             clearInterval(currentInterval);
             setCurrentInterval(setInterval(paintToCanvas, 1000/5));
         }
-            
+
     }
 
     const clearUploadedFile = () => {
@@ -193,13 +211,26 @@ function HairColorView() {
         setIsShowImage(false);
     }
 
+    useEffect(() => {
+        if(userid) {
+            // Cookies.set(userid)
+            socket.emit('add_user', { userid: userid })
+            console.log(userid)
+            // outputVideoRef.current.src=`http://localhost:5001/video_feed?userid=${userid}`
+        }
+        return () => {
+            setUserID(null);
+            axios.get(`http://localhost:5001/remove?userid=${userid}`)
+        }
+    }, [userid])
+
     useEffect(()=>{
         return () => URL.revokeObjectURL(uploadedFile)
     }, [uploadedFile])
 
-    return (    
+    return (
     <>
-        <Container fluid className="page-container">    
+        <Container fluid className="page-container">
             <Container>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs centered value={tab} onChange={handleChange} aria-label="basic tabs example"
@@ -212,7 +243,7 @@ function HairColorView() {
                 </Box>
                 <TabPanel value={tab} index={0} className="option-tab">
                     <p className="my-2">Upload an image with people in it and check how their hair color changes</p>
-                    <input type="file" accept="image/*" ref={hiddenFileInput} onChange={handleFileChange} onClick={(event)=>{event.target.value = null}} style={{display:'none'}} /> 
+                    <input type="file" accept="image/*" ref={hiddenFileInput} onChange={handleFileChange} onClick={(event)=>{event.target.value = null}} style={{display:'none'}} />
                     <Button variant="contained" className='mx-1 my-1 start-button' onClick={handleClick} startIcon={<BsUpload />}> Upload an Image</Button>
                 </TabPanel>
                 <TabPanel value={tab} index={1} className="option-tab">
@@ -237,8 +268,10 @@ function HairColorView() {
                         {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}} src={uploadedFileURL} />}
                     </Grid>
                     <Grid item xs={9} md={4} className="output-col" justifyContent="center">
-                        {isShowVideo && <img src="http://localhost:5001/video_feed"  alt="transformed_output"></img>}
-                        {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}} 
+                        {/* {isShowVideo && <img src={"http://localhost:5001/video_feed?userid=" + userid}  alt="transformed_output"></img>} */}
+                        {isShowVideo && <img src={`http://localhost:5001/video_feed?userid=${userid}`}  alt="transformed_output"></img>}
+                        {/* {isShowVideo && <img alt="transformed_output" ref={outputVideoRef}></img>} */}
+                        {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}}
                         src={`data:image/jpeg;base64,${downloadedFile}`} />}
                     </Grid>
                 </Grid>
@@ -263,7 +296,7 @@ function HairColorView() {
                     }}
                 >
                     {colorList.map((data) => (
-                        <Tab style={{ backgroundColor:data.hex }} 
+                        <Tab style={{ backgroundColor:data.hex }}
                             className="color-tab"
                             key={data.key}
                             onClick={() => onColorChange(data)}
