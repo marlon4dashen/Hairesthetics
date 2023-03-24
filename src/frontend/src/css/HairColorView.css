@@ -88,4 +88,7 @@
     font-size: 15px !important;
     width: 150px !important;
   }
+  .video-container .MuiGrid-item{
+    padding-left: 0px !important;
+  }
 }
