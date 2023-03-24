@@ -10,6 +10,7 @@ import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import {Typography, Box} from '@mui/material';
 import PropTypes from 'prop-types';
+// import Cookies from "js-cookie";
 
 import "../css/HairColorView.css"
 
@@ -39,10 +40,24 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
+
 const socket = io.connect('http://localhost:5001/test')
+const makeid = (length) => {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+}
+
 function HairColorView() {
     const photoRef = useRef(null);
     const videoRef = useRef(null);
+    const outputVideoRef = useRef(null);
     const [ hairColor, setHairColor ] = useState({r: "244",g: "67",b: "54",a: "1",})
     const { r, g, b, a } = hairColor;
     const [isShowVideo, setIsShowVideo] = useState(false);
@@ -55,6 +70,7 @@ function HairColorView() {
     const hiddenFileInput = useRef(null);
     const mediaWidth = 300;
     const mediaHeight = 300;
+    const [userid, setUserID] = useState(makeid(5));
     const constraints = {
         video: {
             width: 300,
@@ -91,6 +107,10 @@ function HairColorView() {
         setTab(newValue);
     };
 
+    const RemoveCookie = () => {
+        Cookies.remove(userid);
+      };
+
     const [colorTab, setColorTab] = React.useState(0);
     const handleColorTabChange = (event, newValue) => {
         setColorTab(newValue);
@@ -102,6 +122,8 @@ function HairColorView() {
         socket.on('connect', function() {
             console.log('Connected!');
         });
+        // const id = makeid(5)
+        // setUserID(id)
         
         navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
             videoRef.current.srcObject = stream;
@@ -126,7 +148,8 @@ function HairColorView() {
                 setCurrentInterval(null);
             }
             setIsShowVideo(false);
-            axios.get("http://localhost:5001/clear")
+            axios.get(`http://localhost:5001/clear?userid=${userid}`)
+            // setUserID(null);
         }
     }
 
@@ -138,7 +161,7 @@ function HairColorView() {
         photo.height = mediaHeight;
         ctx.drawImage(video, 0, 0, mediaWidth, mediaHeight);
         let dataURL = photo.toDataURL('image/jpeg');
-        socket.emit('input image', { image: dataURL, r:hairColor.r, g:hairColor.g, b:hairColor.b });
+        socket.emit('input image', { userid: userid, image: dataURL, r:hairColor.r, g:hairColor.g, b:hairColor.b });
     };
 
     const handleClick = (event) => {
@@ -185,6 +208,19 @@ function HairColorView() {
         setIsShowImage(false);
     }
 
+    useEffect(() => {
+        if(userid) {
+            // Cookies.set(userid)
+            socket.emit('add_user', { userid: userid })
+            console.log(userid)
+            // outputVideoRef.current.src=`http://localhost:5001/video_feed?userid=${userid}`
+        } 
+        return () => {
+            setUserID(null);
+            axios.get(`http://localhost:5001/remove?userid=${userid}`)
+        }
+    }, [userid])
+
     useEffect(()=>{
         return () => URL.revokeObjectURL(uploadedFile)
     }, [uploadedFile])
@@ -222,7 +258,9 @@ function HairColorView() {
                         {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}} src={uploadedFileURL} />}
                     </Grid>
                     <Grid item xs={9} md={4} className="output-col" justifyContent="center">
-                        {isShowVideo && <img src="http://localhost:5001/video_feed"  alt="transformed_output"></img>}
+                        {/* {isShowVideo && <img src={"http://localhost:5001/video_feed?userid=" + userid}  alt="transformed_output"></img>} */}
+                        {isShowVideo && <img src={`http://localhost:5001/video_feed?userid=${userid}`}  alt="transformed_output"></img>}
+                        {/* {isShowVideo && <img alt="transformed_output" ref={outputVideoRef}></img>} */}
                         {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}} 
                         src={`data:image/jpeg;base64,${downloadedFile}`} />}
                     </Grid>
