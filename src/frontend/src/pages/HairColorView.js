@@ -83,7 +83,7 @@ function HairColorView() {
         { key: 16, label: "Light Green", hex:"#00D084", rgb: {r: "0", g: "208", b: "132"} },
         { key: 17, label: "Dark Charcoal", hex:"#333333", rgb: {r: "51", g: "51", b: "51"} },
         { key: 18, label: "White", hex:"#FFFFFF", rgb: {r: "255", g: "255", b: "255"} },
-        { key: 19, label: "Philippine Silver", hex:"#B8B8B8", rgb: {r: "184", g: "184", b: "184"} },     
+        { key: 19, label: "Philippine Silver", hex:"#B8B8B8", rgb: {r: "184", g: "184", b: "184"} },
     ];
 
     const [tab, setTab] = React.useState(0);
@@ -102,7 +102,7 @@ function HairColorView() {
         socket.on('connect', function() {
             console.log('Connected!');
         });
-        
+
         navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
             videoRef.current.srcObject = stream;
             setLocalMediaStream(stream)
@@ -176,7 +176,7 @@ function HairColorView() {
             clearInterval(currentInterval);
             setCurrentInterval(setInterval(paintToCanvas, 1000/5));
         }
-            
+
     }
 
     const clearUploadedFile = () => {
@@ -189,9 +189,9 @@ function HairColorView() {
         return () => URL.revokeObjectURL(uploadedFile)
     }, [uploadedFile])
 
-    return (    
+    return (
     <>
-        <Container fluid className="page-container">    
+        <Container fluid className="page-container">
             <Container>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs centered value={tab} onChange={handleChange} aria-label="basic tabs example"
@@ -204,7 +204,7 @@ function HairColorView() {
                 </Box>
                 <TabPanel value={tab} index={0} className="option-tab">
                     <p className="my-2">Upload an image with people in it and check how their hair color changes</p>
-                    <input type="file" accept="image/*" ref={hiddenFileInput} onChange={handleFileChange} onClick={(event)=>{event.target.value = null}} style={{display:'none'}} /> 
+                    <input type="file" accept="image/*" ref={hiddenFileInput} onChange={handleFileChange} onClick={(event)=>{event.target.value = null}} style={{display:'none'}} />
                     <Button variant="contained" className='mx-1 my-1 start-button' onClick={handleClick} startIcon={<BsUpload />}> Upload an Image</Button>
                 </TabPanel>
                 <TabPanel value={tab} index={1} className="option-tab">
@@ -212,7 +212,7 @@ function HairColorView() {
                     <Button variant="contained"  className='mx-1 my-1 start-button' onClick={startCam} startIcon={<BsPlayCircle />}>Start Video Feed</Button>
                     <Button variant="outlined" className='mx-1 my-1 stop-button' onClick={stopCam} startIcon={<BsStopCircle />}>Stop Video Feed</Button>
                 </TabPanel>
-           
+
             </Container>
             <Container fluid className="video-container">
                 <Grid container spacing={2} justifyContent="center">
@@ -223,12 +223,12 @@ function HairColorView() {
                     </Grid>
                     <Grid item xs={9} md={4} className="output-col" justifyContent="center">
                         {isShowVideo && <img src="http://localhost:5001/video_feed"  alt="transformed_output"></img>}
-                        {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}} 
+                        {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}}
                         src={`data:image/jpeg;base64,${downloadedFile}`} />}
                     </Grid>
                 </Grid>
             </Container>
-            <Container className="color-picker">   
+            <Container className="color-picker">
                 <Tabs
                     value={colorTab}
                     onChange={handleColorTabChange}
@@ -248,7 +248,7 @@ function HairColorView() {
                     }}
                 >
                     {colorList.map((data) => (
-                        <Tab style={{ backgroundColor:data.hex }} 
+                        <Tab style={{ backgroundColor:data.hex }}
                             className="color-tab"
                             key={data.key}
                             onClick={() => onColorChange(data)}

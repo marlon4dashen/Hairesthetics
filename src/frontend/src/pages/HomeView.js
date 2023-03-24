@@ -9,7 +9,7 @@ import EastIcon from '@mui/icons-material/East';
 // Images
 import bannerImg from "../assets/banner/b6.jpg"
 import hairStyle from "../assets/feature/h1.gif";
-import hairColor from "../assets/feature/c2.gif";
+import hairColor from "../assets/feature/c1.gif";
 import map from "../assets/feature/m1.jpeg";
 
 import "../css/HomeView.css"
@@ -21,7 +21,7 @@ function HomeView() {
                 <Typography variant='h3' color='#FDFEFE' sx={{ fontWeight: 'bold' }}>HairEsthetics</Typography>
                 <Typography variant='h6' color='#FDFEFE'>Try your new hair style/color with our frontier AI & AR technology at anytime.</Typography>
             </Grid>
-            
+
             <Grid container className='features-container' spacing={3} justifyContent="center" alignItems="center">
             <Grid item xs={9} md={4} className='grid-item'>
                 <Card className="feature-card">
