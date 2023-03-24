@@ -1,0 +1,1 @@
+gunicorn -w 1 ./src/backend/server.server:app
