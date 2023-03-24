@@ -23,8 +23,8 @@ app.logger.addHandler(logging.StreamHandler(stdout))
 app.config['SECRET_KEY'] = 'secret!'
 app.config['DEBUG'] = True
 
-socketio = SocketIO(app, cors_allowed_origins="*")
-worker = None
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
+workers = {}
 hair_artist = None
 # vc = cv2.VideoCapture(0)
 # if os.environ.get("FLASK_ENV") == "production":
@@ -42,12 +42,13 @@ hair_artist = None
 @socketio.on('input image', namespace='/test')
 def test_message(input):
     image = input.get("image", None)
+    userid = input.get("userid", None)
     if not image:
         raise Exception("No image")
     image = image.split(",")[1]
     r, g, b = input.get("r"), input.get("g"), input.get("b")
-    print([r,g,b])
-    worker.enqueue_input((image, [r, g, b]))
+    if userid in workers:
+        workers[userid].enqueue_input((image, [r, g, b]))
     #camera.enqueue_input(input)
 
     # image_data = input # Do your magical Image processing here!!
@@ -70,14 +71,21 @@ def test_message(input):
 
 @socketio.on('connect', namespace='/test')
 def test_connect():
-    print("client connected")
-    global worker
-    worker = init_camera()
+    print("new connection")
 
+
+@socketio.on('add_user', namespace='/test')
+def add_user(input):
+    global workers
+    worker = init_camera()
+    userid = input.get("userid")
+    workers[userid] = worker
+    print(workers)
 
 def init_camera():
     global hair_artist
-    hair_artist = Hair_Artist()
+    if not hair_artist:
+        hair_artist = Hair_Artist()
     return Worker(hair_artist)
 
 @app.route('/')
@@ -120,15 +128,27 @@ def get_salons():
         return jsonify({'code': 'error'})
     return jsonify({'code': 'success', 'length': size, 'salons': salons})
 
-@app.route('/clear')
+@app.route('/clear', methods=['GET'])
 @cross_origin()
 def clear_cache():
-    if worker:
-        worker.clean_up()
+    args = request.args
+    userid = args["userid"]
+    if userid in workers:
+        workers[userid].clean_up()
+        # del workers[userid]
     return jsonify({'code': 'success'})
 
+@app.route('/remove', methods=['GET'])
+@cross_origin()
+def remove_worker():
+    args = request.args
+    userid = args["userid"]
+    if userid in workers:
+        del workers[userid]
+    print(workers)
+    return jsonify({'code': 'success'})
 
-def gen():
+def gen(userid):
     """Video streaming generator function."""
     app.logger.info("starting to generate frames!")
     while True:
@@ -139,7 +159,8 @@ def gen():
         # output = cv2.cvtColor(output, cv2.COLOR_BGR2RGB)
         # output_str = binascii.a2b_base64(cv2_image_to_base64(output))
         # print("Lapsed time: {}".format(time() - start))
-        frame = worker.get_frame() #pil_image_to_base64(camera.get_frame())
+        if userid in workers:
+            frame = workers[userid].get_frame() #pil_image_to_base64(camera.get_frame())
 
         # frame = camera.get_frame() #pil_image_to_base64(camera.get_frame())
 
@@ -151,9 +172,12 @@ def gen():
 @cross_origin()
 def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
-    while not worker:
+    args = request.args
+    userid = args["userid"]
+    
+    while userid not in workers:
         sleep(0.05)
-    return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen(userid), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == '__main__':
