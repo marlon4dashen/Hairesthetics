@@ -34,3 +34,18 @@ This project is a web application that allows users to try on different hair sty
 ├── .github/workflows (CI/CD configuration files)
 └── .gitignore
 ```
+
+## Trying out our deployment version:
+
+- Open up your browser
+
+- Go to https://ec2-18-191-171-138.us-east-2.compute.amazonaws.com
+
+- You will see the following screen, click visit the website
+<img width="772" alt="Screen Shot 2023-03-25 at 2 05 01 AM" src="https://user-images.githubusercontent.com/57467554/227699867-4e3df1ce-348a-475f-8bbc-ac2f92e9626c.png">
+
+- After the webpage is loaded, close the tab
+
+- In a new tab, go to https://hairesthetics.web.app/
+
+- You are all set!

@@ -16,7 +16,11 @@ import { Mm } from './models/Mm.js'
 import { ManHair0 } from './models/ManHair0.js'
 import { ManHair1 } from './models/ManHair1.js'
 import { ManHair2 } from './models/ManHair2.js'
+import { ManHair3 } from './models/ManHair3.js'
+import { ManHair4 } from './models/ManHair4.js'
 import { WomanHair1 } from './models/WomanHair1.js'
+import { WomanHair2 } from './models/WomanHair2.js'
+import { WomanHair3 } from './models/WomanHair3.js'
 import { Malehair } from './models/Malehair.js'
 
 
@@ -116,6 +120,44 @@ const FaceFollower = (props) => {
           rotation={[0, 0, 0]}
           position={[0.1, -0.725, -0.525]}
           scale={[4.40, 4.75, 4.40]}
+          renderOrder={2}
+          color={props.selectedHair.color}
+          />
+        }
+
+        {props.selectedHair.selectedHair == 6 &&
+          <WomanHair2
+          rotation={[0, 0, 0]}
+          position={[0.05, -0.875, -0.2750]}
+          scale={[4.40, 4.75, 4.40]}
+          renderOrder={2}
+          color={props.selectedHair.color}
+          />
+        }
+        {/* x, y, z(+ going outward, - going inward) */}
+        {props.selectedHair.selectedHair == 7 &&
+          <WomanHair3
+          rotation={[0, 0, 0]}
+          position={[0.05, -0.725, -0.3850]}
+          scale={[4.4, 4.75, 4.40]}
+          renderOrder={2}
+          color={props.selectedHair.color}
+          />
+        }
+        {props.selectedHair.selectedHair == 8 &&
+          <ManHair3
+          rotation={[0, 0, 0]}
+          position={[0.1, -0.555, -0.10]}
+          scale={[4.40, 4.75, 4.40]}
+          renderOrder={2}
+          color={props.selectedHair.color}
+          />
+        }
+        {props.selectedHair.selectedHair == 9 &&
+          <ManHair4
+          rotation={[0, 0, 0]}
+          position={[0.1, -0.555, -0.525]}
+          scale={[4.70, 4.85, 4.70]}
           renderOrder={2}
           color={props.selectedHair.color}
           />
