@@ -15,6 +15,7 @@ import hair4 from "../../public/assets/hairstyles/hair4.png"
 import hair5 from "../../public/assets/hairstyles/hair5.png"
 import hair6 from "../../public/assets/hairstyles/hair6.png"
 import hair7 from "../../public/assets/hairstyles/hair7.png"
+import hair12 from "../../public/assets/hairstyles/hair12.png"
 import CssBaseline from "@mui/material/CssBaseline";
 
 import ARCanvas from '../components/ARCanvas';
@@ -107,8 +108,10 @@ function HairStyleView() {
     { key: 3, label: "Mid-split", img:"/_/public/assets/hairstyles/hair3.png" },
     { key: 4, label: "Quiff", img:"/_/public/assets/hairstyles/hair4.png" },
     { key: 5, label: "Slicked-back", img:"/_/public/assets/hairstyles/hair5.png" },
-    { key: 6, label: "Afro", img:"/_/public/assets/hairstyles/hair6.png" },
-    { key: 7, label: "Undercut", img:"/_/public/assets/hairstyles/hair7.png" },
+    { key: 6, label: "Fringe", img:"/_/public/assets/hairstyles/hair6.png" },
+    { key: 7, label: "Bun", img:"/_/public/assets/hairstyles/hair12.png"  },
+    // { key: 8, label: "Afro", img:"/_/public/assets/hairstyles/hair6.png" },
+    // { key: 9, label: "Undercut", img:"/_/public/assets/hairstyles/hair7.png" },
 
   ]);
 
