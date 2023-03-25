@@ -46,6 +46,6 @@ This project is a web application that allows users to try on different hair sty
 
 - After the webpage is loaded, close the tab
 
-- In a new tab, go to https://hairesthetics.web.app/salon
+- In a new tab, go to https://hairesthetics.web.app/
 
 - You are all set!
