@@ -173,6 +173,7 @@ function SalonRecommendationView() {
             const data = response.data
             var responseCode = data.code
             if (responseCode === 'error'){
+                console.log(response)
                 setAlertMessage({type: "error", message: "Server Error - Please try again later"}) 
                 setAlertOpen(true)
             } else{
@@ -185,6 +186,7 @@ function SalonRecommendationView() {
             setLoading(false)
             })
         .catch(error => {
+            console.log(error)
             setAlertMessage({type: "error", message: "Server Error - Please try again later"})   
             setAlertOpen(true)
             setLoading(false)
