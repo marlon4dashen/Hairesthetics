@@ -68,7 +68,7 @@ function HairColorView() {
     const [uploadedFile, setUploadFile] = useState(null);
     const [uploadedFileURL, setUploadFileURL] = useState(null);
     const [downloadedFile, setDownloadedFile] = useState(null);
-    const [openAlert, setAlertOpen] = useState(false);
+    const [openAlert, setAlertOpen] = useState({visible: false, message: ""});
     const hiddenFileInput = useRef(null);
     const mediaWidth = 300;
     const mediaHeight = 300;
@@ -116,7 +116,6 @@ function HairColorView() {
 
     const startCam = () => {
         clearUploadedFile();
-        setIsShowVideo(true);
         socket.on('connect', function() {
             console.log('Connected!');
         });
@@ -124,6 +123,8 @@ function HairColorView() {
         // setUserID(id)
 
         navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+            setIsShowVideo(true);
+            setAlertOpen({visible: false, message: ""})
             videoRef.current.srcObject = stream;
             setLocalMediaStream(stream)
             let fps = 5;
@@ -133,6 +134,7 @@ function HairColorView() {
             }
             setCurrentInterval(setInterval(paintToCanvas, 1000/fps));
         }).catch(function(error) {
+            setAlertOpen({visible: true, message: "Permission Error - webcam is disabled"})
             console.log(error);
         });
     }
@@ -176,24 +178,25 @@ function HairColorView() {
     };
 
     const processImage = (file)  => {
+        setAlertOpen({visible: false, message: ""})
         const formData = new FormData();
         formData.append('imgFile', file);
-        axios.post("http://localhost:5001/image", formData, {params: {r: r, g: g, b: b}})
+        axios.post("https://ec2-18-191-171-138.us-east-2.compute.amazonaws.com/image", formData, {params: {r: r, g: g, b: b}})
         .then(res => {
-            // console.log(res.data);
             if (res.status === 200) {
                 let imageBytes = res.data;
                 setDownloadedFile(imageBytes);
             } else {
-                setAlertOpen(true)
+                setAlertOpen({visible: true, message: "Server Error - Please try again later"})
             }
         })
-        .catch(error => {console.log(error); setAlertOpen(true)});
+        .catch(error => {console.log(error); setAlertOpen({visible: true, message: "Server Error - Please try again later"})});
     }
 
     const onColorChange = (color) => {
         setHairColor(color.rgb);
         if (isShowImage && uploadedFile){
+            setIsShowVideo(false);
             processImage(uploadedFile)
         } else if (currentInterval){
             clearInterval(currentInterval);
@@ -248,8 +251,15 @@ function HairColorView() {
                     <Button variant="contained"  className='mx-1 my-1 start-button' onClick={startCam} startIcon={<BsPlayCircle />}>Start Video Feed</Button>
                     <Button variant="outlined" className='mx-1 my-1 stop-button' onClick={stopCam} startIcon={<BsStopCircle />}>Stop Video Feed</Button>
                 </TabPanel>
-
             </Container>
+            <Collapse in={openAlert.visible} className="alert-container">
+                <Alert
+                    severity="error"
+                    sx={{ mt: 1 }}
+                >
+                    <strong>{openAlert.message}</strong>
+                </Alert>
+            </Collapse>
             <Container fluid className="video-container">
                 <Grid container spacing={2} justifyContent="center">
                     <Grid item xs={9} md={4} className="input-col" justifyContent="center">
@@ -265,14 +275,6 @@ function HairColorView() {
                         src={`data:image/jpeg;base64,${downloadedFile}`} />}
                     </Grid>
                 </Grid>
-                <Collapse in={openAlert} className="alert-container">
-                    <Alert
-                        severity="error"
-                        sx={{ mt: 1 }}
-                    >
-                        <strong>Server Error - Please try again later</strong>
-                    </Alert>
-                </Collapse>
             </Container>
             <Container className="color-picker">
                 <Tabs
