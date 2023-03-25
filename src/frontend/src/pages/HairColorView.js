@@ -181,7 +181,7 @@ function HairColorView() {
         setAlertOpen({visible: false, message: ""})
         const formData = new FormData();
         formData.append('imgFile', file);
-        axios.post("http://localhost:5001/image", formData, {params: {r: r, g: g, b: b}})
+        axios.post("https://ec2-18-191-171-138.us-east-2.compute.amazonaws.com/image", formData, {params: {r: r, g: g, b: b}})
         .then(res => {
             if (res.status === 200) {
                 let imageBytes = res.data;
