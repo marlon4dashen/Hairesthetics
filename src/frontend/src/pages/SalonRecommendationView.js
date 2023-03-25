@@ -21,6 +21,8 @@ import seat from "../assets/icons/seat.png"
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
 import bgImg from "../assets/banner/b1.jpg"
 
+const host = "ec2-18-191-171-138.us-east-2.compute.amazonaws.com:443"
+
 function SalonRecommendationView() {
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: GOOGLE_MAPS_API_KEY,
@@ -166,7 +168,7 @@ function SalonRecommendationView() {
     const searchNearbySalon = (inputLat, inputLng) => {
         setComplete(false)
         setAlertOpen(false)
-        axios.get(`http://localhost:5001/salons?lat=${inputLat}&lng=${inputLng}`)
+        axios.get(`https://${host}/salons?lat=${inputLat}&lng=${inputLng}`)
         .then(response => {
             const data = response.data
             var responseCode = data.code

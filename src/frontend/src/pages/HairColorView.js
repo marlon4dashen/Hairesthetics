@@ -40,8 +40,8 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-
-const socket = io.connect('http://localhost:5001/test')
+const host = "ec2-18-191-171-138.us-east-2.compute.amazonaws.com"
+const socket = io.connect(`https://${host}/test`)
 const makeid = (length) => {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -144,7 +144,7 @@ function HairColorView() {
                 setCurrentInterval(null);
             }
             setIsShowVideo(false);
-            axios.get(`http://localhost:5001/clear?userid=${userid}`)
+            axios.get(`https://${host}/clear?userid=${userid}`)
             // setUserID(null);
         }
     }
@@ -176,7 +176,7 @@ function HairColorView() {
     const processImage = (file)  => {
         const formData = new FormData();
         formData.append('imgFile', file);
-        axios.post("http://localhost:5001/image", formData, {params: {r: r, g: g, b: b}})
+        axios.post(`https://${host}/image`, formData, {params: {r: r, g: g, b: b}})
         .then(res => {
             console.log(res.data);
             if (res.status === 200) {
@@ -209,11 +209,11 @@ function HairColorView() {
             // Cookies.set(userid)
             socket.emit('add_user', { userid: userid })
             console.log(userid)
-            // outputVideoRef.current.src=`http://localhost:5001/video_feed?userid=${userid}`
+            // outputVideoRef.current.src=`https://localhost:5001/video_feed?userid=${userid}`
         } 
         return () => {
             setUserID(null);
-            axios.get(`http://localhost:5001/remove?userid=${userid}`)
+            axios.get(`https://${host}/remove?userid=${userid}`)
         }
     }, [userid])
 
@@ -222,8 +222,8 @@ function HairColorView() {
     }, [uploadedFile])
 
     return (    
-    <>
-        <Container fluid className="page-container">    
+    <> 
+        <Container fluid className="page-container">  
             <Container>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs centered value={tab} onChange={handleChange} aria-label="basic tabs example"
@@ -254,8 +254,8 @@ function HairColorView() {
                         {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}} src={uploadedFileURL} />}
                     </Grid>
                     <Grid item xs={9} md={4} className="output-col" justifyContent="center">
-                        {/* {isShowVideo && <img src={"http://localhost:5001/video_feed?userid=" + userid}  alt="transformed_output"></img>} */}
-                        {isShowVideo && <img src={`http://localhost:5001/video_feed?userid=${userid}`}  alt="transformed_output"></img>}
+                        {/* {isShowVideo && <img src={"https://localhost:5001/video_feed?userid=" + userid}  alt="transformed_output"></img>} */}
+                        {isShowVideo && <img src={`https://${host}/video_feed?userid=${userid}`}  alt="transformed_output"></img>}
                         {/* {isShowVideo && <img alt="transformed_output" ref={outputVideoRef}></img>} */}
                         {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}} 
                         src={`data:image/jpeg;base64,${downloadedFile}`} />}
