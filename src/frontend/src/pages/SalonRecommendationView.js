@@ -166,11 +166,13 @@ function SalonRecommendationView() {
     const searchNearbySalon = (inputLat, inputLng) => {
         setComplete(false)
         setAlertOpen(false)
-        axios.get(`http://localhost:5001/salons?lat=${inputLat}&lng=${inputLng}`)
+        // fetch(`https://ec2-18-191-171-138.us-east-2.compute.amazonaws.com/salons?lat=${inputLat}&lng=${inputLng}`)
+        axios.get(`https://ec2-18-191-171-138.us-east-2.compute.amazonaws.com/salons?lat=${inputLat}&lng=${inputLng}`)
         .then(response => {
             const data = response.data
             var responseCode = data.code
             if (responseCode === 'error'){
+                console.log(response)
                 setAlertMessage({type: "error", message: "Server Error - Please try again later"}) 
                 setAlertOpen(true)
             } else{
@@ -183,6 +185,7 @@ function SalonRecommendationView() {
             setLoading(false)
             })
         .catch(error => {
+            console.log(error)
             setAlertMessage({type: "error", message: "Server Error - Please try again later"})   
             setAlertOpen(true)
             setLoading(false)
@@ -232,7 +235,7 @@ function SalonRecommendationView() {
                                         <Card.Header className="card-header">{salon.name}</Card.Header>
                                         <Card.Body>
                                              <ListGroup className="list-group-flush">
-                                                 <ListGroup.Item>{salon.address}</ListGroup.Item>
+                                                 <ListGroup.Item className="card-address">{salon.address}</ListGroup.Item>
                                                  <ListGroup.Item>
                                                     Ratings: {salon.rating} | 
                                                     Total Reviews: {salon.user_ratings_total}
