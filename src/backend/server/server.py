@@ -79,6 +79,12 @@ def add_user(input):
     print(workers)
 
 def init_camera():
+    """
+    Initialize the Hair_Artist instance if it hasn't been initialized yet.
+
+    Returns:
+        Worker: An instance of the Worker class.
+    """
     global hair_artist
     if not hair_artist:
         hair_artist = Hair_Artist()
@@ -86,7 +92,9 @@ def init_camera():
 
 @app.route('/')
 def index():
-    """Video streaming home page."""
+    """
+    Renders the home page of the application.
+    """
     return render_template('index.html')
 
 @app.route('/image', methods=['POST'])
