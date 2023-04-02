@@ -209,21 +209,24 @@ def remove_worker():
     return jsonify({'code': 'success'})
 
 def gen(userid):
-    """Video streaming generator function."""
+    """
+    Video streaming generator function.
+
+    Args:
+        userid (str): The user ID.
+
+    Yields:
+        bytes: The video frame data.
+    """
+    # Continuously generate video frames for the user ID
     app.logger.info("starting to generate frames!")
     while True:
 
-        # start = time()
-        # read_return_code, frame = vc.read()
-        # output = hair_artist.apply_hair_color(frame, "pink")
-        # output = cv2.cvtColor(output, cv2.COLOR_BGR2RGB)
-        # output_str = binascii.a2b_base64(cv2_image_to_base64(output))
-        # print("Lapsed time: {}".format(time() - start))
+        # If the user ID exists in workers, get the video frame for that worker
         if userid in workers:
             frame = workers[userid].get_frame() #pil_image_to_base64(camera.get_frame())
 
-        # frame = camera.get_frame() #pil_image_to_base64(camera.get_frame())
-
+        # Yield the video frame data
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
@@ -231,14 +234,24 @@ def gen(userid):
 @app.route('/video_feed')
 @cross_origin()
 def video_feed():
-    """Video streaming route. Put this in the src attribute of an img tag."""
+    """
+    Video streaming route. Put this in the src attribute of an img tag.
+
+    Returns:
+        Response: A Response object containing the video stream.
+    """
+    # Get the user ID from the request arguments
     args = request.args
     userid = args["userid"]
     
+    # Wait until the user ID is present in the workers dictionary
+    while userid not in workers:
     while userid not in workers:
         sleep(0.05)
+
+    # Return a streaming response by calling the generator function with the user ID
     return Response(gen(userid), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == '__main__':
-    socketio.run(app, port=5001)
+    socketio.run(app, port=5001) # Start the Flask-SocketIO server on port 5001
