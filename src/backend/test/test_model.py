@@ -18,5 +18,7 @@ def test_model_initialization():
 # This test function checks the initialization of the Model class with an invalid model file.
 # It verifies that an exception is raised when an invalid path is provided.
 def test_invalid_path():
+    # Use the pytest.raises context manager to check if an exception is raised
+    # when initializing the Model class with an invalid ONNX model file.
     with pytest.raises(Exception) as f:
         model = Model("./hair/Model/abc.onnx")
