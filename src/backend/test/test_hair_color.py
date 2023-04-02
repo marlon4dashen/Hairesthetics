@@ -31,4 +31,6 @@ def test_change_hair_color(test_img):
     # session, input name, input dimensions, output name, and mediapipe object.
     processed_frame = change_hair_color(test_img, color, model.session, 
             model.input_name, model.input_width, model.input_height, model.output_name, mpFace)
+
+    # Assert that the processed frame has the expected dimensions (height, width, channels)
     assert processed_frame.shape == (612, 459, 3)
