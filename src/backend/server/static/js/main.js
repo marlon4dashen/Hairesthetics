@@ -20,11 +20,16 @@ $(document).ready(function(){
       return;
     }
 
+    // Draw the current video frame onto the canvas
     ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0, 300, 150);
 
+    // Convert the canvas image to a data URL in JPEG format
     let dataURL = canvas.toDataURL('image/jpeg');
+    
+    // Emit the input image data to the server
     socket.emit('input image', dataURL);
 
+    // Request the output image from the server
     socket.emit('output image')
 
     var img = new Image();
