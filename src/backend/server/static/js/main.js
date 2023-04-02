@@ -13,7 +13,9 @@ $(document).ready(function(){
   // Connect to the socket server with the specified namespace
   var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
 
+  // Function to send a snapshot of the video stream to the server
   function sendSnapshot() {
+    // If there is no local media stream, do nothing
     if (!localMediaStream) {
       return;
     }
