@@ -2,13 +2,15 @@
 $(document).ready(function(){
   // Define the socket namespace
   let namespace = "/test";
-  
+
+  // Get the video, canvas, and context elements
   let video = document.querySelector("#videoElement");
   let canvas = document.querySelector("#canvasElement");
   let ctx = canvas.getContext('2d');
   photo = document.getElementById('photo');
   var localMediaStream = null;
 
+  // Connect to the socket server with the specified namespace
   var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
 
   function sendSnapshot() {
