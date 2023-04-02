@@ -26,6 +26,9 @@ def test_change_hair_color(test_img):
 
     # Define the target hair color
     color = [100, 110, 111]
+
+    # Call the `change_hair_color` function with the test image, target color, model
+    # session, input name, input dimensions, output name, and mediapipe object.
     processed_frame = change_hair_color(test_img, color, model.session, 
             model.input_name, model.input_width, model.input_height, model.output_name, mpFace)
     assert processed_frame.shape == (612, 459, 3)
