@@ -2,8 +2,19 @@ import requests
 
 
 class SalonRecommendation:
+    """
+    SalonRecommendation class for fetching and ranking nearby salons based on their ratings.
+    """
     
     def __init__(self, lat, lng, api_key):
+        """
+        Initialize the SalonRecommendation object with latitude, longitude, and API key.
+
+        Args:
+            lat (float): Latitude of the user's location.
+            lng (float): Longitude of the user's location.
+            api_key (str): Google Maps API key for fetching salon data.
+        """
         self._lat = lat
         self._lng = lng
         self._salons = []
