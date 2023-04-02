@@ -5,16 +5,16 @@ import numpy as np
 from model import model_utils
 
 
-# nSet constant values for preprocessing and post-processing
+# Set constant values for preprocessing and post-processing
 EXPANDING_FACTOR = 0.75
 MEAN = [0.485, 0.456, 0.406]
 STD = [0.229, 0.224, 0.225]
 ALPHA = 0.20
 
-# nTo reduce Mediapipe false results increase the confidence level
+# To reduce Mediapipe false results increase the confidence level
 MIN_CONFIDENCE_LEVEL = 0.5
 
-# nDefine colors in BGR format
+# Define colors in BGR format
 COLORS = {
     "brown": [139, 69, 13],
     "pink": [255, 192, 203],
