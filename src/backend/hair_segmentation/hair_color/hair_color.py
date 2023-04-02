@@ -5,13 +5,16 @@ import numpy as np
 from model import model_utils
 
 
+# Set constant values for preprocessing and post-processing
 EXPANDING_FACTOR = 0.75
 MEAN = [0.485, 0.456, 0.406]
 STD = [0.229, 0.224, 0.225]
 ALPHA = 0.20
+
 # To reduce Mediapipe false results increase the confidence level
 MIN_CONFIDENCE_LEVEL = 0.5
-# BGR Format
+
+# Define colors in BGR format
 COLORS = {
     "brown": [139, 69, 13],
     "pink": [255, 192, 203],
@@ -29,7 +32,8 @@ def initialize_mediapipe():
     """
     Initializing mediapipe face detection sub-module
     """
-    # Enable face detection
+
+    # Enable face detection with a minimum confidence level
     mpFaceDetection = mediapipe.solutions.face_detection.FaceDetection(
         MIN_CONFIDENCE_LEVEL)
 
@@ -37,6 +41,9 @@ def initialize_mediapipe():
 
 
 def initialize_hair_segmentation_model(hair_segmentation_model):
+    """
+    Initialize the hair segmentation model.
+    """
 
     model = model_utils.Model(hair_segmentation_model)
     return model
@@ -46,10 +53,13 @@ def perform_hair_segmentation(session, input_name, input_width, input_height, ou
     """
     Run inference on the preprocessed image to segment hair
     """
-    # Prepare Input
+
+    # Prepare input image (resize, convert color format, normalize, and transpose)
     img_height, img_width, img_channels = img.shape
+
     # Convert the image to RGB format
     input_image = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
     # Resize the image based based on the model shape
     input_image = cv2.resize(input_image, (input_width, input_height))
 
@@ -61,6 +71,7 @@ def perform_hair_segmentation(session, input_name, input_width, input_height, ou
     # Change H*W*C to C*W*H (H - Height / W - Width / C - Channels)
     input_image = input_image.transpose(2, 0, 1)
     input_tensor = np.expand_dims(input_image, axis=0)
+
     # Convert to float type
     input_tensor = input_tensor.astype(np.float32)
 
@@ -74,6 +85,7 @@ def perform_hair_segmentation(session, input_name, input_width, input_height, ou
     hair_mask = cv2.resize(hair_mask, (img_width, img_height))
     hair_mask = np.round(hair_mask).astype(np.uint8)
 
+    # Apply mask to the original image
     masked_img = cv2.bitwise_or(img, img, mask=hair_mask)
 
     return masked_img
@@ -81,8 +93,13 @@ def perform_hair_segmentation(session, input_name, input_width, input_height, ou
 
 def change_color(img, mask, target_color):
 
+    # Create a copy of the original image
     colored_hair = np.copy(img)
+
+    # Change color of the masked area
     colored_hair[(mask > 0).all(axis=2)] = target_color
+
+    # Blend the original image and colored image
     output = cv2.addWeighted(colored_hair, ALPHA, img,
                              1-ALPHA, 0.5, colored_hair)
     return output
@@ -92,21 +109,26 @@ def change_hair_color(img, target_color, session, input_name, input_width, input
     """
     Change Hair Color
     """
+
     # Preserve a copy of the original
     frame = img.copy()
 
-    # convert from bgr to rgb
+    # convert the color of the masked image from bgr to rgb
     rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
     # Detect faces using the rgb frame
     faces = mpFaceDetection.process(rgb_frame)
 
+    # Perform hair segmentation on the image
     masked_img = perform_hair_segmentation(
         session, input_name, input_width, input_height, output_names, frame)
+
     # Change the color of the segmented hair area
     processed_frame = change_color(
         img=frame, mask=masked_img, target_color=target_color)
 
+    # Return the processed image with the new hair color
     label = "Changing hair color to {}".format(target_color)
     return processed_frame
+
 
