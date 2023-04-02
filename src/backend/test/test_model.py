@@ -1,6 +1,8 @@
 from model.model_utils import Model
 import pytest
 
+# This test function checks the initialization of the Model class with a valid model file.
+# It verifies that the model session and various properties are properly initialized.
 def test_model_initialization():
     model = Model("./model/best_model_simplifier.onnx")
 
