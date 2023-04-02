@@ -67,10 +67,13 @@ $(document).ready(function(){
 
     // Set the desired frames per second (fps)
     fps = 10;
+
+    // Send a snapshot to the server at the specified interval
     setInterval(function () {
       sendSnapshot();
     }, 1000/fps);
   }).catch(function(error) {
+    // Log any errors encountered when getting the user's media
     console.log(error);
   });
 });
