@@ -33,6 +33,8 @@ $(document).ready(function(){
     socket.emit('output image')
 
     var img = new Image();
+
+    // Listen for the 'out-image-event' and update the image source
     socket.on('out-image-event',function(data){
 
 
@@ -44,6 +46,7 @@ $(document).ready(function(){
 
   }
 
+  // On socket connection
   socket.on('connect', function() {
     console.log('Connected!');
   });
