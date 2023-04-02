@@ -50,7 +50,7 @@ def test_bytes_to_cv2_image_jpeg(base64_img_str_jpeg):
     img_arr = bytes_to_cv2_image(img_bytes)
     assert img_arr.shape == (612, 459, 3)
 
-
+# Test the bytes_to_cv2_image function with a PNG image.
 def test_bytes_to_cv2_image_jpeg(base64_img_str_png):
     img_bytes = BytesIO(base64.b64decode(base64_img_str_png))
     img_arr = bytes_to_cv2_image(img_bytes)
