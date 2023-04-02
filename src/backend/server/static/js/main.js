@@ -1,5 +1,8 @@
+// When the DOM is fully loaded
 $(document).ready(function(){
+  // Define the socket namespace
   let namespace = "/test";
+  
   let video = document.querySelector("#videoElement");
   let canvas = document.querySelector("#canvasElement");
   let ctx = canvas.getContext('2d');
