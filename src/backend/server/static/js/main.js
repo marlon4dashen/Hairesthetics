@@ -51,6 +51,7 @@ $(document).ready(function(){
     console.log('Connected!');
   });
 
+  // Set video constraints
   var constraints = {
     video: {
       width: { min: 640 },
@@ -58,6 +59,7 @@ $(document).ready(function(){
     }
   };
 
+  // Get the user's media (video stream) with the specified constraints
   navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
     video.srcObject = stream;
     localMediaStream = stream;
