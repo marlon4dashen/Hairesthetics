@@ -54,38 +54,38 @@ def perform_hair_segmentation(session, input_name, input_width, input_height, ou
     Run inference on the preprocessed image to segment hair
     """
 
-    # nPrepare input image (resize, convert color format, normalize, and transpose)
+    # Prepare input image (resize, convert color format, normalize, and transpose)
     img_height, img_width, img_channels = img.shape
 
-    # nConvert the image to RGB format
+    # Convert the image to RGB format
     input_image = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-    # nResize the image based based on the model shape
+    # Resize the image based based on the model shape
     input_image = cv2.resize(input_image, (input_width, input_height))
 
-    # nPass the preprocessed image to the model for inference
-    # nVGG networks are trained on images with each channel normalized by mean and std.
-    # nNormalize image before processing
+    # Pass the preprocessed image to the model for inference
+    # VGG networks are trained on images with each channel normalized by mean and std.
+    # Normalize image before processing
 
     input_image = (input_image / 255 - MEAN) / STD
     # nChange H*W*C to C*W*H (H - Height / W - Width / C - Channels)
     input_image = input_image.transpose(2, 0, 1)
     input_tensor = np.expand_dims(input_image, axis=0)
 
-    # nConvert to float type
+    # Convert to float type
     input_tensor = input_tensor.astype(np.float32)
 
-    # nPerform inference on the image
+    # Perform inference on the image
     outputs = session.run([output_name], {input_name: input_tensor})
 
-    # nProcess output data
+    # Process output data
     hair_mask = np.squeeze(outputs[0])
     hair_mask = hair_mask.transpose(1, 2, 0)
     hair_mask = hair_mask[:, :, 2]
     hair_mask = cv2.resize(hair_mask, (img_width, img_height))
     hair_mask = np.round(hair_mask).astype(np.uint8)
 
-    # nApply mask to the original image
+    # Apply mask to the original image
     masked_img = cv2.bitwise_or(img, img, mask=hair_mask)
 
     return masked_img
