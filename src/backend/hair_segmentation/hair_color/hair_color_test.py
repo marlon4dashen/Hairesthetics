@@ -61,15 +61,25 @@ def test_perform_hair_segmentation(test_image):
     assert np.all(masked_img[10:30, 20:80, :] == [0, 0, 0])
 
 def test_change_color(test_image):
+    """
+    Test the color changing functionality.
+    """
+
     img = test_image
+
+    # Create a binary mask of the same shape as the test image
     mask = np.zeros((100, 100), dtype=np.uint8)
     mask[10:30, 20:80] = 255
     target_color = [255, 0, 0]
 
+    # Change the color of the masked area in the test image
     output = change_color(img, mask, target_color)
 
+    # Check if the output image is a NumPy array and has the correct shape
     assert isinstance(output, np.ndarray)
     assert output.shape == img.shape
+
+    # Verify that the masked area in the output image has the target color
     assert np.all(output[10:30, 20:80, :] == [255, 0, 0])
 
 def test_change_hair_color(test_image):
