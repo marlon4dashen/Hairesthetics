@@ -78,6 +78,15 @@ class SalonRecommendation:
         return results
 
     def __fetch_place_details(self, place_id):
+        """
+        Fetch place details for a specific salon using the Google Maps API.
+
+        Args:
+            place_id (str): The place_id of the salon.
+
+        Returns:
+            dict: A dictionary containing the place details.
+        """
         place_details_api = f"https://maps.googleapis.com/maps/api/place/details/json?place_id={place_id}&key={self._api_key}"
         place_details = None
         payload={}
@@ -87,8 +96,23 @@ class SalonRecommendation:
         return place_details
 
     def __rank_salons(self):
+        """
+        Rank the fetched salons based on their ratings using the Bayesian average.
+        """
         self._salons = sorted(self._salons, key=lambda salon: self.__bayesian_average(salon['user_ratings_total'], salon['rating'], self._total_average_ratings, 80), reverse=True)
     
     def __bayesian_average(self, salon_ratings_count, salon_ratings_avg, total_avg_ratings_count, confidence_number):
+        """
+        Calculate the Bayesian average for a salon's rating.
+
+        Args:
+            salon_ratings_count (int): The total number of ratings for a salon.
+            salon_ratings_avg (float): The average rating of a salon.
+            total_avg_ratings_count (float): The total average ratings of all salons.
+            confidence_number (int): A confidence number to weigh the rating calculation.
+
+        Returns:
+            float: The Bayesian average rating of a salon.
+        """
         return (confidence_number*total_avg_ratings_count + salon_ratings_avg*salon_ratings_count) / (confidence_number+total_avg_ratings_count)
         # return (salon_ratings_count*salon_ratings_avg + total_avg_ratings_count*confidence_number) / (salon_ratings_count+confidence_number)
