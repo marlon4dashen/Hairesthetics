@@ -23,9 +23,21 @@ class SalonRecommendation:
         self._total_average_ratings = 0
     
     def get_size(self):
+        """
+        Get the total number of salons fetched.
+
+        Returns:
+            int: The number of fetched salons.
+        """
         return self._size
     
     def get_nearby_salons(self):  
+        """
+        Fetch nearby salons and rank them based on their ratings.
+
+        Returns:
+            list: A list of dictionaries containing the fetched salons and their details.
+        """
         results = self.__fetch_nearby_salons()
         for result in results:
             salon = dict()
@@ -52,6 +64,12 @@ class SalonRecommendation:
         return self._salons
     
     def __fetch_nearby_salons(self):
+        """
+        Fetch nearby salons using the Google Maps API.
+
+        Returns:
+            list: A list of dictionaries containing nearby salon results.
+        """
         nearby_search_api = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={self._lat}%2C{self._lng}&radius=1200&type=hair_care&keyword=salon&key={self._api_key}"
         payload={}
         headers = {}
