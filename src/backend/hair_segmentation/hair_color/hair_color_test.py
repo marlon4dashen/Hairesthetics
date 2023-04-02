@@ -26,23 +26,38 @@ def test_initialize_mediapipe():
     assert isinstance(mpFaceDetection, mediapipe.solutions.face_detection.FaceDetection)
 
 def test_initialize_hair_segmentation_model():
-    
+    """
+    Test the hair segmentation model initialization.
+    """
     hair_segmentation_model = 'path/to/model.pb'
     model = initialize_hair_segmentation_model(hair_segmentation_model)
+    
+    # Check if the returned object is of the correct type
     assert isinstance(model, model_utils.Model)
 
 def test_perform_hair_segmentation(test_image):
+    """
+    Test the hair segmentation functionality.
+    """
+
+    # Define model input and output parameters
     input_name = 'input'
     input_width, input_height = 100, 100
     output_name = 'output'
+
+    # Initialize a sample model session
     session = cv2.dnn_DetectionModel('path/to/model.pb', 'path/to/config.pbtxt')
     img = test_image
 
+    # Perform hair segmentation on the test image
     masked_img = perform_hair_segmentation(
         session, input_name, input_width, input_height, output_name, img)
 
+    # Check if the masked image is a NumPy array and has the correct shape
     assert isinstance(masked_img, np.ndarray)
     assert masked_img.shape == img.shape
+
+    # Verify that the masked area in the image is black
     assert np.all(masked_img[10:30, 20:80, :] == [0, 0, 0])
 
 def test_change_color(test_image):
