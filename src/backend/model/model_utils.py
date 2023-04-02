@@ -6,7 +6,16 @@ import os
 logger = logging.getLogger(__name__)
 
 class Model:
+    """
+    Model class for loading and running an ONNX model.
+    """
     def __init__(self, location):
+        """
+        Initialize the Model object with the model location.
+
+        Args:
+            location (str): Path to the ONNX model file.
+        """
         self.model_location = location
         self.initialize_hair_segmentation_model()
 
