@@ -53,7 +53,7 @@ def test_worker_empty():
     with pytest.raises(Exception) as f:
         worker = Worker()
 
-
+# Test the full functionality of the ImageWorker class.
 def test_image_worker_full(hair_artist, base64_img_str_jpeg):
     worker = ImageWorker(hair_artist)
     img_bytes = BytesIO(base64.b64decode(base64_img_str_jpeg))
