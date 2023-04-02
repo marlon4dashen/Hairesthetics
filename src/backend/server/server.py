@@ -1,3 +1,4 @@
+# Import libraries
 import eventlet
 eventlet.monkey_patch()
 from sys import stdout
@@ -16,6 +17,7 @@ load_dotenv()
 from utils.utils import *
 
 
+# Import necessary modules and packages
 from .worker import Worker
 app = Flask(__name__)
 logger = logging.getLogger()
@@ -23,59 +25,53 @@ app.logger.addHandler(logging.StreamHandler(stdout))
 app.config['SECRET_KEY'] = 'secret!'
 app.config['DEBUG'] = True
 
+# Initialize SocketIO with CORS allowed origins and eventlet for async mode
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
-workers = {}
-hair_artist = None
-# vc = cv2.VideoCapture(0)
-# if os.environ.get("FLASK_ENV") == "production":
-#     origins = [
-#         "http://actual-app-url.herokuapp.com",
-#         "https://actual-app-url.herokuapp.com"
-#     ]
-# else:
-#     origins = "*"
-# socketio = SocketIO(app, cors_allowed_origins="*")
-# camera = Camera(Hair_Artist())
+workers = {} # Dictionary to store worker instances for each user
+hair_artist = None # Hair_Artist instance
+
 
 
 
 @socketio.on('input image', namespace='/test')
 def test_message(input):
+    """
+    Receives the input image from the client, processes it, and sends it to the worker for further processing.
+    The input contains the image data, user ID, and desired hair color.
+
+    Args:
+        input (dict): A dictionary containing the image and user ID.
+    """
+    # Extract image, user ID and desired color from the input
     image = input.get("image", None)
     userid = input.get("userid", None)
     if not image:
         raise Exception("No image")
     image = image.split(",")[1]
     r, g, b = input.get("r"), input.get("g"), input.get("b")
+    
+    # If the user ID exists in workers, enqueue the input to the corresponding worker
     if userid in workers:
         workers[userid].enqueue_input((image, [r, g, b]))
-    #camera.enqueue_input(input)
-
-    # image_data = input # Do your magical Image processing here!!
-    # #image_data = image_data.decode("utf-8")
-
-    # img = imageio.imread(io.BytesIO(base64.b64decode(image_data)))
-    # cv2_img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-
-    # retval, buffer = cv2.imencode('.jpg', cv2_img)
-    # b = base64.b64encode(buffer)
-    # b = b.decode()
-    # image_data = "data:image/jpeg;base64," + b
-
-    # # print("OUTPUT " + image_data)
-    # emit('out-image-event', {'image_data': image_data}, namespace='/test')
-
-    # camera.enqueue_input(base64_to_pil_image(input))
-
-    # camera.enqueue_input(base64_to_pil_image(input))
+    
 
 @socketio.on('connect', namespace='/test')
 def test_connect():
+    """
+    Handles a new client connection.
+    """
     print("new connection")
 
 
 @socketio.on('add_user', namespace='/test')
 def add_user(input):
+    """
+    Adds a new user to the list of active workers.
+
+    Args:
+        input (dict): A dictionary containing the user ID.
+    """
+    # Initialize worker and add to the list of active workers using the user ID as the key
     global workers
     worker = init_camera()
     userid = input.get("userid")
