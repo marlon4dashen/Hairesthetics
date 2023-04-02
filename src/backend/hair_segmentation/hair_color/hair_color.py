@@ -33,7 +33,7 @@ def initialize_mediapipe():
     Initializing mediapipe face detection sub-module
     """
 
-    # nEnable face detection with a minimum confidence level
+    # Enable face detection with a minimum confidence level
     mpFaceDetection = mediapipe.solutions.face_detection.FaceDetection(
         MIN_CONFIDENCE_LEVEL)
 
