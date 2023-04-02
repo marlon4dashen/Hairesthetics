@@ -25,5 +25,7 @@ def base64_to_cv2_image(base64_img):
     # Convert the PIL image to a numpy array (OpenCV image format) and return it.
     return numpy.array(img) 
 
+# Function to convert a given image bytes object to an OpenCV (cv2) image.
 def bytes_to_cv2_image(bytes_img):
+    # Open the image bytes using PIL and convert it to a numpy array (OpenCV image format).
     return numpy.array(Image.open(bytes_img))
