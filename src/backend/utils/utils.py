@@ -7,7 +7,11 @@ import base64
 def cv2_image_to_base64(cv_img):
     # Convert the OpenCV image to a PIL image.
     im_pil = Image.fromarray(cv_img)
+
+    # Create a BytesIO buffer to hold the image data.
     buf = BytesIO()
+
+    # Save the PIL image in JPEG format to the buffer.
     im_pil.save(buf, format="JPEG")
     return base64.b64encode(buf.getvalue())
 
