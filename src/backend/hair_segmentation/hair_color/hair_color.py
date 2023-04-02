@@ -68,7 +68,7 @@ def perform_hair_segmentation(session, input_name, input_width, input_height, ou
     # Normalize image before processing
 
     input_image = (input_image / 255 - MEAN) / STD
-    # nChange H*W*C to C*W*H (H - Height / W - Width / C - Channels)
+    # Change H*W*C to C*W*H (H - Height / W - Width / C - Channels)
     input_image = input_image.transpose(2, 0, 1)
     input_tensor = np.expand_dims(input_image, axis=0)
 
@@ -93,13 +93,13 @@ def perform_hair_segmentation(session, input_name, input_width, input_height, ou
 
 def change_color(img, mask, target_color):
 
-    # nCreate a copy of the original image
+    # Create a copy of the original image
     colored_hair = np.copy(img)
 
-    # nChange color of the masked area
+    # Change color of the masked area
     colored_hair[(mask > 0).all(axis=2)] = target_color
 
-    # nBlend the original image and colored image
+    # Blend the original image and colored image
     output = cv2.addWeighted(colored_hair, ALPHA, img,
                              1-ALPHA, 0.5, colored_hair)
     return output
@@ -110,24 +110,24 @@ def change_hair_color(img, target_color, session, input_name, input_width, input
     Change Hair Color
     """
 
-    # nPreserve a copy of the original
+    # Preserve a copy of the original
     frame = img.copy()
 
-    # nconvert the color of the masked image from bgr to rgb
+    # convert the color of the masked image from bgr to rgb
     rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-    # nDetect faces using the rgb frame
+    # Detect faces using the rgb frame
     faces = mpFaceDetection.process(rgb_frame)
 
-    # nPerform hair segmentation on the image
+    # Perform hair segmentation on the image
     masked_img = perform_hair_segmentation(
         session, input_name, input_width, input_height, output_names, frame)
 
-    # nChange the color of the segmented hair area
+    # Change the color of the segmented hair area
     processed_frame = change_color(
         img=frame, mask=masked_img, target_color=target_color)
 
-    # nReturn the processed image with the new hair color
+    # Return the processed image with the new hair color
     label = "Changing hair color to {}".format(target_color)
     return processed_frame
 
