@@ -38,13 +38,13 @@ def test_base64_to_cv2_image_empty():
     with pytest.raises(Exception) as f:
         img_arr = base64_to_cv2_image("")
 
-
+# Test the cv2_image_to_base64 function with a JPEG image.
 def test_cv2_image_to_base64(base64_img_str_jpeg):
     img_arr = base64_to_cv2_image(base64_img_str_jpeg)
     img_str = cv2_image_to_base64(img_arr)
     assert sys.getsizeof(img_str) == 42889
 
-
+# Test the bytes_to_cv2_image function with a JPEG image.
 def test_bytes_to_cv2_image_jpeg(base64_img_str_jpeg):
     img_bytes = BytesIO(base64.b64decode(base64_img_str_jpeg))
     img_arr = bytes_to_cv2_image(img_bytes)
