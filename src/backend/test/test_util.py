@@ -26,13 +26,14 @@ def test_base64_to_cv2_image_jpeg(base64_img_str_jpeg):
     img_arr = base64_to_cv2_image(base64_img_str_jpeg)
     assert img_arr.shape == (612, 459, 3)
 
-
+# Test the base64_to_cv2_image function with a PNG image.
 def test_base64_to_cv2_image_png(base64_img_str_png):
     img_arr = base64_to_cv2_image(base64_img_str_png)
     assert img_arr.shape == (404, 310, 3)
     
 
-
+# Test the base64_to_cv2_image function with an empty string.
+# The function should raise an exception.
 def test_base64_to_cv2_image_empty():
     with pytest.raises(Exception) as f:
         img_arr = base64_to_cv2_image("")
