@@ -60,7 +60,8 @@ def test_image_worker_full(hair_artist, base64_img_str_jpeg):
     fr = worker.process_one(img_bytes, [129, 10, 233])
     assert fr != None
 
-
+# Test ImageWorker class initialization with no Hair_Artist object.
+# It should raise an exception.
 def test_image_worker_empty():
     with pytest.raises(Exception) as f:
         worker = ImageWorker()
