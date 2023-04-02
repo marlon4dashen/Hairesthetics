@@ -159,28 +159,53 @@ def get_salons():
         size = salon_handler.get_size()
     except Exception as e:
         return jsonify({'code': 'error'})
-        
+
     # Return a response containing the list of salons and their count
     return jsonify({'code': 'success', 'length': size, 'salons': salons})
 
 @app.route('/clear', methods=['GET'])
 @cross_origin()
 def clear_cache():
+    """
+    Clears the cache for a specific user.
+
+    Returns:
+        Response: A Response object containing the status of the cache clearing.
+    """
+    # Get the user ID from the request arguments
     args = request.args
     userid = args["userid"]
+
+    # If the user ID exists in workers, clear the cache for that worker
+    if userid in workers:
     if userid in workers:
         workers[userid].clean_up()
         # del workers[userid]
+
+    # Return a success response
     return jsonify({'code': 'success'})
 
 @app.route('/remove', methods=['GET'])
 @cross_origin()
 def remove_worker():
+    """
+    Removes a worker from the list of active workers.
+
+    Returns:
+        Response: A Response object containing the status of the worker removal.
+    """
+    # Get the user ID from the request arguments
     args = request.args
     userid = args["userid"]
+
+    # If the user ID exists in workers, remove the worker from the list of active workers
     if userid in workers:
         del workers[userid]
+
+    # Print the updated list of workers
     print(workers)
+
+    # Return a success response
     return jsonify({'code': 'success'})
 
 def gen(userid):
