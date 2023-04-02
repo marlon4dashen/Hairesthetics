@@ -15,7 +15,8 @@ def test_model_initialization():
     assert model.input_type != None
     assert model.input_shape != None
 
-
+# This test function checks the initialization of the Model class with an invalid model file.
+# It verifies that an exception is raised when an invalid path is provided.
 def test_invalid_path():
     with pytest.raises(Exception) as f:
         model = Model("./hair/Model/abc.onnx")
