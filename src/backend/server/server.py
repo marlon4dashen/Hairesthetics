@@ -100,17 +100,32 @@ def index():
 @app.route('/image', methods=['POST'])
 @cross_origin()
 def process_image():
+    """
+    Processes an input image received from the client.
+
+    Returns:
+        Response: A Response object containing the processed image.
+    """
+    # Get arguments and files from the request
     args = request.args
     files = request.files
     inputImage = files.get('imgFile', default=None)
+    
+    # Check if an input image exists, if not, return an error response
     if not inputImage:
         return jsonify({'code': 'error'})
+
+    # Initialize Hair_Artist if not already initialized
     global hair_artist
     if not hair_artist:
         hair_artist = Hair_Artist()
     r, g, b = args.get("r", 0), args.get("g", 0), args.get("b", 0)
+    
+    # Create a worker to process the image and get the output
     worker = ImageWorker(hair_artist)
     output_str = worker.process_one(inputImage, [r, g, b])
+    
+    # Create a response containing the processed image and return it
     response = make_response(output_str)
     response.headers['Content-Type'] = 'image/jpeg'
     return response        
@@ -118,18 +133,34 @@ def process_image():
 @app.route('/salons', methods=['GET'])
 @cross_origin()
 def get_salons():
+    """
+    Retrieves a list of nearby salons based on the user's latitude and longitude.
+
+    Returns:
+        Response: A Response object containing the list of salons.
+    """
+
+    # Get latitude and longitude from the request arguments
     args = request.args
     userLat = args.get("lat", default="", type=str)
     userlng = args.get("lng", default="", type=str)
+    
+    # If latitude or longitude is missing, return an error response
     if not userLat or not userlng:
         return jsonify({'code': 'error'})
+    
+    # Initialize the SalonRecommendation instance with the latitude, longitude, and API key
     try:
         api_key = os.getenv('GOOGLE_API_KEY')
         salon_handler = SalonRecommendation(userLat, userlng, api_key)
+        
+        # Get the list of nearby salons and their count
         salons = salon_handler.get_nearby_salons()
         size = salon_handler.get_size()
     except Exception as e:
         return jsonify({'code': 'error'})
+        
+    # Return a response containing the list of salons and their count
     return jsonify({'code': 'success', 'length': size, 'salons': salons})
 
 @app.route('/clear', methods=['GET'])
