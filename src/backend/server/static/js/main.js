@@ -61,8 +61,11 @@ $(document).ready(function(){
 
   // Get the user's media (video stream) with the specified constraints
   navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+    // Set the video source to the user's media stream
     video.srcObject = stream;
     localMediaStream = stream;
+
+    // Set the desired frames per second (fps)
     fps = 10;
     setInterval(function () {
       sendSnapshot();
