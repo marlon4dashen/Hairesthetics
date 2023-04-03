@@ -32,6 +32,7 @@
   /* background-color: white; */
 }
 
+/* This section styles the drop-down menu for the search bar */
 .css-1im77uy-control {
   border-color: white !important;
   border-width: 1px !important;
@@ -39,24 +40,29 @@
   color: black !important;
 }
 
+/* This section styles the address section of each search result */
 .card-address {
   min-height: 65px !important;
 }
 
+/* This section styles the link to each salon in the search results */
 .salon-link {
   text-decoration: none;
 }
 
+/* This section styles the header of the search results section */
 .results-col-header {
   color: #4DB6AC;
   font-weight: bold;
 }
 
+/* This section styles the container for the loading animation */
 .loading-container {
   justify-content: center;
   align-items: center;
 }
 
+/* This section styles the loading animation bar */
 .loading-bar{
   height: 14px !important;
   margin-top: 10px;
