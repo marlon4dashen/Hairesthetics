@@ -1,3 +1,4 @@
+// This is the file that create the interface for home view of the web application
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
