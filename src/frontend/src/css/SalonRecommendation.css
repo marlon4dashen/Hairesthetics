@@ -69,6 +69,7 @@
   background-color: white !important;
 }
 
+/* These sections style the different parts of the loading animation bar */
 .loading-bar .css-5ir5xx-MuiLinearProgress-bar1{
   background-color: #4DB6AC !important;
 }
@@ -85,6 +86,7 @@
   background-color: #4DB6AC !important;
 }
 
+/* This section styles the info window that appears when a marker is clicked on the map */
 .info-window {
   border: 1px solid black !important;
   color: black !important;
