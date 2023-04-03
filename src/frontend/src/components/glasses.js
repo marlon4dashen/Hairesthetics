@@ -4,6 +4,8 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { scaleLandmark } from '../facemesh/landmarks_helpers';
 
+// This function loads a 3D model from a file using GLTFLoader and returns a Promise.
+// The Promise resolves to the scene of the loaded model.
 function loadModel( file ) {
   return new Promise( ( res, rej ) => {
       const loader = new GLTFLoader();
@@ -16,6 +18,8 @@ function loadModel( file ) {
 }
 
 export class Glasses {
+  // This constructor sets the scene, width, height, and initializes some instance variables.
+  // It also calls the loadGlasses function to load the glasses model.
   constructor(scene, width, height) {
     this.scene = scene;
     this.width = width;
@@ -25,6 +29,8 @@ export class Glasses {
     this.loadGlasses();
   }
 
+  // This function loads the glasses model using the loadModel function.
+  // It also sets the scaleFactor and name of the glasses.
   async loadGlasses() {
     this.glasses = await loadModel( `${PUBLIC_PATH}/3d/black-glasses/scene.gltf` );
     // this.glasses = await loadModel( `${PUBLIC_PATH}/3d/short/Short1.gltf` );
@@ -37,17 +43,20 @@ export class Glasses {
     this.glasses.name = 'glasses';
   }
 
+  // This function updates the width and height instance variables and sets the needsUpdate flag to true.
   updateDimensions(width, height) {
     this.width = width;
     this.height = height;
     this.needsUpdate = true;
   }
 
+  // This function updates the landmarks instance variable and sets the needsUpdate flag to true.
   updateLandmarks(landmarks) {
     this.landmarks = landmarks;
     this.needsUpdate = true;
   }
 
+  // This function updates the position, scale, and rotation of the glasses model based on the current landmarks.
   updateGlasses() {
     // Points for reference
     // https://raw.githubusercontent.com/google/mediapipe/master/mediapipe/modules/face_geometry/data/canonical_face_model_uv_visualization.png
