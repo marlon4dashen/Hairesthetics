@@ -162,6 +162,7 @@ function HairColorView() {
         }
     }
 
+    // Function to capture a frame from the video and send it to the server
     const paintToCanvas = () => {
         let video = videoRef.current;
         let photo = photoRef.current;
@@ -173,11 +174,13 @@ function HairColorView() {
         socket.emit('input image', { userid: userid, image: dataURL, r:hairColor.r, g:hairColor.g, b:hairColor.b });
     };
 
+    // Function to handle file upload button click
     const handleClick = (event) => {
         hiddenFileInput.current.click();
         stopCam()
     };
 
+    // Function to handle file selection
     const handleFileChange = (event) => {
         setIsShowImage(true);
         const file = event.target.files[0];
@@ -186,10 +189,13 @@ function HairColorView() {
         processImage(file);
     };
 
+    // function to process image and send it to server
     const processImage = (file)  => {
         setAlertOpen({visible: false, message: ""})
+        // create a new form data object and append the image file to it
         const formData = new FormData();
         formData.append('imgFile', file);
+        // make a post request to server with the image and color params
         axios.post("https://ec2-18-191-171-138.us-east-2.compute.amazonaws.com/image", formData, {params: {r: r, g: g, b: b}})
         .then(res => {
             if (res.status === 200) {
@@ -199,14 +205,19 @@ function HairColorView() {
                 setAlertOpen({visible: true, message: "Server Error - Please try again later"})
             }
         })
+        // if error occurs, log it to console and set alert message to show
         .catch(error => {console.log(error); setAlertOpen({visible: true, message: "Server Error - Please try again later"})});
     }
 
+    // function to handle color change of hair
     const onColorChange = (color) => {
         setHairColor(color.rgb);
+        // if image is being shown and there is an uploaded image
         if (isShowImage && uploadedFile){
             setIsShowVideo(false);
             processImage(uploadedFile)
+        // if video is being shown and there is a current interval
+        // clear current interval and set new interval for rendering video
         } else if (currentInterval){
             clearInterval(currentInterval);
             setCurrentInterval(setInterval(paintToCanvas, 1000/5));
@@ -214,6 +225,7 @@ function HairColorView() {
 
     }
 
+    // function to clear uploaded image
     const clearUploadedFile = () => {
         setUploadFile(null);
         setDownloadedFile(null);
