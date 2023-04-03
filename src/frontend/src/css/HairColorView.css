@@ -1,27 +1,33 @@
+/* Set the height of the video container to 50% of the viewport height and add padding to the top and a top border */
 .video-container {
   height: 50vh;
   padding-top: 30px;
   border-top: 1px solid #4DB6AC;
 }
 
+/* Hide the webcam video element */
 .webcam-video {
   display: none;
 }
 
+/* Increase the font size of option title */
 .option-title {
   font-size: 25px !important;
 }
 
+/* Set margin for alert container */
 .alert-container {
   margin-left: 12%;
   margin-right: 12%;
 }
 
+/* Add margin to the color picker element */
 .color-picker {
   margin-top: 20px;
   margin-bottom: 15px;
 }
 
+/* Set styling for color tab element */
 .color-tab {
   border-radius: 0;
   box-shadow: none;
@@ -30,6 +36,7 @@
   border: 1px solid white !important;
 }
 
+/* Set color, font-weight and size for the SVG icon element */
 .css-ptiqhd-MuiSvgIcon-root {
   color: #4DB6AC;
   font-weight: bold;
@@ -37,57 +44,69 @@
   height: 3em !important;
 }
 
+/* Set color for an element with the class css-1k33q06 */
 .css-1k33q06 {
   color: #4DB6AC;
 }
 
+/* Set color for option tab element */
 .option-tab {
   color: white;
 }
 
+/* Set color, font-size and width for tab label element */
 .tab-label {
   color: white !important;
   font-size: 20px !important;
   width: 200px !important;
 }
 
+/* Set styling for tab label element on hover */
 .tab-label:hover {
   color: white !important;
   background-color: #4DB6AC !important;
 }
 
+/* Set styling for start button element */
 .start-button {
   background-color: transparent !important;
   border: 1px solid white !important;
   color: white !important;
 }
 
+/* Set styling for start button element on hover */
 .start-button:hover {
   background-color: white !important;
   color: black !important;
 }
 
+/* Set styling for stop button element */
 .stop-button {
   border-color: red !important;
   color: red !important;
 }
 
+/* Set styling for stop button element on hover */
 .stop-button:hover {
   background-color: red !important;
   color: white !important;
 }
 
+/* Set a minimum height for video container on smaller screens */
 @media screen and (max-width: 900px) {
   .video-container {
     min-height: 700px;
   }
 }
 
+/* Set font-size and width for tab label element on smaller screens */
 @media screen and (max-width: 480px) {
   .tab-label {
     font-size: 15px !important;
     width: 150px !important;
   }
+
+  /* Set padding-left for MuiGrid item element inside video container on smaller screens */
   .video-container .MuiGrid-item{
     padding-left: 0px !important;
   }
