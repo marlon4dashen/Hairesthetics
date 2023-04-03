@@ -1,4 +1,4 @@
-import React from 'react'
+//This file renders the main web application
 import './App.css';
 import HomeView from "./pages/HomeView"
 import HairStyleView from "./pages/HairStyleView"
