@@ -232,6 +232,7 @@ function HairColorView() {
         setIsShowImage(false);
     }
 
+    // use effect hook to connect to server when userid changes
     useEffect(() => {
         if(userid) {
             // Cookies.set(userid)
@@ -245,10 +246,12 @@ function HairColorView() {
         }
     }, [userid])
 
+    // use effect hook to revoke object url of uploaded image when it changes
     useEffect(()=>{
         return () => URL.revokeObjectURL(uploadedFile)
     }, [uploadedFile])
 
+    // return the HairColorView interface
     return (
     <>
         <Container fluid className="page-container">
