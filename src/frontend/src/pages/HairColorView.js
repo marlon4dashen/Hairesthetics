@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 
 import "../css/HairColorView.css"
 
+// Function to display content for individual tabs
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
   return (
@@ -35,14 +36,17 @@ function TabPanel(props) {
   );
 }
 
+// Set propTypes for TabPanel
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
 
-
+// Connect to the socket.io server
 const socket = io.connect('http://localhost:5001/test')
+
+// Function to generate a random user ID
 const makeid = (length) => {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -55,6 +59,7 @@ const makeid = (length) => {
     return result;
 }
 
+// Define the main component
 function HairColorView() {
     const photoRef = useRef(null);
     const videoRef = useRef(null);
@@ -81,6 +86,7 @@ function HairColorView() {
         }
     };
 
+    // Define color options
     const colorList = [
         { key: 0, label: "Smoky Black", hex:"#100C07", rgb: {r: "16", g: "12", b: "7"} },
         { key: 1, label: "Liver", hex:"#5A3825", rgb: {r: "90", g: "56", b: "37"} },
@@ -104,6 +110,7 @@ function HairColorView() {
         { key: 19, label: "Philippine Silver", hex:"#B8B8B8", rgb: {r: "184", g: "184", b: "184"} },
     ];
 
+    // Define state variables and handlers
     const [tab, setTab] = React.useState(0);
     const handleChange = (event, newValue) => {
         setTab(newValue);
@@ -114,6 +121,7 @@ function HairColorView() {
         setColorTab(newValue);
     };
 
+    // Function to start the camera
     const startCam = () => {
         clearUploadedFile();
         socket.on('connect', function() {
@@ -123,22 +131,23 @@ function HairColorView() {
         // setUserID(id)
 
         navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
-            setIsShowVideo(true);
-            setAlertOpen({visible: false, message: ""})
+            setIsShowVideo(true); // show video
+            setAlertOpen({visible: false, message: ""}) // close any alert message
             videoRef.current.srcObject = stream;
             setLocalMediaStream(stream)
             let fps = 5;
-            if (currentInterval){
+            if (currentInterval){ // clear the previous interval if exists
                 clearInterval(currentInterval);
                 setCurrentInterval(null);
             }
             setCurrentInterval(setInterval(paintToCanvas, 1000/fps));
-        }).catch(function(error) {
+        }).catch(function(error) { // handle error
             setAlertOpen({visible: true, message: "Permission Error - webcam is disabled"})
             console.log(error);
         });
     }
 
+    // Function to stop the camera
     const stopCam = () => {
         if (localMediaStream){
             const tracks = localMediaStream.getTracks();
