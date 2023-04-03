@@ -1,9 +1,11 @@
+/* This section styles the container for the list of places */
 .places-container {
   position: absolute;
   z-index: 10;
   width: 300px;
 }
 
+/* This section styles the container for the map itself */
 .map-container {
   width: 100%;
   min-height: 50vh;
@@ -11,15 +13,18 @@
   border: 2px solid white;
 }
 
+/* This section styles the info window that appears when a marker is clicked on the map */
 .map-container .gm-style .gm-style-iw-c {
   border: 2px solid black !important;
 }
 
+/* This section styles the input box for the search bar */
 .combobox-input {
   width: 100%;
   padding: 0.5rem;
 }
 
+/* This section styles the container for the list of search results */
 .results-col {
   padding-top: 20px;
   height: 30vh !important;
