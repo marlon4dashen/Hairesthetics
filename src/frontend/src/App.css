@@ -1,8 +1,10 @@
+/* Center the app and chaneg the background color to black*/
 .App {
   text-align: center;
   background-color: black;
 }
 
+/* set the page shape */
 .page-container {
   padding-top: 15px;
   position: relative;
@@ -14,6 +16,7 @@
   background-size: cover;
 }
 
+/* set the header */
 .app-header {
   height: 8vh;
 }
@@ -27,6 +30,7 @@
   --bs-nav-link-color: #F2F3F4 !important;
 }
 
+/* set the footer */
 .app-footer {
   background-color: rgba(var(--bs-dark-rgb),1) !important;
   color: white;

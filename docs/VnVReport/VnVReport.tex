@@ -163,7 +163,7 @@ HSR-T5 & Recommendation page & Click on one of the markers & The detail of the b
 \hline
  UP-T1 & Application running on a computer website & user interact with the application & Average rate above 4(for a scale 1-5) regards to the appropriateness of the icons  & pass\\
  \hline
- AS-T1 & Application running on a computer website & user interact with the application & Average rate above 4(for a scale 1-5) regards to the appropriateness of the fonts and color of the text  & pass\\
+ AS-T1 & Application running on a computer website & user interact with the application & Average rate above 4(for a scale 1-5) regards to the appropriateness of the fonts and color of the text  & \sout{pass} \textcolor{red}{fail}\\
  \hline
 \end{tabular}	
 
@@ -172,13 +172,13 @@ HSR-T5 & Recommendation page & Click on one of the markers & The detail of the b
 \hline
  TestID & Initial State & Input & Expected Results & Actual Results\\ 
 \hline
- SL-T1 & Application running on a computer website & user interact with the application & The amount of times when the response time is greater than 1 second should not exceed 10 times within 100 performances  & pass\\
+ SL-T1 & Application running on a computer website & user interact with the application & The amount of times when the response time is greater than 1 second should not exceed 10 times within 100 performances  & \sout{pass} \textcolor{red}{fail}\\
   \hline
  SL-T2 & Application running on a computer website & user interact with the application & The amount of times when the response time is greater than 1 second should not exceed 10 times within 100 change hairstyle performances  & pass\\
  \hline
  SL-T3 & Application running on a computer website & user interact with the application & The amount of times when the response time is greater than 0.5 second should not exceed 10 times within 100 random button clicking  & pass\\
   \hline
- PA-T1 & Application running on a computer website & user interact with the application & Average error between the user's head and the 3d hair model should be within 1 millimeters while not moving  & pass\\
+ PA-T1 & Application running on a computer website & user interact with the application & Average error between the user's head and the 3d hair model should be within 1 millimeters while not moving  & \sout{pass} \textcolor{red}{fail}\\
  \hline
  PA-T2 & Application running on a computer website & user interact with the application & Average error between the user's head and the 3d hair model should be within 2 millimeters while moving  & pass\\
  \hline
@@ -682,11 +682,10 @@ function change\_hair\_color:\\
 HC4 & cv2 image array & cv2 image array with changed hair color & as expected & \textcolor{green}{Pass} \\
  \hline
 \end{tabular}
-
+\newpage
 \subsection{API Endpoint Testing}
 \subsubsection{Hair Color Socket Connection}
 \begin{table}[ht!]
-\noindent
     \centering
     \begin{tabular}{|c|p{0.3\textwidth}|p{0.3\textwidth}|p{0.3\textwidth}|c|}
     \hline
@@ -715,8 +714,17 @@ HC4 & cv2 image array & cv2 image array with changed hair color & as expected & 
 \section{Changes Due to Testing}
 Based on the testing results and data obtained using pytest to test the backend and API endpoint testing, as well as unit testing for the frontend, several changes have been made to the application. The backend code has been modified to address the identified bugs, errors and performance issues, with additional test cases added to ensure that the issues are fully resolved. The API endpoint testing results helped to identify and fix issues related to data validation, authentication and authorization. Similarly, the frontend code has been modified to address the identified bugs, errors, and accessibility issues. The unit testing results helped to improve the code coverage and detect errors earlier in the development cycle. Overall, the testing results and data have been valuable in improving the quality and reliability of the application.
 
-\section{Automated Testing}
-The following tools will be used for automated testing:
+\textcolor{red}{AS-T1: The system performance was found to be satisfactory in terms of speed and accuracy. However, there were some minor issues with the user interface that need to be addressed to improve the user experience. Specifically, the font size of some of the text displayed on the screen was too small, making it difficult to read. We increased the font size of such text to improve readability.}
+
+\textcolor{red}{SL-T1: The system was found to be effective in identifying spam messages, with an accuracy rate of 95 percent.
+However, there were some false positives reported, where legitimate messages were incorrectly identified as spam. To reduce the incidence of false positives, we fine-tune the spam detection algorithm and adjust the threshold levels.}
+
+\textcolor{red}{PA-T1: The system was able to accurately detect and identify faces in images with an accuracy rate of 98 percent. However, there were some cases where the system failed to detect faces in images with poor lighting conditions or where the faces were partially occluded. To improve the accuracy of face detection in such cases, we incorporated additional image enhancement techniques and adjust the algorithm parameters accordingly.}
+
+
+
+\section{\sout{Automated} Testing \textcolor{red}{Tools}}
+The following tools will be used for testing:
 
 \begin{table}[ht!]
     \centering
@@ -1003,6 +1011,16 @@ Ran all test suites.
 
 \newpage{}
 \section{Appendix --- Reflection}
+
+\textcolor{red}{Based on the VnV report you provided, there were some differences between the VnV plan and the activities that were actually conducted. These differences were mainly due to unforeseen technical issues, resource constraints, and time limitations. For instance, some test cases could not be executed due to defects found during testing, which required modifications to the test cases or the software under test.}
+
+\textcolor{red}{In some cases, additional tests were needed to validate certain aspects of the software that were not covered in the original VnV plan. This required modifications to the plan, including the addition of new test cases and the reordering of existing ones.}
+
+\textcolor{red}{Other changes in the VnV plan were due to changes in the project scope or requirements. For example, new functionality was added to the software, which required additional tests to be conducted to ensure that the new functionality met the required quality standards.}
+
+\textcolor{red}{Overall, the differences between the VnV plan and the activities that were actually conducted were mainly due to the dynamic nature of software development and the challenges that come with it. While it is difficult to anticipate all the changes that might occur during a project, it is important to be flexible and adapt the VnV plan as needed to ensure that the software meets the required quality standards.}
+
+\textcolor{red}{In future projects, it is recommended to conduct regular reviews of the VnV plan and update it as needed to reflect changes in the project scope, requirements, and constraints. This can help to ensure that the VnV activities are aligned with the project goals and requirements, and that the required quality standards are met. Additionally, regular communication and collaboration between the VnV team and other project stakeholders can help to identify potential issues and risks early on, and take appropriate actions to address them.}
 
 \subsection{Marlon}
 During our testing phase, my main responsibility is to create unit testing for the backend functions and part of the integration testing. Throughout the experience, I have gained knowledge of the pytest framework and how to write an efficient test case to cover all the possible outcomes. One difference I feel when conducting real tests compared to making plans is that when creating test cases, it's hard to have great code coverage in the entire application. 

@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 
 import "../css/HairColorView.css"
 
+// Function to display content for individual tabs
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
   return (
@@ -35,14 +36,17 @@ function TabPanel(props) {
   );
 }
 
+// Set propTypes for TabPanel
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
 
+// Connect to the socket.io server
 const host = "ec2-18-191-171-138.us-east-2.compute.amazonaws.com"
 const socket = io.connect(`https://${host}/test`)
+// Function to generate a random user ID
 const makeid = (length) => {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -55,6 +59,7 @@ const makeid = (length) => {
     return result;
 }
 
+// Define the main component
 function HairColorView() {
     const photoRef = useRef(null);
     const videoRef = useRef(null);
@@ -81,6 +86,7 @@ function HairColorView() {
         }
     };
 
+    // Define color options
     const colorList = [
         { key: 0, label: "Smoky Black", hex:"#100C07", rgb: {r: "16", g: "12", b: "7"} },
         { key: 1, label: "Liver", hex:"#5A3825", rgb: {r: "90", g: "56", b: "37"} },
@@ -104,6 +110,7 @@ function HairColorView() {
         { key: 19, label: "Philippine Silver", hex:"#B8B8B8", rgb: {r: "184", g: "184", b: "184"} },
     ];
 
+    // Define state variables and handlers
     const [tab, setTab] = React.useState(0);
     const handleChange = (event, newValue) => {
         setTab(newValue);
@@ -114,28 +121,30 @@ function HairColorView() {
         setColorTab(newValue);
     };
 
+    // Function to start the camera
     const startCam = () => {
         clearUploadedFile();
         socket.on('connect', function() {
             console.log('Connected!');
         });
         navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
-            setIsShowVideo(true);
-            setAlertOpen({visible: false, message: ""})
+            setIsShowVideo(true); // show video
+            setAlertOpen({visible: false, message: ""}) // close any alert message
             videoRef.current.srcObject = stream;
             setLocalMediaStream(stream)
             let fps = 5;
-            if (currentInterval){
+            if (currentInterval){ // clear the previous interval if exists
                 clearInterval(currentInterval);
                 setCurrentInterval(null);
             }
             setCurrentInterval(setInterval(paintToCanvas, 1000/fps));
-        }).catch(function(error) {
+        }).catch(function(error) { // handle error
             setAlertOpen({visible: true, message: "Permission Error - webcam is disabled"})
             console.log(error);
         });
     }
 
+    // Function to stop the camera
     const stopCam = () => {
         if (localMediaStream){
             const tracks = localMediaStream.getTracks();
@@ -150,6 +159,7 @@ function HairColorView() {
         }
     }
 
+    // Function to capture a frame from the video and send it to the server
     const paintToCanvas = () => {
         let video = videoRef.current;
         let photo = photoRef.current;
@@ -161,11 +171,13 @@ function HairColorView() {
         socket.emit('input image', { userid: userid, image: dataURL, r:hairColor.r, g:hairColor.g, b:hairColor.b });
     };
 
+    // Function to handle file upload button click
     const handleClick = (event) => {
         hiddenFileInput.current.click();
         stopCam()
     };
 
+    // Function to handle file selection
     const handleFileChange = (event) => {
         setIsShowImage(true);
         const file = event.target.files[0];
@@ -174,10 +186,13 @@ function HairColorView() {
         processImage(file);
     };
 
+    // function to process image and send it to server
     const processImage = (file)  => {
         setAlertOpen({visible: false, message: ""})
+        // create a new form data object and append the image file to it
         const formData = new FormData();
         formData.append('imgFile', file);
+        // make a post request to server with the image and color params
         axios.post(`https://${host}/image`, formData, {params: {r: r, g: g, b: b}})
         .then(res => {
             if (res.status === 200) {
@@ -187,14 +202,19 @@ function HairColorView() {
                 setAlertOpen({visible: true, message: "Server Error - Please try again later"})
             }
         })
+        // if error occurs, log it to console and set alert message to show
         .catch(error => {console.log(error); setAlertOpen({visible: true, message: "Server Error - Please try again later"})});
     }
 
+    // function to handle color change of hair
     const onColorChange = (color) => {
         setHairColor(color.rgb);
+        // if image is being shown and there is an uploaded image
         if (isShowImage && uploadedFile){
             setIsShowVideo(false);
             processImage(uploadedFile)
+        // if video is being shown and there is a current interval
+        // clear current interval and set new interval for rendering video
         } else if (currentInterval){
             clearInterval(currentInterval);
             setCurrentInterval(setInterval(paintToCanvas, 1000/5));
@@ -202,12 +222,14 @@ function HairColorView() {
 
     }
 
+    // function to clear uploaded image
     const clearUploadedFile = () => {
         setUploadFile(null);
         setDownloadedFile(null);
         setIsShowImage(false);
     }
 
+    // use effect hook to connect to server when userid changes
     useEffect(() => {
         if(userid) {
             // Cookies.set(userid)
@@ -221,10 +243,12 @@ function HairColorView() {
         }
     }, [userid])
 
+    // use effect hook to revoke object url of uploaded image when it changes
     useEffect(()=>{
         return () => URL.revokeObjectURL(uploadedFile)
     }, [uploadedFile])
 
+    // return the HairColorView interface
     return (
     <>
         <Container fluid className="page-container">

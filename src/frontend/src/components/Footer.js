@@ -1,3 +1,4 @@
+//This file set the footer of the web application
 import React from 'react'
 import {Container, Row, Col, Button} from 'react-bootstrap'
 import { FaGithub } from 'react-icons/fa';

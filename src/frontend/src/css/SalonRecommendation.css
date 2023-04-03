@@ -1,9 +1,11 @@
+/* This section styles the container for the list of places */
 .places-container {
   position: absolute;
   z-index: 10;
   width: 300px;
 }
 
+/* This section styles the container for the map itself */
 .map-container {
   width: 100%;
   min-height: 50vh;
@@ -11,15 +13,18 @@
   border: 2px solid white;
 }
 
+/* This section styles the info window that appears when a marker is clicked on the map */
 .map-container .gm-style .gm-style-iw-c {
   border: 2px solid black !important;
 }
 
+/* This section styles the input box for the search bar */
 .combobox-input {
   width: 100%;
   padding: 0.5rem;
 }
 
+/* This section styles the container for the list of search results */
 .results-col {
   padding-top: 20px;
   height: 30vh !important;
@@ -27,6 +32,7 @@
   /* background-color: white; */
 }
 
+/* This section styles the drop-down menu for the search bar */
 .css-1im77uy-control {
   border-color: white !important;
   border-width: 1px !important;
@@ -34,30 +40,36 @@
   color: black !important;
 }
 
+/* This section styles the address section of each search result */
 .card-address {
   min-height: 65px !important;
 }
 
+/* This section styles the link to each salon in the search results */
 .salon-link {
   text-decoration: none;
 }
 
+/* This section styles the header of the search results section */
 .results-col-header {
   color: #4DB6AC;
   font-weight: bold;
 }
 
+/* This section styles the container for the loading animation */
 .loading-container {
   justify-content: center;
   align-items: center;
 }
 
+/* This section styles the loading animation bar */
 .loading-bar{
   height: 14px !important;
   margin-top: 10px;
   background-color: white !important;
 }
 
+/* These sections style the different parts of the loading animation bar */
 .loading-bar .css-5ir5xx-MuiLinearProgress-bar1{
   background-color: #4DB6AC !important;
 }
@@ -74,6 +86,7 @@
   background-color: #4DB6AC !important;
 }
 
+/* This section styles the info window that appears when a marker is clicked on the map */
 .info-window {
   border: 1px solid black !important;
   color: black !important;

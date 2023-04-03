@@ -1,3 +1,4 @@
+// This file implement the interface of saon recommandation view of the web application
 import React, { useEffect, useState, useMemo } from "react"
 import {Container, Button, Row, Col, Card, ListGroup} from 'react-bootstrap'
 import {IoMdLocate} from 'react-icons/io';
@@ -23,10 +24,13 @@ const { GOOGLE_MAPS_API_KEY } = require("../config.json");
 const host = "ec2-18-191-171-138.us-east-2.compute.amazonaws.com:443"
 
 function SalonRecommendationView() {
+    // Load Google Maps Places API script
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: GOOGLE_MAPS_API_KEY,
         libraries: ["places"],
     });
+
+    // Declare state variables
     const [resultsLength, setResultLength] = useState(0)
     const [searchResults, setSearchResults] = useState([])
     const [selected, setSelected] = useState(null);
@@ -35,9 +39,12 @@ function SalonRecommendationView() {
     const [openAlert, setAlertOpen] = useState(false);
     const [alertMessage, setAlertMessage] = useState({type: "info", msg: ""});
 
+     // Define Map component
     function Map() {
         const center = useMemo(() => ({ lat: 43.6532, lng: -79.3832 }), []);
         const [selectedPlace, setSelectedPlace] = useState(null)
+
+        // Add event listener to close InfoWindow on "Escape" key press
         useEffect(() => {
             const listener = e => {if (e.key === "Escape") {setSelectedPlace(null);}};
             window.addEventListener("keydown", listener);
@@ -79,7 +86,9 @@ function SalonRecommendationView() {
         );
     }
 
+    // Define PlacesAutocomplete component
     const PlacesAutocomplete = ({ setSelected }) => {
+        // Declare state variables for Places Autocomplete
         const {
             ready,
             value,
@@ -91,6 +100,7 @@ function SalonRecommendationView() {
             debounce: 200,
         });
 
+        // Handle search result selection
         const handleSelect = async (inputText) => {
             let address = inputText.label;
             setValue(address, false);
@@ -102,6 +112,7 @@ function SalonRecommendationView() {
             searchNearbySalon(lat, lng);
         };
 
+        // Load search results
         const loadOptions = async (inputText, callback) => {
             setValue(inputText);
             if (status === "OK") {
@@ -141,6 +152,7 @@ function SalonRecommendationView() {
         );
     };
 
+    // This function gets the user's current location and then calls the 'searchNearbySalon' function passing the latitude and longitude values as arguments.
     const locateUserLocation = () => {
         setLoading(true)
         if (navigator.geolocation) {
@@ -164,9 +176,11 @@ function SalonRecommendationView() {
         }
     }
 
+    // This function makes an API request to retrieve nearby salons based on the user's 
     const searchNearbySalon = (inputLat, inputLng) => {
         setComplete(false)
         setAlertOpen(false)
+        // fetch(`https://ec2-18-191-171-138.us-east-2.compute.amazonaws.com/salons?lat=${inputLat}&lng=${inputLng}`)
         axios.get(`https://${host}/salons?lat=${inputLat}&lng=${inputLng}`)
         .then(response => {
             const data = response.data
@@ -192,6 +206,7 @@ function SalonRecommendationView() {
         })
     }
 
+    //Return the interface
     return (
         <div className="page-container">
             <Container>

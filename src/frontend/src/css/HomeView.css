@@ -1,3 +1,4 @@
+/* styles the banner section of the webpage */
 .banner-container {
     height: 40vh;
     background-repeat: no-repeat;
@@ -6,6 +7,7 @@
     background-attachment: fixed;
 }
 
+/* styles the features section of the webpage */
 .features-container {
     background-color: white;
     min-height: 55vh;
@@ -15,15 +17,18 @@
     padding-right: 200px;
 }
 
+/* styles the grid items in the features section */
 .grid-item {
     padding-top: 0px !important;
 }
 
+/* styles the feature cards in the features section */
 .feature-card {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     border-radius: 20px !important;
 }
 
+/* styles the feature images in the feature cards */
 .feature-image {
     height: 45vh;
     object-fit: cover;
@@ -31,21 +36,25 @@
     border-top-right-radius: 20px !important;
 }
 
+/* styles the feature body in the feature cards */
 .feature-body {
     height: 25vh;
 }
 
+/* styles the feature buttons in the feature cards */
 .feature-button {
     background-color: transparent !important;
     color: black !important;
     border-color: black !important;
 }
 
+/* styles the feature buttons when they are hovered over */
 .feature-button:hover {
     background-color: black !important;
     color: white !important;
 }
 
+/* styles for smaller screens with a max width of 1250px */
 @media screen and (max-width: 1250px) {
     .features-container {
         padding-top: 3vh;
@@ -59,6 +68,7 @@
     }
 }
 
+/* adjusts the styles for smaller screens with a max width of 1024px */
 @media screen and (max-width: 1024px) {
     .features-container {
         padding-top: 3vh;
@@ -72,6 +82,7 @@
     }
 }
 
+/* adjusts the styles for smaller screens with a max width of 768px */
 @media screen and (max-width: 768px) {
     .features-container {
         padding-top: 1vh;
@@ -82,6 +93,7 @@
     }
 }
 
+/* adjusts the styles for smaller screens with a max width of 480px */
 @media screen and (max-width: 480px) {
     .features-container {
         padding-left: 10px;
