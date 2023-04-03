@@ -23,23 +23,25 @@ import { WomanHair2 } from './models/WomanHair2.js'
 import { WomanHair3 } from './models/WomanHair3.js'
 import { Malehair } from './models/Malehair.js'
 
-
-const _maxFacesDetected = 1 // max number of detected faces
+// Set the maximum number of detected faces to 1 and create an array to store face followers
+const _maxFacesDetected = 1 
 const _faceFollowers = new Array(_maxFacesDetected)
 let _expressions = null
 
 
-// This mesh follows the face. put stuffs in it.
-// Its position and orientation is controlled by  THREE.js helper
+// Define a component for a mesh that follows the face and put stuff in it
+// Its position and orientation is controlled by THREE.js helper
 const FaceFollower = (props) => {
   // This reference will give us direct access to the mesh
   const objRef = useRef()
+
+  // Update the array of face followers with the current mesh
   useEffect(() => {
     const threeObject3D = objRef.current
     _faceFollowers[props.faceIndex] = threeObject3D
   })
 
-
+// Render the mesh
   console.log('RENDER FaceFollower component')
   return (
     <object3D ref={objRef}>
@@ -76,26 +78,6 @@ const FaceFollower = (props) => {
           color={props.selectedHair.color}
           />
         }
-
-
-        {/* {props.selectedHair.selectedHair == 4 &&
-          <Beard
-          rotation={[0, 0, 0]}
-          position={[0, -0.45, 0.4]}
-          scale={[0.08, 0.08, 0.08]}
-          renderOrder={2}
-          color={props.selectedHair.color}
-          />
-        } */}
-        {/* {props.selectedHair.selectedHair == 5 &&
-          <B2
-          rotation={[0, 0, 0]}
-          position={[0, -1.0, 0.2]}
-          scale={[0.20, 0.15, 0.15]}
-          renderOrder={2}
-          color={props.selectedHair.color}
-          />
-        } */}
 
       {props.selectedHair.selectedHair == 3 &&
           <Malehair
@@ -174,29 +156,6 @@ const FaceFollower = (props) => {
     </object3D>
   )
 }
-
-// const FaceFollower = (props) => {
-//   const objRef = useRef();
-//   useEffect(() => {
-//     const threeObject3D = objRef.current;
-//     _faceFollowers[props.faceIndex] = threeObject3D;
-//   });
-
-//   console.log('RENDER FaceFollower component')
-//   return (
-//     <object3D ref={objRef}>
-//       <Suspense fallback={null}>
-//         <Hat
-//           rotation={[0, -Math.PI, 0]}
-//           position={[0, 1.825, 0]}
-//           scale={[1.5, 1.5, 1.5]}
-//           renderOrder={2}
-//         />
-//         {/* <Head position={[0, -0.1435, 0]} scale={[1.125, 1, 1.125]} /> */}
-//       </Suspense>
-//     </object3D>
-//   );
-// };
 
 
 // fake component, display nothing
