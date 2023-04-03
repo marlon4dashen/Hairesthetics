@@ -8,8 +8,8 @@ import EastIcon from '@mui/icons-material/East';
 
 // Images
 import bannerImg from "../assets/banner/b6.jpg"
-import hairStyle from "../assets/feature/h1.gif";
-import hairColor from "../assets/feature/c1.gif";
+import hairStyle from "../assets/feature/c1.gif";
+import hairColor from "../assets/feature/c3.gif";
 import map from "../assets/feature/m1.jpeg";
 
 import "../css/HomeView.css"

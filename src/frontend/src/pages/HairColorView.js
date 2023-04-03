@@ -268,7 +268,7 @@ function HairColorView() {
                         {/* {isShowVideo && <img src={"https://localhost:5001/video_feed?userid=" + userid}  alt="transformed_output"></img>} */}
                         {isShowVideo && <img src={`https://${host}/video_feed?userid=${userid}`}  alt="transformed_output"></img>}
                         {/* {isShowVideo && <img alt="transformed_output" ref={outputVideoRef}></img>} */}
-                        {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}} 
+                        {isShowImage && <img style={{'width': mediaWidth, 'height': mediaHeight}}
                         src={`data:image/jpeg;base64,${downloadedFile}`} />}
                     </Grid>
                 </Grid>
