@@ -1,3 +1,4 @@
+//this file sets the scrollbar for the web application
 import React, { useEffect, useState } from "react";
 import {Card, CardContent, CardMedia, CardActionArea, Button, Typography, Grid, Paper, IconButton, Chip, Box, Tabs} from '@mui/material';
 import { makeStyles } from '@mui/styles';
@@ -6,31 +7,7 @@ import hair0 from "../../public/assets/hairstyles/hair0.png"
 import hair1 from "../../public/assets/hairstyles/hair1.png"
 import hair2 from "../../public/assets/hairstyles/hair2.png"
 
-
-
-// const ActionAreaCard = (props) => {
-//     return (
-//       <Card sx={{ Width: 250 }}>
-//         <CardActionArea>
-//           <CardMedia
-//             component="img"
-//             height="150"
-//             width="150"
-//             image={hair0}
-//             alt="hairstyle-0"
-//           />
-//           <CardContent>
-//             <Typography gutterBottom variant="h5" component="div">
-//               {props.label}
-//             </Typography>
-//           </CardContent>
-//         </CardActionArea>
-//       </Card>
-//     );
-// }
-
-
-
+//constant used to set the scrollbar
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
