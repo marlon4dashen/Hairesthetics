@@ -178,7 +178,6 @@ def clear_cache():
 
     # If the user ID exists in workers, clear the cache for that worker
     if userid in workers:
-    if userid in workers:
         workers[userid].clean_up()
         # del workers[userid]
 
@@ -245,7 +244,6 @@ def video_feed():
     userid = args["userid"]
     
     # Wait until the user ID is present in the workers dictionary
-    while userid not in workers:
     while userid not in workers:
         sleep(0.05)
 
