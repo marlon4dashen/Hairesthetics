@@ -146,6 +146,7 @@ function HairStyleView() {
     { key: 19, label: "Philippine Silver", hex:"#B8B8B8", rgb: {r: "184", g: "184", b: "184"} },
 ];
 
+    //Return the interface
     return (
       <ThemeProvider theme={themeDark}>
 
