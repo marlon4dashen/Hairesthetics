@@ -22,10 +22,13 @@ const { GOOGLE_MAPS_API_KEY } = require("../config.json");
 
 
 function SalonRecommendationView() {
+    // Load Google Maps Places API script
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: GOOGLE_MAPS_API_KEY,
         libraries: ["places"],
     });
+
+    // Declare state variables
     const [resultsLength, setResultLength] = useState(0)
     const [searchResults, setSearchResults] = useState([])
     const [selected, setSelected] = useState(null);
@@ -34,9 +37,12 @@ function SalonRecommendationView() {
     const [openAlert, setAlertOpen] = useState(false);
     const [alertMessage, setAlertMessage] = useState({type: "info", msg: ""});
 
+     // Define Map component
     function Map() {
         const center = useMemo(() => ({ lat: 43.6532, lng: -79.3832 }), []);
         const [selectedPlace, setSelectedPlace] = useState(null)
+
+        // Add event listener to close InfoWindow on "Escape" key press
         useEffect(() => {
             const listener = e => {if (e.key === "Escape") {setSelectedPlace(null);}};
             window.addEventListener("keydown", listener);
@@ -78,7 +84,9 @@ function SalonRecommendationView() {
         );
     }
 
+    // Define PlacesAutocomplete component
     const PlacesAutocomplete = ({ setSelected }) => {
+        // Declare state variables for Places Autocomplete
         const {
             ready,
             value,
@@ -90,6 +98,7 @@ function SalonRecommendationView() {
             debounce: 200,
         });
 
+        // Handle search result selection
         const handleSelect = async (inputText) => {
             let address = inputText.label;
             setValue(address, false);
@@ -101,6 +110,7 @@ function SalonRecommendationView() {
             searchNearbySalon(lat, lng);
         };
 
+        // Load search results
         const loadOptions = async (inputText, callback) => {
             setValue(inputText);
             if (status === "OK") {
