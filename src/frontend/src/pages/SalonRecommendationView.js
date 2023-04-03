@@ -1,3 +1,4 @@
+// This file implement the interface of saon recommandation view of the web application
 import React, { useEffect, useState, useMemo } from "react"
 import {Container, Button, Row, Col, Card, ListGroup} from 'react-bootstrap'
 import {IoMdLocate} from 'react-icons/io';
@@ -150,6 +151,7 @@ function SalonRecommendationView() {
         );
     };
 
+    // This function gets the user's current location and then calls the 'searchNearbySalon' function passing the latitude and longitude values as arguments.
     const locateUserLocation = () => {
         setLoading(true)
         if (navigator.geolocation) {
@@ -173,12 +175,13 @@ function SalonRecommendationView() {
         }
     }
 
+    // This function makes an API request to retrieve nearby salons based on the user's 
     const searchNearbySalon = (inputLat, inputLng) => {
         setComplete(false)
         setAlertOpen(false)
         // fetch(`https://ec2-18-191-171-138.us-east-2.compute.amazonaws.com/salons?lat=${inputLat}&lng=${inputLng}`)
         axios.get(`https://ec2-18-191-171-138.us-east-2.compute.amazonaws.com/salons?lat=${inputLat}&lng=${inputLng}`)
-        .then(response => {
+        .then(response => { // If the API request is successful, execute this block
             const data = response.data
             var responseCode = data.code
             if (responseCode === 'error'){
@@ -202,6 +205,7 @@ function SalonRecommendationView() {
         })
     }
 
+    //Return the interface
     return (
         <div className="page-container">
             <Container>
