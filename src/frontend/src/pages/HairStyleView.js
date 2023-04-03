@@ -25,7 +25,7 @@ import "../css/HairStyleView.css"
 
 
 
-
+// Create a dark theme for the app using the createTheme function.
 const themeDark = createTheme({
   palette: {
     background: {
@@ -35,11 +35,13 @@ const themeDark = createTheme({
       primary: "#ffffff"
     },
   },
+  // Customize the menu styling by setting the background color of the root MuiPaper element to light blue.
   menu: {
     "& .MuiPaper-root": {
       backgroundColor: "lightblue"
     }
   },
+  // Define the typography styles for h1, h2, and h3 tags to have bold font weight.
   typography: {
       h1: {
         fontWeight: 'bold',
@@ -56,6 +58,7 @@ const themeDark = createTheme({
 },
 });
 
+// Define the styling for components in the HairStyleView component using the makeStyles function.
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -67,19 +70,23 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "100%",
     zIndex:3,
 
-
+  // Define a blank element that will take up 70% of the viewport height and 100% of the width.
   },
   blank:{
     height: "70vh",
     width: "100vw",
 
   },
+
+  // Define the styling for the hairstyle cards, which will have no border radius, no box shadow, and a minimum height and width.
   card: {
     borderRadius: 0,
     boxShadow: 'none',
     minHeight: "14vh",
     minWidth: "14vh",
   },
+
+  // Define the styling for the hairstyle images, which will have no border radius, cover the container, and have a fixed width and height.
   img:{
     borderRadius: 0,
     "object-fit": "cover",
@@ -88,8 +95,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-
+// Define the HairStyleView component, which will display a list of hairstyles and allow the user to select one and choose a color.
 function HairStyleView() {
   const classes = useStyles();
   const [selectedHair, setSelectedHair] = useState(-1);
@@ -101,6 +107,7 @@ function HairStyleView() {
         setColorTab(newValue);
     };
 
+  // Define a list of hairstyles with their labels and images.
   const [hairList, setHairList] = useState([
     { key: 0, label: "Bob", img:"/_/public/assets/hairstyles/hair0.png" },
     { key: 1, label: "Reverse", img:"/_/public/assets/hairstyles/hair1.png" },
@@ -115,6 +122,7 @@ function HairStyleView() {
 
   ]);
 
+  // Define a list of hair coloes to choose from.
   const colorList = [
     { key: 0, label: "Original", hex:"#FFFFFF", rgb: {r: "255", g: "255", b: "255"} },
     { key: 1, label: "Smoky Black", hex:"#100C07", rgb: {r: "16", g: "12", b: "7"} },
