@@ -26,7 +26,7 @@ sorting=ynt
 
 \begin{document}
 
-\title{Project Title: System Verification and Validation Plan for Hairesthetics} 
+\title{System Verification and Validation Plan for HairEsthetics} 
 \author{Team 18 \\ Charlotte Cheng
         \\ Marlon Liu
         \\ Senni Tan
@@ -45,7 +45,8 @@ sorting=ynt
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Oct 25th & 1.0 & Initial draft\\
+Oct 25 & 1.0 & Initial draft\\
+\textcolor{red}{Apr 3} & \textcolor{red}{2.0} & \textcolor{red}{Revision 1}\\
 \bottomrule
 \end{tabularx}
 
@@ -71,7 +72,6 @@ Oct 25th & 1.0 & Initial draft\\
   MG & Module Guide\\
   GUI & Graphical User Interface\\
   PoC & Proof of Concept\\
-  
   \bottomrule
 \end{tabular}\\
 
@@ -80,14 +80,14 @@ Oct 25th & 1.0 & Initial draft\\
 
 \pagenumbering{arabic}
 
-This document will provide the testing plan for Hairesthetics, including verification and validation Plan of SRS, design, and implementation, as well as system tests ranging from functional requirements tests to unit tests. It will also act as an outline of testing methods and outline the tools that will be utilized.
+This document will provide the testing plan for HairEsthetics, including verification and validation Plan of SRS, design, and implementation, as well as system tests ranging from functional requirements tests to unit tests. It will also act as an outline of testing methods and outline the tools that will be utilized.
 
 \section{General Information}
 
 \subsection{Summary}
 
 
-  The software application Hairesthetics will be tested. Its functionality includes facial recognition, 3D hair modification, hair salon recommendation and authentication System.
+  The software application HairEsthetics will be tested. Its functionality includes 3D hair style and color simulation, hair salon recommendation and authentication System. 
 
 \subsection{Objectives}
 
@@ -96,8 +96,11 @@ safety of data, efficient execution, and adequate usability.
 
 \subsection{Relevant Documentation}
 
-Relevant documentation includes \textit{SRS}, \textit{HA} and \textit{MG}.
-
+Relevant documentation includes \textit{SRS}, \textit{HA}.
+\begin{enumerate}
+    \item SRS - \href{https://github.com/marlon4dashen/Hairesthetics/blob/main/docs/SRS/SRS.pdf}{/docs/SRS/SRS.pdf}
+    \item Hazard Analysis - \href{https://github.com/marlon4dashen/Hairesthetics/blob/main/docs/HazardAnalysis/HazardAnalysis.pdf}{/docs/HazardAnalysis/HazardAnalysis.pdf}
+\end{enumerate}
 \section{Plan}
 
 This section will provide the verification and validation plan of SRS, design, and implementation as well as tools that will be used for Verification and Automated Testing.
@@ -161,7 +164,7 @@ The following tools will be used for automated testing:
         \textbf{Module} & \textbf{Automated Testing and Verification Tools} \\ \hline
         Backend API & Postman \\ \hline
         Python code & Pytest, Pycoverage, flake8 \\ \hline
-        IOS code and ARKit & XCTest, XCUITest \\ \hline
+        JavaScript code & Jest, Mocha \\ \hline
     \end{tabular}
     \caption{The verification tools used in each module/section}
 \end{table}
@@ -181,79 +184,103 @@ place themselves in the mind of their target user and stay on track with what th
 	
 \subsection{Tests for Functional Requirements}
 
-\subsubsection{Facial Recognition System}
+\subsubsection{Hair Style System}
 		
 \begin{enumerate}
 
-\item{FRS-T1\\}
+\item{HS-T1\\}
 Type: Functional, Dynamic, Manual
 					
+Initial State: Hair Style Page, with granted webcam permission
+					
+Input: Live video footage from webcam
+					
+Output: The chosen hair model is placed on top of the tester's head
+
+How the test will be performed: Open the hair style page on desktop or mobile phone. The tester will click on the hair style page, and select different hair styles. And check if the hair models are rendered correctly by rotating their head.
+					
+
+\item{HS-T2\\}
+Type: Functional, Dynamic, Manual
+					
+Initial State: Hair Style Page
+					
+Input: User click deny webcam permission
+					
+Output: The live video will be disabled and a error message will be displayed.
+
+How the test will be performed: Open the hair style page on desktop or mobile phone. The tester will click on the hair style page, and select 'deny' when the browser prompts the permission dialogue. After clicking 'deny', the test will not see themselves on the page, and the video container will be shown in black.
+
+\item{HS-T3\\}
+Type: Functional, Dynamic, Manual
+                    
 Initial State: Home page
 					
-Input: An image (clicked upload)
+Input: Click hair style on the menu
 					
-Output: Facial features coordinates
+Output: Switch to the hair style page
+					
+How test will be performed: When at the home screen, the tester clicks on the button that directs to virtual simulation, see if it switches to the virtual simulation screen
 
-How test will be performed: Upload a sample image to the facial recognition system, and manually check if the produced coordinates are appropriate.
-					
-\item{FRS-T2\\}
+\item{HS-T4\\}
 Type: Functional, Dynamic, Manual
                     
-Initial State: Home screen
+Initial State: Hair Style Screen
 					
-Input: A photo (taken)
+Input: A hairstyle is selected in the color selection bar at the bottom of the screen
 					
-Output: Facial features coordinates
+Output: The application fits the hairstyle onto the user's head, at an appropriate position and scale. 
 					
-How test will be performed: Take a photo with a clear and whole face included, then manually check if the produced coordinates are appropriate for the taken image. 
-
+How test will be performed: The tester should try to select a hairstyle, and check if the system fits the hairstyle onto the user's head at an appropriate position and scale.
 \end{enumerate}
 
-\subsubsection{Hair Modification System}
+\subsubsection{Hair Color System}
 \begin{enumerate}
-\item{HMS-T1\\}
+\item{HC-T1\\}
 Type: Functional, Dynamic, Manual
                     
-Initial State: Home screen
+Initial State: Home page
 					
-Input: Click on virtual simulation section
+Input: Select hair color on the menu
 					
-Output: Switch to virtual simulation screen
+Output: Switch to hair color page
 					
-How test will be performed: When at the home screen, click on the button that directs to virtual simulation, see if it switches to the virtual simulation screen
-\item{HMS-T2\\}
-Type: Functional, Dynamic, Manual
-                    
-Initial State: Virtual Simulation Screen
-					
-Input: Enable camera input (assume the application already has the camera access)
-					
-Output: The hair and facial feature coordinates of the user's face with updates
-					
-How test will be performed: As soon as the user is at the virtual simulator, manually check if the hair and facial coordinates are output by the system periodically with the input video.
+How test will be performed: The tester will select the hair color tab and checks if the hair color page is rendered correctly
 
-\item{HMS-T3\\}
+\item{HC-T2\\}
 Type: Functional, Dynamic, Manual
-                    
-Initial State: Virtual Simulation Screen
 					
-Input: Select a hair color
+Initial State: Hair Color Page
 					
-Output: The system displays the changed hair color at appropriate position.
+Input: User click deny webcam permission
 					
-How test will be performed: The tester should try to select a hair color and see if his/her hair color changes to the selected color.
+Output: The live video will be disabled and an error message will be shown.
 
-\item{HMS-T4\\}
+How the test will be performed: Open the hair style page on desktop or mobile phone. The tester will click on the hair style page, and select 'deny' when the browser prompts the permission dialogue. After clicking 'deny', the test will not see themselves on the page, and the video container will be shown in black.
+
+\item{HC-T3\\}
 Type: Functional, Dynamic, Manual
                     
-Initial State: Virtual Simulation Screen
+Initial State: Hair Color Screen
 					
-Input: Select a hairstyle
+Input: An image is uploaded and select a color from the palette
 					
-Output: The application fit the hairstyle onto user's head, at an appropriate position and scale. 
+Output: The page will display the transformed image with the correct color
 					
-How test will be performed: The tester should try to select a hair style, and check if the system fits the hair style onto the user's head at an appropriate position and scale.
+How test will be performed: The tester should upload an image and select a color, then check if the system outputs the transformed image with the selected color
+
+\item{HC-T4\\}
+Type: Functional, Dynamic, Manual
+                    
+Initial State: Hair Color Screen
+					
+Input: Click upload image button
+					
+Output: The page will open the select image dialogue and allows the user to upload images from local storage.
+					
+How test will be performed: The tester will click the upload image button and check if they can upload an image in the specific format
 \end{enumerate}
+
 \subsubsection{Hair Salon Recommendation System}
 \begin{enumerate}
 \item{HSR-T1}\\
@@ -261,18 +288,18 @@ Type: Functional, Dynamic, Manual
 					
 Initial State: Home screen
 					
-Input: User clicked on recommendation
+Input: Click operation on recommendation tab
 					
-Output: Switch to recommendation page with a map
+Output: Switch to the recommendation page with a map
 					
-How test will be performed: Click on the recommendation tab and see if the screen changes to the recommendation page with a map
+How test will be performed: The tester clicks on the recommendation tab and see if the screen changes to the recommendation page with a map
 				
 \item{HSR-T2}\\
 Type: Functional, Dynamic, Manual
 					
 Initial State: Recommendation page
 					
-Input: User entered a valid address
+Input: The user entered a valid address in the search box
 					
 Output: The map zooms to the entered location and displays up to 5 location markers (recommended hair salon) near the entered location
 					
@@ -288,27 +315,19 @@ Input: User entered an invalid or unknown address
 Output: The page displays an address not found message
 					
 How test will be performed: Enter an invalid address and check if the error message shows up.
+
 \item{HSR-T4}\\
 Type: Functional, Dynamic, Manual
 					
 Initial State: Recommendation page
 					
-Input: User clicked on 'use my current location'
+Input: The user clicked on the "use my current location" button
 					
-Output: The map zooms to the user current location and displays up to 5 location markers (recommended hair salon) near the location (within 10 kilometer radius)
+Output: The map zooms to the user's current location and displays up to 5 location markers (recommended hair salon) near the location (within a 10-kilometer radius)
 					
 How test will be performed: Click on the 'use my current location' button and see if the map zooms to the current location correctly and markers being displayed around the current location.
+
 \item{HSR-T5}\\
-Type: Functional, Dynamic, Manual
-					
-Initial State: Recommendation page
-					
-Input: User clicked on 'use my current location'
-					
-Output: The map zooms to the user current location and displays up to 5 location markers (recommended hair salon) near the location (within 10 kilometer radius)
-					
-How test will be performed: Click on the 'use my current location' button and see if the map zooms to the current location correctly and markers being displayed around the current location.
-\item{HSR-T6}\\
 Type: Functional, Dynamic, Manual
 					
 Initial State: Recommendation page with markers
@@ -318,6 +337,7 @@ Input: User clicked on one of the marker
 Output: The details of that hair salon will be shown. Details include address, postal code, overall ratings, and link to their web page if possible.
 					
 How test will be performed: Click on one of the marker and see if the details of the hair salon will be displayed.
+
 \item{HSR-T6}\\
 Type: Functional, Dynamic, Manual
 					
@@ -408,11 +428,11 @@ Type: Structural, Dynamic, Manual
 					
 Initial State: Application installed onto a cell phone and running
 					
-Input/Condition: User inputs
+Input/Condition: App opened
 					
 Output/Result: Interfaces of the application
 					
-How test will be performed: Tests will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "Is the text on the application outstanding and easily recognizable for you with this font size?"
+How test will be performed: Tests will be done manually by developers running the prototype. Tests will be enhanced by actual user feedback via a survey asking them "Is the text on the application outstanding and easily recognizable for you with this font size? Rate from 1-5(bad to good)" The appearance should achieve an average mark above 4.
 					
 \item{AP-T2\\}
 
@@ -420,11 +440,11 @@ Type: Structural, Dynamic, Manual
 					
 Initial State: Application installed onto a cell phone and running
 					
-Input: User inputs
+Input: App opened
 					
-Output: Logo, icon, buttons and other functional entity units that the user can be interact with
+Output: Logo, icon, buttons, and other functional entity units that the user can interact with
 					
-How test will be performed: Tests will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "Is the elements on the interface well-organized enough for you to use the application easily?"
+How test will be performed: Tests will be done manually by developers running the prototype. Tests will be enhanced by actual user feedback via a survey asking them "Is the elements on the interface well-organized enough for you to use the application easily? Rate from 1-5(bad to good)" The average mark should be greater than 4.
 
 \end{enumerate}
 
@@ -436,25 +456,25 @@ How test will be performed: Tests will be done manually by developers running pr
 
 Type: Structural, Dynamic, Manual.
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a }\textcolor{red}{Application running on a computer website} \sout{computer and running}
 					
-Input/Condition: User inputs
+Input/Condition: \sout{App} \textcolor{red}{website} opened
 					
 Output/Result: Any visual elements in the interface
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale, would you say the style of the interface matches the modern aesthetic? (1-10) (poorly - very)"
+How test will be performed: The test will be done manually by developers running the prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale, would you say the style of the interface matches the modern aesthetic? (1-5) (poorly - very)" The average mark should be greater than 4
 					
 \item{IA-T2\\}
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
-Input: User inputs
+Input: \sout{App} \textcolor{red}{website} opened
 					
 Output: The entire interface presented to the user
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale, do you think the interface is simple and clear? (1 - 10) from very disagree to very agree"
+How test will be performed: The test will be done manually by developers running the prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale, do you think the interface is simple and clear? (1 - 5) from very disagree to very agree" The average mark should be greater than 4
 
 \end{enumerate}
 
@@ -468,25 +488,25 @@ How test will be performed: Test will be done manually by developers running pro
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
 Output/Result: The entire interface and any interactable elements on the interface
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale, do you think the interactable components in the interface is easy to be recognized? (1 - 10) from very disagree to very agree"
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale, do you think the interactable components in the interface is easy to be recognized? (1 - 5) from very disagree to very agree" The average mark should be greater than 4
 					
 \item{EU-T2\\}
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input: User inputs
 					
 Output: The entire interface and any interactable elements on the interface
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "During the use of this application, how many times did you misclicking an interactable element?"
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "During the use of this application, how many times did you misclicking an interactable element?" All the responsed times that the user misclick an interactable element should be less than 5
 
 \end{enumerate}
 
@@ -498,25 +518,25 @@ How test will be performed: Test will be done manually by developers running pro
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application is not yet installed
+Initial State: \sout{Application is not yet installed} \textcolor{red}{Application is not running on the website}
 					
 Input/Condition: User operations
 					
-Output/Result: The installed application
+Output/Result: \sout{installed} \textcolor{red}{run} application
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "Did you finish the installation within 3 steps: open App Store, search for "Hairesthetics", click on install?"
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "Did you finish the installation within 3 steps: open App Store, search for "Hairesthetics", click on install?" All the response should be "yes"
 					
 \item{LR-T2\\}
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input: User inputs
 					
 Output: Instructions on the interface when user first open the application
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale do you find the instruction easy to follow? (1 - 10) from very disagree to very agree"
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale do you find the instruction easy to follow? (1 - 5) from very disagree to very agree" The average mark should be greater than 4
 
 \end{enumerate}
 
@@ -528,13 +548,13 @@ How test will be performed: Test will be done manually by developers running pro
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
 Output/Result: Icons on the interface
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale do you find the icon is appropriate and with no offense? (1 - 10) from very disagree to very agree"
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale do you find the icon is appropriate and with no offense? (1 - 5) from very disagree to very agree" The average mark should be greater than 4
 
 \end{enumerate}
 
@@ -546,13 +566,13 @@ How test will be performed: Test will be done manually by developers running pro
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
 Output/Result: Text on the interface
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale do you find the text has appropriate font size and color? (1 - 10) from very disagree to very agree"
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale do you find the text has appropriate font size and color? (1 - 5) from very disagree to very agree" The average mark should be greater than 4
 
 \end{enumerate}
 
@@ -566,37 +586,37 @@ How test will be performed: Test will be done manually by developers running pro
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
 Output/Result: Hairstyle suggestion is given on the screen
 					
-How test will be performed: Test will be done manually by developers running prototype. The developer will test the hairstyle suggestion functionality 100 time and measure the time from giving input to the hairstyle suggestion output. Number of times when the response time is greater than 1 second will be recorded.
+How test will be performed: Test will be done manually by developers running prototype. The developer will test the hairstyle suggestion functionality 100 time and measure the time from giving input to the hairstyle suggestion output. Number of times when the response time is greater than 1 second will be recorded. The recorded number of times should be less than or equal to 10
 					
 \item{SL-T2\\}
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
 Output/Result: Hairstyle changing on the screen
 					
-How test will be performed: Test will be done manually by developers running prototype. The developer will test the hairstyle changing functionality 100 time and measure the time from giving input to the hairstyle changing output. Number of times when the response time is greater than 1 second will be recorded.
+How test will be performed: Test will be done manually by developers running prototype. The developer will test the hairstyle changing functionality 100 time and measure the time from giving input to the hairstyle changing output. Number of times when the response time is greater than 1 second will be recorded. The recorded number of times should be less than or equal to 10
 
 \textbf{\item{SL-T3\\}}
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
 Output/Result: Responses to the user inputs
 					
-How test will be performed: Test will be done manually by developers running prototype. The developer will randomly clicking any interactable buttons 100 time and measure the time from clicking the button to the response output. Number of times when the response time is greater than 0.5 second will be recorded.
+How test will be performed: Test will be done manually by developers running prototype. The developer will randomly clicking any interactable buttons 100 time and measure the time from clicking the button to the response output. Number of times when the response time is greater than 0.5 second will be recorded. The recorded number of times should be less than or equal to 10
 
 \end{enumerate}
 
@@ -608,19 +628,19 @@ How test will be performed: Test will be done manually by developers running pro
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
 Output/Result: Hairstyle on the user's head on the screen
 					
-How test will be performed: Test will be done manually by developers running prototype. The developer will test the hairstyle functionality 100 time and take screenshots, then measure the length from the hair image to the head's position. All measurements are recorded and the average error in length should be within 1 millimeter.
+How test will be performed: Test will be done manually by developers running prototype. The developer will test the hairstyle functionality 100 time and take screenshots, then measure the length from the hair image to the head's position. All measurements are recorded and the average error in length should be within 1 millimeter. 
 					
 \item{PA-T1\\}
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
@@ -638,25 +658,25 @@ How test will be performed: Test will be done manually by developers running pro
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
 Output/Result: Response from user inputs
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "How many times have you faced a crash when using the application?" The total number will be add up and divided by the number of users to get the crash percentage.
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "How many times have you faced a crash when using the application?" The total number will be add up and divided by the number of users to get the crash percentage. And the crash percentage should be less than 2\%
 					
 \item{RA-T2\\}
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
 Output/Result: Response from user inputs
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "How many times have you get an error message or any unexpected wrong behavior of the application when using the application?" The total number will be add up and divided by the number of users to get the crash percentage.
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "How many times have you get an error message or any unexpected wrong behavior of the application when using the application?" The total number will be add up and divided by the number of users to get the expected error message percentage, and the percentage should be greater than 98\%
 
 \end{enumerate}
 
@@ -668,19 +688,19 @@ How test will be performed: Test will be done manually by developers running pro
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
 Output/Result: Response from user inputs
 					
-How test will be performed: Test will be done manually by developers running prototype. The developer will try to inject irrational inputs to break the application and record the number of times that the application has an systematic error message(not error message from error exception handling) or any unexpected wrong behavior.
+How test will be performed: Test will be done manually by developers running prototype. The developer will try to inject irrational inputs to break the application and record the number of times that the application has an systematic error message(not error message from error exception handling) or any unexpected wrong behavior. The number of times that the application crashes is divided by the total number of injected irrational inputs to get a percentage and this percentage should be less than 3\%
 					
 \item{RB-T2\\}
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
@@ -698,7 +718,7 @@ How test will be performed: Test will be done manually by developers running pro
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
@@ -710,7 +730,7 @@ How test will be performed: Test will be done manually by developers running pro
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
@@ -747,7 +767,7 @@ Watch Room in the SRS document.
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
@@ -797,7 +817,7 @@ How test will be performed: Developers will run tests in this document to ensure
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: Version of Application is updated. Application is updated and running
 					
@@ -815,7 +835,7 @@ How test will be performed: After application is updated, users will be asked in
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application is published and able to be downloaded from app store.
+Initial State: Application is published and able to be \sout{downloaded} \textcolor{red}{accessed} from \sout{app store}\textcolor{red}{website}.
 					
 Input/Condition: Developer input
 					
@@ -826,7 +846,7 @@ How test will be performed: Developers collect feed backs from user and fix any 
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application is installed able to run.
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: System failure occurs to the app
 					
@@ -842,7 +862,7 @@ How test will be performed: Developers would try to crash the app and record the
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
@@ -862,7 +882,7 @@ How test will be performed: Test will be done manually by developers running pro
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
@@ -882,7 +902,7 @@ How test will be performed: Test will be done manually by developers running pro
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
@@ -902,7 +922,7 @@ How test will be performed: Test will be done manually by developers running pro
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
 Input/Condition: User inputs
 					
@@ -941,42 +961,51 @@ More specifically, most of the non-functional requirements cannot be verified by
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-	& FR1 & FR2 & FR3 & FR4 & FR5 & FR6 & FR7 & HM1 & HM2 & HM3 & HM4 & HM5 & HM6 & HM7 & HM8 & HM9 \\
+	& FR1 & FR2 & FR3 & FR6 & FR7 & HM7 & HM8 & HM9 & HM11 & HM12 \\
 \hline
-FRS-T1        & X& X& X& X& & & & & & & & & & & & \\ \hline
-FRS-T2        & & & & & X& X& X& & & & & & & & &  \\ \hline
-HMS-T1        & & & & & & & & & & & & & & & & \\ \hline
-HMS-T2        & & & & & & & & & & X& X& X& & & & \\ \hline
-HMS-T3        & & & & & & & & X& X& & & & & & & \\ \hline
-HMS-T4        & & & & & & & & & & & & & X& X& X&X \\ \hline
+HS-T1        & X& X& X& X& X& & & & X& X  \\ \hline
+HS-T2        & X& & & & & & & & & X  \\ \hline
+HS-T3        & & & & & & & & & & X  \\ \hline
+HS-T4        & X& X& X& X& X& X& X& X& X& X  \\ \hline
 
 \end{tabular}
-\caption{Traceability Matrix Showing the Connections Between Functional Requirements and functional requirements tests}
+\caption{\textcolor{red}{Traceability Matrix Showing the Connections Between Functional Requirements and functional requirements tests}}
 \label{Table:A_trace}
 \end{table}
-\end{landscape}
 
-\begin{landscape}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+	& FR1 & FR2 & FR3 & FR6 & FR7 & HM1 & HM2 & HM3 & HM4 & HM5 & HM6  \\
+\hline
+HC-T1        & & & & & & & & & & &  \\ \hline
+HC-T2        & X& & & & & & & & & &  X\\ \hline
+HC-T3        & X& X& X& X& X& X& X& X& X& X& X \\ \hline
+HC-T4        & X& X& X& X& X& X& X& X& X& X& X \\ \hline
+
+\end{tabular}
+\caption{\textcolor{red}{Traceability Matrix Showing the Connections Between Functional Requirements and functional requirements tests}}
+\label{Table:A_trace}
+\end{table}
+
+% \end{landscape}
+
+% \begin{landscape}
 \begin{table}[h!]
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 \hline
-& HR1 & HR2 & HR3 & HR4 & AR1 & AR2 & AR3 & AR4 \\
+& HR1 & HR2 & HR3 & HR4  \\
 \hline
-HSR-T1        & & & & & & & & \\ \hline
-HSR-T2        &X &X &X & & & & & \\ \hline
-HSR-T3        &X &X &X & & & & & \\ \hline
-HSR-T4        &X &X &X & & & & & \\ \hline
-HSR-T5        & & & & & & & & \\ \hline
-HSR-T6        & & & & X& & & & \\ \hline
-HSR-T7        & & & & X& & & & \\ \hline
-AS-T1         & & & & &X & & & \\ \hline
-AS-T2        & & & & &X & & & \\ \hline
-AS-T3        & & & & &X & & & \\ \hline
-AS-T4        & & & & &X & & & \\ \hline
-AS-T5        & & & & & &X &X & \\ \hline
+HSR-T1        & & & & \\ \hline
+HSR-T2        & X& X& X& X \\ \hline
+HSR-T3        & X& X& X& \\ \hline
+HSR-T4        & X& X& X& X \\ \hline
+HSR-T5        & X& & X& \\ \hline
+HSR-T6        & X& & & X\\ \hline
 \end{tabular}
-\caption{Traceability Matrix Showing the Connections Between Functional Requirements and functional requirements tests}
+\caption{\textcolor{red}{Traceability Matrix Showing the Connections Between Functional Requirements and functional requirements tests}}
 \label{Table:A_trace}
 \end{table}
 \end{landscape}
@@ -1079,22 +1108,6 @@ For our project, the interface and user experience would be very important. In o
 
 \newpage{}
 \subsection{Reflection}
-
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Lifelong Learning.  Please answer the following questions:
-
-\begin{enumerate}
-  \item What knowledge and skills will the team collectively need to acquire to
-  successfully complete the verification and validation of your project?
-  Examples of possible knowledge and skills include dynamic testing knowledge,
-  static testing knowledge, specific tool usage etc.  You should look to
-  identify at least one item for each team member.
-  
-  \item For each of the knowledge areas and skills identified in the previous
-  question, what are at least two approaches to acquiring the knowledge or
-  mastering the skill?  Of the identified approaches, which will each team
-  member pursue, and why did they make this choice?
-\end{enumerate}
 \subsubsection{Senni}
 More knowledge on dynamic testing will be acquired for the team to successfully complete the verification and validation of the project. In the system test for nonfuncational requirement, most of the tests are plan to be done by the user and gathering feedback from the user survey, a more generic approach or a more generic measure tool or methods are required to give a more thorough test.\\
 \newline

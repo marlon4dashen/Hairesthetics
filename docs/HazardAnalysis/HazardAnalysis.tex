@@ -25,7 +25,7 @@
     urlcolor=cyan           % color of external links
 }
 
-\title{Hazard Analysis\\Hairesthetics}
+\title{Hazard Analysis\\HairEsthetics}
 
 \author{Team 18 \\ Charlotte Cheng
         \\ Marlon Liu
@@ -57,7 +57,8 @@
 \midrule
 Oct 11 & All & Initial Draft\\
 Jan 13 & Marlon Liu & Change based on reviews\\
-... & ... & ...\\
+Apr 2 & Hongwei Niu & Resolved problems according to feedback\\
+Apr 3 & All & Revision 1\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -82,22 +83,22 @@ The scope of this document is to state any critical assumptions about the projec
 \section{System Boundaries and Components}
 The system referred to in this document that the hazard analysis will be conducted on consists of:
 \begin{enumerate}
-    \item The iOS application installed on user devices, including both the front-end and back-end made up of the following four major components:
+    \item The \sout{iOS} \textcolor{red}{web application} including both the front-end and back-end made up of the following four major components:
     \begin{itemize}
-        \item Facial Recognition System
-        \item Hair Modification System
+        \item Hair Style System
+        \item Hair Color System
         \item Hair Salon Recommendation System
-        \item Authentication System       
+        \item \sout{Authentication System   }    
     \end{itemize}
-    \item User Device, iPhone
+    \item \sout{iPhone} Mobile and desktop devices
     \item \sout{MongoDB database where all data will be stored}
-    \item \sout{Cloud database backup programs}
+    \item \sout{Cloud database backup programs} AWS and Firebase for deploying the application
 \end{enumerate}
 
-\noindent The system boundary in this case includes the entire application, user device, \sout{the database, and the data backup program.} The user device and cloud hosting, hardware, \sout{and down-time of the database} are elements that are not controlled by this project. The user device is controlled by the user \sout{and portions of the database are controlled by MongoDB}. However, they are still critical elements of the system and were thus included in this hazard analysis.
+\noindent The system boundary in this case includes the entire application, user device, \sout{the database, and the data backup program.} The user devices and cloud service providers, \sout{and down-time of the database} are elements that are not controlled by this project. The user device is controlled by the user \sout{and portions of the database are controlled by MongoDB}. However, they are still critical elements of the system and were thus included in this hazard analysis.
 
 \section{Critical Assumptions}
-The application will be tested on Apple-provided iPhone simulators as well as developers' devices (iOS 14 and above). It is assumed that all physical devices are in good condition to be used for the project and if the application is compatible with Apple-provided iPhone simulators, then it is compatible and functions properly on actual iPhones with iOS 14 and above.\\
+The application will be tested on \sout{Apple-provided iPhone simulators as well as developers' devices (iOS 14 and above)} \textcolor{red}{chrome and safari using different devices}. It is assumed that all physical devices are in good condition to be used \textcolor{red}{under good internet condition} for the project and if the application is compatible with \sout{Apple-provided iPhone simulators, then it is compatible and functions properly on actual iPhones with iOS 14 and above}different browsers.\\
 \\
 \noindent The scope and specifications of the project will not change when the project takes place. However, when conducting the project, there might be cases where the scope and specifications need to be altered to cater to clients' requirements and needs of the project.\\
 \\
@@ -110,13 +111,11 @@ The out of scope hazards falls into the following categories:
 \begin{itemize}
     \item User's Camera
     \item User's mobile phone hardware
-    \item ArKit library
+    \item \sout{ArKit}\textcolor{red}{AR} library
 \end{itemize}
-User side's hardware conditions is something that the team does not have control over. Besides, the ArKit library is also out of the scope since it is a third party library. The hazards can not be handled completely through our development, however we will try our best to minimize them.
+User side's hardware conditions is something that the team does not have control over. Besides, the \sout{ArKit} \textcolor{red}{AR} library is also out of the scope since it is a third party library. The hazards can not be handled completely through our development, however we will try our best to minimize them.
 \subsection{Failure Mode and Effect Analysis Table}
 The failure modes \& effects analysis (FMEA) was chosen as a tool to identify and analyze the hazards within the system so that requirements can be made to mitigate them.
-
-\wss{Include your FMEA table here}
 
 \begin{landscape}
 \begin{table}[h!]
@@ -126,19 +125,34 @@ The failure modes \& effects analysis (FMEA) was chosen as a tool to identify an
   | p{0.9cm} | }
 \hline
 	\centering{Component} & \centering{Failure Mode} & \centering{Effects of Failure} & \centering{Causes of Failure} & \centering{Recommended Action} & \centering{SR} & Ref \\ \hline
-    Facial Recognition System & The facial landmarks aren't computed properly & Inaccurate simulation results & User might not input proper image / video & Ask the user for inputs again & \sout{FR5, FR6} \textcolor{red}{IR6} & H1-1 \\ \cline{2-7}
-     & System Crash & Overall application crash & Model execution failure & Display error message to prevent further actions & \sout{RAR1} \textcolor{red}{IR7} & H1-2 \\ \hline
+    Hair Style System & No face detected & Inaccurate simulation results & user is badly positioned in front of the webcam. Some other environmental factors such as bad lighting & Ask the user to recenter themselves in front of the webcam & \sout{FR5, FR6} \textcolor{red}{ACR1, IR2, IR5} & H1-1 \\ \cline{2-7}
+     & User denied access to webcam & \sout{Overall application crash} \textcolor{red}{No simulations performed} & User clicks the 'Deny' button when the browser asks for webcam permission & Display error message to prevent further actions \textcolor{red}{and prompt the user to change the permission settings} & \sout{RAR1} \textcolor{red}{ACR3} & H1-2 \\ \hline
      
-     Hair Modification System & Failed to load hairstyle models & Virtual hair simulation won't appear on the screen  & \sout{Database failure} \textcolor{red}{File not exist, incorrect file format, file broken}  & \sout{Backup data or reboot} \textcolor{red}{manually check the file validity and replace if it's in bad condition} & \sout{HM6} \textcolor{red}{IR7} & H2-1 \\  \cline{2-7}
-     
-     ~ & Algorithm failed to detect hair coordinates  & User's hair color fails to change as selected  &  
-     Hair coordination data failed to be retrieved. \newline 
-     Facial recognition system crash
-     & Refer to H1-1 & \sout{HM3 \newline HM4} \textcolor{red}{IR7} & H2-2 \\ \hline
-     
-     Hair Salon Recommendation System & Failed to compute recommendations, Invalid user input & User gets no recommendation and lose interests & \sout{Database failure} \textcolor{red}{Backend API fails to retrieve information, invalid GCP token} & \sout{Inform user to try again} \textcolor{red}{Update token in config and rerun the application} & \sout{HR2} \textcolor{red}{IR1, IR2} & H3-1 \\ \cline{2-7}
-     ~ & System freeze or crash & system crash or overall application crash & \sout{Database failure}, Invalid user input & Backup data or reboot & \sout{HR1, SLR1} \textcolor{red}{IR7} & H3-2 \\ \hline
-     
+     Hair Color System  & Hair color simulation failure & User's hair color fails to change as selected 
+     \newline \textcolor{red}{Hair coordination data failed to be retrieved.}&  
+     \sout{Hair coordination data failed to be retrieved.} \newline 
+     Pre-trained model failed to detect hair segments
+     & \sout{Refer to H1-1} \textcolor{red}{Refer to H1-2}  & \sout{HM3 \newline HM4} \textcolor{red}{ACR1, IR2, IR5} & H2-2 \\ \cline{2-7}
+     & User denied access to webcam & \sout{Overall application crash} \textcolor{red}{No simulations performed} & User clicks the 'Deny' button when the browser asks for webcam permission & Display error message to prevent further actions \textcolor{red}{and prompt the user to change the permission settings} & \sout{RAR1} \textcolor{red}{ACR3} & H2-2 \\ \hline
+\end{tabularx}
+\caption{Failure Mode and Effect Analysis Table}
+\label{FMEA Table}
+\end{table}
+\end{landscape}
+
+\newpage
+
+\begin{landscape}
+\begin{table}[h!]
+\def\arraystretch{1.7}
+\begin{tabularx}{1.2\textwidth} { |X|X|X|X|X
+  | p{0.9cm}
+  | p{0.9cm} | }
+\hline
+	\centering{Component} & \centering{Failure Mode} & \centering{Effects of Failure} & \centering{Causes of Failure} & \centering{Recommended Action} & \centering{SR} & Ref \\ \hline
+         Hair Salon Recommendation System & \sout{Failed to compute recommendations, Invalid user input} \textcolor{red}{Location not found} & \sout{User gets no recommendation and lose interests} \textcolor{red}{User gets no recommendation based on their location}  & \sout{Database failure}  \textcolor{red}{User enters an non-existing location} & \sout{Inform user to try again}  \textcolor{red}{Inform the user to input a valid location or try using the current location button} & \sout{HR2} \textcolor{red}{IR5} & H3-1 \\ \cline{2-7}
+     ~ & \textcolor{red}{User current location retrieval failure} & \sout{Database failure}, \sout{Invalid user input} \textcolor{red}{No salon recommendations} & \textcolor{red}{User denies location permission from the browser} & \sout{Backup data or reboot} \textcolor{red}{Change location setting in the browser} & \sout{HR1, SLR1} \textcolor{red}{ACR4} & H3-2 \\ \cline{2-7}
+     ~ & \textcolor{red}{Failure of recommendation system} & \textcolor{red}{No salon recommendations} & \textcolor{red}{Google Places API service outage} & \textcolor{red}{Display an error message and ask to try again later} & \textcolor{red}{IR5} & H3-3 \\ \hline
 
 \end{tabularx}
 \caption{Failure Mode and Effect Analysis Table}
@@ -157,8 +171,6 @@ The failure modes \& effects analysis (FMEA) was chosen as a tool to identify an
   | p{0.9cm} | }
 \hline
 	\centering{Component} & \centering{Failure Mode} & \centering{Effects of Failure} & \centering{Causes of Failure} & \centering{Recommended Action} & \centering{SR} & Ref \\ \hline
-     
-
      \sout{Authentication System} & \sout{User can not login to the app} & \sout{User can not use the functionality of the application}  & \sout{Login credentials do not match the records in the database} & \sout{Inform user to try again or reset credentials} & \sout{AR1} & \sout{H4-1} \\ \cline{2-7}
      ~ & \sout{System failed to use the default camera with the device}  & \sout{The application can not be used since there's no input source} & 
     \sout{User denied the access of the camera.}  \newline
@@ -170,13 +182,14 @@ The failure modes \& effects analysis (FMEA) was chosen as a tool to identify an
 
     General & App crashes unexpectedly & User loses the current progress  &
     The device runs out of battery. \newline 
-    The application crashes due to instability.  &
-    Charge the device. \newline 
-    Reboot and restart the app. & 
+    The cloud provider for hosting the front end experiences a server outage.  &
+    \sout{Charge the device. \newline 
+    Reboot and restart the app.
+    } \textcolor{red}{Warn the user when battery level is below 10 percent} & 
     \sout{RAR1 \newline
     RAR2} \textcolor{red}{IR7}
     &  H5-1 \\  \cline{2-7}
-    ~ & Failed to save the images locally & The user won't have the simulation result & User denied the system access to the local storage. \textcolor{red}{The local storage is full.} & Prompt the user to allow access to local storage, \textcolor{red}{Prompt users to clear up local storage before retrying} & \sout{AR2} \textcolor{red}{IR1, IR2, IR7} & H5-2 \\   
+    ~ & \textcolor{red}{Loss of internet connection} & \textcolor{red}{Application becomes unresponsive or an application crash} & \textcolor{red}{User experiences an internet related issue} & \textcolor{red}{Safely suspend any ongoing operations and clean up any saved information} & \textcolor{red}{IR1, IR2, IR5} & \textcolor{red}{H5-2} \\   
     \hline
 
 \end{tabularx}
@@ -191,13 +204,26 @@ Requirements that have been included in Revision 0 of the Software Requirements 
 
 \subsubsection{Access Requirements}
 \begin{itemize}
-    \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:] \textbf{Users will be able to access images they previously stored.}
-    \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:]
-    \textbf{Admins will be able to unlock locked resources.}
+    \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:] \textbf{Users will be able to upload images stored in their devices.}
+    \item[] \textcolor{red}{Rationale: Allowing users to use HairEsthetics hair simulations on their local images.}
+    \item[] \textcolor{red}{Hazard: Uploading malicious files might lead to privacy breaches and potential misuse of personal data.}
+    
     \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:]
     \textbf{Only admins will be able to modify application information.}
-    \item[ACR\refstepcounter{acrreqnum}\theacrreqnum\label{R_Inputs}:] 
-    Users will be able to access the history of the hairs they chose.
+    \item[] \textcolor{red}{Rationale: Restricting application information modification to admins prevents unauthorized changes and maintains application stability.}
+    \item[] \textcolor{red}{Hazard: Inadequate admin access controls, leading to unauthorized modifications and potential application vulnerabilities.}
+    
+    \item[ACR\refstepcounter{acrreqnum}\theacrreqnum
+    \label{R_Inputs}:] 
+    \textbf{The application must asks the user for permission to access their webcam }
+    \item[] \textcolor{red}{Rationale: Informing the user that using certain feature requires accessing sensitive information. Give the user the option to proceed or not}
+    \item[] \textcolor{red}{Hazard: Denied permission causes inability to use hair style and color simulation.}
+    
+    \item[ACR\refstepcounter{acrreqnum}\theacrreqnum
+    \label{R_Inputs}:] 
+    \textbf{The application must asks the user for permission to access their current location}
+    \item[] \textcolor{red}{Rationale: Informing the user that using certain feature requires accessing sensitive information. Give the user the option to proceed or not}
+    \item[] \textcolor{red}{Hazard: Denied permission causes inability to use salon recommendation.}
 \end{itemize}
 
 
@@ -205,30 +231,58 @@ Requirements that have been included in Revision 0 of the Software Requirements 
 \begin{itemize}
     \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] \textbf{The product will not modify data unnecessary.}
     \textcolor{red}{The product will not touch or modify data/objects in the local storage.}
+    \item[] \textcolor{red}{Rationale: Ensuring that the application does not modify unrelated data or objects maintains data integrity and prevents unintended consequences.}
+    \item[] \textcolor{red}{Hazard: Unintentional data modification, leading to data corruption and application instability.}
+
     \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] \textbf{The product will not modify any data unrelated to its execution.}
     \textcolor{red}{The product will only access local storage for saving images, will not modify other data.}
+    \item[] \textcolor{red}{Rationale: Restricting the application to only modify data related to its execution ensures data integrity and prevents unauthorized access.}
+    \item[] \textcolor{red}{Hazard: Unintended data modification or access, leading to data breaches and application instability.}
+
     \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] \sout{\textbf{Data will be automatically backed up daily.}}
     \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] \sout{\textbf{Unsaved data will be stored locally on the user's device if it cannot be uploaded to the remote database and is not explicitly discarded.}}
     \textcolor{red}{The data will only be saved in local storage upon users' requests.}
-    \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] All locked resources will be unlocked once the user sends the request to admins and admins approves the request.
+    \item[] \textcolor{red}{Rationale: Saving data to local storage only when requested by users ensures data privacy and control over personal information.}
+    \item[] \textcolor{red}{Hazard: Unauthorized data storage, leading to potential privacy breaches and misuse of personal data.}
+    
     \textcolor{red}{
     \item[IR\refstepcounter{irreqnum}\theirreqnum
     \label{R_Inputs}:] The data input is accurate, complete, and consistent.
+    \item[] \textcolor{red}{Rationale: Ensuring accurate, complete, and consistent data input allows for a smoother user experience and prevents application errors.}
+    \item[] \textcolor{red}{Hazard: Inaccurate or inconsistent data input, leading to incorrect results, application errors, and user dissatisfaction.}
+
+
     \item[IR\refstepcounter{irreqnum}\theirreqnum
     \label{R_Inputs}:] The application will execute fully functionally}
+    \item[] \textcolor{red}{Rationale: A fully functional application ensures user satisfaction, maintains data integrity, and prevents application errors.}
+    \item[] \textcolor{red}{Hazard: Application malfunction or failure, leading to potential data corruption, loss, and user dissatisfaction.}
     
 \end{itemize}
 
 \subsubsection{Privacy Requirements}
 \begin{itemize}
     \item[PRR\refstepcounter{prrreqnum}\theprrreqnum \label{R_Inputs}:] \textbf{Users will not be able to access data generated by other users.}
-    \item[PRR\refstepcounter{prrreqnum}\theprrreqnum \label{R_Inputs}:] \textbf{Users will be required to register and login to the application with their emails.}
-    \item[PRR\refstepcounter{prrreqnum}\theprrreqnum \label{R_Inputs}:] Admins will not able to access data generated by other users.
+    \item[] \textcolor{red}{Rationale: Restricting users from accessing data generated by others maintains privacy and prevents unauthorized access to personal data.}
+    \item[] \textcolor{red}{Hazard: Unauthorized access to other users' data, leading to privacy breaches and potential misuse of personal data.}
+    
+    \item[PRR\refstepcounter{prrreqnum}\theprrreqnum \label{R_Inputs}:] \sout{\textbf{Users will be required to register and login to the application with their emails.}}
+    \item[] \textcolor{red}{Rationale: Requiring users to register and log in with their email addresses establishes unique user identities and helps maintain data privacy.}
+    \item[] \textcolor{red}{Hazard: Unauthorized access to user accounts and personal data, leading to privacy breaches and potential misuse of personal}
+    
+    \item[PRR\refstepcounter{prrreqnum}\theprrreqnum \label{R_Inputs}:] \sout{Admins will not able to access data generated by other users.}
+    \item[] \textcolor{red}{Rationale: Restricting admin access to user-generated data maintains user privacy and ensures a trustful environment.}
+    \item[] \textcolor{red}{Hazard: Unauthorized access by admins to users' data, leading to privacy breaches and potential misuse of personal data.}
+    
+    \item[PRR\refstepcounter{prrreqnum}\theprrreqnum \label{R_Inputs}:] \textbf{The application does not save any images, videos uploaded by the user after an operation}
+    \item[] \textcolor{red}{Rationale: Protects user privacy}
+  
 \end{itemize}
 
 \subsubsection{Audit Requirements}
 \begin{itemize}
     \item[AUR\refstepcounter{aurreqnum}\theaurreqnum \label{R_Inputs}:] \textbf{Requirements should be easy to read and verify against the system facilitate regular inspections.}
+    \item[] \textcolor{red}{Rationale: Clear and easily verifiable requirements ensure that the application's compliance with these requirements can be regularly inspected, resulting in a more secure and stable product.}
+    \item[] \textcolor{red}{Hazard: Ambiguous or hard-to-verify requirements, leading to inadequate inspection, potential non-compliance, and application vulnerabilities.}
 \end{itemize}
 
 \subsubsection{Immunity Requirements}
@@ -236,6 +290,6 @@ N/A
 
 \section{Roadmap}
 
-The hazard analysis resulted in new safety and security requirements given in section above. A number of the requirements will be implemented within the capstone timeline such as ACR1, ACR3, IR1, IR2, IR4, PRR1, PRR2, PRR3, AUR1. However, some of them will not, due to project time constraints, such as ACR2, ACR4, IR3, IR5. These will be implemented in the future. Towards the end of the project, the hazard analysis will be consulted to gain an understanding of which risks have been successfully mitigated and which one sill require work.
+The hazard analysis resulted in new safety and security requirements given in section above. A number of the requirements will be implemented within the capstone timeline such as ACR1, ACR3, IR1, IR2, IR5, PRR1, PRR2, PRR3, AUR1. However, some of them will not, due to project time constraints, such as ACR2, ACR4, IR3, IR5. These will be implemented in the future. Towards the end of the project, the hazard analysis will be consulted to gain an understanding of which risks have been successfully mitigated and which one sill require work.
 
 \end{document}

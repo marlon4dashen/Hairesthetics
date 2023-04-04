@@ -207,7 +207,7 @@
 
 \begin{document}
 
-\title{Software Requirements Specification for Hairesthetics: A 3D Hairstyle Simulation iOS App} 
+\title{Software Requirements Specification for HairEsthetics: A real-time 3D Hair simulation Application} 
 
 \author{Team 18 \\ Charlotte Cheng
         \\ Marlon Liu
@@ -236,7 +236,8 @@
 \midrule
 Oct 1 & 1.0 & Initial Drafts\\
 Oct 4 & 1.1 & Update template based on rubric\\
-Dec 6 & 2.0 & Updates on functional requirement
+Dec 6 & 2.0 & Updates on functional requirement \\
+Apr 2 & 2.1 & \textcolor{red}{Revision 1} \\ 
 \bottomrule
 \end{tabularx}
 
@@ -299,35 +300,40 @@ It is assumed that all system users have experience operating with iOS applicati
 \item \textbf{RGB} - Red, Green, Blue
 \item \textbf{AR} - Augmented Reality
 \item \textbf{IOS} - A mobile operating system developed by Apple Inc
+\item \textbf{AWS} - Amazon Web Services
 \item \textbf{SRS} - Software Requirement Specification
 \item \textbf{VnV} - Validation and Verification
 \end{enumerate}
 
 \subsection{Mandated Constraints}
 \subsubsection{Solution Constraints}
-\textbf{Description}: The product shall operate using \sout{iOS 14 and above.}\textcolor{red}{website browsers} \\
+\textbf{Description}: The product shall operate on \sout{iOS 14 and above} \textcolor{red}{latest version of Chrome and Safari browsers} \\
 \textbf{Rationale}: The users use \sout{iOS 14} \textcolor{red}{website browsers} and do not want to update system. \\
 \textbf{Fit Criterion}: The product shall be approved as \sout{iOS 14} \textcolor{red}{different borwsers} compliant by developers. \\
 \newline
-\textbf{Description}: The product shall use any camera input connected to the device to obtain the input image and videos from users. \\
-\textbf{Rationale}: The users will not pay for a new graphic input device. \\
-\textbf{Fit Criterion}: All graphical inputs should come from the default camera with the device. \\
+\textbf{Description}: The product shall use \sout{any camera input} \textcolor{red}{the webcam} connected to the device to obtain the input image and videos from users. \\
+\textbf{Rationale}: The users should not pay for a new graphic input device. \\
+\textbf{Fit Criterion}: All graphical inputs should come from the default webcam with the device. \\
 \subsubsection{Implementation Environment of the Current System}
 \begin{itemize}
     \item Source code is entirely written in Python and \sout{swift} \textcolor{red}{JavaScript}.
     \item \sout{Backend framework Flask is used to create user login system.}
     \item \sout{MongoDB is used for storing and manipulating the password database.}
-    \item \scout{\sout{iOS AR kit} \textcolor{red}{Three.js} }\textcolor{red}{ and React.js }is used for developing AR components.
+    \item \scout{\sout{iOS AR kit} \textcolor{red}{Three.js} }is used for developing AR components.
+    \item \textcolor{red}{React.js framework is used for integrating HTML, CSS, and JavaScript components}
+    \item \textcolor{red}{Flask is used for establishing server APIs and socket.io is used for video streaming between frontend and backend}
+    \item \textcolor{red}{Using Firebase for deploying the frontend application and AWS EC2 for deploying the backend application}
     \item OpenCV is mainly used for capturing and analysing user's facial feature
 \end{itemize}
 \subsubsection{Off-The-Shelf Software}
 \begin{itemize}
     \item Facial Contour Detection API from google ML Kit (mediapipe).
+    \item Google Maps and Places API for salon nearby searches
 \end{itemize}
 \subsubsection{Partner or Collaborative Applications}
-N/A. \\All the external libraries / API used are open-sourced and free of charge.
+All the external libraries / API used are open-sourced and free of charge.
 \subsubsection{Anticipated Workplace Environment}
-The workplace could be anywhere with a visible screen and camera. When The workplace is outside, the device must be weather resistant, have displays that are visible in sunlight, and allow for the effect of surrounding environment on output.
+The workplace could be anywhere with a visible screen, camera \textcolor{red}{, and internet}. When The workplace is outside, the device must be weather resistant, have displays that are visible in sunlight, and allow for the effect of surrounding environment on output.
 \subsubsection{Schedule Constraints}
 Project must be completed before the end of the academic year. This will limit the amount, complexity and quality of the additional features upon initial release date.
 \subsubsection{Budget Constraints}
@@ -362,16 +368,15 @@ The goal of our application can be found below:
      \item Our software should be able to identify the facial features based on the input faces
      \item Our software should be able to provide the 3D simulation of hairstyles on user's head lively, the virtual hair should be able to move around with the user's head.
      \item Our software should allow the users to change the hair color of their own hair as well as the virtual hair they are trying on.
-     \item Our software should be able to recommend hairstyles based on the users facial features.
+     \item \sout{Our software should be able to recommend hairstyles based on the users facial features.}
  \end{itemize}
  
  \noindent
  Based on the above goals of our application, the scope of our requirements can be summarized to the following:
  \begin{itemize}
-     \item Identify user facial features
-     \item Simulate 3D virtual hairstyles
-     \item Change hair color
-     \item Recommend local hair salon
+     \item Real-time 3D hairstyle simulation
+     \item Real-time hair color change
+     \item Nearby hair salon recommendation
  \end{itemize}
 
 \subsubsection{Out of Scope}
@@ -380,7 +385,7 @@ The stretch goals are currently out of the scope of our requirements document, w
 
 \begin{itemize}
     \item Support virtual modification of the simulating hairstyles: This allows the users to touch and change the simulated hairstyles and the system should modify the virtual hair accordingly.
-    \item Hair style detection: This enables the software to detect the current hairstyle the users have with machine learning algorithms.
+    \item Facial tracking: This enables the software to detect the user's face and tracks its location from the camera input.
     \item Providing nearby hair salons: This goal suggest nearby hair salons to the users ranked by their ratings and reviews.
 \end{itemize}
 
@@ -405,21 +410,30 @@ The stretch goals are currently out of the scope of our requirements document, w
 \end{table}
 \end{flushleft}
 
+\subsection{Use Case Diagram}
+\begin{figure}[H]
+\begin{center}
+ \includegraphics[width=0.5\textwidth]{use_case_diagram}
+\caption{Use Case Diagram}
+\end{center}
+\end{figure}
+
 \subsection{Individual Product Use Cases}
 \begin{UC}
     \item Change hairstyle: The user wants to change a hairstyle
     \item Change hair color: The user wants to change a hair color
-    \item \sout{UC3: Upload images: The user wants to upload images (after transformation) to their account}
+    \item \sout{Upload images: The user wants to upload images (after transformation) to their account}
     \item \sout{Save images: The user wants to save their images (after transformation)}
     \item \sout{Log into account: The user wants to log into their account}
-    \item \sout{Pick a} \textcolor{red}{ Obatain information of recommended} hair salon: The user wants to pick a local hair salon \textcolor{red}{ with a high ranking.}
+    \item \textcolor{red}{Find nearby salon: The user wants to find some salon recommendations around the input or current location}
+    \item Find information of recommended hair salon: The user wants to find information of a recommended salon.
 \end{UC}
 
 \subsection{The Context of the System}
 % \graphicspath{ {./system_context_diagram.jpg/} }
 \begin{figure}[h!]
 \begin{center}
- \includegraphics[width=1\textwidth]{system_context_diagram_2}
+ \includegraphics[width=1\textwidth]{system_context_diagram_3}
 \caption{Context of System Diagram}
 \end{center}
 \end{figure}
@@ -442,21 +456,26 @@ The stretch goals are currently out of the scope of our requirements document, w
         \item[FR\refstepcounter{frreqnum}\thefrreqnum \label{R_Inputs}:] The system must store the coordinates from the \sout{hair and} facial features.
     \end{itemize}
 
-\subsubsection{Hair Modification System}
+\subsubsection{Hair Color System}
     \begin{itemize}
         \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The user must choose a color from the provided options if hair color transformation is selected
         \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system must load the hair feature data for hair color transition
         \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system should map the hair coordinates on the \sout{image} \textcolor{red}{frame} and apply the new rgb values to the region
         \item[] Rationale: The \textcolor{red}{facial} coordinates are retrieved from facial recognition system, and \textcolor{red}{the hair edges are computed in this system, so new rgb colors can be applied to the hair regions}.
-        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system must load the facial coordinates for hair style transformation
-        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:]The user must choose a hair style from the provided options if hair style transformation is selected
-        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:]\sout{ The system should load the selected hair style dataset from the database}
         \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] the system should adjust the coordinate to be proportional with the image scale
-        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system should add the new hair style coordinates above the facial coordinates.
-        \item[] Rationale: depends on the hair style, some can be placed on top of the existing hair style, or re-construct
         \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system should output the transformed face in image or \sout{video} \textcolor{red}{streaming}.
         \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] \textcolor{red}{The system must perform hair extraction on pre-processed image.}
         \item[] \textcolor{red}{Rationale: The pre-trained hair detection model needs a grayscale image as an input to provide a more accurate result}
+    \end{itemize}
+\subsubsection{Hair Style System}
+    \begin{itemize}
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:]The user must choose a hair style from the provided options if hair style transformation is selected
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system should add the new hair style coordinates above the facial coordinates.
+        \item[] Rationale: depends on the hair style, some can be placed on top of the existing hair style, or re-construct
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system must load the facial coordinates for hair style transformation
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:]\sout{ The system should load the selected hair style dataset from the web storage}
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] the system should adjust the coordinate to be proportional with the image scale
+        \item[HM\refstepcounter{hmreqnum}\thehmreqnum \label{R_Inputs}:] The system should output the transformed face in image or \sout{video} \textcolor{red}{streaming}.
     \end{itemize}
 \subsubsection{Hair Salon Recommendation System}
     \begin{itemize}
@@ -478,11 +497,9 @@ The stretch goals are currently out of the scope of our requirements document, w
     \end{itemize}
 
 \subsection{Finite State Machine}
-% \graphicspath{ {./fsm_1.jpg/} }
-% \includegraphics[width=\textwidth]{FSM}
 \begin{figure}[H]
 \begin{center}
- \includegraphics[width=1\textwidth]{fsm_1}
+ \includegraphics[width=1\textwidth]{fsm_2}
 \caption{Finite State Machine}
 \end{center}
 \end{figure}
@@ -543,7 +560,6 @@ N/A
 \subsection{Performance Requirements}
 \subsubsection{Speed and Latency Requirements}
 \begin{itemize}
-    \item[SLR\refstepcounter{slrreqnum}\theslrreqnum \label{R_Inputs}:] The response time of hairstyle suggestion must be within 1 second.
     \item[SLR\refstepcounter{slrreqnum}\theslrreqnum \label{R_Inputs}:] The response time of users changing hairstyles must be within 1 second.
     \item[SLR\refstepcounter{slrreqnum}\theslrreqnum \label{R_Inputs}:] The response time of users clicking any other buttons must be within 0.5 seconds.
 \end{itemize}
@@ -560,7 +576,7 @@ N/A
 \subsubsection{Reliability and Availability Requirements}
 \begin{itemize}
     \item[RAR\refstepcounter{rarreqnum}\therarreqnum \label{R_Inputs}:] For all users, the application will be available to use without crashes over 99 percents of the time. (less than or equal to 1 crash per 100 access)
-    \item[RAR\refstepcounter{rarreqnum}\therarreqnum \label{R_Inputs}:] The application must allow the users to use continuously until the hardware device is broken or out of battery. 
+    \item[RAR\refstepcounter{rarreqnum}\therarreqnum \label{R_Inputs}:] The application must allow the users to use continuously until the internet connection is lost
     \item[] Fit Criteria: There should be no errors during unit tests, integration test and user tests for the application.
 \end{itemize}
 
@@ -626,13 +642,13 @@ N/A
 \subsubsection{Supportability Requirements}
 \begin{itemize}
     \item[SPR\refstepcounter{sprreqnum}\thesprreqnum \label{R_Inputs}:] 
-    The product shall be available on \sout{iPhone with iOS system 14 and after.} \textcolor{red}{browsers that support react implementation.}
+    The product shall be available on \sout{iPhone with iOS system 14 and after.} \textcolor{red}{browsers that support JavaScript rendering.}
 \end{itemize}
 
 \subsubsection{Adaptablity Requirements}
 \begin{itemize}
     \item[ADR\refstepcounter{adrreqnum}\theadrreqnum \label{R_Inputs}:] 
-    The product shall be compatible with \sout{iOS system 14 and after.} \textcolor{red}{browsers that support react implementation.}
+    The product shall be compatible with \sout{iOS system 14 and after.} \textcolor{red}{browsers that support JavaScript rendering.}
     
 \end{itemize}
 
@@ -875,9 +891,7 @@ Until now, there are a few similar open source projects online for us to go thro
         \hline
         Implement AR functionality in UI & A component in the front end that takes the analyzed output from computer vision in backend and apply AR technique to add hairs on the user's face on the screen\\
         \hline
-        Implement Database & A database to store user information\\
-        \hline
-        Implement Database interaction on UI & Add a component to fulfill read and write access to database\\
+        Deploy frontend and backend application & Deploy the application using cloud technologies. User and developer can play with HairEsthestics anywhere\\
         \bottomrule
     \end{tabularx}
 \end{table}
@@ -1007,7 +1021,6 @@ UPR1        & & & & & & & & \\ \hline
 ASR1        & & & & & & & & \\ \hline
 SLR1        & & & & & & & & \\ \hline
 SLR2        & & & & & & & & \\ \hline
-SLR3        & & & & & & & & \\ \hline
 PAR1        & & & & & & & & \\ \hline
 PAR2        & & & & & & & & \\ \hline
 RAR1        & & & & & & & & \\ \hline
