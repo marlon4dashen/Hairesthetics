@@ -483,7 +483,7 @@ The stretch goals are currently out of the scope of our requirements document, w
         \item[HR\refstepcounter{hrreqnum}\thehrreqnum \label{R_Inputs}:] The system must retrieve \sout{5} nearby hair salon locations based on the input address
         \item[HR\refstepcounter{hrreqnum}\thehrreqnum \label{R_Inputs}:] The system should label the retrieved locations on a map
         \item[] Rationale: marking the locations on the map allows the user to see the distance to their current location visually
-        \item[HR\refstepcounter{hrreqnum}\thehrreqnum \label{R_Inputs}:] The system should rank the locations \sout{based on user review} \textcolor{red}{using Bayesian average with average user rating and total number of user ratings}
+        \item[HR\refstepcounter{hrreqnum}\thehrreqnum \label{R_Inputs}:] The system should rank the locations \sout{based on user review} \textcolor{red}{using a reliable algorithm using average user rating and total number of user ratings}
         \item[] Rationale: the user reviews is a good indicator for deciding which one to go to
     \end{itemize}
     
@@ -527,9 +527,9 @@ The stretch goals are currently out of the scope of our requirements document, w
 
 \subsubsection{Ease of Use Requirements}
 \begin{itemize}
-    \item[EUR\refstepcounter{eurreqnum}\theeurreqnum \label{R_Inputs}:] Interactable components on the interface should be emphasized to signify the user that the components can be interacted with.
-    \item[] Fit Criteria: Volunteers will be invited to use the application and see if they can intuitively find out all the interactable components.
-    \item[EUR\refstepcounter{eurreqnum}\theeurreqnum \label{R_Inputs}:] Interactable components on the interface should be big enough to prevent the user from misclicking.
+    \item[EUR\refstepcounter{eurreqnum}\theeurreqnum \label{R_Inputs}:] Interactive components on the interface should be emphasized to signify the user that the components can be interacted with.
+    \item[] Fit Criteria: Volunteers will be invited to use the application and see if they can intuitively find out all the interactive components.
+    \item[EUR\refstepcounter{eurreqnum}\theeurreqnum \label{R_Inputs}:] Interactive components on the interface should be big enough to prevent the user from misclicking.
     \item[] Fit Criteria: Volunteers will be invited to use the application and see if they will misclick throughout using the application.
 \end{itemize}
 
@@ -592,7 +592,7 @@ N/A
 \begin{itemize}
     \item[CCR\refstepcounter{ccrreqnum}\theccrreqnum \label{R_Inputs}:]\sout{The application must have a database to store every user's account information.
     \item[] Fit Criteria: Database developer will do tests on the database such that the count of users' account information in the database equals the actual registered number of user accounts.}
-    \item[CCR\refstepcounter{ccrreqnum}\theccrreqnum \label{R_Inputs}:] \sout{The product must have a database to store at least 10 different hairstyles.}
+    \item[CCR\refstepcounter{ccrreqnum}\theccrreqnum \label{R_Inputs}:] The product must have a \sout{database to store} at least 10 different hairstyles \textcolor{red}{ for users to choose from on hair style page}.
 \end{itemize}
 
 \subsubsection{Scalability and Extensibility Requirements}
@@ -622,8 +622,8 @@ N/A
 
 \subsubsection{Release Requirements}
 \begin{itemize}
-    \item[RER\refstepcounter{rerreqnum}\thererreqnum \label{R_Inputs}:] Data from previous builds of the product should be compatible with new builds of the product.
-    \item[] Fit Criteria: Developers will regularly run tests to ensure that data can be used between different builds.
+    \item[RER\refstepcounter{rerreqnum}\thererreqnum \label{R_Inputs}:] \sout{Data from previous builds of the product should be compatible with new builds of the product.}
+    \item[] \sout{Fit Criteria: Developers will regularly run tests to ensure that data can be used between different builds.}
     \item[RER\refstepcounter{rerreqnum}\thererreqnum \label{R_Inputs}:] Version updates and descriptions of changes shall be included in change logs available to the user.
 \end{itemize}
 
@@ -656,17 +656,18 @@ N/A
 
 \subsubsection{Access Requirements}
 \begin{itemize}
-    \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:] Users will be able to access images they previously stored.
+    \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:] \sout{Users will be able to access images they previously stored.}
     \item[] Fit Criteria: Developers will run tests as user role to ensure that stored data is accessible.
     \item[ACR\refstepcounter{acrreqnum}\theacrreqnum\label{R_Inputs}:] 
-    Users will be able to access site data for job sites they are authorized for.
+    \sout{Users will be able to access site data for job sites they are authorized for.}
     \item[] Fit Criteria: Developers will run tests in user role to ensure that data is accessible with permission.
     \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:]
-    Admins and supervisors will be able to unlock locked resources.
+    \sout{Admins and supervisors will be able to unlock locked resources.}
     \item[] Fit Criteria: Developers will run tests in admin role to ensure that locked resources are accessible to admins and supervisors.
     \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:]
-    Only admins will be able to modify application information.
+    \sout{Only admins will be able to modify application information.}
     \item[] Fit Criteria: Developers will run tests in admin role to ensure that only admins can modify application information.
+    \item[ACR\refstepcounter{acrreqnum}\theacrreqnum \label{R_Inputs}:] User will not have access to other user's data using the application
 \end{itemize}
 
 
@@ -681,24 +682,16 @@ N/A
     \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:]\sout{ Data will be automatically backed up daily. 
      \item[] Fit Criteria: Developers will verify that the cloud database is backed up daily.}
     \item[IR\refstepcounter{irreqnum}\theirreqnum \label{R_Inputs}:] \sout{Unsaved data will be stored locally on the user's device if it cannot be uploaded to the remote database and is not explicitly discarded.}
-    \textcolor{red}{The data will only be saved in local storage upon users' requests.}
     \item[] Fit Criteria: Developers will run tests in user role to ensure that unsaved data is stored locally on the user's device if it cannot be uploaded to the remote database and is not explicitly discarded.
     \item[IR\refstepcounter{irreqnum}\theirreqnum
-    \label{R_Inputs}:] \textcolor{red}{All locked resources will be unlocked once the user sends the request to admins and admins approves the request.
+    \label{R_Inputs}:] \sout{All locked resources will be unlocked once the user sends the request to admins and admins approves the request.
     \item[] Fit Criteria: This could be measured through tracking the number of requests made by users and the number of approvals given by admins, as well as monitoring the status of the resources before and after approval to ensure they have been successfully unlocked.}
-    \textcolor{red}{
-    \item[IR\refstepcounter{irreqnum}\theirreqnum
-    \label{R_Inputs}:] The data input is accurate, complete, and consistent.
-    \item[] Fit Criteria: Calculate the percentage of errors or inconsistencies in the data input. A low error rate would indicate a high level of accuracy and consistency.
-    \item[IR\refstepcounter{irreqnum}\theirreqnum
-    \label{R_Inputs}:] The application will execute fully functionally.
-    \item[] Fit Criteria: Test the application's performance under different loads and conditions to ensure that it can handle the expected usage.}
 \end{itemize}
 
 \subsubsection{Privacy Requirements}
 \begin{itemize}
-    \item[PRR\refstepcounter{prrreqnum}\theprrreqnum \label{R_Inputs}:] Users will not be able to access data generated by other users.
-    \item[] Fit Criteria: Developers will run tests in user role to ensure that users cannot access data generated by other users.
+    \item[PRR\refstepcounter{prrreqnum}\theprrreqnum \label{R_Inputs}:] The application must ask the user for permission to use webcam and location
+    \item[] Fit Criteria: Developers will run tests as their first time to ensure that the browser will ask for permission to access webcam and location.
     
     \item[PRR\refstepcounter{prrreqnum}\theprrreqnum \label{R_Inputs}:]\sout{Users will be required to register and login to the application with their emails.
     \item[] Fit Criteria: Developers will run tests in user role to ensure that users cannot access data generated by other users.
