@@ -3,11 +3,16 @@
 \usepackage{tabularx}
 \usepackage{booktabs}
 
-\title{Reflection Report on \progname}
+\title{Reflection Report on HairEsthetics}
 
-\author{\authname}
+\author{Team 18 \\ Charlotte Cheng
+        \\ Marlon Liu
+        \\ Senni Tan
+        \\ Qiushi Xu
+        \\ Hongwei Niu
+        \\ Bill Song}
 
-\date{}
+\date{\today}
 
 \input{../Comments}
 \input{../Common}
@@ -20,9 +25,7 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
-Date2 & Name(s) & Description of changes\\
-... & ... & ...\\
+Apr 1 & team & final reflection\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -31,22 +34,38 @@ Date2 & Name(s) & Description of changes\\
 
 \maketitle
 
-Put your introductory blurb here.
+This reflection report documents the journey of our team throughout the development of our capstone project, which aimed to address a particular challenge or problem in a specific domain. Over the course of the project, we engaged in a range of tasks, such as conducting research, developing and testing prototypes, and implementing a final solution. This report is a detailed account of the lessons we learned, the challenges we faced, and the strategies we employed to overcome them. It is also an opportunity for us to reflect on the strengths and weaknesses of our project, and to identify areas for future improvement. Ultimately, this report serves as a record of our collective experience and as a way for us to share our insights and learning with others.
 
 \section{Project Overview}
 
-\plt{Summarize the original project goals and requirements}
+The goal of the capstone project was to develop an application that allows users to experiment with different hairstyles and hair colors virtually, and to facilitate their search for nearby salons. To achieve this, we aimed to build a user-friendly and interactive web application that allows users to try on different hairstyles and colors using advanced image processing algorithms and socket transmission technology. Additionally, we wanted the application to include a search functionality that enables users to find salons in their area. Our project requirements also included ensuring that the application is accessible across different platforms and devices and that it adheres to best practices in terms of security, privacy, and user experience.
+
 
 \section{Key Accomplishments}
+  
+One of the major accomplishments of our project was the successful implementation of the core functionality of the web application, which allowed users to experiment with different hairstyles and colors, and search for nearby salons. This required a high level of technical expertise in image processing algorithms, web development frameworks, information transmission, and AR technology. In our project, we used the React.js framework for the frontend implementation and the Python Flask for the backend implementation. We also used AR technology for our hairstyle models to provide a more realistic looking to improve user experience. The Google Map API was integrated for nearby salon searching. 
 
-\plt{What went well?  This can be what went well with the documentation, the
-  coding, the project management, etc.}
+As mentioned, we used a wide range of technologies. We conducted extensive research on emerging web development frameworks, image processing algorithms, and machine learning techniques to identify the most appropriate tools and technologies for the project. We spent a significant amount of time exploring new technologies and experimenting with different approaches to ensure that our application was cutting-edge and technologically advanced. As a result, we were able to learn and incorporate a range of new technologies into our development process, including frameworks like React and Flask, as well as image-processing libraries like OpenCV. We also developed expertise in machine learning techniques like face detection and landmark estimation, which enabled us to accurately map hairstyles onto users' faces. By dedicating time to researching and learning new technologies, we were able to build a technically robust and innovative application that was well-suited to our project goals and requirements.
+
+Another key accomplishment of our project was the successful collaboration and communication among team members, which enabled us to effectively manage the project timeline, divide tasks, and meet project milestones. We established regular check-ins, clear communication channels on discord, and project version control and issue tracking on GitHub that allowed us to stay on track and address any issues that arose.
+
+What's more, our project was developed with a user-centered design that prioritized the user experience and made the application easy to use and intuitive. This involved conducting user research, creating user personas, and conducting usability testing, which helped us to identify pain points and make design improvements that enhanced the user experience.
+
+After the implementation, our team had a rigorous testing on the application, which ensured the reliability and security of the application. We implemented automated testing and code reviews, as well as comprehensive documentation of the codebase and project requirements, which facilitated future maintenance and updates.
 
 \section{Key Problem Areas}
 
-\plt{What went wrong?  This can be what went wrong with the documentation, the
-  technology, the coding, time management, etc.}
+Throughout the course of our capstone project, we made frequent changes to our project scope, requirements, and design, as we gained new insights and responded to evolving user needs. However, we recognize that some of these changes may not have been fully captured in our project documentation, due to the iterative nature of our development process and the dynamic nature of the project. So in our later development stage, after the revision 0 demonstrations particularly, our document is inconsistent with our changes and the updated design, which causes confusion to the team developers and project stakeholders such as TAs. However, we have since reviewed and refined our project documentation to ensure that it accurately reflects the final product. We understand the importance of documenting changes as they occur, and we are committed to maintaining accurate and up-to-date documentation going forward. Despite any discrepancies that may have existed between our documentation and our final product during the development process, we remain confident in the quality and functionality of our final product, and we are proud of the efforts we made to continuously improve and refine our project throughout its development.
+
+During the implementation phase of our project, we initially planned to develop an iOS mobile application, as we discovered that iOS supports AR models and Python can be used in the backend for face detection. However, we encountered a challenge when we discovered that Python's backend is not compatible with iOS mobile applications. To address this issue, we conducted further research and explored alternative solutions. After careful consideration, we determined that a web application would be the best approach for our project. We then adapted our development plan to align with this new platform and successfully integrated AR models and face detection features using JavaScript and other suitable technologies. While this change in platform presented a challenge, we ultimately found a workable solution that allowed us to achieve our project goals.
+
+In our project, we encountered budget constraints when searching for suitable AR models for hairstyles. The models we found online were often expensive, which meant we needed to spend more time searching for suitable models within our budget. Additionally, we needed to invest resources into ensuring that the models we selected were compatible with our project's requirements, which further added to the time and effort needed for this task. These constraints can impact the overall timeline and quality of the project and may require careful planning and management to overcome. In our case, we were able to navigate these constraints by conducting thorough research and exploring various options until we found models that met our requirements and budget.
 
 \section{What Would you Do Differently Next Time}
+To avoid the problem of inconsistent project documentation, we can establish a process for maintaining accurate and up-to-date documentation throughout the project's development. This could involve assigning someone on the team to be responsible for regularly reviewing and updating the documentation, ensuring that any changes made to the project are reflected in the documentation. Additionally, we can establish checkpoints during the development process where we review and update the documentation to ensure that it is consistent with the project's current status.
+
+In future projects, we can conduct more thorough research and analysis during the planning phase to ensure that the selected technology stack is compatible with our project requirements. This can help us avoid situations where we encounter unexpected compatibility issues during the implementation phase. Additionally, we can explore multiple platform options and evaluate their feasibility based on the project's requirements, constraints, and goals before finalizing the development plan.
+
+To address budget constraints, we can conduct a more thorough and comprehensive analysis of the project's requirements and costs during the planning phase. This can help us identify potential areas where we may encounter budget constraints and plan accordingly. Additionally, we can explore alternative options for acquiring the necessary resources, such as open-source AR models or negotiating with vendors for discounts. Finally, we can establish a contingency plan in case we encounter unexpected budget constraints during the implementation phase, such as prioritizing essential features and deferring non-essential ones until later stages of the project.
 
 \end{document}
