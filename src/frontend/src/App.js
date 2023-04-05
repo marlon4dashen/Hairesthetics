@@ -1,4 +1,5 @@
 //This file renders the main web application
+import React from 'react'
 import './App.css';
 import HomeView from "./pages/HomeView"
 import HairStyleView from "./pages/HairStyleView"

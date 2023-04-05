@@ -4,6 +4,9 @@
 \usepackage{tabularx}
 \usepackage{hyperref}
 \usepackage{pdflscape}
+\usepackage [english]{babel}
+\usepackage [autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
 \usepackage[normalem]{ulem}
 \hypersetup{
     colorlinks,
@@ -122,7 +125,7 @@ Everyone on the team shares a role in the verification and validation process.
 
  
 \noindent
-Our SRS would be verified through getting ad hoc feedback from our classmates and TAs. Since the team that reviewed The plan and TA had knowledge on our SRS, our plan is to ask them to explore our application with improvisation and ensure that they cover every possible functionality covered in our SRS. They can use their own ways to try to explore the extent of each features provided in our application and find possible behavioral bugs. 
+Our SRS would be verified through getting ad hoc feedback from our classmates and TAs. Since the team that reviewed the VnV plan and TA had knowledge on our SRS, our plan is to ask them to explore our application with improvisation and ensure that they cover every possible functionality covered in our SRS. They can use their own ways to try to explore the extent of each features provided in our application and find possible behavioral bugs. 
 
 \subsection{Design Verification Plan}
 
@@ -140,8 +143,6 @@ Design will be verified by teammates, classmates and stakeholders. A checklist w
 
 
 \subsection{Verification and Validation Plan Verification Plan}
-
-
 
 \noindent
 The verification and validation plan will be verified by a group of our classmates and TAs where they will be asked to perform a walk-through of the document to ensure that our test plan is complete and effective. Any feedback will be accepted and changes will be made to address those reviews.
@@ -169,15 +170,21 @@ The following tools will be used for automated testing:
     \caption{The verification tools used in each module/section}
 \end{table}
 
-\newpage
+\textcolor{red}{For client-side testing, Jest framework is used for mocking UI components and its behaviour. Mocha is a unit testing framework that contains driver functions that test and compare the collaboration between the components. In addition, all the helper functions will be tested using the Mocha framework. On the server side, Pytest framework is used for unit testing for all interfaces along with the private methods within the modules. The team is trying to achieve a 95 percents test coverage for the server code. We believe this percentage is a good indication of usefule and effective server code. To achieve this, we are planning to have domain and edge test cases. Lastly, the team is utilizing Postman tool to perform the end-to-end testings.}
 
 \subsection{Software Validation Plan}
 
-No external data will be used for validation, therefore no plans are formulated for it.\\
-\\
 \noindent Review sessions will be conducted with the stakeholders to check that the requirements document fully capture the right requirements. For this purpose, a task-based walkthrough will serve as the validation. Users of the system were already identified in SRS along with a set of real-world tasks that they complete using the system. These tasks must mirror what users actually do in their environment but not how they do it. These tasks must be very specific and they must be complete. This information was gathered by observing the actual target users using the application in their environment, team 18 came up with a list of target users and realistic tasks. The combination of a user and their corresponding task descriptions is called a scenario and the goal is to tell a complete story.
-With a manageable list of scenarios in place from SRS, a task-based walkthrough of the system can be performed by teammates and stakeholders. A scenario will be selected and participants will
-place themselves in the mind of their target user and stay on track with what that user is trying to accomplish during the scenario. 
+With a manageable list of scenarios in place from SRS, a task-based walkthrough of the system can be performed by teammates and stakeholders. A scenario will be selected and participants will place themselves in the mind of their target user and stay on track with what that user is trying to accomplish during the scenario. \textcolor{red}{HairEsthetics tagets users who wish to get a hair style or color idea before going to a salon. Here are the real-world tasks that we imagine our target users will do:} 
+\begin{itemize}
+    \item \textcolor{red}{On the hair style page, try on all hair styles}
+    \item \textcolor{red}{When a hair style is selected, move or tilt their head around and examine the selected style at all angle}
+    \item \textcolor{red}{On the hair color page, try at least 5 different hair colors}
+    \item \textcolor{red}{Look at the output results using uploaded images or live streaming}
+    \item \textcolor{red}{Find nearby salon recommendations using the current location or an inputted address}
+\end{itemize}
+
+\noindent \textcolor{red}{Moreover, a \hyperref[sec:survey]{usability survey} will be conducted on 20 university students consisting of male and females with different hair style. The objective of this usability survey is to validate some of the non-functional requirements and improve our application.}
 
 
 \section{System Test Description}
@@ -321,9 +328,9 @@ Type: Functional, Dynamic, Manual
 					
 Initial State: Recommendation page
 					
-Input: The user clicked on the "use my current location" button
+Input: The user clicked on the 'use my current location' button
 					
-Output: The map zooms to the user's current location and displays up to 5 location markers (recommended hair salon) near the location (within a 10-kilometer radius)
+Output: The map zooms to the user's current location and displays at least 5 location markers (recommended hair salon) near the location (within a 10-kilometer radius)
 					
 How test will be performed: Click on the 'use my current location' button and see if the map zooms to the current location correctly and markers being displayed around the current location.
 
@@ -426,25 +433,25 @@ How test will be performed: Create a test user with sample images. Then login as
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: Have the application opened on a web browser
 					
-Input/Condition: App opened
+Input/Condition: Application opened
 					
 Output/Result: Interfaces of the application
 					
-How test will be performed: Tests will be done manually by developers running the prototype. Tests will be enhanced by actual user feedback via a survey asking them "Is the text on the application outstanding and easily recognizable for you with this font size? Rate from 1-5(bad to good)" The appearance should achieve an average mark above 4.
+How test will be performed: Tests will be done manually by developers running the prototype. Tests will be enhanced by actual user feedback via a survey asking them "The application is easily readable. Rate from 1-5(strongly disagree to strongly agree)" The appearance should achieve an average mark above 4.
 					
 \item{AP-T2\\}
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application installed onto a cell phone and running
+Initial State: Have the application opened on a web browser
 					
 Input: App opened
 					
-Output: Logo, icon, buttons, and other functional entity units that the user can interact with
+Output: Icon, buttons, and other functional entity units that the user can interact with
 					
-How test will be performed: Tests will be done manually by developers running the prototype. Tests will be enhanced by actual user feedback via a survey asking them "Is the elements on the interface well-organized enough for you to use the application easily? Rate from 1-5(bad to good)" The average mark should be greater than 4.
+How test will be performed: Tests will be done manually by developers running the prototype. Tests will be enhanced by actual user feedback via a survey asking them "The UI elements (buttons, icons, texts) are well-organized and easy to follow. Rate from 1-5(strongly disagree to strongly agree)" The average mark should be greater than 4.
 
 \end{enumerate}
 
@@ -462,19 +469,19 @@ Input/Condition: \sout{App} \textcolor{red}{website} opened
 					
 Output/Result: Any visual elements in the interface
 					
-How test will be performed: The test will be done manually by developers running the prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale, would you say the style of the interface matches the modern aesthetic? (1-5) (poorly - very)" The average mark should be greater than 4
+How test will be performed: The test will be done manually by developers running the prototype. Tests will be enhanced by actual user feedback via a survey asking them "The application appearance matches modern aesthetics. Rate from 1-5(strongly disagree to strongly agree)" The average mark should be greater than 4
 					
 \item{IA-T2\\}
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
+Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a browser}
 					
 Input: \sout{App} \textcolor{red}{website} opened
 					
 Output: The entire interface presented to the user
 					
-How test will be performed: The test will be done manually by developers running the prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale, do you think the interface is simple and clear? (1 - 5) from very disagree to very agree" The average mark should be greater than 4
+How test will be performed: The test will be done manually by developers running the prototype. Tests will be enhanced by actual user feedback via a survey asking them "The interface is clear and simple. Rate from 1-5(strongly disagree to strongly agree)" The average mark should be greater than 4
 
 \end{enumerate}
 
@@ -492,9 +499,9 @@ Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{App
 					
 Input/Condition: User inputs
 					
-Output/Result: The entire interface and any interactable elements on the interface
+Output/Result: The entire interface and any clickable elements on the interface
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale, do you think the interactable components in the interface is easy to be recognized? (1 - 5) from very disagree to very agree" The average mark should be greater than 4
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "The clickable components in the interface is easy to use and readable. Rate from 1-5(strongly disagree to strongly agree)" The average mark should be greater than 4
 					
 \item{EU-T2\\}
 
@@ -504,9 +511,9 @@ Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{App
 					
 Input: User inputs
 					
-Output: The entire interface and any interactable elements on the interface
+Output: The entire interface and any clickable elements on the interface
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "During the use of this application, how many times did you misclicking an interactable element?" All the responsed times that the user misclick an interactable element should be less than 5
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "During the use of this application, how many times did you misclick an interactive element?" All the responses times the number of an interactive element should be less than 5
 
 \end{enumerate}
 
@@ -518,25 +525,25 @@ How test will be performed: Test will be done manually by developers running pro
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: \sout{Application is not yet installed} \textcolor{red}{Application is not running on the website}
+Initial State: Application is not yet installed
 					
-Input/Condition: User operations
+Input/Condition: \textcolor{red}{New environment with nothing in it}
 					
-Output/Result: \sout{installed} \textcolor{red}{run} application
+Output/Result: \sout{installed} \textcolor{red}{application running on a web browser}
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "Did you finish the installation within 3 steps: open App Store, search for "Hairesthetics", click on install?" All the response should be "yes"
+How test will be performed: \textcolor{red}{The tester will create a fresh environment with nothing it. Then the tester will follow the installation guide (readme) in the GitHub repository. The guide will contain less than 3 steps (commands to run) and the tester will be able to see the application running successfully on a web browser}
 					
 \item{LR-T2\\}
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
+Initial State: Application is not yet installed
 					
-Input: User inputs
+Input/Condition: \textcolor{red}{New environment with nothing in it}
 					
-Output: Instructions on the interface when user first open the application
+Output/Result: \sout{installed} \textcolor{red}{application running on a web browser}
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale do you find the instruction easy to follow? (1 - 5) from very disagree to very agree" The average mark should be greater than 4
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "The instruction is easy to follow. Rate from 1-5(strongly disagree to strongly agree)" The average mark should be greater than 4
 
 \end{enumerate}
 
@@ -554,7 +561,7 @@ Input/Condition: User inputs
 					
 Output/Result: Icons on the interface
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale do you find the icon is appropriate and with no offense? (1 - 5) from very disagree to very agree" The average mark should be greater than 4
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "The icons are appropriate and unoffensive. Rate from 1-5(strongly disagree to strongly agree)" The average mark should be greater than 4
 
 \end{enumerate}
 
@@ -572,7 +579,7 @@ Input/Condition: User inputs
 					
 Output/Result: Text on the interface
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "In what scale do you find the text has appropriate font size and color? (1 - 5) from very disagree to very agree" The average mark should be greater than 4
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "The font size are appropriate and clear. Rate from 1-5(strongly disagree to strongly agree)" The average mark should be greater than 4
 
 \end{enumerate}
 
@@ -616,7 +623,7 @@ Input/Condition: User inputs
 					
 Output/Result: Responses to the user inputs
 					
-How test will be performed: Test will be done manually by developers running prototype. The developer will randomly clicking any interactable buttons 100 time and measure the time from clicking the button to the response output. Number of times when the response time is greater than 0.5 second will be recorded. The recorded number of times should be less than or equal to 10
+How test will be performed: Test will be done manually by developers running prototype. The developer will randomly clicking any interactive buttons 100 time and measure the time from clicking the button to the response output. Number of times when the response time is greater than 0.5 second will be recorded. The recorded number of times should be less than or equal to 10
 
 \end{enumerate}
 
@@ -624,7 +631,7 @@ How test will be performed: Test will be done manually by developers running pro
 
 \begin{enumerate}
 
-\item{PA-T1\\}
+\item{PAR-T1\\}
 
 Type: Structural, Dynamic, Manual
 					
@@ -634,9 +641,9 @@ Input/Condition: User inputs
 					
 Output/Result: Hairstyle on the user's head on the screen
 					
-How test will be performed: Test will be done manually by developers running prototype. The developer will test the hairstyle functionality 100 time and take screenshots, then measure the length from the hair image to the head's position. All measurements are recorded and the average error in length should be within 1 millimeter. 
+How test will be performed: Test will be done manually by developers running prototype. The developer will test the hairstyle functionality 100 time and take screenshots, then measure the length from the hair image to the head's position. All measurements are recorded and the average error in length should be within 1 centimeter. 
 					
-\item{PA-T1\\}
+\item{PAR-T2\\}
 
 Type: Structural, Dynamic, Manual
 					
@@ -646,7 +653,7 @@ Input/Condition: User inputs
 					
 Output/Result: Moving hair image on the user's head on the screen
 					
-How test will be performed: Test will be done manually by developers running prototype. The developer will test the hairstyle functionality 100 time with moving developer's head and record the screen. Each scene in the recording video will be made into screenshots, then developers measure the length from the hair image to the head's position. All measurements are recorded and the average error in length should be within 2 millimeter.
+How test will be performed: Test will be done manually by developers running prototype. The developer will test the hairstyle functionality 100 time with moving developer's head and record the screen. Each scene in the recording video will be made into screenshots, then developers measure the length from the hair image to the head's position. All measurements are recorded and the average error in length should be within 1 centimeter.
 
 \end{enumerate}
 
@@ -654,7 +661,7 @@ How test will be performed: Test will be done manually by developers running pro
 
 \begin{enumerate}
 
-\item{RA-T1\\}
+\item{RAR-T1\\}
 
 Type: Structural, Dynamic, Manual
 					
@@ -666,7 +673,7 @@ Output/Result: Response from user inputs
 					
 How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "How many times have you faced a crash when using the application?" The total number will be add up and divided by the number of users to get the crash percentage. And the crash percentage should be less than 2\%
 					
-\item{RA-T2\\}
+\item{RAR-T2\\}
 
 Type: Structural, Dynamic, Manual
 					
@@ -676,7 +683,7 @@ Input/Condition: User inputs
 					
 Output/Result: Response from user inputs
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "How many times have you get an error message or any unexpected wrong behavior of the application when using the application?" The total number will be add up and divided by the number of users to get the expected error message percentage, and the percentage should be greater than 98\%
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "How many times have you get an error message or any unexpected behavior of the application when using it?" The total number will be add up and divided by the number of users to get the expected error message percentage, and the percentage should be greater than 98\%
 
 \end{enumerate}
 
@@ -684,7 +691,7 @@ How test will be performed: Test will be done manually by developers running pro
 
 \begin{enumerate}
 
-\item{RB-T1\\}
+\item{RBR-T1\\}
 
 Type: Structural, Dynamic, Manual
 					
@@ -696,7 +703,7 @@ Output/Result: Response from user inputs
 					
 How test will be performed: Test will be done manually by developers running prototype. The developer will try to inject irrational inputs to break the application and record the number of times that the application has an systematic error message(not error message from error exception handling) or any unexpected wrong behavior. The number of times that the application crashes is divided by the total number of injected irrational inputs to get a percentage and this percentage should be less than 3\%
 					
-\item{RB-T2\\}
+\item{RBR-T2\\}
 
 Type: Structural, Dynamic, Manual
 					
@@ -714,17 +721,17 @@ How test will be performed: Test will be done manually by developers running pro
 
 \begin{enumerate}
 
-\item{CC-T1\\}
+\item{\sout{CC-T1}\\}
 
 Type: Structural, Dynamic, Manual
 					
 Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
 					
-Input/Condition: User inputs
+Input/Condition: \sout{User inputs}
 					
-Output/Result: Response from user inputs
+Output/Result: \sout{Response from user inputs}
 					
-How test will be performed: Test will be done manually by developers running prototype. At 10 different time points, the database developer will check if the number of user's information in database matches the actual number of users. Any mismatch will be recorded.
+How test will be performed: \sout{Test will be done manually by developers running prototype. At 10 different time points, the database developer will check if the number of user's information in database matches the actual number of users. Any mismatch will be recorded.}
 					
 \item{CC-T2\\}
 
@@ -734,9 +741,9 @@ Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{App
 					
 Input/Condition: User inputs
 					
-Output/Result: Response from user inputs
+Output/Result: 10 hair styles should be available to choose on the hair style page
 					
-How test will be performed: Test will be done manually by developers running prototype. Developer will check at any 100 different time points, the database stores at least 10 different hairstyles. Any mismatch will be recorded.
+How test will be performed: \sout{Test will be done manually by developers running prototype. Developer will check at any 100 different time points, the database stores at least 10 different hairstyles. Any mismatch will be recorded.}\textcolor{red}{Developer will check at any 50 different timestamps, the hair style page should have at least 10 different hairstyles}
 
 \end{enumerate}
 
@@ -754,8 +761,7 @@ Input/Condition: User inputs
 					
 Output/Result: Response from user inputs
 					
-How test will be performed: Any possible future developing features will be kept in the section of
-Watch Room in the SRS document.
+How test will be performed: Any possible future developing features will be kept in the section of Watch Room in the SRS document.
 
 \end{enumerate}
 
@@ -787,31 +793,19 @@ How test will be performed: The developer will perform the tests written in this
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: Application is not yet installed
+Initial State: A web browser is opened
 					
-Input/Condition: User operations
+Input/Condition: Enter HairEsthetics url in a new tab
 					
-Output/Result: Search result of "Hairesthetics" application is shown in App Store
+Output/Result: \textcolor{red}{HairEsthetics is rendered on the browser}
 					
-How test will be performed: Test will be done manually by user searching "Hairesthetics" in App Store. ests will be enhanced by actual user feedback via a survey asking them "Can you find Hairesthetics application on App Store?"
+How test will be performed: \textcolor{red}{Open a blank tab on a web browser, then type in the url and check if the application is rendered}
 
 \end{enumerate}
 
 \paragraph{Release Requirements}
 
 \begin{enumerate}
-
-\item{RE-T1\\}
-
-Type: Structural, Dynamic, Manual
-					
-Initial State: Application installed onto a cell phone and running
-					
-Input/Condition: User inputs
-					
-Output/Result: Response from user inputs
-					
-How test will be performed: Developers will run tests in this document to ensure that data can be used between different builds.
 					
 \item{RE-T2\\}
 
@@ -868,7 +862,7 @@ Input/Condition: User inputs
 					
 Output/Result: Response from user inputs
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "Is your iPhone with iOS 14 and later? If yes, is the application running on your phone?"
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "Please indicate which browser and its version you are running the application on"
 
 \end{enumerate}
 
@@ -878,17 +872,53 @@ How test will be performed: Test will be done manually by developers running pro
 
 \begin{enumerate}
 
-\item{AC-T1\\}
+\item{ACR-T5\\}
 
 Type: Structural, Dynamic, Manual
 					
-Initial State: \sout{Application installed onto a cell phone}\textcolor{red}{Application running on a computer website}
+Initial State: A browser with 2 tabs. Each tab has HairEsthetics running.
 					
-Input/Condition: User inputs
+Input/Condition: On the hair color page, upload two different images on two tabs
 					
-Output/Result: Response from user inputs
+Output/Result: Each tab will have different results
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "Are you able to access images previously stored on the application?"
+How test will be performed: \textcolor{red}{The tester will upload two different image on the 2 opened tabs. Ideally, the server assign independent workers to handle the two requests. The user will not see the uploaded image or the transformed image from another user.}
+
+\end{enumerate}
+
+\paragraph{Integrity Requirements}
+
+\begin{enumerate}
+
+\item{IR-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Have HairEsthetics running on a browser
+					
+Input/Condition: On the hair color page, upload an image
+					
+Output/Result: Check if the uploaded image is modified in local storage by checking the modified date and time
+					
+How test will be performed: \textcolor{red}{Upload an image from the folder and compare the modified time or date before and after the operation}
+
+\end{enumerate}
+
+\paragraph{Privacy Requirements}
+
+\begin{enumerate}
+
+\item{PRR-T1\\}
+
+Type: Structural, Dynamic, Manual
+					
+Initial State: Have HairEsthetics running on a browser
+					
+Input/Condition: On the hair color page, click "live action"
+					
+Output/Result: Check if a dialogue opened on the browser asking permission to access webcam
+					
+How test will be performed: \textcolor{red}{On the hair color page, click the live action button and check if a dialogue opened on the browser asking permission to access webcam}
 
 \end{enumerate}
 
@@ -908,7 +938,7 @@ Input/Condition: User inputs
 					
 Output/Result: Response from user inputs
 					
-How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "Do you think that any terms in the application is inappropriate or offensive toward your or others culture?"
+How test will be performed: Test will be done manually by developers running prototype. Tests will be enhanced by actual user feedback via a survey asking them "Do you think that any terms in the application is offensive toward your or others culture?"
 
 \end{enumerate}
 
@@ -1099,6 +1129,28 @@ Their values are defined in this section for easy maintenance.
 \subsection{Usability Research Plan}
 For our project, the interface and user experience would be very important. In order to conduct the best user friendly application, we decides to make a user research by two methods. First of all, we are planning to prepare a usability survey and make small interviews with users interested in such apps. Buy gathering suggestions from public we can make small changes to make our product easier to use. Besides, we are also planing to ask guests to test use our application and gain useful feed backs once it is implemented. By making small changes accordingly before submitting may improve the usability experience significantly.
 \subsection{Usability Survey Questions}
+\label{sec:survey}
+On a scale of 1 to 5 (5 being the strongly agree, 1 being strongly disagree)
+\begin{itemize}
+    \item The application interface is easily readable
+    \item The UI elements (buttons, icons, texts) are well-organized and easy to follow
+    \item The application appearance matches modern aesthetics
+    \item The interface is clear and simple
+    \item The clickable components in the interface is easy to use and readable
+    \item The instruction is easy to follow
+    \item The icons are appropriate and unoffensive
+    \item The font size are appropriate and clear
+\end{itemize}
+Fill in the blank
+\begin{itemize}
+    \item During the use of this application, how many times did you misclick an interactive element?
+    \item How many times have you faced a crash when using the application
+    \item How many times have you get an error message or any unexpected behavior of the application when using it?
+    \item Have you seen the pop-up window for the update log?
+    \item Please indicate which browser and its version you are running the application on
+    \item Do you think that any terms in the application is offensive toward your or others culture?
+    \item Have you seen the pop up windows of the legal statements when you start the application for the first time?
+\end{itemize}
 \begin{itemize}
     \item Would you prefer to have a tutorial of our application by text or video?
     \item Would you prefer to have all the features hidden or present when virtually presenting the hairstyle?
@@ -1129,7 +1181,7 @@ There are a few knowledge I need to learn before the actual testing begin. First
 
 
 \subsubsection{Charlotte}
-For this VnV plan, I learnt that in software testing, verification and validation (V&V) is the process of checking that a software system meets specifications and requirements so that it fulfills its intended purpose. It may also be referred to as software quality control. It is normally the responsibility of software testers as part of the software development lifecycle. In simple terms, software verification is: "Assuming we should build X, does our software achieve its goals without any bugs or gaps?" On the other hand, software validation is: "Was X what we should have built? Does X meet the high-level requirements?".\\
+For this VnV plan, I learnt that in software testing, verification and validation (V&V) is the process of checking that a software system meets specifications and requirements so that it fulfills its intended purpose. It may also be referred to as software quality control. It is normally the responsibility of software testers as part of the software development lifecycle. In simple terms, software verification is: "Assuming we should build X, does our software achieve its goals without any bugs or gaps?" On the other hand, software validation is: 'Was X what we should have built? Does X meet the high-level requirements?".\\
 
 Verification and validation are not the same things, although they are often confused. Verification is asking the question: Are we building the product right?
 Validation is asking the question: Are we building the right product? "Building the product right" checks that the specifications are correctly implemented by the system while "building the right product" refers back to the user's needs. In some contexts, it is required to have written requirements for both as well as formal procedures or protocols for determining compliance. 

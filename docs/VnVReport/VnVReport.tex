@@ -1,4 +1,4 @@
-\documentclass[12pt, titlepage]{article}
+\documentclass[12pt, oneside, openany, titlepage]{article}
 
 \usepackage{booktabs}
 \usepackage{tabularx}
@@ -21,7 +21,7 @@
 
 \begin{document}
 
-\title{Verification and Validation Report: Hairesthetics} 
+\title{Verification and Validation Report: HairEsthetics} 
 \author{Team 18 \\ Charlotte Cheng
         \\ Marlon Liu
         \\ Senni Tan
@@ -39,8 +39,9 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+Mar 6 & 1.0 & Upload Template\\
+Mar 8 & 1.1 & Initial Draft\\
+\textcolor{red}{Apr 3} & \textcolor{red}{2.0} & \textcolor{red}{Revision 1}\\
 \bottomrule
 \end{tabularx}
 
@@ -73,8 +74,6 @@ Date 2 & 1.1 & Notes\\
 
 \pagenumbering{arabic}
 
-This document ...
-
 \section{Functional Requirements Evaluation}
 
   \begin{tabular}{|p{2cm}| p{3cm}| p{3cm}| p{3cm}|p{2cm}| p{1cm}| }
@@ -90,22 +89,23 @@ This document ...
  \hline
  TestID & Initial State & Input & Expected Results & Actual Results & Result \\ 
  \hline
- FRS-T1 & Home Page & A photo of a person's face uploaded by the tester with the upload button clicked & The facial features coordinates in a tuple (x,y), where x and y values are appropriate for the location of the facial features within the image & (-5, 2), indicating that the facial features were detected to be slightly left of center and slightly above the center of the image. & pass \\ 
+ HS-T1 & Home Page & A photo of a person's face uploaded by the tester with the upload button clicked & The facial features coordinates in a tuple (x,y), where x and y values are appropriate for the location of the facial features within the image & (-5, 2), indicating that the facial features were detected to be slightly left of center and slightly above the center of the image. & pass \\ 
  \hline
- FRS-T2 & Home Screen & A photo of a person's face taken by the tester through the camera in the web app & The facial features coordinates in a tuple (x,y), where x and y values are appropriate for the location of the facial features within the image & (0, 0), indicating that the facial features were detected to be centered within the image & pass \\
+
+ HS-T2 & \Home Screen & \sout{A photo of a person's face taken by the tester through the camera in the web app}\textcolor{red}{User click on deny when asked for camera permission} & \sout{The facial features coordinates in a tuple (x,y), where x and y values are appropriate for the location of the facial features within the image}\textcolor{red}{Hairstyle disabled and error message should show up} & \sout{(0, 0), indicating that the facial features were detected to be centered within the image} \textcolor{red}{Hairstyle was disabled and an error message showed up}& pass \\
  \hline
- HMS-T1 & Home Screen & Click operation on the virtual simulation button on the home screen & Switch to the virtual simulation screen & Switched to the virtual simulation screen & pass \\
+ HS-T3 & Home Screen & Click operation on the virtual simulation button on the home screen & Switch to the virtual simulation screen & Switched to the virtual simulation screen & pass \\
  \hline 
- HMS-T2 & Virtual Simulation Scree & Camera access allowed by the user & The hair and facial feature coordinates of the user’s face outputted periodically in the backend system log console & The hair and facial feature coordinates of the user’s face were outputted periodically in the backend system log console & pass \\
- \hline
 \end{tabular}
 \begin{tabular}{ |p{2cm}| p{3cm}| p{3cm}| p{3cm}|p{2cm}| p{1cm}|} 
  \hline
  TestID & Initial State & Input & Expected Results & Actual Results & Result \\ 
 \hline
-HMS-T3 & Virtual Simulation Screen & A hair color is selected in the color selection bar at the bottom of the screen & The system displays the changed hair color at the appropriate position(the original hair section of the face) & The system displayed the changed hair color at the appropriate position & pass\\
+HC-T2 & Virtual Simulation Scree & Camera access allowed by the user & The hair and facial feature coordinates of the user’s face outputted periodically in the backend system log console & The hair and facial feature coordinates of the user’s face were outputted periodically in the backend system log console & pass \\
  \hline
- HMS-T4 & Virtual Simulation Screen & A hairstyle is selected in the color selection bar at the bottom of the screen & The application fits the hairstyle onto the user’s head, at an appropriate position and scale & The application fits the hairstyle onto the user's head at an appropriate position and scale & pass\\
+HC-T3 & Virtual Simulation Screen & A hair color is selected in the color selection bar at the bottom of the screen & The system displays the changed hair color at the appropriate position(the original hair section of the face) & The system displayed the changed hair color at the appropriate position & pass\\
+ \hline
+ HS-T4 & Virtual Simulation Screen & A hairstyle is selected in the color selection bar at the bottom of the screen & The application fits the hairstyle onto the user’s head, at an appropriate position and scale & The application fits the hairstyle onto the user's head at an appropriate position and scale & pass\\
  \hline
 \end{tabular}
 
@@ -125,126 +125,134 @@ HSR-T2 & Recommendation page & User enters an valid address & The map should zoo
  \hline
  TestID & Initial State & Input & Expected Results & Actual Results & Result \\ 
 \hline
-HSR-T4 & Recommendation page & User click on "use my current location" button & The map should zoom to current location entered correctly and mark recommended barber shops & The map zooms to the device location after clicking on "use my current location" button and the recommended barber shops are marked on the map & pass & pass\\
+HSR-T4 & Recommendation page & User click on "use my current location" button & The map should zoom to current location entered correctly and mark recommended barber shops & The map zooms to the device location after clicking on "use my current location" button and the recommended barber shops are marked on the map & pass\\
  \hline
 HSR-T5 & Recommendation page & Click on one of the markers & The detail of the barber shop should be displayed & The shop location, ratings and other information is shown after click on the corresponding marker & pass\\
  \hline
  HSR-T6 & Hair salon details tab opened & user click on the website link & The website should be redirected to the barber shop's website & After clicking on the website links, the browser redirected to the shop's website & pass\\
  \hline
 \end{tabular}
-
 \section{Nonfunctional Requirements Evaluation}
+
+\hspace{-3cm}
+\includegraphics[scale=0.4]{VnVReport/user_survey.png}
+Some of the test results should refer to this survey table above
+\newpage
 \subsection{Appearance Requirements}
-\begin{tabular}{ |p{2cm}| p{3cm} |p{4cm}| p{4cm}|p{2cm}|   } 
+\begin{tabular}{ |p{1.5cm}| p{2cm} |p{2cm}| p{4cm}|p{3cm}|p{1.5cm}|  } 
  \hline
- TestID & Initial State & Input & Expected Results & Actual Results\\ 
+ TestID & Initial State & Input & Expected Results & \textcolor{red}{Actual Results} & Results\\ 
  \hline
- AP-T1 & Application running on a computer website & user interact with the application & Average rate above 4(for a scale 1-5) regards to how recognizable was the text in application  & pass\\
+ AP-T1 & Application running on a computer website & user interact with the application & Average rate above for a scale 1-5 regards to how recognizable was the text in application  &\textcolor{red}{The average rate is 4.5 out of 5 regarding to how recognizable was the text in application} &pass\\
   \hline
- AP-T2 & Application running on a computer website & user interact with the application & Average rate above 4(for a scale 1-5) regards to how recognizable was the elements in application  & pass\\
+ AP-T2 & Application running on a computer website & user interact with the application & Average rate above for a scale 1-5 regards to how recognizable was the elements in application  &\textcolor{red}{The average rate is 4 out of 5 regarding to how recognizable was the elements in application} &pass\\
   \hline
- IA-T1 & Application running on a computer website & user interact with the application & Average rate above 4(for a scale 1-5) regards to how modern aesthetic was the application matches to & pass\\
+ IA-T1 & Application running on a computer website & user interact with the application & Average rate above for a scale 1-5 regards to how modern aesthetic was the application matches to &\textcolor{red}{The average rate is 4.5 out of 5 regarding to how modern aesthetic was the application matches to}& pass\\
    \hline
- IA-T2 & Application running on a computer website & user interact with the application & Average rate above 4(for a scale 1-5) regards to how simple and clear was the application to & pass\\
+ IA-T2 & Application running on a computer website & user interact with the application & Average rate above for a scale 1-5 regards to how simple and clear was the application &\textcolor{red}{The average rate is 4.5 out of 5 regarding to how simple and clear was the application}& pass\\
  \hline
  \end{tabular}
+
 \subsection{Usability}
-\begin{tabular}{ |p{2cm}| p{3cm}| p{4cm}| p{4cm}|p{2cm}|  } 
+\begin{tabular}{ |p{1.5cm}| p{2cm} |p{2cm}| p{4cm}|p{3cm}|p{1.5cm}|   } 
  \hline
- TestID & Initial State & Input & Expected Results & Actual Results \\ 
+ TestID & Initial State & Input & Expected Results & Actual Results &Results \\ 
  \hline
- EU-T1 & Application running on a computer website & user interact with the application & Average rate above 4(for a scale 1-5) regards to how easy it is to recognize the intractable components to  & pass\\
+ EU-T1 & Application running on a computer website & user interact with the application & Average rate above 4(for a scale 1-5) regards to how easy it is to recognize the intractable components  &\textcolor{red}{The average rate is 4.5 out of 5 regarding to how how easy it is to recognize the intractable components}& pass\\
   \hline
- EU-T2 & Application running on a computer website & user interact with the application & the amount of each user to perform a misclick during the use of this application should be less than 5  & pass\\
+ EU-T2 & Application running on a computer website & user interact with the application & the amount of each user to perform a misclick during the use of this application should be less than 5  &\textcolor{red}{The average misclick happens to be 2.6 per use}& pass\\
   \hline
- LR-T1 & Application running on a computer website & user interact with the application & User should be able to install and use the application within 3 steps from 0 & pass\\
+ LR-T1 & Web application is not opened & user interact with the application & User should be able to install and use the application following the GitHub read me instruction &\textcolor{red}{The user followed the instruction and successfully opened the web application}& pass\\
 \hline
- LR-T2 & Application running on a computer website & user interact with the application & Average rate above 4(for a scale 1-5) regards to how easy to follow the instruction provided & pass\\
+ LR-T2 & Web application is not opened & user interact with the application & Average rate above 4(for a scale 1-5 regards to how easy to follow the instruction provided &\textcolor{red}{The average rate is 4.5 out of 5 regarding to how easy to follow the instruction provided}& pass\\
 \hline
- UP-T1 & Application running on a computer website & user interact with the application & Average rate above 4(for a scale 1-5) regards to the appropriateness of the icons  & pass\\
+ UP-T1 & Application running on a computer website & user interact with the application & Average rate above 4(for a scale 1-5) regards to the appropriateness of the icons  &\textcolor{red}{The average rate is 4.5 out of 5 regarding to the appropriateness of the icons}& pass\\
  \hline
- AS-T1 & Application running on a computer website & user interact with the application & Average rate above 4(for a scale 1-5) regards to the appropriateness of the fonts and color of the text  & \sout{pass} \textcolor{red}{fail}\\
+ \end{tabular}
+ \newpage
+ \begin{tabular}{ |p{1.5cm}| p{2cm} |p{2cm}| p{4cm}|p{3cm}|p{1.5cm}|   }
+ \hline
+ AS-T1 & Application running on a computer website & user interact with the application & Average rate above 4(for a scale 1-5) regards to the appropriateness of the fonts and color of the text& \textcolor{red}{The average rate was 3 out of 5 regarding to the appropriateness of the fonts and color of the text} & \sout{pass} \textcolor{red}{fail}\\
  \hline
 \end{tabular}	
-
+\newline
 \subsection{Performance}
-\begin{tabular}{ |p{2cm}| p{3cm} |p{4cm}| p{4cm}|p{2cm}|  }
+\begin{tabular}{ |p{1.5cm}| p{2cm} |p{2cm}| p{4cm}|p{3cm}|p{1.5cm}|  }
 \hline
- TestID & Initial State & Input & Expected Results & Actual Results\\ 
+ TestID & Initial State & Input & Expected Results & \textcolor{red}{Actual Results}& Results\\ 
 \hline
- SL-T1 & Application running on a computer website & user interact with the application & The amount of times when the response time is greater than 1 second should not exceed 10 times within 100 performances  & \sout{pass} \textcolor{red}{fail}\\
+ SL-T1 & Application running on a computer website & user interact with the application & The amount of times when the response time is greater than 1 second should not exceed 10 times within 100 performances& \textcolor{red}{About 22 times the response time exceeded 1 second out of 100 performances} & \sout{pass} \textcolor{red}{fail}\\
   \hline
- SL-T2 & Application running on a computer website & user interact with the application & The amount of times when the response time is greater than 1 second should not exceed 10 times within 100 change hairstyle performances  & pass\\
+ SL-T2 & Application running on a computer website & user interact with the application & The amount of times when the response time is greater than 1 second should not exceed 10 times within 100 change hairstyle performances  &\textcolor{red}{Only 6 out of 100 performances the response time exceeded 1 seconds} &pass\\
  \hline
- SL-T3 & Application running on a computer website & user interact with the application & The amount of times when the response time is greater than 0.5 second should not exceed 10 times within 100 random button clicking  & pass\\
+ SL-T3 & Application running on a computer website & user interact with the application & The amount of times when the response time is greater than 0.5 second should not exceed 10 times within 100 random button clicking  &\textcolor{red}{Only 4 out of 100 random button clicking the response time exceeded 0.5 seconds}& pass\\
   \hline
- PA-T1 & Application running on a computer website & user interact with the application & Average error between the user's head and the 3d hair model should be within 1 millimeters while not moving  & \sout{pass} \textcolor{red}{fail}\\
- \hline
- PA-T2 & Application running on a computer website & user interact with the application & Average error between the user's head and the 3d hair model should be within 2 millimeters while moving  & pass\\
- \hline
- RA-T1 & Application running on a computer website & user interact with the application & Average error between the user's head and the 3d hair model should be within 2 millimeters while moving  & pass\\
- \hline
- \end{tabular}
- \begin{tabular}{ |p{2cm}| p{3cm} |p{4cm}| p{4cm}|p{2cm}|  }
+ PA-T1 & Application running on a computer website & user interact with the application & Average error between the user's head and the 3d hair model should be within 1 millimeters while not moving &\textcolor{red}{Average error between the user's head and the 3d hair model was averagely 1.6 mm while not moving}  & \sout{pass} \textcolor{red}{fail}\\
 \hline
- TestID & Initial State & Input & Expected Results & Actual Results\\ 
+\end{tabular}
+\begin{tabular}{ |p{1.5cm}| p{2cm} |p{2cm}| p{4cm}|p{3cm}|p{1.5cm}|   }
+
  \hline
- RA-T2 & Application running on a computer website & user interact with the application & Average error between the user's head and the 3d hair model should be within 2 millimeters while moving  & pass\\
+ PA-T2 & Application running on a computer website & user interact with the application & Average error between the user's head and the 3d hair model should be within 2 millimeters while moving& \textcolor{red}{Average error between the user's head and the 3d hair model was 1.9 mm while moving} & pass\\
  \hline
- RB-T1 & Application running on a computer website & user interact with the application & The number of crashes happening should be less than 3 times out of 100 irrational inputs  & pass\\
+ RA-T1 & Application running on a computer website & user interact with the application & The crash percentage should be less than 2 percent of the times the application used &\textcolor{red}{According to users' feedback, 0 crash happened during using our web application} & pass\\
  \hline
- CC-T1 & Application running on a computer website & users interact with the application & The number of actual users should match with the number of users recorded in data set  & pass\\
+ RA-T2 & Application running on a computer website & user interact with the application & The user should get correct error message 98percent of the time when unexpected output happens &\textcolor{red}{According to users' feedback, 100 percent of unexpected output lead to correct error message}  & pass\\
+ \hline
+ RB-T1 & Application running on a computer website & user interact with the application & The number of crashes happening should be less than 3 times out of 100 irrational inputs & \textcolor{red}{According to users' feedback, 0 crash happened out of 100 irrational inputs}& pass\\
+ \hline
+ \sout{CC-T1} & \sout{Application running on a computer website} & \sout{users interact with the application} & \sout{The number of actual users should match with the number of users recorded in data set} &\textcolor{red}{N/A}& \sout{pass}\\
   \hline
- CC-T2 & Application running on a computer website & users interact with the application & The database should contain at least 4 different hair styles  & pass\\
+ CC-T2 & Application running on a computer website & users interact with the application & The database should contain at least \sout{4} \textcolor{red}{10} different hair styles  &\textcolor{red}{There are 10 different hair styles contained in our database} &pass\\
   \hline
- LG-T1 & Application running on a computer website & users interact with the application & The unit tests should be run once per month  & pass\\
+ LG-T1 & Application running on a computer website & users interact with the application & The unit tests should be run once per month&\textcolor{red}{The unit tests runs for each week}  & pass\\
  \hline
  
 \end{tabular}
 \subsection{Operational and Environmental Requirements tests}
-\begin{tabular}{ |p{2cm}| p{3cm} |p{4cm}| p{4cm}|p{2cm}|  }
+\begin{tabular}{ |p{1.5cm}| p{2cm} |p{2cm}| p{4cm}|p{3cm}|p{1.5cm}|  }
 \hline
- TestID & Initial State & Input & Expected Results & Actual Results\\ 
+ TestID & Initial State & Input & Expected Results & Actual Results&Results\\ 
  \hline
- PD-T1 & Application not yet opened & user operations & Should be able to access the website by entering the according website address & pass\\
+ PD-T1 & Application not yet opened & user operations & Should be able to access the website by entering the according website address &\textcolor{red}{User can access the website by entering the correct web address} & pass\\
  \hline
- RE-T1 & Application running on a computer website & user interact with the application & Developers should perform the above tests on different devices  & pass\\
+ RE-T1 & Application running on a computer website & user interact with the application & Developers should perform the above tests on different devices  &\textcolor{red}{The website can be accessed through diffrent phones, laptops, Desktops and pads} & pass\\
  \hline
- RE-T2 & Application running on a computer website & Update the application & User should be noted when the product is updated  & pass\\
+ RE-T2 & Application running on a computer website & Update the application & User should be noted when the product is updated  & \textcolor{red}{User does not receive notification when product updated} & \sout{pass} \textcolor{red}{fail}\\
  \hline
 \end{tabular}
 \subsection{Maintainability And Support Requirements Tests}
-\begin{tabular}{ |p{2cm}| p{3cm} |p{4cm}| p{4cm}|p{2cm}|  }
+\begin{tabular}{ |p{1.5cm}| p{2cm} |p{2cm}| p{4cm}|p{3cm}|p{1.5cm}|  }
 \hline
- TestID & Initial State & Input & Expected Results & Actual Results\\ 
+ TestID & Initial State & Input & Expected Results & Actual Results&Results\\ 
  \hline
- MS-T1 and MS-T2 & Application not yet opened & user operations & Feedback of the application should be collected and stored, the team will fix all bugs reported & pass\\
+ MS-T1 and MS-T2 & Application not yet opened & user operations & Feedback of the application should be collected and stored, the team will fix all bugs reported &\textcolor{red}{Issue tracker is created to collect and store , the team constantly resolve issues in there} & pass\\
  \hline
- MS-T3 & Application running on a computer website & user interact with the application & The recovery time for each crash should be less than 1 hour  & pass\\
+ MS-T3 & Application running on a computer website & user interact with the application & The recovery time for each crash should be less than 1 hour  &\textcolor{red}{The system recover within 30 minutes for each creash} &pass\\
  \hline
 \end{tabular}
 \subsection{Security Requirements Tests}
-\begin{tabular}{ |p{2cm}| p{3cm} |p{4cm}| p{4cm}|p{2cm}|  }
+\begin{tabular}{ |p{1.5cm}| p{2cm} |p{2cm}| p{4cm}|p{3cm}|p{1.5cm}|  }
 \hline
- TestID & Initial State & Input & Expected Results & Actual Results\\ 
+ TestID & Initial State & Input & Expected Results & Actual Results&Results\\ 
  \hline
- AC-T1 & Application not yet opened & user operations & User should be able to access his/her images stored in the database & pass\\
+ \sout{AC-T1} & \sout{Application not yet opened} & \sout{user operations} & \sout{User should be able to access his/her images stored in the database} & & \sout{pass}\\
  \hline
 \end{tabular}
 \subsection{Cultural and Political Requirements}
-\begin{tabular}{ |p{2cm}| p{3cm} |p{4cm}| p{4cm}|p{2cm}|  }
+\begin{tabular}{ |p{1.5cm}| p{2cm} |p{2cm}| p{4cm}|p{3cm}|p{1.5cm}|  }
 \hline
- TestID & Initial State & Input & Expected Results & Actual Results\\ 
+ TestID & Initial State & Input & Expected Results & Actual Results& Results\\ 
  \hline
- CR-T1 & Application not yet opened & user operations & Users should not feel their culture being offended while using our application & pass\\
+ CR-T1 & Application not yet opened & user operations & Users should not feel their culture being offended while using our application &\textcolor{red}{According to user feed-backs, non of our users feel their culture being offended when using our application} & pass\\
  \hline
 \end{tabular}
 \subsection{Legal Requirements}
-\begin{tabular}{ |p{2cm}| p{3cm} |p{4cm}| p{4cm}|p{2cm}|  }
+\begin{tabular}{ |p{1.5cm}| p{2cm} |p{2cm}| p{4cm}|p{3cm}|p{1.5cm}|  }
 \hline
- TestID & Initial State & Input & Expected Results & Actual Results\\ 
+ TestID & Initial State & Input & Expected Results & Actual Results&Results\\ 
  \hline
- CP-T1 & Application not yet opened & user operations & User should agree on the legal statement when first time using the application & pass\\
+ CP-T1 & Application not yet opened & user operations & User should agree on the legal statement when first time using the application &\textcolor{red}{user agrees to our legal statement when first using our web application} & pass\\
  \hline
 \end{tabular}
 
@@ -1010,7 +1018,7 @@ Ran all test suites.
 \bibliography{../../refs/References}
 
 \newpage{}
-\section{Appendix --- Reflection}
+\section{Appendix-A --- Reflection}
 
 \textcolor{red}{Based on the VnV report you provided, there were some differences between the VnV plan and the activities that were actually conducted. These differences were mainly due to unforeseen technical issues, resource constraints, and time limitations. For instance, some test cases could not be executed due to defects found during testing, which required modifications to the test cases or the software under test.}
 
@@ -1039,4 +1047,11 @@ Software testing involves running the software with the aim of finding bugs or e
 
 \subsection{Charlotte Cheng}
 I was responsible for creating unit tests for our project's javascript helper functions, and I utilized the Jest framework to execute the testing process. My experience with using JEST to test JavaScript helper functions has been insightful and informative. I found JEST to be an excellent testing tool that allowed me to write and execute test cases with ease. Through the process, I realized the importance of testing helper functions as they form the backbone of any JavaScript application. By using JEST, I was able to thoroughly test the helper functions, check their output, and identify any potential bugs or errors. The feedback provided by JEST during the testing process was invaluable in fixing issues and optimizing the functions for better performance. Overall, the experience has taught me the significance of writing and executing effective test cases, the importance of helper functions in JavaScript development, and how JEST can help in delivering high-quality software.
+
+
+\newpage{}
+\section{Appendix-B --- Testers Information}
+\textcolor{red}{}
+
+
 \end{document}
