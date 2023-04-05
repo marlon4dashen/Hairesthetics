@@ -9,6 +9,7 @@
 \usepackage{colortbl}
 \usepackage{xr}
 \usepackage{hyperref}
+\usepackage[normalem]{ulem}
 \usepackage{longtable}
 \usepackage{xfrac}
 \usepackage{tabularx}
@@ -19,6 +20,7 @@
 \usepackage[section]{placeins}
 \usepackage{caption}
 \usepackage{fullpage}
+\usepackage{soul}
 
 \hypersetup{
 bookmarks=true,     % show bookmarks bar?
@@ -63,7 +65,11 @@ urlcolor=cyan          % color of external links
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Jan 17 & 0 & Rev0 MIS\\
+Jan 15 & 0.1 & Initial Draft\\
+Jan 16 & 0.2 & Minor updates\\
+Jan 17 & 1 & Rev0 MIS\\
+Apr 1 & 2 & Final Doc Update\\
+Apr 4 & 2.1 & Minor update to modules\\
 \bottomrule
 \end{tabularx}
 
@@ -145,19 +151,24 @@ below, which are leaves in the hierarchy tree, are the modules that will
 actually be implemented.
 
 \begin{description}
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Controller Module
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Facial Recognition Module
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \sout{Controller Module} \textcolor{red}{App Module}
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \textcolor{red}{Server Module}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hair Color Module
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hair Style Module
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \textcolor{red}{Worker Module}
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \textcolor{red}{Image Worker Module}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Salon Recommendation Module
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] ML Model Module
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Utility Module
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \textcolor{red}{Hair Artist Module}
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \textcolor{red}{Model Utils Module}
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \textcolor{red}{Image Utils Module}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hair Color View Module
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hair Style View Module
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Salon Recommendation Interface Module
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Salon Recommendation View Module
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Home View Module
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Camera Module
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Error View Module
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \sout{Error View Module} \textcolor{red}{Footer Module}
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \sout{Camera Module} \textcolor{red}{NavBar Module}
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \sout{Launch View Module} \textcolor{red}{AR Canvas Module}
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \textcolor{red}{HairModel Module}
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \textcolor{red}{ThreeFiber Helper Module}
 \end{description}
 
 \begin{table}[H]
@@ -167,23 +178,33 @@ actually be implemented.
 \textbf{Level 1} & \textbf{Level 2}\\
 \midrule
 
-{Hardware-Hiding Module} & M13 \\
+{Hardware-Hiding Module} & \sout{M13} \textcolor{red}{M1} \\
 \midrule
 
 \multirow{7}{0.3\textwidth}{Behaviour-Hiding Module}
-& M1\\
+& \sout{M1}\\
 & M2\\
 & M3\\
 & M4\\
 & M5\\
-& M8\\
-& M9\\
+& \textcolor{red}{M6} \\
+& \textcolor{red}{M7} \\
 & M10\\
 & M11\\
-& M13\\
+& \textcolor{red}{M12} \\
+& \textcolor{red}{M13} \\
+& M14\\
+& \textcolor{red}{M15} \\
+& \textcolor{red}{M16} \\
+& \textcolor{red}{M17} \\
 \midrule
 
-\multirow{2}{0.3\textwidth}{Software Decision Module} & M6 \\  & M7\\
+\multirow{2}{0.3\textwidth}{Software Decision Module} 
+& \sout{M6} \\  
+& \sout{M7}\\
+& \textcolor{red}{M8} \\
+& \textcolor{red}{M9}\\
+& \textcolor{red}{M18} \\
 \bottomrule
 
 \end{tabular}
@@ -191,35 +212,45 @@ actually be implemented.
 \label{TblMH}
 \end{table}
 
+
+
 \subsection{UML Diagram}
+\newpage
+
 \begin{center}
 \begin{figure}[]
 % \graphicspath{ {component_diagram.jpg} }
-\includegraphics[width=0.8\textwidth, scale=0.8, keepaspectratio]{Design/SoftArchitecture/UML.png}
-\caption{UML Diagram}
+\includegraphics[width=0.8\textwidth, scale=1.5, keepaspectratio]{Design/SoftArchitecture/uml1.png}
+\caption{UML Diagram Part 1}
+\label{FigUH} 
+\end{figure}
+\end{center}
+
+\begin{center}
+\begin{figure}[]
+% \graphicspath{ {component_diagram.jpg} }
+\includegraphics[width=0.8\textwidth, scale=1.5, keepaspectratio]{Design/SoftArchitecture/uml2.png}
+\caption{UML Diagram Part 2}
 \label{FigUH} 
 \end{figure}
 \end{center}
 
 ~\newpage
 
-\section{MIS of Controller Module}
+\section{\sout{MIS of Controller Module}\textcolor{red}{App Module}}
 
 \subsection{Module}
-M1 - Controller \\
+M1 - App Module \\
 Abstract Data Type Module
 
-\subsection{Uses}
-FacialRecognition (M2) \\
-HairColor (M3) \\
-HairStyle (M4) \\
-SalonRecommendation (M5) \\
-HairColorView (M8) \\
-HairStyleView (M9) \\
-SalonRecommendationView (M10) \\
-HomeView (M11) \\
-ErrorView (M13) \\
-Camera (M12) \\
+\subsection{\textcolor{red}{Uses}}
+Server Module (M2) \\
+HairColorView (M10) \\
+HairStyleView (M11) \\
+SalonRecommendationView (M12) \\
+HomeView (M13) \\
+Footer Module (M14) \\
+NavBar Module (M15) \\
 
 \subsection{Syntax}
 
@@ -232,14 +263,7 @@ Camera (M12) \\
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-initApp & - & - & - \\
-switchToHairColorScreen & - & - & - \\
-switchToHairStyleScreen & - & - & - \\
-switchToErrorScreen & string & - & - \\
-switchToSalonScreen & - & - & - \\
-switchToMain & - & - & - \\
-getCamera & - & Camera & - \\
-resetState & & & \\
+App & - & - & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -247,7 +271,7 @@ resetState & & & \\
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-hairColorScreen := HairColorView \\
+\sout{hairColorScreen := HairColorView \\
 hairStyleScreen := HairStyleView \\
 salonRecomScreen := SalonRecommendationView \\
 camera := Camera \\
@@ -258,139 +282,40 @@ facialRecognitionModel := FacialRecognition \\
 hairColorModel := HairColor \\
 hairStyleModel := HairStyle \\
 salonRecommendationModel := SalonRecommendation \\
-currentView := homeScreen
+currentView := homeScreen}
 
 \subsubsection{Environment Variables}
 
 \subsubsection{Assumptions}
 
-\subsubsection{Access Routine Semantics}
+\subsubsection{\textcolor{red}{Access Routine Semantics}}
 
-\noindent initApp():
+\noindent App():
 \begin{itemize}
 \item transition: \\
-switchScreen(launchScreen) \\
-currentView.display()
+app := react.component() 
 \item output: 
 \item exception:
 \end{itemize}
 
-\noindent switchToHairColorScreen():
-\begin{itemize}
-\item transition: switchScreen(hairColorScreen) 
-\item output:
-\item exception:
-\end{itemize}
+\subsubsection{\textcolor{red}{Local Functions}}
 
-\noindent switchToHairStyleScreen():
-\begin{itemize}
-\item transition: switchScreen(hairStyleScreen) 
-\item output:
-\item exception:
-\end{itemize}
 
-\noindent switchToErrorScreen(message):
-\begin{itemize}
-\item transition: switchScreen(errorScreen) 
-\item output:
-\item exception: 
-\end{itemize}
-
-\noindent switchToSalonScreen():
-\begin{itemize}
-\item transition: switchScreen(salonScreen) 
-\item output:
-\item exception:
-\end{itemize}
-
-\noindent switchToMain():
-\begin{itemize}
-\item transition: switchScreen(homeScreen) 
-\item output:
-\item exception: 
-\end{itemize}
-
-\noindent getCamera():
-\begin{itemize}
-\item transition:
-\item output: camera
-\item exception:
-\end{itemize}
-
-\noindent resetState():
-\begin{itemize}
-\item transition: currentView.clear()
-\item output: 
-\item exception: 
-\end{itemize}
-
-\subsubsection{Local Functions}
-
-\noindent getFacialCoordinates(img):
-\begin{itemize}
-\item input: \\
-img - inputImage 
-\item transition:
-\item output: \\
-faces := facialRecognitionModel.detectFaces(img) \\
-return faces - faceObject[]
-\item exception:
-\end{itemize}
-
-\noindent changeHairColorPressed(img, color):
-\begin{itemize}
-\item input: \\
-img - inputImage \\
-color - rgb values
-\item transition:
-\item output: \\
-outImg := hairColorModel.changeHairColor(img, color) \\
-return outImg - image with chose hair color
-\item exception:
-\end{itemize}
-
-\noindent changeHairStylePressed(img, basePosition):
-\begin{itemize}
-\item input: \\
-img - inputImage \\
-basedPosition - camera base position
-\item transition:
-\item output: \\
-coordinates := getFacialCoordinates(img) \\
-rotationDegrees := hairStyleModel.computeRotationDegree(coordinates) \\
-return rotationDegrees - double[]
-\item exception:
-\end{itemize}
-
-\noindent switchScreen(view):
-\begin{itemize}
-currentView.reset() \\
-view.display() \\
-currentView := view \\
-\end{itemize}
-
-\noindent binding():
-\begin{itemize}
-HairColorView.backToHomeButton.event.pressed(switchScreen(homeScreen)) \\
-HairStyleView.backToHomeButton.event.pressed(switchScreen(homeScreen)) \\
-SalonRecommendationView.backToHomeButton.event.pressed(switchScreen(homeScreen)) \\
-ErrorView.backToHomeButton.event.pressed(switchScreen(homeScreen)) \\
-HairColorView.selectedColor.event.pressed(changeHairColorPressed(img, color)) \\
-HairStyleView.previousHairStyle.event.pressed(changeHairStylePressed(img, basePosition)) \\
-HairStyleView.nextHairStyle.event.pressed(changeHairStylePressed(img, basePosition)) \\
-\end{itemize}
-
+\color{red}
 \newpage
-\section{MIS of Facial Recognition Module}
+\section{\textcolor{red}{MIS of Server Module}}
 \subsection{Module}
-M2 - FacialRecognition\\
+M2 - Server\\
 Abstract Object Module
 
 \subsection{Uses}
-MLModel (M6) \\
-Utility (M7)
+Worker (M4) \\
+Hair Artist (M7) \\
+Salon Recommendation (M6) \\
+Flask \\
+SocketIO 
 
-\subsection{Syntax}
+\subsection{\textcolor{red}{Syntax}}
 
 \subsubsection{Exported Constants}
 \subsubsection{Exported Access Programs}
@@ -400,58 +325,117 @@ Utility (M7)
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-detectFaces & image & list of face objects & InterruptException \\
-detectMultipleFaces & boolean &  &  \\
-reset & & string & \\
+test\_connect &  & JSON & \\
+message & JSON &  &  \\
+add\_user & int & JSON & \\
+init\_camera &  &  & \\
+process\_images & File & JSON & \\
+get\_salons & double, double & JSON & \\
+clear\_cache & int & JSON & KeyError\\
+remove\_worker & int & JSON & KeyError\\
+video\_feed & int & JSON & KeyError\\
 \hline
 \end{tabular}
 \end{center}
 
-\subsection{Semantics}
+\subsection{\textcolor{red}{Semantics}}
 
 \subsubsection{State Variables}
-detectMultiple := true
+app := Flask() \\
+workers := dict() \\
+imageWorker := null \\
+socketio := SocketIO(app) \\
+hairArtist := null \\
+salonRecommendation := null
 
 \subsubsection{Environment Variables}
 
 \subsubsection{Assumptions}
 
-\subsubsection{Access Routine Semantics}
-\noindent detectFaces(img):
+\subsubsection{\textcolor{red}{Access Routine Semantics}}
+\noindent \textcolor{red}{test\_connect()}:
 \begin{itemize}
 \item transition:
 \item output: \\
-processedImage = Utility.toGreyScale(img) \\
-if detectMultiple == true $=>$ MLModel.getFaceModel().process(processedImage)\\
-if detectMultiple == false $=>$ MLModel.getFaceModel().process(processedImage, max\_faces=1) \\
-return results - a list of face objects detected in the input image
-\begin{center}
-\begin{figure}[H]
-% \graphicspath{ {component_diagram.jpg} }
-\includegraphics[scale=0.5]{Design/SoftDetailedDes/face_mesh.png}
-\caption{Face Landmarks within a face object}
-\label{Fig_UseHierarchy} 
-\end{figure}
-\end{center}
-\item exception: InterruptException := action terminated by the user
-\end{itemize}
-
-\noindent detectMultipleFaces(status):
-\begin{itemize}
-\item transition: detectMultiple := status
-\item output: 
+return output - JSON with 200 status connection success
 \item exception: 
 \end{itemize}
 
-\noindent reset():
+\noindent \textcolor{red}{message(img, color, user\_id)}:
+\begin{itemize}
+\item transition: worker[user\_id].enqueue\_input = (img, color)
+\item output: JSON with 200 status success
+\item exception: 
+\end{itemize}
+
+\noindent \textcolor{red}{add\_user(user\_id)}:
 \begin{itemize}
 \item transition: 
-\item output: message $=>$ MLModel.reset(hair)
+hairArtist = HairArtist() if hairArtist == none \\
+worker[user\_id] = Worker(hairArtist)
+\item output: JSON with 200 status success
+\item exception: 
+\end{itemize}
+
+\noindent \textcolor{red}{init\_camera(user\_id)}:
+\begin{itemize}
+\item transition: imageWorker = imageWorker(hairArtist)
+\item output: JSON with 200 status success
+\item exception: 
+\end{itemize}
+
+\noindent \textcolor{red}{process\_images(File, color, user\_id)}:
+\begin{itemize}
+\item transition: res = imageWorker.process\_one(files.toImage(), color)
+\item output: JSON with processed frame status 200 success
+\item exception: 
+\end{itemize}
+
+\noindent \textcolor{red}{get\_salons(lat, lng)}:
+\begin{itemize}
+\item input: lat - latitude in double, lng - longitude in double
+\item transition: \\
+salonRecommendation = salonRecommendation(lat, lng) \\
+salons = salonRecommendation.get\_nearby\_salons()
+\item output: salons - JSON with nearby salon informations and 200 status code
+\item exception: 
+\end{itemize}
+
+\noindent \textcolor{red}{clear\_cache(user\_id)}:
+\begin{itemize}
+\item transition: \\
+if user\_id exists: \\
+workers[user\_id].clean\_up()
+\item output: JSON with 200 status code success
+\item exception: 
+\end{itemize}
+
+\noindent \textcolor{red}{remove\_worker(user\_id)}:
+\begin{itemize}
+\item transition: \\
+if user\_id exists: \\
+delete workers[user\_id]
+\item output: JSON with 200 status code success
+\item exception: 
+\end{itemize}
+
+\noindent \textcolor{red}{video\_feed(user\_id)}:
+\begin{itemize}
+\item transition: \\
+if user\_id exists: \\
+resp = gen(user\_id)
+\item output: Response with form data containing the processed frames
 \item exception: 
 \end{itemize}
 
 \subsubsection{Local Functions}
-None
+The generator function that generates the frame for different users\\ 
+\textcolor{red}{gen(user\_id)}: 
+\begin{itemize}
+    \item transition: frame = worker[user\_id].get\_frame()
+    \item output: yield formdata containing the frame
+\end{itemize}
+\color{black}
 
 \newpage
 \section{MIS of Hair Color Module}
@@ -460,8 +444,10 @@ M3 - HairColor Module\\
 Abstract Object Module
 
 \subsection{Uses}
-MLModel (M6) \\
-Utility (M7)
+\textcolor{red}{Model Utils (M8)} \\
+\textcolor{red}{Image Utils (M9)} \\
+\sout{MLModel (M6)} \\
+\sout{Utility (M7)}
 
 \subsection{Syntax}
 
@@ -486,7 +472,8 @@ reset & & string & \\
 
 \subsubsection{State Variables}
 colors - Map$<$str, int[]$>$ - a mapping between the name of color and their rgb values \\
-alpha - double - represents the ratio between the original image and the masked image
+alpha - double - represents the ratio between the original image and the masked image \\ 
+\textcolor{red}{min\_confidence\_value - double - the minimum confidence interval for machine learning model}
 
 \subsubsection{Environment Variables}
 
@@ -551,7 +538,7 @@ image - the copy of an original image
 \end{itemize}
 
 \newpage
-\section{MIS of Hair Style Module}
+\section{\sout{MIS of Hair Style Module}}
 \subsection{Module}
 M9 - FacialRecognition\\
 Abstract Object Module
@@ -603,6 +590,183 @@ facialCoordinates - a list of coordinates of the facial features
 \end{itemize}
 
 \subsubsection{Local Functions}
+
+\color{red}
+\newpage
+\section{\textcolor{red}{MIS of Worker Module}}
+\subsection{\textcolor{red}{Module}}
+M4 - Worker Module\\
+Abstract Data Type Module
+
+\subsection{\textcolor{red}{Uses}}
+Hair Artist (M7) \\
+Threading
+
+\subsection{\textcolor{red}{Syntax}}
+
+\subsubsection{Exported Constants}
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{3cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\_\_init\_\_ & HairArtist & Worker & \\
+enqueue\_input & img, tuple & &   \\
+get\_frame & & img &  \\
+clean\_up & & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{\textcolor{red}{Semantics}}
+
+\subsubsection{\textcolor{red}{State Variables}}
+thread - Thread - daemon thread processing images in the background \\ 
+to\_process - Deque - Double ended queue that stores input images (FIFO) \\ 
+to\_output - Deque - Double ended queue that stores output images (FIFO) \\ 
+makeup\_artist - HairArtist - HairArtist instance that used for image processing 
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+\subsubsection{\textcolor{red}{Access Routine Semantics}}
+\noindent 
+\textcolor{red}{\_\_init\_\_(hairArtist)}:
+\begin{itemize}
+\item input: hairArtist - HairArtist instance that used for image processing  \\
+\item transition: \\
+to\_process := Deque([])\\ 
+to\_output := Deque([]) \\
+makeup\_artist := hairArtist \\
+thread = Thread(target=keep\_processing())
+\item output:
+\item exception:
+\end{itemize}
+
+\noindent 
+\textcolor{red}{enqueue\_input(img, color)}:
+\begin{itemize}
+\item input: img - the input image from user  \\
+tuple(color) - the input color to change hair to
+\item transition: \\
+to\_process.append((img, color))
+\item output:
+\item exception:
+\end{itemize}
+
+\noindent 
+\textcolor{red}{get\_frame()}:
+\begin{itemize}
+\item input:
+\item transition: \\
+frame = to\_output.popleft(img)
+\item output:\\
+return - frame - processed image frame in order
+\item exception:
+\end{itemize}
+
+
+\noindent 
+\textcolor{red}{clean\_up()}:
+\begin{itemize}
+\item input:
+\item transition: \\
+to\_output.clear()\\ 
+to\_process.clear() 
+\item output:
+\item exception:
+\end{itemize}
+
+\subsubsection{Local Functions}
+\textcolor{red}{keep\_processing()}:  
+\begin{itemize}
+\item input:
+\item transition: \\
+while !to\_process().empty():\\
+process\_one()
+\item output:
+\item exception:
+\end{itemize}
+
+\noindent
+\textcolor{red}{process\_one()}: 
+\begin{itemize}
+\item input:
+\item transition: \\
+img, color = to\_process.popleft() \\
+res = hair\_artist.apply\_hair\_color(img, color) \\
+to\_output.append(res)
+\item output:
+\item exception:
+\end{itemize}
+
+\newpage
+\section{\textcolor{red}{MIS of Image Worker Module}}
+\subsection{\textcolor{red}{Module}}
+M5 - Image Worker Module\\
+Abstract Data Type Module
+
+\subsection{\textcolor{red}{Uses}}
+Hair Artist (M7)
+
+\subsection{\textcolor{red}{Syntax}}
+
+\subsubsection{Exported Constants}
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{3cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\_\_init\_\_ & HairArtist & ImageWorker & \\
+process\_one & img, tuple & &  \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{\textcolor{red}{Semantics}}
+
+\subsubsection{\textcolor{red}{State Variables}}
+makeup\_artist - HairArtist - HairArtist instance that used for image processing 
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+\subsubsection{\textcolor{red}{Access Routine Semantics}}
+\noindent 
+\textcolor{red}{\_\_init\_\_(hairArtist)}:
+\begin{itemize}
+\item input: hairArtist - HairArtist instance that used for image processing  \\
+\item transition: \\
+to\_process := Deque([])\\ 
+to\_output := Deque([]) \\
+makeup\_artist := hairArtist \\
+thread = Thread(target=keep\_processing())
+\item output:
+\item exception:
+\end{itemize}
+
+
+\noindent
+\textcolor{red}{process\_one(img, color)}: 
+\begin{itemize}
+\item input: img - input image for hair segmentation \\ 
+color - input color to change the hair \\
+\item transition: \\
+res = hair\_artist.apply\_hair\_color(img, color) \\
+\item output:
+\item exception:
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\color{black}
+
  
 \newpage
 \section{MIS of Salon Recommendation Module} \label{Module} 
@@ -619,6 +783,102 @@ Abstract Object Module
 
 \subsubsection{Exported Constants}
 
+\subsubsection{\textcolor{red}{Exported Access Programs}}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{3cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+get\_size & & int & \\
+getNearbySalons & & list[salons] & \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{\textcolor{red}{State Variables}}
+
+lat - double - latitude \\ 
+lng - double - longitude \\ 
+salons - list[dict] - contains the information of salons \\ 
+size - int - size of nearby salons \\ 
+total\_average\_rating - double - the average rating among all salons 
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+\color{red}
+\subsubsection{\textcolor{red}{Access Routine Semantics}}
+
+\noindent \textcolor{red}{get\_size()}:
+\begin{itemize}
+\item input:
+\item transition:  
+\item output: \\ 
+return - size - the size of nearby salons
+\item exception: 
+\end{itemize}
+
+\noindent \textcolor{red}{getNearbySalons()}:
+\begin{itemize}
+\item input: 
+\item transition: 
+nearby\_salons = fetchNearbySalons(lat, lng) \\ 
+foreach salon in nearby\_salons:
+details = fetch\_place\_details \\
+salons.append(details) \\ 
+rank\_salons(salons)
+\item output: \\
+return - salons - the sorted nearby salon details list
+\item exception: 
+\end{itemize}
+
+
+\subsubsection{\textcolor{red}{Local Functions}}
+\noindent \textcolor{red}{fetchNearbySalons()}:
+\begin{itemize}
+\item input: 
+\item transition: 
+\item output: \\
+return nearby\_salons - response from google map API. 
+\item exception: 
+\end{itemize}
+
+\noindent \textcolor{red}{fetchPlaceDetails(place\_id)}:
+\begin{itemize}
+\item input: 
+\item transition: 
+\item output: \\
+return salon\_info - the salon information with the given place\_id 
+\item exception: 
+\end{itemize}
+
+\noindent \textcolor{red}{rank\_salons()}:
+\begin{itemize}
+\item input: 
+\item transition: 
+sort the salons with their average ratings generated by the bayesian algorithm
+\item output: \\
+\item exception: 
+\end{itemize}
+
+
+\newpage
+\section{\textcolor{red}{MIS of Hair Artist Module}}
+\subsection{\textcolor{red}{Module}}
+M7 - HairArtist Module\\
+Abstract Data Type Module
+
+\subsection{\textcolor{red}{Uses}}
+Model Utils Module (M8) \\
+Image Utils Module (M9) \\ 
+Hair Color Module (M3) 
+
+\subsection{\textcolor{red}{Syntax}}
+
+\subsubsection{Exported Constants}
 \subsubsection{Exported Access Programs}
 
 \begin{center}
@@ -626,143 +886,109 @@ Abstract Object Module
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-milesToMeter  & int &  int  & - \\
-outputToFile & string, list & file & - \\
-findNearby & string, list & string, list & IndexOutOfRange \\
+apply\_hair\_color & img, color & img & \\
 \hline
 \end{tabular}
 \end{center}
 
-\subsection{Semantics}
+\subsection{\textcolor{red}{Semantics}}
 
-\subsubsection{State Variables}
+\subsubsection{\textcolor{red}{State Variables}}
+face\_recognition - mediapipe instance of face recognition \\
+hair\_model - ModelUtils instance with session that performs hair segmentation
 
 \subsubsection{Environment Variables}
 
 \subsubsection{Assumptions}
 
-\subsubsection{Access Routine Semantics}
+\subsubsection{\textcolor{red}{Access Routine Semantics}}
 
-\noindent milesToMeter(distance):
+\noindent
+\textcolor{red}{apply\_hair\_color(img, color)}: 
 \begin{itemize}
-\item input: The input to the function would be the distance between the two points in miles.
-\item transition:  
-\item output: output the distance between two locations from miles to meters. used to give the user more precise measurements, or to conform to international standards. 
-\item exception: InvalidValueException - The value is negative or irational numbers 
+\item input: img - input image for hair segmentation \\ 
+color - input color to change the hair 
+\item transition: \\
+res = hair\_color.change\_hair\_color(img, color, hair\_model, face\_recognition)
+\item output:
+res - img - processed frame with hair color changed as desired
+\item exception:
 \end{itemize}
 
-\noindent outputToFile(outputFileName, businessList):
-\begin{itemize}
-\item input: The input to the function would be the self defined output filename and the generated list after sorting the salon choices.
-\item transition:  
-\item output: output the file that stores the customized hair salon information after sorting. 
-\end{itemize}
-
-\noindent findNearby(APIKEY, distance, filter):
-\begin{itemize}
-\item input: The input to the function would be the google API KEY, the distance user want to search for, and the filter information used to filter hair salons.
-\item transition:  
-\item output: output the sorted business list
-\item exception: IndexOutOfRange: the value of distance is invalid
-\end{itemize}
 \subsubsection{Local Functions}
 
-\newpage
-\section{MIS of ML Model Module}
-\subsection{Module}
-M6 - MLModel\\
-Abstract Object Module
+\color{black}
+\section{\textcolor{red}{MIS of ModelUtils Module}}
+\subsection{\textcolor{red}{Module}}
+M8 - Model Utils Module\\
+Abstract Data Type Module
 
 \subsection{Uses}
-Mediapipe (External Module) \\
 Onnx (External Module) \\
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
 
-\subsubsection{Exported Access Programs}
+\subsubsection{\textcolor{red}{Exported Access Programs}}
 
 \begin{center}
 \begin{tabular}{p{4cm} p{3cm} p{4cm} p{4cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-initFaceModel & &  & InterruptException \\
-initHairModel & &  &  \\
-getFaceModel & & mediapipeModel & \\
-getHairModel & & onnxModel & \\
-resetModel & string & string & \\
+initialize\_hair\_segmentation\_model & & FileNotFoundException & \\
 \hline
 \end{tabular}
 \end{center}
 
-\subsection{Semantics}
+\subsection{\textcolor{red}{Semantics}}
 
-\subsubsection{State Variables}
-minConfidenceLevel := 0.5 \\
-minDetectionConfidence := 0.5 \\
-modelFilePath := filePath (path to the pre-trained model) \\
-faceModel := null \\
-hairModel := null
+\subsubsection{\textcolor{red}{State Variables}}
+minConfidenceLevel - 0.5 - minimum confidence accuracy for output \\
+inputShape - tuple - represent model input shape \\
+outputShape - tuple - represent model output shape \\
+modelFilePath - filePath (path to the pre-trained model) \\
+model\_session - ML model with active session
+
 
 
 \subsubsection{Environment Variables}
 
 \subsubsection{Assumptions}
 
-\subsubsection{Access Routine Semantics}
-\noindent initFaceModel():
-\begin{itemize}
-\item transition: faceModel := mediapipe.FaceMesh(minConfidenceLevel, minDetectionConfidence)
-\item output: 
-\item exception:
-\end{itemize}
-
-\noindent initHairModel():
-\begin{itemize}
-\item transition: 
-hairModel := onnxruntime.InferenceSession(modelFilePath) \\
-\item output: 
-\item exception: 
-\end{itemize}
-
-\noindent getFaceModel():
-\begin{itemize}
-\item transition:
-\item output: faceModel
-\item exception:
-\end{itemize}
-
-\noindent getHairModel():
-\begin{itemize}
-\item transition:
-\item output: hairModel
-\item exception: 
-\end{itemize}
-
-\noindent resetModel(name):
+\subsubsection{\textcolor{red}{Access Routine Semantics}}
+\color{red}
+\noindent \textcolor{red}{initialize\_hair\_segmentation\_model()}:
 \begin{itemize}
 \item transition: \\
-if name == "face" then initFaceModel() \\
-else if name == "hair", then initHairModel()
+model\_session = onnx\_inference\_session(modelFilePath, minConfidenceLevel) \\ 
+inputShape = model\_session.input\_shape \\ 
+outputShape = model\_session.output\_shape \\ 
 \item output: 
-\item exception: 
+\item exception:
 \end{itemize}
+\color{black}
 
 \subsubsection{Local Functions}
 
 \newpage
-\section{MIS of Utility Module}
-\subsection{Module}
-M7 - Utility Module\\
+\section{\textcolor{red}{MIS of Image Utils Module}}
+\subsection{\textcolor{red}{Module}}
+M9 - Utility Module\\
 Library
 
-\subsection{Uses}
-OpenCV (External Module)
-Numpy (External Module)
 
-\subsection{Syntax}
+\subsection{\textcolor{red}{Uses}}
+OpenCV (External Module) \\
+Numpy (External Module) \\
+\color{red}
+Pillow (External Module) \\ 
+BytesIO (External Module) \\
+base64 (External Module)
+\color{black}
+
+\subsection{\textcolor{red}{Syntax}}
 
 \subsubsection{Exported Constants}
 \subsubsection{Exported Access Programs}
@@ -776,11 +1002,13 @@ processImage & image, list[int] & tensor & illegalArgumentException \\
 maskImage & image, image & image  & illegalArgumentException \\
 toGreyScale & image & image & \\
 resizeImage & image, list[int] & image & illegalArgumentException \\
+cv2\_image\_to\_base64 & img & string & illegalArgumentException & \\
+base64\_to\_cv2\_image & string & img & illegalArgumentException & \\
 \hline
 \end{tabular}
 \end{center}
 
-\subsection{Semantics}
+\subsection{\textcolor{red}{Semantics}}
 
 \subsubsection{State Variables}
 mean - list[double] - the mean values of trained images, used to normalize the images \\
@@ -833,9 +1061,30 @@ Numpy.reshape(image, shape) - reshape the image \\
 output an reshaped image 
 \item exception: illegalArgumentException - illegal input size for resizing
 \end{itemize}
+\color{red}
+\noindent \textcolor{red}{cv2\_image\_to\_base64(image)}:
+\begin{itemize}
+\item input: image - the input image 
+\item transition: N/A
+\item output: \\
+img = PIL.Image.fromarray(img) \\
+base64.b64encode(img)
+\item exception: illegalArgumentException - input array can not be transformed into image
+\end{itemize}
 
+\noindent \textcolor{red}{base64\_to\_cv2\_image(string)}:
+\begin{itemize}
+\item input: string - image string encoded in base64
+\item transition: N/A
+\item output: \\
+str = base64.b64decode(string) \\ 
+img = PIL.Image.open(str) \\
+\item exception: illegalArgumentException - input string can not be transformed into image
+\end{itemize}
+\color{black}
 \subsubsection{Local Functions}
 None
+
 
 \newpage
 \section{MIS of Hair Color View Module} \label{Module} 
@@ -856,9 +1105,9 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-buttonActionRed &  & updateCameraView & - \\
-buttonActionBrown &  & updateCameraView & - \\
-buttonActionBackToHome &  & backToHomePage & - \\
+\textcolor{red}{TabPanel} & \textcolor{red}{prop} & \textcolor{red}{React.component} & - \\
+\textcolor{red}{makeid} & \textcolor{red}{number} & \textcolor{red}{number} & - \\
+\textcolor{red}{HairColorView} & \textcolor{red}{void} & \textcolor{red}{React.component} & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -866,46 +1115,40 @@ buttonActionBackToHome &  & backToHomePage & - \\
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-None
+\textcolor{red}{socket : Socket.io} \wss{io socket connected on localhost/5001}
 
 \subsubsection{Environment Variables}
-Screen, Camera, Buttons
+Screen, Camera
 
 \subsubsection{Assumptions}
 None
 
 \subsubsection{Access Routine Semantics}
 
-\noindent buttonActionRed():
+\noindent \textcolor{red}{TabPanel(prop)}:
 \begin{itemize}
 \item transition: None 
-\item output: the camera view with user's hair color changed by calling Local function updateHairColor(red).
+\item output: \textcolor{red}{the tab panel for the user to select different hair colors with the given React properties.}
 \item exception: None
 \end{itemize}
 
-\noindent buttonActionBrown():
+\noindent \textcolor{red}{makeid(length)}:
 \begin{itemize}
 \item transition: None 
-\item output: the camera view with user's hair color changed by calling Local function updateHairColor(Brown).
+\item output: \textcolor{red}{generate a random id number with the given length.}
 \item exception: None
 \end{itemize}
 
-\noindent buttonActionBackToHome():
+\noindent \textcolor{red}{HairColorView()}:
 \begin{itemize}
 \item transition: None 
-\item output: Go back to home page interface.
-\item exception: None
-\end{itemize}
-
-\subsubsection{Local Functions}
-\noindent updateHairColor(color):
-\begin{itemize}
-\item transition: None 
-\item output: the camera view with user's hair color changed.
+\item output: \textcolor{red}{generate the HairColorView page.}
 \item exception: None
 \end{itemize}
 
 \newpage
+
+
 \section{MIS of Hair Style View Module} \label{Module} 
 \subsection{Module}
 M9 - HairStyleView\\
@@ -924,10 +1167,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-buttonActionShort &  & updateCameraView & - \\
-buttonActionTail &  & updateCameraView & - \\
-upDateCoordinate &  & updateCoorinates and angle & - \\
-buttonActionBackToHome &  & backToHomePage & - \\
+\textcolor{red}{HairStyleView} & \textcolor{red}{void} & \textcolor{red}{React.component} & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -935,64 +1175,29 @@ buttonActionBackToHome &  & backToHomePage & - \\
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-Double[][]: coordinates(Represent the coordinates to put the hair model)
-Double: A]angle(Represent the angle that the hair model needs to turn)
+\textcolor{red}{themeDark : Theme} \wss{MUI Theme for frontend UI View} \\
+\textcolor{red}{useStyles: Styles} \wss{MUI styles for frontend UI View}
 
 \subsubsection{Environment Variables}
-Screen, Camera, Buttons
+Screen, Camera
 
 \subsubsection{Assumptions}
 None
 
 \subsubsection{Access Routine Semantics}
 
-\noindent updateCoordinate():
+\noindent \textcolor{red}{HairStyleView}():
 \begin{itemize}
-\item transition: coordinates = HairStyleModule.getCoordinates()  
-\item output: None
+\item transition: None  
+\item output: \textcolor{red}{generate the HairStyleView Page}
 \item exception: None
 \end{itemize}
 
-\noindent updateAngle():
-\begin{itemize}
-\item transition: coordinates = HairStyleModule.getAngle()  
-\item output: None
-\item exception: None
-\end{itemize}
-
-\noindent buttonActionShort():
-\begin{itemize}
-\item transition: None 
-\item output: the camera view with user's hair style changed by calling Local function upDateHairColor(Short).
-\item exception: None
-\end{itemize}
-
-\noindent buttonActionTail():
-\begin{itemize}
-\item transition: None 
-\item output: the camera view with user's hair style changed by calling Local function upDateHairColor(Tail).
-\item exception: None
-\end{itemize}
-
-\noindent buttonActionBackToHome():
-\begin{itemize}
-\item transition: None 
-\item output: Go back to the home page interface.
-\item exception: None
-\end{itemize}
-
-\subsubsection{Local Functions}
-\noindent updateHairStyle(style, coordinates, angle):
-\begin{itemize}
-\item transition: None 
-\item output: the camera view with user's hair style changed.
-\item exception: None
-\end{itemize}
-  
+ 
 \newpage
 \section{MIS of Salon Recommendation View Module} \label{Module}
 \subsection{Module}
-M10 - SalonRecommendationView
+M10 - SalonRecommendationView \\
 Abstract Object Module
 
 \subsection{Uses}
@@ -1004,11 +1209,11 @@ None
 
 \subsubsection{Exported Access Programs}
 \begin{center}
-\begin{tabular}{p{4cm} p{3cm} p{4cm} p{4cm}}
+\begin{tabular}{p{6cm} p{3cm} p{4cm} p{3cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-showBarbers & void & View &  \\
+\textcolor{red}{SalonRecommendataionView} & void & \textcolor{red}{React.component} &  -\\
 \hline
 \end{tabular}
 \end{center}
@@ -1016,87 +1221,105 @@ showBarbers & void & View &  \\
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-addressInput: String \\
-map: GoogleMapsObject \\
-backToHome: UINavigationButton
+\textcolor{red}{selected: \{lat, lng\}} \wss{selected user location by latitude and longitude}
 
 \subsubsection{Environment Variables}
 Screen 
 
 \subsubsection{Assumptions}
-The map object is successfully generated from GoogleMap API before the showBarbers function is called.
+None
 
 \subsubsection{Access Routine Semantics}
-
-\noindent showBarbers():
+\noindent \textcolor{red}{SalonRecommendationView}():
 \begin{itemize}
 \item transition: None
-\item output: out := View 
+\item output: \textcolor{red}{generate the SalonRecommendationView Page} 
 \item exception: None
 \end{itemize}
 
 \subsubsection{Local Functions}
-\noindent onChange(event):
+\noindent \textcolor{red}{Map()}:
 \begin{itemize}
-\item transition: addressInput := event.text 
-\item output: out := None
+\item transition: \textcolor{red}{None}
+\item output: \textcolor{red}{generate the GoogleMap React Component}
 \item exception: None
 \end{itemize}
 
-\noindent onClick():
+\noindent \textcolor{red}{PlaceAutoComplete()}:
 \begin{itemize}
-\item transition: None 
-\item output: out := navigate back to home page
+\item transition: \textcolor{red}{None}
+\item output: \textcolor{red}{generate the autocomplete search bar react component}
 \item exception: None
 \end{itemize}
 
-\noindent generateMap():
+\noindent \textcolor{red}{locateUserLocation()}:
 \begin{itemize}
-\item transition: map := new GoogleMapsObject from Google Map API 
-\item output: out := None
+\item transition: \textcolor{red}{selected := located user location }
+\item output: None
 \item exception: None
 \end{itemize}
+
+\noindent \textcolor{red}{searchNearbySalon(lat, lng)}:
+\begin{itemize}
+\item transition: \textcolor{red}{None} 
+\item output: \textcolor{red}{use google map api to get nearby salons by the given latitude and longitude}
+\item exception: None
+\end{itemize}
+
 
 \section{MIS of Home View Module}
 \subsection{Module}
-M11 - HomeView Module\\
-UIView Module
+M11 - HomeView Module
 
 \subsection{Uses}
-Camera (M13) \\
-SwiftUI (External Module) \\
-RealityKit (External Module) \\
-ARKit (External Module) \\
+\textcolor{red}{None}
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
+\textcolor{red}{None}
+
 \subsubsection{Exported Access Programs}
+\begin{center}
+\begin{tabular}{p{4cm} p{3cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\textcolor{red}{HomeView} & \textcolor{red}{void} & \textcolor{red}{React.component} &  -\\
+\hline
+\end{tabular}
+\end{center}
 
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-body - View - View of the home interface, a swift object.
-currentMode - String - A string that describes current mode \\
-toHairColor - UIButton - Navigate to Haircolor view\\
-toHairStyle - UIButton - Navigate to Hairstyle view\\
-toSalonRecom - UIButton - Navigate to Salon Recommendation view\\
+\textcolor{red}{None}
 
 \subsubsection{Environment Variables}
+\textcolor{red}{Screen}
 
 \subsubsection{Assumptions}
+\textcolor{red}{None}
 
 \subsubsection{Access Routine Semantics}
-
-\subsubsection{Local Functions}
+\noindent \textcolor{red}{HomeView}():
+\begin{itemize}
+\item transition: None
+\item output: \textcolor{red}{generate the HomeView Page} 
+\item exception: None
+\end{itemize}
 
 \newpage
-\section{MIS of Error View Module} \label{Module} 
+
+\color{red}
+
+\section{MIS of Footer Module} \label{Module} 
 \subsection{Module}
-M12 - ErrorView
+M14 - Footer\\
 Abstract Object Module
+
 \subsection{Uses}
-None
+react, react-bootstrap, react-icons
 
 \subsection{Syntax}
 \subsubsection{Exported Constants}
@@ -1108,7 +1331,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-showError & String, String & UIAlertView & - \\
+\textcolor{red}{Footer} & \textcolor{red}{void} & \textcolor{red}{React.component} & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -1119,125 +1342,346 @@ showError & String, String & UIAlertView & - \\
 None
 
 \subsubsection{Environment Variables}
-Screen
+None
 
 \subsubsection{Assumptions}
 None
 
 \subsubsection{Access Routine Semantics}
 
-\noindent showError(title, message):
+\noindent \textcolor{red}{Footer()}:
 \begin{itemize}
 \item transition: None 
-\item output: the UIAlertView with the input title and the input message 
+\item output: \textcolor{red}{generate the Footer component.}
+\item exception: None
+\end{itemize}
+
+\newpage
+
+
+\section{MIS of NavBar Module} \label{Module} 
+\subsection{Module}
+M15 - NavBar\\
+Abstract Object Module
+
+\subsection{Uses}
+react, react-bootstrap, react-router-dom
+
+\subsection{Syntax}
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+\begin{center}
+\begin{tabular}{p{4cm} p{3cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\textcolor{red}{NavBar} & \textcolor{red}{void} & \textcolor{red}{React.component} & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+None
+
+\subsubsection{Environment Variables}
+None
+
+\subsubsection{Assumptions}
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \textcolor{red}{Footer()}:
+\begin{itemize}
+\item transition: None 
+\item output: \textcolor{red}{generate the NavBar component.}
+\item exception: None
+\end{itemize}
+\newpage
+
+
+
+
+\section{\textcolor{red}{MIS of ARCanvas Module}}
+\subsection{Module}
+\textcolor{red}{M16 - ARCanvas Module}\\
+Abstract Object Module
+
+\subsection{Uses}
+react, @react-three/fiber, @react-three/drei, facefilter, ThreeFiberHelper, HairModel
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+\textcolor{red}{None}
+
+\subsubsection{Exported Access Programs}
+\begin{center}
+\begin{tabular}{p{4cm} p{3cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+FaceFollower & props & React.component\\
+ThreeGrabber  & props & React.component\\
+compure\_sizing & & list[double] \\
+ARCanvas & selectedHair & React.component\\
+handle\_resize & & \\
+do\_resize  & & \\
+useEffect & sizing & \\
+callbackReady & errCode, spec &\\
+callbackTrack & detectStatesArg & \\
+callbackDetect & faceIndex, isDetected & \\
+\textcolor{red}{ARCanvas} & \textcolor{red}{url} & \textcolor{red}{React.component} &  -\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+\_maxFaceDetected: int\\
+\_faceFollowers: Array[int]\\
+expressions: null\\
+\_threeFiber: null\\
+
+\subsubsection{Environment Variables}
+\textcolor{red}{window}
+
+\subsubsection{Assumptions}
+\textcolor{red}{None}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent \textcolor{red}{FaceFollower}(props):
+\begin{itemize}
+\item transition: None
+\item output: \textcolor{red}{Generate the FaceFollower React component} 
+\item exception: None
+\end{itemize}
+
+\noindent \textcolor{red}{compute\_sizing}():
+\begin{itemize}
+\item transition: None
+\item output: \{width, height, top, left\} 
+\item exception: None
+\end{itemize}
+
+\noindent \textcolor{red}{ARCanvas}(selectedHair):
+\begin{itemize}
+\item transition: selectedHair := event.id
+\item output: \textcolor{red}{Generate the FaceFollower React component} 
+\item exception: None
+\end{itemize}
+
+\noindent \textcolor{red}{handle\_resize}():
+\begin{itemize}
+\item transition: \_timerResize := setTimeout(do\_resize, 200)
+\item output: None
+\item exception: None
+\end{itemize}
+
+
+
+\noindent \textcolor{red}{do\_resize}():
+\begin{itemize}
+\item transition: \_timerResize := null, sizing := newSizing
+\item output: None
+\item exception: None
+\end{itemize}
+
+\noindent \textcolor{red}{useEffect}(sizing):
+\begin{itemize}
+\item transition: \_timerResize := null, sizing := newSizing
+\item output: None
+\item exception: None
+\end{itemize}
+
+\noindent \textcolor{red}{callbackReady}(errCode, spec):
+\begin{itemize}
+\item transition: \_timerResize := null, sizing := newSizing
+\item output: None
+\item exception: None
+\end{itemize}
+
+\noindent \textcolor{red}{callbackTrack}(detectStatesArg):
+\begin{itemize}
+\item transition: detectStates := detectStatesArg.length  
+\item output: None
+\item exception: None
+\end{itemize}
+
+\noindent \textcolor{red}{callbackDetect}(faceIndex, isDetected):
+\begin{itemize}
+\item transition: None
+\item output: None
+\item exception: None
+\end{itemize}
+
+\newpage
+
+
+
+
+
+\section{\textcolor{red}{MIS of HairModel Module}}
+\subsection{Module}
+\textcolor{red}{M17 - HairModel Module}
+Abstract Object Module
+
+\subsection{Uses}
+\textcolor{red}{react, @react-three/drei}
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+\textcolor{red}{None}
+
+\subsubsection{Exported Access Programs}
+\begin{center}
+\begin{tabular}{p{4cm} p{3cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+\textcolor{red}{HairModel} & \textcolor{red}{url} & \textcolor{red}{React.component} &  -\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+\textcolor{red}{nodes: Three.mesh.geometry}\\
+\textcolor{red}{materials: Three.mesh.material}
+
+\subsubsection{Environment Variables}
+\textcolor{red}{Screen}
+
+\subsubsection{Assumptions}
+\textcolor{red}{None}
+
+\subsubsection{Access Routine Semantics}
+\noindent \textcolor{red}{HairModel}(url):
+\begin{itemize}
+\item transition: None
+\item output: \textcolor{red}{Import the gltf model from url and pre-load the Hair Model as React component} 
+\item exception: None
+\end{itemize}
+
+\newpage
+
+\section{\textcolor{red}{MIS of ThreeFiberHelper Module}}
+\subsection{Module}
+\textcolor{red}{M18 - ThreeFiberHelper Module}
+Abstract Object Module
+
+\subsection{Uses}
+\textcolor{red}{Three}
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+\textcolor{red}{None}
+
+\subsubsection{Exported Access Programs}
+\begin{center}
+\begin{tabular}{p{3cm} p{6cm} p{5cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+update\_poses & number[], ThreeCamera & - &  -\\
+\hline
+update & number[], ThreeCamera & - &  -\\
+\hline
+create\_occluder & any & Mesh\<any, ShaderMaterial\> &  -\\
+\hline
+update\_camera & \{width, height\}, ThreeCamera & - &  -\\
+\hline
+ThreeFiberHelper & - & React.component &  -\\
+\hline
+
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+\_settings: {double, [double, double], double, double}:
+\_threeFiberCompositeObjects: null\\
+\_threeProjMatrix : null\\
+\_previousSizing: {int, int}\\
+\_threeTranslation: null\\
+\_maxFaces: int\\
+\_detectCallback: null\\
+\_videoElement: null\\
+\_scaleWL: int\\
+\_canvasAspectRatio: int\\
+\_threeTranslation: Three.Vector3\\
+\_threeProjMatrix: Three.Matrix4\\
+
+\subsubsection{Environment Variables}
+\textcolor{red}{threeCamera}
+
+\subsubsection{Assumptions}
+\textcolor{red}{None}
+
+\subsubsection{Access Routine Semantics}
+
+
+\noindent \textcolor{red}{update\_poses}(ds, threeCamera):
+\begin{itemize}
+\item transition: halfTanFOVX := $tan(threeCamera.aspect * threeCamera.fov * pi /360)$
+\item output: None
+\item exception: None
+\end{itemize}
+
+\noindent \textcolor{red}{update}(detectStates, threeCamera):
+\begin{itemize}
+\item transition: None
+\item output: None
+\item exception: None
+\end{itemize}
+
+
+
+\noindent \textcolor{red}{create\_occluder}(occluderGeometry):
+\begin{itemize}
+\item transition: 
+\item output: occluderMesh := Three.Mesh(occluderGeometry)
+\item exception: None
+\end{itemize}
+
+\noindent \textcolor{red}{update\_camera}(sizing, threeCamera):
+\begin{itemize}
+\item transition: threeCamera.aspect := \_canvasAspectRatio, threeCamera.fov := fov, threeCamera.view := null
+\item output: None
+\item exception: None
+\end{itemize}
+
+
+\noindent \textcolor{red}{ThreeFiberHelper}():
+\begin{itemize}
+\item transition: None
+\item output: ThreeFiber object that finished setup and face detection
 \item exception: None
 \end{itemize}
 
 \subsubsection{Local Functions}
-None
 
-\newpage
-\section{MIS of Camera Model Module}
-\subsection{Module}
-M13 - CameraModel\\
-Abstract Object Module
-
-\subsection{Uses}
-AVCapture (External Module)\\
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-\begin{tabular}{p{4cm} p{3cm} p{4cm} p{4cm}}
-\hline
-\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-\hline
-Check & &  & AVCaptureRequestDenial \\
-setUp & &  & AVCaptureConfigureError \\
-takePic & &  & \\
-reTake & &  & \\
-savePic &  & Data & UIImageWriteToSavedPhotosAlbumException \\
-photoOutput &  &  & \\
-\hline
-\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{State Variables}
-AVCapturePhotoCaptureDelegate := \{ \\
-isTaken := false \\
-output := null \\
-session := AVCaptureSession()\\
-alert := false\\
-isSaved := false\\
-picData - Data - stores camera session image data\\
-\}\\
-
-\subsubsection{Environment Variables}
-
-\subsubsection{Assumptions}
-
-\subsubsection{Access Routine Semantics}
-\noindent Check():
+\noindent detect(detectState):
 \begin{itemize}
-\item transition: AVCaptureDevice.authorizationStatus(for: .video) ? setUp() : AVCaptureDevice.requestAccess(for: .video)
-\item output: 
-\item exception: AVCaptureRequestDenial
-\end{itemize}
-
-\noindent setUp():
-\begin{itemize}
-\item transition: AVCaptureDevice := AVCaptureDevice.default(.builtInWideAngleCamera, for: .video) 
-\item output: 
-\item exception: AVCaptureConfigureError
-\end{itemize}
-
-\noindent takePic():
-\begin{itemize}
-\item transition: \\  
-isTaken := !self.isTaken\\
-output.capturePhoto := (with: AVCapturePhotoSettings(), delegate: self)
-\item output: 
+\item input: None
+\item transition: detect face and set up AR using ThreeFiber library on state variable \_settings
+\item output: None
 \item exception:
 \end{itemize}
 
-\noindent reTake():
-\begin{itemize}
-\item transition: \\  
-isTaken := !self.isTaken\\
-isSaved := false\\
-self.output.capturePhoto := (with: AVCapturePhotoSettings(), delegate: self)
-\item output: 
-\item exception:
-\end{itemize}
-
-\noindent savePic():
-\begin{itemize}
-\item transition: \\  
-isSaved := true\\
-\item output: picData
-\item exception: UIImageWriteToSavedPhotosAlbumException
-\end{itemize}
-
-\noindent photoOutput():
-\begin{itemize}
-\item transition: \\  
-picData := AVCapturePhotoOutput.photo.fileDataRepresentation()
-\item output: 
-\item exception:
-\end{itemize}
-
-\subsubsection{Local Functions}
-\bibliographystyle {plainnat}
-\bibliography {../../../refs/References}
-
-\newpage
-
+\color{black}
 \section{Appendix} \label{Appendix} 
 
 \end{document}
