@@ -7,7 +7,9 @@
 \usepackage{tabularx}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage[normalem]{ulem}
 \usepackage{hyperref}
+
 \hypersetup{
     colorlinks,
     citecolor=blue,
@@ -33,7 +35,7 @@
 
 \begin{document}
 
-\title{System Design for Hairesthetics}
+\title{System Design for HairEsthetics}
 
 \author{Team 18 \\ Charlotte Cheng
         \\ Marlon Liu
@@ -57,6 +59,8 @@
 Jan 12 & 1.0 & Initial Draft\\
 Jan 14 & 1.1 & Minor changes\\
 Jan 16 & 1.2 & team review and revision \\
+\textcolor{red}{Apr 3} & 2.0 & Revision 1 \\
+\textcolor{red}{Apr 4} & 2.1 & Minor update\\
 \bottomrule
 \end{tabularx}
 
@@ -66,29 +70,34 @@ Jan 16 & 1.2 & team review and revision \\
 
 This section records information for easy reference.
 
-\subsection{Abbreviations and Acronyms}
+\subsection{\textcolor{red}{Abbreviations and Acronyms}}
 
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{l l} 
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
-  ML & Machine Learning \\
-  UI & User Interface\\
+  AC & Anticipated Change\\
   AI & Artificial Intelligence \\
   AR & Augumented Reality \\
-  App & Application \\
   API & Application programming interface\\
-  REST & Representational state transfer\\
-  RGB & Red, Green, Blue \\
-  OS & Operating System \\
+  App & Application \\
+  DAG & Directed Acyclic Graph \\
+  M & Module \\
   macOS & Operating system developed by Apple Inc \\
-  SRS & Software Requirement Specification \\
-  VnVPlan & Validation and Verification Plan \\
   MG & Module Guide \\
   MIS & Module Interface Specification \\
+  ML & Machine Learning \\
+  OS & Operating System \\
+  R & Requirement\\
+  REST & Representational state transfer\\
+  RGB & Red, Green, Blue \\
+  SC & Scientific Computing \\
+  SRS & Software Requirement Specification \\
+  UC & Unlikely Change \\
+  UI & User Interface\\
   \bottomrule
-\end{tabular}\\
+\end{tabular}
 
 \newpage
 
@@ -135,8 +144,8 @@ The purpose of this document is to effectively communicate the overall design of
 \subsection{System Context Diagram}
 \begin{center}
 \begin{figure}[H]
-\graphicspath{ {system_context.jpg} }
-\includegraphics[width=1\textwidth]{system_context}
+\graphicspath{ {system_context_diagram_1.jpg} }
+\includegraphics[width=1\textwidth]{system_context_diagram_1}
 \caption{System Context Diagram}
 \label{Fig_SystemContext} 
 \end{figure}
@@ -184,11 +193,11 @@ FR6 & The system must mark the corners and shape with facial landmark coordinate
 \midrule
 FR7 & The system must store the coordinates from the hair and facial features & Store the coordinates real-time using cache\\
 \midrule
-HM9 & The system should output the transformed face in image or video & Display the change using the camera view\\
+HM12 & The system should output the transformed face in image or video & Display the change using the camera view\\
 \midrule
-HM10 & The system should detect hair edges on detected faces & Use hair segmentation algorithm (UNet) to compute hair edge coordinates\\
+HM6 & The system should detect hair edges on detected faces & Use hair segmentation algorithm (UNet) to compute hair edge coordinates\\
 \midrule
-LR1 & The installation process must be completed within 3 steps & The app should be available on app store to allow easy installation\\
+\sout{LR1} & \sout{The installation process must be completed within 3 steps} & \sout{The app should be available on app store to allow easy installation}\\
 
 \bottomrule
 \end{tabularx}
@@ -249,7 +258,7 @@ The user interface for Hairesthetics on MacOS is designed to be intuitive and ea
 
 \noindent The app settings for Hairesthetics are accessed through a dedicated settings menu, which is accessible from the toolbar. The settings menu allows the user to configure various aspects of the app, including user preferences and app appearance. It also displays details about application version, privacy levels. \\
 
-\noindent The layout and components of the user interface are detailed in the appendix of this document, which was created using Figma, a design tool.
+\noindent The layout and components of the user interface \ref{UI:1} are detailed in the appendix of this document, which was created using Figma, a design tool.
 
 \section{Design of Communication Protocols}
 
@@ -266,13 +275,13 @@ This is a rough outline of the timeline for the project, and the specific tasks 
 \textbf{Week} & \textbf{Task} & \textbf{Responsible Member(s)}\\
 \midrule
 1-3 & Facial feature detection and hair segmentation & Marlon Liu, Bill Song \\
-& UI/UX design and ARKit exploration & Charlotte Cheng, Senni Tan \\
+& UI/UX design and \sout{ARKit exploration} \textcolor{red}{Three.js simulations} & Charlotte Cheng, Senni Tan \\
 \midrule
 4-6 & API and model training development & Hongwei Niu \\
 & Hair model artist and 3D simulation & Qiushi Xu \\
 \midrule
 7-8 & Refining and improving computer vision algorithms & Marlon Liu, Bill Song \\
-& Implementing AR interface in iOS application & Qiushi Xu, Charlotte Cheng, Senni Tan  \\
+& Implementing AR interface in \sout{iOS} \textcolor{red}{React web} application & Qiushi Xu, Charlotte Cheng, Senni Tan  \\
 \midrule
 9-10 & Finalizing backend and APIs & Hongwei Niu \\
 & Integrating 3D hair simulations into AR interface & Qiushi Xu \\
@@ -298,13 +307,20 @@ This is a rough outline of the timeline for the project, and the specific tasks 
   \centering
   \includegraphics[width=0.8\linewidth]{MainView.png}
   \caption{Hairstyle View of the app, exported from Figma}
+  \label{UI:1}
 \end{figure}
+\textcolor{red}{
+The AR Hairstyle simulation View of an app allows users to virtually try on different hairstyles in real-time. The interface uses augmented reality (AR) technology to superimpose the selected hairstyle on the user's image or a 3D model of the user's head. The interface has various options for selecting hairstyles, including a sub-menu for dynamically changing hair color. Users will be able to browse through different hairstyles and select the one they want to try on. 
+}
+
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.8\linewidth]{AppSettings.png}
   \caption{App Settings of the app, exported from Figma}
 \end{figure}
+\textcolor{red}{
+The app settings view allows users to customize and control various aspects of the app. It includes a navigation menu, text fields for software version and buttons for adjusting privacy level, and a help/support section. The settings view is designed to provide users with a personalized app experience that meets their preferences and needs.}
 
 \section{Communication Protocols}
 

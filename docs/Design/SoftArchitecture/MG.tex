@@ -6,8 +6,12 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{graphicx}
-\usepackage{float}
+\usepackage{float}-
+\usepackage [english]{babel}
+\usepackage [autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
 \usepackage{hyperref}
+\usepackage[normalem]{ulem}
 \hypersetup{
     colorlinks,
     citecolor=blue,
@@ -33,7 +37,7 @@
 
 \begin{document}
 
-\title{Module Guide for Hairesthetics}
+\title{Module Guide for HairEsthetics}
 
 \author{Team 18 \\ Charlotte Cheng
         \\ Marlon Liu
@@ -53,7 +57,8 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Jan 16 & 0 & Rev0 MG\\
+Jan 16 & 1.0 & Rev0 MG\\
+\textcolor{red}{Apr 3} & \textcolor{red}{2.0} & \textcolor{red}{Revision 1}\\
 \bottomrule
 \end{tabularx}
 
@@ -63,7 +68,7 @@ Jan 16 & 0 & Rev0 MG\\
 
 This section records information for easy reference.
 
-\subsection{Abbreviations and Acronyms}
+\subsection{\textcolor{red}{Abbreviations and Acronyms}}
 
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{l l} 
@@ -71,26 +76,29 @@ This section records information for easy reference.
   \textbf{symbol} & \textbf{description}\\
   \midrule 
   AC & Anticipated Change\\
-  DAG & Directed Acyclic Graph \\
-  M & Module \\
-  OS & Operating System \\
-  R & Requirement\\
-  SC & Scientific Computing \\
-  \progname & Explanation of program name\\
-  UC & Unlikely Change \\
-  ML & Machine Learning \\
-  UI & User Interface\\
   AI & Artificial Intelligence \\
   AR & Augumented Reality \\
-  App & Application \\
   API & Application programming interface\\
-  REST & Representational state transfer\\
-  RGB & Red, Green, Blue \\
+  App & Application \\
+  DAG & Directed Acyclic Graph \\
+  M & Module \\
   macOS & Operating system developed by Apple Inc \\
-  SRS & Software Requirement Specification \\
-  VnVPlan & Validation and Verification Plan \\
   MG & Module Guide \\
   MIS & Module Interface Specification \\
+  ML & Machine Learning \\
+  OS & Operating System \\
+  R & Requirement\\
+  REST & Representational state transfer\\
+  RGB & Red, Green, Blue \\
+  SC & Scientific Computing \\
+  SRS & Software Requirement Specification \\
+  UC & Unlikely Change \\
+  UI & User Interface\\
+
+
+
+  VnVPlan & Validation and Verification Plan \\
+
   \bottomrule
 \end{tabular}\\
 
@@ -115,7 +123,7 @@ This section records information for easy reference.
 	This Module Guide(MG) of our project is developed after the Software Requirements Specification(SRS). The purpose of the MG is to explain the structure of modules based on selected design principles and patterns which further helps understand the project's functionalities based on the SRS. It also briefly introduces the services each module provides.
 	
 	\subsection{Design Principles}
-	The design principles which would be used in the MG include information Hiding, high cohesion, low coupling, high fan-in, and low fan-out for module decomposition. Information Hiding includes identifying and encapsulating the expected changes. 
+	The design principles which would be used in the MG include information hiding, high cohesion, low coupling, high fan-in, and low fan-out for module decomposition. The information-hiding principle includes identifying and encapsulating the expected changes. 
 
     \subsection{Design Pattern}
     Our project follows the MVC (model-view-controller) design pattern. MVC allows us to apply the separation of concern principle and breaks the complex problem into smaller sub-problems that can be solved in different modules. 
@@ -159,9 +167,9 @@ change.
 \noindent \begin{itemize}
 
 \item[AC\refstepcounter{acnum}\theacnum\label{LC_meaningfulLabel}:] 
-This project will only result in the development of a MacOS app. However, an android application may also be developed to work with, or in place of, the MacOS application in the future.
+This project will only result in the development of a \sout{MacOS app} \textcolor{red}{web application}. \sout{However, an android application may also be developed to work with, or in place of, the MacOS application in the future.}
 \item[AC\refstepcounter{acnum}\theacnum\label{LC_meaningfulLabel}:] 
-The application may be extended to offer compatibility as a web application.
+\sout{he application may be extended to offer compatibility as a web application.}
 \item[AC\refstepcounter{acnum}\theacnum\label{LC_meaningfulLabel}:] 
 The application will not initially pursue functionality for users to "cut" their 3D simulated hair.
 \item[AC\refstepcounter{acnum}\theacnum\label{LC_meaningfulLabel}:] 
@@ -234,20 +242,24 @@ below, which are leaves in the hierarchy tree, are the modules that will
 actually be implemented.
 
 \begin{description}
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Controller Module
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Facial Recognition Module
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \sout{Controller Module} \textcolor{red}{App Module}
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \textcolor{red}{Server Module}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hair Color Module
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hair Style Module
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \textcolor{red}{Worker Module}
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \textcolor{red}{Image Worker Module}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Salon Recommendation Module
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] ML Model Module
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Utility Module
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \textcolor{red}{Hair Artist Module}
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \textcolor{red}{Model Utils Module}
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \textcolor{red}{Image Utils Module}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hair Color View Module
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hair Style View Module
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Salon Recommendation View Module
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Home View Module
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Error View Module
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Camera Module
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Launch View Module
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \sout{Error View Module} \textcolor{red}{Footer Module}
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \sout{Camera Module} \textcolor{red}{NavBar Module}
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \sout{Launch View Module} \textcolor{red}{AR Canvas Module}
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \textcolor{red}{HairModel Module}
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] \textcolor{red}{ThreeFiber Helper Module}
 \end{description}
 
 \begin{table}[H]
@@ -257,23 +269,33 @@ actually be implemented.
 \textbf{Level 1} & \textbf{Level 2}\\
 \midrule
 
-{Hardware-Hiding Module} & M13 \\
+{Hardware-Hiding Module} & \sout{M13} \textcolor{red}{M1} \\
 \midrule
 
 \multirow{7}{0.3\textwidth}{Behaviour-Hiding Module}
-& M1\\
+& \sout{M1}\\
 & M2\\
 & M3\\
 & M4\\
 & M5\\
-& M8\\
-& M9\\
+& \textcolor{red}{M6} \\
+& \textcolor{red}{M7} \\
 & M10\\
 & M11\\
+& \textcolor{red}{M12} \\
+& \textcolor{red}{M13} \\
 & M14\\
+& \textcolor{red}{M15} \\
+& \textcolor{red}{M16} \\
+& \textcolor{red}{M17} \\
 \midrule
 
-\multirow{2}{0.3\textwidth}{Software Decision Module} & M6 \\  & M7\\
+\multirow{2}{0.3\textwidth}{Software Decision Module} 
+& \sout{M6} \\  
+& \sout{M7}\\
+& \textcolor{red}{M8} \\
+& \textcolor{red}{M9}\\
+& \textcolor{red}{M18} \\
 \bottomrule
 
 \end{tabular}
@@ -303,23 +325,23 @@ The software architecture we use is the model-view-controller(MVC) architecture,
 So we will follow the MVC architecture while decomposing our modules.
 
 
-\subsection{Hardware Hiding Modules (M13)}
+\subsection{Hardware Hiding Modules}
 
 \begin{description}
 \item[Secrets:]The implementation of the hardware adaptation.
 \item[Services:]This module would allow the software to change and adapt the changes of hardware environment.
-\item[Implemented By:] Swift
+\item[Implemented By:] \textcolor{red}{Python}
 \end{description}
 
-\subsubsection{Camera Module (M13)}
+\subsubsection{\sout{Camera Module }}
 
 \begin{description}
-\item[Secrets:]The implementation of access to camera.
-\item[Services:]Provide access for the app to the device's camera.
-\item[Implemented By:] Swift
+\item[Secrets:] The implementation of access to camera.
+\item[Services:] Provide access for the app to the device's camera.
+\item[Implemented By:] \textcolor{red}{Python}
 \end{description}
 
-\subsection{Behaviour-Hiding Module(M1, M2, M3, M4, M5, M8, M9, M10, M11, M12)}
+\subsection{Behaviour-Hiding Module(M2, M3, M4, M5, M6, M7, M10, M11, M12, M13, M14, M15, M16, M17)}
 
 \begin{description}
 \item[Secrets:]The implementation of the behaviors of our application after processing user input
@@ -327,21 +349,23 @@ So we will follow the MVC architecture while decomposing our modules.
   hardware-hiding module and the software decision module.
 \end{description}
 
-\subsubsection{Controller Module (M1)}
+\subsubsection{\textcolor{red}{App Module (M1)}}
 
+\color{red}
 \begin{description}
-\item[Secrets:]Controllers to interact with the model and view components after processing the user input.
-\item[Services:]Provides communication between the user inputs and modules and passes them to the UI.
-\item[Implemented By:] Python / Swift
-\item[Type of Module:] Abstract Data Type
+\item[Secrets:] \textcolor{red}{The implementation of the entire application}
+\item[Services:]\textcolor{red}{The app module initializes the web application and manages the routes in the frontend.}
+\item[Implemented By:] React
+\item[Type of Module:] Abstract Object
 \end{description}
+\color{black}
 
-\subsubsection{Facial Recognition Module (M2)}
+\subsubsection{\textcolor{red}{Server Module (M2)}}
 
 \begin{description}
-\item[Secrets:]Algorithm for detecting faces in the input image/video.
-\item[Services:]Detect faces in the input image/video and provide facial landmarks
-\item[Implemented By:] Python
+\item[Secrets:] \textcolor{red}{The server endpoints and WebSocket implementations}
+\item[Services:]\textcolor{red}{It routes the requests to corresponding endpoints and establishes workers to handle the requests.}
+\item[Implemented By:] Python, \textcolor{red}{Flask, SocketIO}
 \item[Type of Module:] Abstract Object
 \end{description}
 
@@ -354,16 +378,36 @@ So we will follow the MVC architecture while decomposing our modules.
 \item[Type of Module:] Abstract Object
 \end{description}
 
-\subsubsection{Hair Style Module (M4)}
+\subsubsection{\sout{Hair Style Module (M4)}}
 
 \begin{description}
-\item[Secrets:]Algorithm for adding new hair on detected faces
-\item[Services:]Obtain position and rotation degree for adding AR hair model based on input user faces.
-\item[Implemented By:] Python
-\item[Type of Module:] Abstract Object
+\item[Secrets:]\sout{Algorithm for adding new hair on detected faces}
+\item[Services:]\sout{Obtain position and rotation degree for adding AR hair model based on input user faces.}
+\item[Implemented By:] \sout{Python}
+\item[Type of Module:] \sout{Abstract Object}
 \end{description}
 
-\subsubsection{Salon Recommendation Module (M5)}
+\color{red}
+\subsubsection{\textcolor{red}{Worker Module (M4)}}
+
+\begin{description}
+\item[Secrets:] The details of how input image frames are handled and results are produced.
+\item[Services:] Handle input frames with individual threads that perform hair color change.
+\item[Implemented By:] Python, Thread
+\item[Type of Module:] Abstract Data Type
+\end{description}
+
+\subsubsection{\textcolor{red}{Image Worker Module (M5)}}
+
+\begin{description}
+\item[Secrets:] The details of how image files are handled and results are produced.
+\item[Services:] Handle input image file and produce hair color change.
+\item[Implemented By:] Python
+\item[Type of Module:] Abstract Data Type
+\end{description}
+
+\color{black}
+\subsubsection{Salon Recommendation Module (M6)}
 
 \begin{description}
 \item[Secrets:] The implementation of nearby salon recommendation.
@@ -373,62 +417,112 @@ So we will follow the MVC architecture while decomposing our modules.
 \item[Type of Module:] Abstract Object
 \end{description}
 
-\subsubsection{Hair Color View Module (M8)}
+\color{red}
+\subsubsection{\textcolor{red}{Hair Artist Module (M7)}}
+
+\begin{description}
+\item[Secrets:] Encapsulates the necessary models, library, and functions to perform hair color change. 
+\item[Services:] Serve as the model and algorithm interface for workers to interact with.
+\item[Implemented By:] Python
+\item[Type of Module:] Abstract Data Type
+\end{description}
+
+\color{black}
+
+\subsubsection{Hair Color View Module (M10)}
 
 \begin{description}
 \item[Secrets:] Algorithms and data structure for the hair color changing screen.
 \item[Services:] Display the resulted color of hair when user changes the hair color.
-\item[Implemented By:] Swift
+\item[Implemented By:] \textcolor{red}{React}
 \item[Type of Module:] Abstract Object
 \end{description}
 
-\subsubsection{Hair Style View Module (M9)}
+\subsubsection{Hair Style View Module (M11)}
 
 \begin{description}
-\item[Secrets:] Algorithms and data structure for hair style changing screen.
-\item[Services:] Put the selected AR hair model to the detected face when user press the buttons accordingly.
-\item[Implemented By:] Swift
+\item[Secrets:] Algorithms and data structure for hairstyle changing screen.
+\item[Services:] Put the selected AR hair model to the detected face when the user presses the buttons accordingly.
+\item[Implemented By:] \textcolor{red}{React}
 \item[Type of Module:] Abstract Object
 \end{description}
 
-\subsubsection{Salon Recommendation View Module (M10)}
+\subsubsection{Salon Recommendation View Module (M12)}
 
 \begin{description}
 \item[Secrets:] Algorithms and data structure for salon recommendation screen.
 \item[Services:] Display nearby hair salon and display information about a chosen salon.
-\item[Implemented By:] Python, Google Maps API
+\item[Implemented By:] \textcolor{red}{React}
 \item[Type of Module:] Abstract Object
 \end{description}
 
-\subsubsection{Home View Module (M11)}
+\subsubsection{Home View Module (M13)}
 
 \begin{description}
 \item[Secrets:] Algorithms and data structure for displaying the home screen.
-\item[Services:] Provide basic guidance and buttons for the users to start using the app.
+\item[Services:] Provide basic guidance for the users to start using the app.
 
-\item[Implemented By:] Swift
+\item[Implemented By:]\textcolor{red}{React}
 \item[Type of Module:] Abstract Object
 \end{description}
 
-\subsubsection{Error View Module (M12)}
+\subsubsection{\sout{Error View Module (M12)}}
 
 \begin{description}
-\item[Secrets:] Algorithms and data structure for displaying the error screen.
-\item[Services:] Provide details and guidance to errors happening in the application.
-\item[Implemented By:] Swift
-\item[Type of Module:] Abstract Object
+\item [Secrets:] \sout{Algorithms and data structure for displaying the error screen.}
+\item[Services:] \sout{Provide details and guidance to errors happening in the application.}
+\item[Implemented By:] \sout{Swift}
+\item[Type of Module:] \sout{Abstract Object}
 \end{description}
 
-\subsubsection{Launch View Module (M14)}
+\subsubsection{\sout{Launch View Module (M14)}}
 
 \begin{description}
-\item[Secrets:] Algorithms and data structure for displaying the error screen.
-\item[Services:] Provide details and status when loading the application.
-\item[Implemented By:] Swift
+\item[Secrets:] \sout{Algorithms and data structure for displaying the error screen.}
+\item[Services:] \sout{Provide details and status when loading the application.}
+\item[Implemented By:] \sout{Swift}
+\item[Type of Module:] \sout{Abstract Object}
+\end{description}
+
+\color{red}
+\subsubsection{\textcolor{red}{Footer Module (M14)}}
+
+\begin{description}
+\item[Secrets:] Implementation of the footer of the web page. 
+\item[Services:] Serve as a component at the bottom of the web page.
+\item[Implemented By:] React
 \item[Type of Module:] Abstract Object
 \end{description}
 
-\subsection{Software Decision Module (M6, M7)}
+\subsubsection{\textcolor{red}{NavBar Module (M15)}}
+
+\begin{description}
+\item[Secrets:] Implementation of the NavBar at the top of the web page and the navigation to other pages from the NavBar. 
+\item[Services:] Serve as the component at the top of the web page and provide navigation to other pages.
+\item[Implemented By:] React
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{\textcolor{red}{AR Canvars Module (M16)}}
+
+\begin{description}
+\item[Secrets:] Implementation of face detection for the AR (ThreeFiberHelper Module). 
+\item[Services:] Serve as the component that provides the face detection for the AR module (ThreeFiberHelper Module).
+\item[Implemented By:] React
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{\textcolor{red}{Hair Model Module (M17)}}
+
+\begin{description}
+\item[Secrets:] Implementation of hair AR models. 
+\item[Services:] Serve as the models that provide different hair styles.
+\item[Implemented By:] React
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\color{black}
+\subsection{Software Decision Module (M8, M9, M18)}
 
 \begin{description}
 \item[Secrets:] The design decision based on mathematical models, and real-world objects in the form of data structures. It also includes libraries required to support behavioral functionalities.
@@ -438,7 +532,7 @@ So we will follow the MVC architecture while decomposing our modules.
 \item[Implemented By:] Python
 \end{description}
 
-\subsubsection{ML Model Module (M6)}
+\subsubsection{\sout{ML Model Module (M6)} \textcolor{red}{Model Utils Module (M8)}}
 
 \begin{description}
 \item[Secrets:]Data structure for representing a pre-trained model
@@ -447,7 +541,7 @@ So we will follow the MVC architecture while decomposing our modules.
 \item[Type of Module:] Abstract Object
 \end{description}
 
-\subsubsection{Utility Module (M7)}
+\subsubsection{\sout{Utility Module (M7)} \textcolor{red}{Image Utils Module (M9)}}
 
 \begin{description}
 \item[Secrets:]Utility functions for image processing
@@ -456,6 +550,17 @@ So we will follow the MVC architecture while decomposing our modules.
 \item[Type of Module:] Library
 \end{description}
 
+\color{red}
+\subsubsection{\textcolor{red}{ThreeFiber Helper Module (M18)}}
+
+\begin{description}
+\item[Secrets:]Utility functions for applying AR hairstyles
+\item[Services:] This module will provide utility services and operations required for applying AR hair style models.
+\item[Implemented By:] React
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\color{black}
 \section{Traceability Matrix} \label{SecTM}
 
 This section shows two traceability matrices: between the modules and the
@@ -469,24 +574,26 @@ requirements and between the modules and the anticipated changes.
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-FR1 & M8, M9\\
-FR2 & M7\\
-FR3 & M2, M6\\
-FR6 & M2\\
-FR7 & M2, M6\\
-HM1 & M8\\
-HM2 & M3\\
+FR1 & \sout{M8, M9} \textcolor{red}{M16, M18}\\
+FR2 & M7, \textcolor{red}{M16}\\
+FR3 & \sout{M2, M6} \textcolor{red}{M7}\\
+FR6 & \sout{M2} \textcolor{red}{M16}\\
+FR7 & \sout{M2, M6} \textcolor{red}{M16, M17}\\
+HM1 & \sout{M8} \textcolor{red}{10}\\
+HM2 & \sout{M3} \\
 HM3 & M3\\
-HM4 & M4, M6\\
-HM5 & M9\\
-HM7 & M7\\
-HM8 & M4\\
-HM9 & M8, M9\\
-HM10 & M3, M6\\
-HR1 & M10 \\
-HR2 & M5 \\
-HR3 & M10 \\
-HR4 & M5 \\
+HM4 & M4, \sout{M6} \textcolor{red}{M5}\\
+HM5 & \sout{M9} \textcolor{red}{M10}\\
+HM7 & \sout{M7} \\textcolor{red}{M11}\\
+HM8 & \sout{M4} \textcolor{red}{M16, M18}\\
+HM9 & \sout{M8, M9} \textcolor{red}{M16}\\
+\sout{HM10} & M3, M6\\
+HM11 & \sout{M3, M6} \textcolor{red}{M17}\\
+HM12 & \sout{M3, M6} \textcolor{red}{M11}\\
+HR1 & \sout{M10} \textcolor{red}{M12} \\
+HR2 & \sout{M5} \textcolor{red}{M6} \\
+HR3 & \sout{M10} \textcolor{red}{M12} \\
+HR4 & \sout{M5} \textcolor{red}{M6}  \\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Requirements and Modules}
@@ -499,16 +606,16 @@ HR4 & M5 \\
 \toprule
 \textbf{AC} & \textbf{Modules}\\
 \midrule
-AC1 & M8, M9, M10, M11, M12\\
-AC2 & Not applicable \\
-AC3 & M4, M9 \\
-AC4 & M6 \\
+AC1 & \textcolor{red}{M10, M11, M12, M13, M14, M15, M16, M17, M18}\\
+\sout{AC2} & Not applicable \\
+AC3 & \sout{M4, M9} \textcolor{red}{M16} \\
+\sout{AC4} & M6 \\
 AC5 & Not applicable \\
-AC6 & M1\\
-AC7 & M2, M4, M5\\
-AC8 & M8, M9, M10, M11, M12\\
-AC9 & M5, M10\\
-AC10 & M4, M9\\
+AC6 & \sout{M1} \textcolor{red}{M2}
+AC7 & \sout{M2, M4, M5} \textcolor{red}{M3, M6, M16}\\
+AC8 & \sout{M8, M9, M10, M11, M12} \textcolor{red}{M10, M11, M12, M13, M14, M15, M16, M17, M18} \\
+AC9 & \sout{M5, M10} \textcolor{red}{M3, M4, M5}\\
+AC10 & \sout{M4, M9} \textcolor{M3, M17}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}
@@ -535,22 +642,31 @@ because they use modules from the lower levels.
 % \label{FigUH}
 % \end{figure}
 
-\subsection{Use Hierarchy Diagram}
+\subsection{\textcolor{red}{Use Hierarchy Diagram}}
 \begin{center}
 \begin{figure}[H]
 % \graphicspath{ {component_diagram.jpg} }
-\includegraphics[width=1\textwidth]{Design/SoftArchitecture/use_hierarchy.jpg}
+\includegraphics[width=1\textwidth]{Design/SoftArchitecture/use_hierarchy_new.png}
 \caption{Use hierarchy among modules}
 \label{FigUH} 
 \end{figure}
 \end{center}
 
-\subsection{UML Diagram}
+\subsection{\textcolor{red}{UML Diagram}}
 \begin{center}
 \begin{figure}[]
 % \graphicspath{ {component_diagram.jpg} }
-\includegraphics[width=0.8\textwidth, scale=0.8, keepaspectratio]{Design/SoftArchitecture/UML.png}
-\caption{UML Diagram}
+\includegraphics[width=0.8\textwidth, scale=1.5, keepaspectratio]{Design/SoftArchitecture/uml1.png}
+\caption{UML Diagram Part 1}
+\label{FigUH} 
+\end{figure}
+\end{center}
+
+\begin{center}
+\begin{figure}[]
+% \graphicspath{ {component_diagram.jpg} }
+\includegraphics[width=0.8\textwidth, scale=1.5, keepaspectratio]{Design/SoftArchitecture/uml2.png}
+\caption{UML Diagram Part 2}
 \label{FigUH} 
 \end{figure}
 \end{center}
