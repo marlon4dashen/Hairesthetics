@@ -19,30 +19,66 @@
 
 \begin{document}
 
-\begin{table}[hp]
-\caption{Revision History} \label{TblRevisionHistory}
-\begin{tabularx}{\textwidth}{llX}
-\toprule
-\textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
-\midrule
-Apr 1 & team & final reflection\\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\newpage
-
 \maketitle
-
 This reflection report documents the journey of our team throughout the development of our capstone project, which aimed to address a particular challenge or problem in a specific domain. Over the course of the project, we engaged in a range of tasks, such as conducting research, developing and testing prototypes, and implementing a final solution. This report is a detailed account of the lessons we learned, the challenges we faced, and the strategies we employed to overcome them. It is also an opportunity for us to reflect on the strengths and weaknesses of our project, and to identify areas for future improvement. Ultimately, this report serves as a record of our collective experience and as a way for us to share our insights and learning with others.
 
-\section{Project Overview}
+\section{Changes in Response to Feedback}
 
-The goal of the capstone project was to develop an application that allows users to experiment with different hairstyles and hair colors virtually, and to facilitate their search for nearby salons. To achieve this, we aimed to build a user-friendly and interactive web application that allows users to try on different hairstyles and colors using advanced image processing algorithms and socket transmission technology. Additionally, we wanted the application to include a search functionality that enables users to find salons in their area. Our project requirements also included ensuring that the application is accessible across different platforms and devices and that it adheres to best practices in terms of security, privacy, and user experience.
+Over the course of the project, we got lots of feedback from TAs, the instructor, teammates user testers, and other teams in terms of project planning, implementation, testing, and documentation.
+
+Our initial design was to develop an application to help users to try on different hairstyles and hair colors and to search for nearby salons. This initial idea was approved by the instructor, and we were planning to make this an iOS mobile application because we found out iOS had a useful AR package and Python AI could support face detection. However, as the development went on, we faced the challenge that the Python Flask backend was not compatible with the iOS application. We immediately scheduled a meeting to discuss this problem and we decided to do further research about some compatible frameworks we could use. After researching and discussing, we used React.js since it was highly compatible with Python Flask backend and there were lots of AR packages supported by React framework. 
+
+After the revision 0 demonstration, we got some useful feedback from the instructor. At that time, our frontend web page did not use the same style for each component, so instructor said that the different components in our web did not look like the components in the same app. We definitely addressed this problem and improved the UI for the later revision 1 demonstration. After the implementation, we also did lots of tests on our project. User feedback was an important part of user testing. We invited some user testers to experience our application and fill out the survey. From this, we further verify the test cases for our project and improve the project based on user feedback.
+
+In terms of documentation, we got lots of feedback from the TA and peer feedback from the other team. Feedback from the TA focused more on the content of our documentation. Because our project was not done when writing those documents, there were some ambiguous and inconsistencies in our documents. From the feedback provided by the TA, we can address this problem and make all our documents consistent with our final product. Feedback from the other team focused more on the structure of the documents, we could know which part we were missing, and we can now complete that in our final documentation.
+
+\subsection{SRS and Hazard Analysis}
+As mentioned above, we were initially planning to develop our app on iOS and later changed to React web therefore we updated the SRS and HA documents to be consistent with these changes. Also, feedback from the TA and other teams both mentioned that we were missing rationales in some sections, so we updated this as well.
 
 
-\section{Key Accomplishments}
-  
+\subsection{Design and Design Documentation}
+As mentioned above, we were initially planning to develop our app on iOS and later changed to React web therefore the main update of the design documentation was to address this issue. We re-drew the UML, and some other structure diagrams to make our documents consistent with our final design. And the remaining sections of the design documents were also updated based on the new design and the new diagrams.
+
+\subsection{VnV Plan and Report}
+The feedback from the TA and other teams showed our VnV Plan and Report document had some unclear statements, we addressed this problem and re-word some of the test method statements to make it clear how we applied the test. Also, the TA mentioned that there were some inconsistencies between the VnV Plan and the Report, this was addressed as well. For the VnV Report, more details were provided, such as the overview of the testers and a summary of the feedback and results received from each tester.
+
+\section{Design Iteration (LO11)}
+
+Our initial idea was to develop an application to help users to try on different hairstyles and hair colors and to search for nearby salons. We conducted some research and found out iOS had a useful AR package and Python AI could support face detection. This initial idea was approved by the instructor, and we were planning to make this an iOS mobile application. Along the way to enrich our design, we continued researching relevant technologies online and wrote documentation about our design and project plan. However, as the development went on, we faced the challenge that the Python Flask backend was not compatible with the iOS application. We immediately scheduled a meeting to discuss this problem and we decided to do further research about some compatible frameworks we could use. After researching and discussing, we used React.js since it was highly compatible with Python Flask backend and there were lots of AR packages supported by React framework. We updated some of our documentation to adapt to this new change, and we spent time learning those new technologies. Then we started implementing and completed our prototype for the revision 0 demonstration. After the demonstration, we got some feedback from user testers, the TA, and the instructor, and we worked on the final product to address the feedback and improve our application. At the same time, we also kept our documents updated to be consistent with our design changes. After the final product was done, we presented it in the revision 1 demonstration. Finally, we reviewed our documents and make it consistent with our final design. We also added more details and reduce the ambiguity based on the feedback on the documents from the TA and other teams. 
+
+
+
+\section{Design Decisions (LO12)}
+The time and money constraints we encountered during the development of our hair style web application had a significant impact on the project. One major area of impact was the search for suitable AR models for the app. We found that many of the models available online were expensive, and we needed to spend a significant amount of time and resources to find models that met our requirements and budget. This affected the overall timeline of the project, as we needed to allocate additional time to search for models and ensure that they were compatible with our project's requirements.
+
+Additionally, the budget constraints impacted other areas of the project as well. For example, we had to carefully manage our expenses and prioritize our spending to ensure that we stayed within budget while still delivering a high-quality product. This required us to make trade-offs and prioritize certain features over others, which had an impact on the final product.
+
+Overall, the time and money constraints we encountered during the project required careful planning and management to overcome. We needed to be strategic in how we allocated our resources and prioritize our spending to ensure that we delivered a product that met our requirements and budget. Despite these challenges, we were able to successfully navigate the constraints and deliver a high-quality product that we are proud of.
+ 
+
+\section{Economic Considerations (LO23)}
+
+Our Hairesthetic web application was not intended for sale. However, if we were to market the application, we would need to conduct market research to identify potential customers and competitors. Additionally, we would need to develop a marketing strategy to reach our target audience, which could include social media advertising, influencer marketing, and partnerships with beauty companies.
+
+In terms of production cost, it would depend on various factors such as server costs, software licensing fees, and maintenance expenses. Since we did not intend to sell our product, we did not conduct a detailed analysis of production costs.
+
+If we were to charge for our product, we would need to consider the pricing strategies of other beauty and hair styling applications in the market. To make a profit, we would need to sell a significant number of units, which would depend on the pricing strategy and production costs.
+
+Since our application was not intended for sale, we focused on attracting users by making the application freely available online and promoting it through our personal networks and social media. In the future, we could potentially attract more users by collaborating with beauty bloggers and influencers who could promote the application to their followers. We estimate that there are a significant number of potential users for our application, as hair styling and beauty are popular topics with a broad audience.
+
+\section{Reflection on Project Management (LO24)}
+Effective project management played a critical role in the successful completion of our capstone project. We utilized a variety of tools and methods to facilitate communication and collaboration among team members. Specifically, we used Discord to host virtual meetings, which allowed us to discuss project updates, assign tasks, and address any issues or concerns in a timely and efficient manner. We also utilized WeChat to communicate with each other outside of meetings and to share resources and updates related to the project.
+
+In addition to effective communication, we also adhered to a strict schedule and completed tasks on time. By establishing clear deadlines and milestones, we were able to ensure that progress was being made consistently and that the project was on track. Furthermore, we were able to adapt and adjust our plan as necessary to address any issues or roadblocks that arose during the development process.
+
+Overall, our commitment to effective project management and communication allowed us to work efficiently and effectively as a team, resulting in the successful completion of our project.
+
+\subsection{How Does Your Project Management Compare to Your Development Plan}
+
+We mostly followed our initial development plan. For the team meeting plan, we always made it on time. If some of our team members could not attend due to time conflicts, we would summarize and inform the team members in the group chat on WeChat. We strictly followed our team communication plan. Each time our meeting was hosted virtually on Discord and we used WeChat to communicate with each other outside of meetings and to share resources and updates related to the project. For the team member roles and workflow plan, we followed them strictly as described in our Development plan document. We used GitHub for version control of our project and we used Git issues to keep track of the feedback from other teams and some issues we need to resolve for the team. As mentioned above, we initially planned to use the iOS frontend and Python backend, but we later decided to change it to the React.js frontend and Python Flask backend.
+
+\subsection{What Went Well?}
+
 One of the major accomplishments of our project was the successful implementation of the core functionality of the web application, which allowed users to experiment with different hairstyles and colors, and search for nearby salons. This required a high level of technical expertise in image processing algorithms, web development frameworks, information transmission, and AR technology. In our project, we used the React.js framework for the frontend implementation and the Python Flask for the backend implementation. We also used AR technology for our hairstyle models to provide a more realistic looking to improve user experience. The Google Map API was integrated for nearby salon searching. 
 
 As mentioned, we used a wide range of technologies. We conducted extensive research on emerging web development frameworks, image processing algorithms, and machine learning techniques to identify the most appropriate tools and technologies for the project. We spent a significant amount of time exploring new technologies and experimenting with different approaches to ensure that our application was cutting-edge and technologically advanced. As a result, we were able to learn and incorporate a range of new technologies into our development process, including frameworks like React and Flask, as well as image-processing libraries like OpenCV. We also developed expertise in machine learning techniques like face detection and landmark estimation, which enabled us to accurately map hairstyles onto users' faces. By dedicating time to researching and learning new technologies, we were able to build a technically robust and innovative application that was well-suited to our project goals and requirements.
@@ -53,7 +89,7 @@ What's more, our project was developed with a user-centered design that prioriti
 
 After the implementation, our team had a rigorous testing on the application, which ensured the reliability and security of the application. We implemented automated testing and code reviews, as well as comprehensive documentation of the codebase and project requirements, which facilitated future maintenance and updates.
 
-\section{Key Problem Areas}
+\subsection{What Went Wrong?}
 
 Throughout the course of our capstone project, we made frequent changes to our project scope, requirements, and design, as we gained new insights and responded to evolving user needs. However, we recognize that some of these changes may not have been fully captured in our project documentation, due to the iterative nature of our development process and the dynamic nature of the project. So in our later development stage, after the revision 0 demonstrations particularly, our document is inconsistent with our changes and the updated design, which causes confusion to the team developers and project stakeholders such as TAs. However, we have since reviewed and refined our project documentation to ensure that it accurately reflects the final product. We understand the importance of documenting changes as they occur, and we are committed to maintaining accurate and up-to-date documentation going forward. Despite any discrepancies that may have existed between our documentation and our final product during the development process, we remain confident in the quality and functionality of our final product, and we are proud of the efforts we made to continuously improve and refine our project throughout its development.
 
@@ -61,7 +97,7 @@ During the implementation phase of our project, we initially planned to develop 
 
 In our project, we encountered budget constraints when searching for suitable AR models for hairstyles. The models we found online were often expensive, which meant we needed to spend more time searching for suitable models within our budget. Additionally, we needed to invest resources into ensuring that the models we selected were compatible with our project's requirements, which further added to the time and effort needed for this task. These constraints can impact the overall timeline and quality of the project and may require careful planning and management to overcome. In our case, we were able to navigate these constraints by conducting thorough research and exploring various options until we found models that met our requirements and budget.
 
-\section{What Would you Do Differently Next Time}
+\subsection{What Would you Do Differently Next Time?}
 To avoid the problem of inconsistent project documentation, we can establish a process for maintaining accurate and up-to-date documentation throughout the project's development. This could involve assigning someone on the team to be responsible for regularly reviewing and updating the documentation, ensuring that any changes made to the project are reflected in the documentation. Additionally, we can establish checkpoints during the development process where we review and update the documentation to ensure that it is consistent with the project's current status.
 
 In future projects, we can conduct more thorough research and analysis during the planning phase to ensure that the selected technology stack is compatible with our project requirements. This can help us avoid situations where we encounter unexpected compatibility issues during the implementation phase. Additionally, we can explore multiple platform options and evaluate their feasibility based on the project's requirements, constraints, and goals before finalizing the development plan.
